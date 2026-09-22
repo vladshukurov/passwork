@@ -36,13 +36,6 @@ export function mountPageMotion() {
       gsap.from(block,{opacity:0,y:14,duration:siteMotion.reveal,ease:siteMotion.revealEase,
         clearProps:'opacity,transform',scrollTrigger:{trigger:block,start:'top 90%',once:true}});
     });
-    const footer=document.querySelector('.site-footer');
-    if(footer){
-      gsap.from(footer.querySelectorAll('.footer-main > *'),{
-        opacity:0,y:16,duration:siteMotion.reveal,stagger:.07,ease:siteMotion.revealEase,
-        clearProps:'opacity,transform',scrollTrigger:{trigger:footer,start:'top 88%',once:true}
-      });
-    }
   });
   media.add('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)', () => {
     const cleanups = [];
