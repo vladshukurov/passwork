@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/code/design-tokens.css"><link rel="stylesheet" href="/passwork-tokens.css"><link rel="stylesheet" href="/attio-buttons.css"><link rel="stylesheet" href="/passwork.css"><link rel="stylesheet" href="/passwork-motion.css">
 <link rel="stylesheet" href="/client-logos.css"><link rel="stylesheet" href="/hero-entrance.css"><link rel="stylesheet" href="/hero-scroll.css"><link rel="stylesheet" href="/security-switcher.css">
 <link rel="stylesheet" href="/live-dashboard-base.css"><link rel="stylesheet" href="/live-dashboard-light.css">
-<link rel="stylesheet" href="/team-dashboards.css"><link rel="stylesheet" href="/team-dashboards-light.css">
+<link rel="stylesheet" href="/team-dashboards.css"><link rel="stylesheet" href="/team-dashboards-light.css"><link rel="stylesheet" href="/site-footer.css">
 <script defer src="/vendor/gsap/gsap.min.js"></script>
 <script defer src="/vendor/gsap/ScrollTrigger.min.js"></script>
 <script type="module" src="/passwork.js"></script></head><body>
@@ -195,6 +195,29 @@
 <div class="security-code-expand">Show all <img src="/passwork-assets/security/imgIcon6.svg" alt="" class=""></div></div></div></div></div>
 <img src="/passwork-assets/security/imgRectangle240650873.svg" alt="" class="security-stage-fade"></div></div>
 </section></div></main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-signature"><a href="#top" aria-label="Пассворк — к началу страницы"><img class="footer-logo" src="/passwork-assets/logo-light.svg" alt="Пассворк"></a><span class="footer-brand-divider" aria-hidden="true"></span><img class="footer-russia" src="/passwork-assets/imgVector.svg" alt="Сделано в России"></div>
+        <p>Управление корпоративными паролями<br> и доступами в одном контуре.</p>
+        <button class="button button-dark" data-dialog="demo">Запросить демо</button>
+      </div>
+      <nav class="footer-column" aria-label="Продукт">
+        <h2>Пассворк</h2><a href="#top">Возможности</a><a href="#teams">Для вашей команды</a><a href="#certification">Сертификация</a><button data-dialog="pricing">Стоимость</button>
+      </nav>
+      <nav class="footer-column" aria-label="Ресурсы">
+        <h2>Ресурсы</h2><a href="https://passwork.ru/docs/" target="_blank" rel="noopener noreferrer">Техническая документация <span aria-hidden="true">↗</span></a><a href="https://manuals.passwork.ru/" target="_blank" rel="noopener noreferrer">Руководство пользователя <span aria-hidden="true">↗</span></a><a href="https://passwork.ru/help/" target="_blank" rel="noopener noreferrer">Центр поддержки <span aria-hidden="true">↗</span></a><button data-dialog="implementation">Обсудить внедрение</button>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2014–2026 ООО «Пассворк»</span>
+      <a href="https://passwork.ru/Политика_конфиденциальности.pdf" target="_blank" rel="noopener noreferrer">Политика конфиденциальности</a>
+      <a href="https://passwork.ru/Лицензионное_соглашение.pdf" target="_blank" rel="noopener noreferrer">Лицензионное соглашение</a>
+      <a href="#top" class="footer-top" aria-label="К началу страницы">Наверх <span aria-hidden="true">↑</span></a>
+    </div>
+  </div>
+</footer>
 <dialog class="contact-dialog" aria-labelledby="dialog-title"><button class="dialog-close" aria-label="Закрыть окно">×</button><span class="eyebrow">Пассворк</span><h2 id="dialog-title">Запросить демо</h2><p class="dialog-description"></p>
 <form id="contact-form"><label>Имя<input name="name" autocomplete="name" required placeholder="Как к вам обращаться"></label><label>Рабочая почта<input name="email" type="email" autocomplete="email" required placeholder="you@company.ru"></label><label>Компания<input name="company" autocomplete="organization" required placeholder="Название компании"></label><p class="form-note">Это локальный прототип: данные не отправляются.</p><button class="button button-dark" type="submit">Подготовить заявку</button></form><div class="form-result" role="status" hidden></div></dialog>
 </body></html>

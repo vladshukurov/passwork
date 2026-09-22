@@ -15,9 +15,9 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
 
 /* Updated blue art and FSTEC applicability cards from Figma 2144:37748. */
-.hero-gradient{background:url('/passwork-assets/blue-gradient.png') center/cover no-repeat}
+.hero-gradient{background:url('/passwork-assets/blue-gradient-hd.png') center/cover no-repeat}
 .hero-noise,.hero-texture{display:none}
-.team-scene{background:#397dca url('/passwork-assets/blue-gradient.png') center/cover no-repeat}
+.team-scene{background:#397dca url('/passwork-assets/blue-gradient-hd.png') center/cover no-repeat}
 .team-scene>.scene-dots{top:-16.54%;bottom:auto;height:149.87%;object-fit:fill}
 /* Shared section intro: one interface for matching two-column lead blocks. */
 .section-intro{display:grid;grid-template-columns:minmax(0,491fr) minmax(0,610fr);justify-content:space-between;gap:var(--pw-section-gap);min-height:395px;padding:var(--pw-section-top) var(--pw-section-x) var(--pw-section-bottom);border-bottom:1px solid var(--pw-border)}
@@ -49,6 +49,13 @@ body{font-family:var(--pw-font)}
 .certification-copy p,.feature-label,.feature-copy>p:last-child{color:var(--pw-text-secondary)}
 .team-tabs button,.product-tabs button{border-radius:var(--pw-radius-control)}
 .team-tabs button[aria-selected="true"]{background:var(--pw-control);border-color:var(--pw-control-border);color:var(--pw-surface-muted)}
+.product-tabs button,.team-tabs button{transform:translateY(0);transition:background-color 260ms var(--pw-ease-ui),color 260ms var(--pw-ease-ui),border-color 260ms var(--pw-ease-ui),box-shadow 260ms var(--pw-ease-ui),transform 260ms var(--pw-ease-ui)}
+.product-tabs button:not([aria-selected="true"]):hover,.team-tabs button:not([aria-selected="true"]):hover{transform:translateY(-1px)}
+.product-tabs button[aria-selected="true"],.team-tabs button[aria-selected="true"]{box-shadow:0 8px 20px -14px #0b193070}
+.product-tabs button:active,.team-tabs button:active{transform:translateY(0) scale(.985);transition-duration:90ms}
+.security-next-choice{transition:opacity 300ms var(--pw-ease-ui),color 300ms var(--pw-ease-ui)}
+.header-inner nav a,.header-inner nav button{transition:color 220ms var(--pw-ease-ui),background-color 220ms var(--pw-ease-ui)}
+.menu-toggle span{transition:transform 260ms var(--pw-ease-ui),background-color 220ms var(--pw-ease-ui)}
 .feature-copy{background:var(--pw-surface)}
 .contact-dialog{background:var(--pw-surface);color:var(--pw-text);border-radius:var(--pw-radius-dialog);box-shadow:var(--pw-shadow-dialog)}
 

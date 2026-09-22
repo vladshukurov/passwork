@@ -27,20 +27,32 @@
   font: var(--pw-weight) var(--pw-button-font-size)/22px var(--pw-font-ui);
   white-space: nowrap;
   cursor: pointer;
-  transition-property: color, border-color, background-color, --pw-button-from, --pw-button-to;
-  transition-duration: var(--pw-duration-ui);
-  transition-timing-function: var(--pw-ease-ui);
+  box-shadow: 0 1px 2px #0b193012, 0 0 0 1px #ffffff24 inset;
+  transform: translateY(0) scale(1);
+  transition:
+    transform 260ms var(--pw-ease-ui),
+    box-shadow 260ms var(--pw-ease-ui),
+    color var(--pw-duration-ui) var(--pw-ease-ui),
+    border-color var(--pw-duration-ui) var(--pw-ease-ui),
+    background-color var(--pw-duration-ui) var(--pw-ease-ui),
+    --pw-button-from var(--pw-duration-ui) var(--pw-ease-ui),
+    --pw-button-to var(--pw-duration-ui) var(--pw-ease-ui);
 }
 .button:hover,
 .button:focus-visible {
   --pw-button-from: #fff;
   --pw-button-to: #fff;
 }
-.button:hover,
-.button:active { transition-duration: 50ms; }
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px -12px #0b193052, 0 0 0 1px #ffffff36 inset;
+}
 .button:active {
   --pw-button-from: #eee;
   --pw-button-to: #eee;
+  transform: translateY(0) scale(.985);
+  box-shadow: 0 1px 3px #0b19301c, 0 0 0 1px #0000000a inset;
+  transition-duration: 90ms;
 }
 .button:focus-visible {
   outline: 3px solid var(--pw-focus);
@@ -61,12 +73,14 @@
   background-color: var(--pw-control);
   border-color: var(--pw-control-border);
   color: #f3f4f6;
+  box-shadow: 0 1px 2px #11182724, 0 0 0 1px #ffffff0a inset;
 }
 .button-dark:hover,
 .button-dark:focus-visible {
   --pw-button-from: var(--pw-control-border);
   --pw-button-to: var(--pw-control);
   color: #fff;
+  box-shadow: 0 10px 24px -14px #111827a6, 0 0 0 1px #ffffff14 inset;
 }
 .button-dark:active {
   --pw-button-from: var(--pw-control-pressed);
@@ -78,13 +92,14 @@
   background-color: transparent;
   border-color: #c1cfe2;
   color: #fff;
+  box-shadow: 0 0 0 1px #ffffff0a inset;
 }
 .button-outline:hover,
-.button-outline:focus-visible { background-color: #ffffff14; }
-.button-outline:active { background-color: #ffffff24; }
+.button-outline:focus-visible { background-color: #ffffff14; border-color:#e0e8f5; box-shadow:0 9px 24px -15px #0b193080,0 0 0 1px #ffffff18 inset; }
+.button-outline:active { background-color: #ffffff24; box-shadow:0 1px 3px #0b193026,0 0 0 1px #ffffff18 inset; }
 .button-outline:disabled { background-color: transparent; border-color: #ffffff40; color: #ffffff66; }
 .button-outline img { filter: brightness(0) invert(1); }
 .button-small { height: 32px; padding: 0 10px; gap: 6px; border-radius: var(--pw-radius-control); font-size: 12px; line-height: 18px; }
 @media (prefers-reduced-motion: reduce) {
-  .button { transition: none; }
+  .button { transition: none; transform:none; }
 }

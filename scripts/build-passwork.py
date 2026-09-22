@@ -6,6 +6,7 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 assets = json.loads((ROOT / 'source/passwork-assets.json').read_text())
 security_assets = json.loads((ROOT / 'source/security-assets.json').read_text())
+footer = (ROOT / 'source/site-footer.html').read_text().strip()
 
 def security_image(key, cls=''):
     return f'<img src="{security_assets[key]}" alt="" class="{cls}">'
@@ -120,7 +121,7 @@ page = f'''<!doctype html>
 <link rel="stylesheet" href="/code/design-tokens.css"><link rel="stylesheet" href="/passwork-tokens.css"><link rel="stylesheet" href="/attio-buttons.css"><link rel="stylesheet" href="/passwork.css"><link rel="stylesheet" href="/passwork-motion.css">
 <link rel="stylesheet" href="/client-logos.css"><link rel="stylesheet" href="/hero-entrance.css"><link rel="stylesheet" href="/hero-scroll.css"><link rel="stylesheet" href="/security-switcher.css">
 <link rel="stylesheet" href="/live-dashboard-base.css"><link rel="stylesheet" href="/live-dashboard-light.css">
-<link rel="stylesheet" href="/team-dashboards.css"><link rel="stylesheet" href="/team-dashboards-light.css">
+<link rel="stylesheet" href="/team-dashboards.css"><link rel="stylesheet" href="/team-dashboards-light.css"><link rel="stylesheet" href="/site-footer.css">
 <script defer src="/vendor/gsap/gsap.min.js"></script>
 <script defer src="/vendor/gsap/ScrollTrigger.min.js"></script>
 <script type="module" src="/passwork.js"></script></head><body>
@@ -207,6 +208,7 @@ page = f'''<!doctype html>
 <div class="security-code-expand">Show all {security_image('imgIcon6')}</div></div></div></div></div>
 {security_image('imgRectangle240650873', 'security-stage-fade')}</div></div>
 </section></div></main>
+{footer}
 <dialog class="contact-dialog" aria-labelledby="dialog-title"><button class="dialog-close" aria-label="Закрыть окно">×</button><span class="eyebrow">Пассворк</span><h2 id="dialog-title">Запросить демо</h2><p class="dialog-description"></p>
 <form id="contact-form"><label>Имя<input name="name" autocomplete="name" required placeholder="Как к вам обращаться"></label><label>Рабочая почта<input name="email" type="email" autocomplete="email" required placeholder="you@company.ru"></label><label>Компания<input name="company" autocomplete="organization" required placeholder="Название компании"></label><p class="form-note">Это локальный прототип: данные не отправляются.</p><button class="button button-dark" type="submit">Подготовить заявку</button></form><div class="form-result" role="status" hidden></div></dialog>
 </body></html>'''

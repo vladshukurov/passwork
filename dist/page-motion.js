@@ -19,6 +19,30 @@ export function mountPageMotion() {
         scrollTrigger:{trigger:card,start:'top 90%',once:true}
       });
     });
+    [
+      ['.about', '.eyebrow,h2'],
+      ['.certification > .section-intro', ':scope > *'],
+      ['.teams-heading', ':scope > *'],
+      ['.security-switcher > .section-intro', ':scope > *'],
+    ].forEach(([triggerSelector,targetSelector]) => {
+      const trigger=document.querySelector(triggerSelector);
+      if(!trigger)return;
+      gsap.from(trigger.querySelectorAll(targetSelector), {
+        opacity:0,y:18,duration:siteMotion.reveal,stagger:.09,ease:siteMotion.revealEase,
+        clearProps:'opacity,transform',scrollTrigger:{trigger,start:'top 86%',once:true}
+      });
+    });
+    document.querySelectorAll('.team-tabs,.security-switcher-grid').forEach(block => {
+      gsap.from(block,{opacity:0,y:14,duration:siteMotion.reveal,ease:siteMotion.revealEase,
+        clearProps:'opacity,transform',scrollTrigger:{trigger:block,start:'top 90%',once:true}});
+    });
+    const footer=document.querySelector('.site-footer');
+    if(footer){
+      gsap.from(footer.querySelectorAll('.footer-main > *'),{
+        opacity:0,y:16,duration:siteMotion.reveal,stagger:.07,ease:siteMotion.revealEase,
+        clearProps:'opacity,transform',scrollTrigger:{trigger:footer,start:'top 88%',once:true}
+      });
+    }
   });
   media.add('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)', () => {
     const cleanups = [];
@@ -56,7 +80,7 @@ export function mountPageMotion() {
       }
       const enter = event => {
         if(event.pointerType==='touch')return;
-        timeline.timeScale(1).play();
+        timeline.timeScale(siteMotion.hoverSpeed).play();
       };
       const leave = () => timeline.timeScale(siteMotion.returnSpeed).reverse();
       card.addEventListener('pointerenter',enter);
