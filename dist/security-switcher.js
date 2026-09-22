@@ -1,5 +1,6 @@
 // Three synchronized feature scenes in the Figma layout, with Attio-style fades.
 import { mountSecurityDashboardMotion } from './security-dashboard-motion.js';
+import {gsap} from './page-motion.js';
 
 export function mountSecuritySwitcher(section) {
   if (!section) return () => {};
@@ -14,45 +15,37 @@ export function mountSecuritySwitcher(section) {
   const duration = 8000;
   const dashboardDuration = 12000;
   let active = choices.findIndex(choice => choice.classList.contains('is-active'));
-  let elapsed = 0;
-  let previous = 0;
-  let frame = 0;
+  const clock = {elapsed:0};
+  const cycle = gsap.to(clock,{elapsed:1,duration:12,ease:'none',paused:true,onUpdate:()=>{
+    if(progressBars[active]) gsap.set(progressBars[active],{scaleX:clock.elapsed});
+  },onComplete:()=>select((active+1)%choices.length)});
   let inView = false;
   let hovered = false;
   let focused = false;
-  let disposed = false;
 
   function select(index) {
     active = index;
-    elapsed = 0;
     choices.forEach((choice, i) => {
       const selected = i === index;
       for (const element of [choice, visuals[i]]) {
         element.classList.toggle('is-active', selected);
         element.setAttribute('aria-hidden', String(!selected));
         element.inert = !selected;
+        gsap.to(element,{autoAlpha:selected?1:0,y:selected?0:6,duration:reduced.matches?0:.42,
+          ease:'power2.out',overwrite:true});
       }
     });
     section.dataset.activeFeature = String(index);
     progressBars.forEach(bar => { if (bar) bar.style.transform = 'scaleX(0)'; });
     dashboards.forEach((dashboard, i) => dashboard?.select(i === index));
-  }
-  function tick(now) {
-    frame = 0;
-    if (disposed) return;
-    elapsed += previous ? Math.min(80, now - previous) : 0;
-    previous = now;
-    if (elapsed >= (dashboards[active] ? dashboardDuration : duration)) select((active + 1) % choices.length);
-    const progress = Math.min(1, elapsed / (dashboards[active] ? dashboardDuration : duration));
-    if (progressBars[active]) progressBars[active].style.transform = `scaleX(${progress})`;
-    frame = requestAnimationFrame(tick);
+    cycle.duration((dashboards[active]?dashboardDuration:duration)/1000).restart().pause();
+    syncPlayback();
   }
   function syncPlayback() {
     dashboards.forEach(dashboard => dashboard?.setPlayback(inView && !document.hidden, reduced.matches));
     const playing = inView && !document.hidden && !reduced.matches && !hovered && !focused;
     section.dataset.autoplay = playing ? 'playing' : 'paused';
-    if (playing && !frame) { previous = 0; frame = requestAnimationFrame(tick); }
-    if (!playing) { cancelAnimationFrame(frame); frame = 0; previous = 0; }
+    cycle.paused(!playing);
   }
   const key = event => {
     let next;
@@ -93,8 +86,8 @@ export function mountSecuritySwitcher(section) {
   select(Math.max(0, active));
   syncPlayback();
   return () => {
-    disposed = true;
-    cancelAnimationFrame(frame);
+    cycle.kill();
+    gsap.killTweensOf([...choices,...visuals,...progressBars]);
     observer.disconnect();
     dashboards.forEach(dashboard => dashboard?.destroy());
     nextButtons.forEach((button, index) => button.removeEventListener('click', nextHandlers[index]));

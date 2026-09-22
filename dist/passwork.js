@@ -1,4 +1,4 @@
-import {motion,withTempo} from './code/motion-tokens.js';
+import {gsap, mountPageMotion} from './page-motion.js';
 import {mountHeroDashboard} from './live-dashboard.js';
 import {mountClientLogos} from './client-logos.js';
 import {mountHeroScroll} from './hero-scroll.js';
@@ -11,13 +11,14 @@ mountOrbitAnimation(document.querySelector('.orbit-scene'));
 mountSecuritySwitcher(document.querySelector('.security-switcher'));
 
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+mountPageMotion();
 const productPanel=document.querySelector('#product-panel');
 const detail=document.querySelector('.product-detail');
 const productTabs=[...document.querySelectorAll('[data-product]')];
 const liveDashboard=document.querySelector('.pw-live-dashboard');
 let stopDashboard=mountHeroDashboard(liveDashboard);
 mountHeroScroll(document.querySelector('.hero'),document.querySelector('.site-header'));
-const logo=document.querySelector('.brand img').src;
+const logo=document.querySelector('.brand-light').src;
 const productViews=[null,
   {title:'Управление доступом',description:'Доступ к нужным паролям — для нужных людей.',body:`<table class="preview-table"><thead><tr><th>Команда</th><th>Уровень доступа</th><th>Статус</th></tr></thead><tbody><tr><td>Администраторы</td><td>Полный доступ</td><td><span class="status-pill">Активен</span></td></tr><tr><td>IT-команда</td><td>Редактирование</td><td><span class="status-pill">Активен</span></td></tr><tr><td>Сотрудники</td><td>Просмотр</td><td><span class="status-pill">Активен</span></td></tr></tbody></table>`},
   {title:'Коды двухфакторной аутентификации',description:'Пароли и одноразовые коды в одном защищённом пространстве.',body:`<div class="preview-item"><div><h4>Корпоративная почта</h4><p>Пример одноразового кода</p></div><span class="code-number">482 916</span></div><div class="preview-item"><div><h4>Рабочие сервисы</h4><p>Пример одноразового кода</p></div><span class="code-number">735 204</span></div>`},
@@ -26,8 +27,7 @@ const productViews=[null,
 
 function animateSwitch(element){
   if(reduced.matches)return;
-  element.getAnimations().forEach(animation=>animation.cancel());
-  element.animate([{opacity:0,filter:`blur(${motion.blurCard}px)`},{opacity:1,filter:'blur(0)'}],{duration:withTempo(motion.switch),easing:motion.easeUI});
+  gsap.fromTo(element,{opacity:0,y:6},{opacity:1,y:0,duration:.38,ease:'power2.out',overwrite:true,clearProps:'opacity,transform'});
 }
 function setSelection(buttons,index,panel){
   buttons.forEach((button,i)=>{button.setAttribute('aria-selected',String(i===index));button.tabIndex=i===index?0:-1;});

@@ -1,29 +1,19 @@
 /* Figma 2147:38342: shared introduction, then one fading feature at a time. */
-.security-switcher { --security-unit: var(--unit); position: relative; background: #fafafb; }
-.security-switcher .security-intro {
-  grid-template-columns: 491fr 610fr;
-  gap: calc(305 * var(--security-unit));
-  min-height: calc(388 * var(--security-unit));
-  padding: calc(152 * var(--security-unit)) calc(57 * var(--security-unit)) calc(64 * var(--security-unit));
-}
-.security-switcher .security-intro h2 {
-  font-size: calc(48 * var(--security-unit)); line-height: 1.083333; letter-spacing: -.17px; color: #1c1d1f;
-}
-.security-switcher .security-intro > div { height: calc(172 * var(--security-unit)); padding-top: calc(8 * var(--security-unit)); }
-.security-switcher .security-intro p { max-width: calc(567 * var(--security-unit)); font-size: calc(24 * var(--security-unit)); line-height: 1.333333; color: #1c1d1f; }
-.security-switcher .security-intro .button {
-  height: calc(46 * var(--security-unit)); margin-top: calc(28 * var(--security-unit)); padding: 0 calc(14 * var(--security-unit));
-  border-radius: 6px; font: 500 calc(16 * var(--security-unit))/1.25 Museo, Arial, sans-serif; letter-spacing: -.17px;
-}
+.security-switcher { --security-unit: var(--unit); position: relative; background: var(--pw-page); }
+.security-switcher > .section-intro { background:var(--pw-page); }
+.security-switcher > .section-intro h2 { color:var(--pw-text); }
+.security-switcher > .section-intro > div { height:auto; }
+.security-switcher > .section-intro p { max-width:567px; color:var(--pw-text); }
+.security-switcher > .section-intro .button { font-family:var(--pw-font);letter-spacing:var(--pw-heading-tracking); }
 .security-switcher-grid { position: relative; display: grid; grid-template-columns: 666fr 854fr; height: calc(580 * var(--security-unit)); border-bottom: 1px solid var(--stroke); }
 .security-switcher-grid:focus-visible { outline-offset: -3px; }
 .security-switcher-copy { position: relative; min-width: 0; grid-template-columns: minmax(0, 1fr); }
 .security-choice { position: absolute; inset: 0; min-width: 0; padding: calc(57 * var(--security-unit)); }
-.security-choice .feature-label { gap: calc(15 * var(--security-unit)); font-size: calc(16 * var(--security-unit)); line-height: calc(37.333 * var(--security-unit)); letter-spacing: -.3484px; }
+.security-choice .feature-label { min-height: calc(37.333 * var(--security-unit)); gap: calc(15 * var(--security-unit)); font: 500 calc(16 * var(--security-unit))/calc(26.133 * var(--security-unit)) Museo, Arial, sans-serif; letter-spacing: -.3484px; }
 .security-choice .feature-label::before { width: calc(8.711 * var(--security-unit)); height: calc(8.711 * var(--security-unit)); }
-.security-choice h3 { margin: calc(44 * var(--security-unit)) 0 calc(32 * var(--security-unit)); max-width: calc(450 * var(--security-unit)); font-size: calc(32 * var(--security-unit)); line-height: 1.125; letter-spacing: -.7px; }
-.security-choice-description { max-width: calc(503 * var(--security-unit)); color: #475569; font-size: calc(15 * var(--security-unit)); line-height: 1.6; letter-spacing: -.3484px; }
-.security-choice, .security-visual { opacity: 0; visibility: hidden; transform: translateY(6px); filter: blur(3px); transition: opacity 550ms ease, transform 650ms cubic-bezier(.22,1,.36,1), filter 550ms ease, visibility 550ms; pointer-events: none; }
+.security-choice h3 { margin: calc(44 * var(--security-unit)) 0 calc(32 * var(--security-unit)); max-width: calc(450 * var(--security-unit)); font: 500 calc(32 * var(--security-unit))/1.125 Museo, Arial, sans-serif; letter-spacing: -1.0453px; }
+.security-choice-description { max-width: calc(503 * var(--security-unit)); color: var(--pw-text-secondary); font: 500 calc(15 * var(--security-unit))/1.6 Museo, Arial, sans-serif; letter-spacing: -.3484px; }
+.security-choice, .security-visual { opacity: 0; visibility: hidden; pointer-events: none; }
 .security-choice.is-active, .security-visual.is-active { opacity: 1; visibility: visible; transform: none; filter: none; }
 .security-choice.is-active { pointer-events: auto; }
 .security-choice-footer { margin-top: calc(32 * var(--security-unit)); }
@@ -35,7 +25,7 @@
 .security-next-choice { padding: 0; border: 0; background: none; text-align: left; color: #1c1d1f; opacity: .2; font: 500 calc(24 * var(--security-unit))/1.5 Museo, Arial, sans-serif; letter-spacing: calc(-1.0453 * var(--security-unit)); transition: opacity 200ms ease; }
 .security-next-choice + .security-next-choice { opacity: .06; }
 .security-next-choice:hover, .security-next-choice:focus-visible { opacity: .8; }
-.security-switcher-stage { position: relative; min-width: 0; overflow: hidden; background: #f3f4f6; }
+.security-switcher-stage { position: relative; min-width: 0; overflow: hidden; background: linear-gradient(150.16deg, #d4e3ff 25.868%, #266df0 97.099%); }
 .security-stage-pattern, .security-stage-background, .security-stage-dots, .security-stage-fade { position: absolute; pointer-events: none; max-width: none; }
 .security-stage-pattern { inset: 0 auto 0 0; width: calc(578 * var(--security-unit)); height: 100%; }
 .security-stage-background { inset: 0; width: 100%; height: 100%; }
@@ -118,10 +108,7 @@
 .infrastructure-link-backup::after { bottom: -2px; }
 @media (max-width: 1100px) and (min-width: 801px) {
   .security-switcher { --security-unit: .7px; }
-  .security-switcher .security-intro { gap: 64px; padding: 80px 40px 48px; }
-  .security-switcher .security-intro h2 { font-size: 32px; }
-  .security-switcher .security-intro > div { height: auto; }
-  .security-switcher .security-intro p { font-size: 18px; }
+  .security-switcher > .section-intro { min-height:0; }
   .security-switcher-grid { height: auto; min-height: 430px; }
   .security-switcher-copy { display: grid; }
   .security-choice { position: relative; grid-area: 1 / 1; padding: 32px; }
@@ -131,10 +118,7 @@
 }
 @media (max-width: 800px) {
   .security-switcher { --security-unit: 1px; }
-  .security-switcher .security-intro { grid-template-columns: 1fr; gap: 28px; padding: 56px 24px 40px; }
-  .security-switcher .security-intro h2 { font-size: 31px; }
-  .security-switcher .security-intro > div { height: auto; padding: 0; }
-  .security-switcher .security-intro p { font-size: 18px; }
+  .security-switcher > .section-intro { grid-template-columns: minmax(0,1fr); }
   .security-switcher-grid { display: flex; flex-direction: column; height: auto; }
   .security-switcher-copy { display: grid; height: auto; }
   .security-choice { position: relative; grid-area: 1 / 1; padding: 32px 24px; }

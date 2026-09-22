@@ -12,28 +12,42 @@
   border: 0;
   isolation: isolate;
   backdrop-filter: none;
-  transition: opacity 1s cubic-bezier(.42,0,.58,1), color .3s;
+  -webkit-backdrop-filter: none;
+  background: transparent;
+  transition: opacity .3s ease, color .2s;
 }
 .site-header.is-scroll-header.is-header-hidden {
   opacity: 0;
   pointer-events: none;
 }
-.site-header.is-scroll-header::before {
+.site-header.is-scroll-header::before,
+.site-header.is-scroll-header::after {
   content: '';
   position: absolute;
   z-index: -1;
   inset: 0 0 -40px;
   pointer-events: none;
-  background: linear-gradient(180deg, #222f64f5 0%, #222f64bf 55%, #222f6400 100%);
   opacity: 0;
   transition: opacity .3s;
 }
-.site-header.is-scrolled::before { opacity: 1; }
-.site-header.is-past-hero {
+.site-header.is-scroll-header::before {
+  background: linear-gradient(180deg, #2d578df5 0%, #2d578dbf 55%, #2d578d00 100%);
+}
+.site-header.is-scroll-header::after {
+  background: linear-gradient(180deg, #fffffff5 0%, #ffffffdf 55%, #ffffff00 100%);
+}
+.site-header.is-scroll-header.is-over-product::before { opacity: 1; }
+.site-header.is-scroll-header.is-past-hero::after { opacity: 1; }
+.site-header.is-scroll-header.is-past-hero {
   color: #6f7988;
 }
-.site-header.is-past-hero::before { background: linear-gradient(180deg, #fffffff5 0%, #ffffffdf 55%, #ffffff00 100%); }
-.site-header.is-past-hero :is(.brand img, .astra) { filter: brightness(.2); }
+.site-header.is-past-hero .astra { filter: brightness(.2); }
+.brand { display:grid; }
+.brand img { grid-area:1/1; filter:none; }
+.brand-light { opacity:0; }
+.site-header.is-past-hero .brand-light { opacity:1; }
+.site-header.is-past-hero .brand-dark { opacity:0; }
+.preview-sidebar>img { filter:none; }
 .site-header.is-past-hero .header-inner nav :is(a,button):hover { color: #1c1d1f; }
 .site-header.is-past-hero .menu-toggle span { background: #1c1d1f; }
 
@@ -50,10 +64,11 @@
   .has-scroll-motion .hero-copy-scroll {
     position: sticky;
     top: calc(157 * var(--unit));
-    transition: opacity 1s cubic-bezier(.42,0,.58,1);
+    opacity: var(--hero-copy-opacity, 1);
+    transform: translate3d(0, var(--hero-copy-y, 0px), 0);
+    will-change: opacity, transform;
   }
   .has-scroll-motion.is-scrolled .hero-copy-scroll {
-    opacity: 0;
     pointer-events: none;
   }
   .has-scroll-motion .product-showcase {

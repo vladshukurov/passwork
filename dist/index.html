@@ -4,14 +4,16 @@
 <meta name="description" content="Управление корпоративными паролями, доступами и действиями — в одном контуре.">
 <link rel="icon" href="/passwork-assets/imgKey02.svg" type="image/svg+xml">
 <link rel="preload" href="/passwork-assets/MuseoSansCyrl-500.otf" as="font" type="font/otf" crossorigin>
-<link rel="stylesheet" href="/code/design-tokens.css"><link rel="stylesheet" href="/attio-buttons.css"><link rel="stylesheet" href="/passwork.css"><link rel="stylesheet" href="/passwork-motion.css">
+<link rel="stylesheet" href="/code/design-tokens.css"><link rel="stylesheet" href="/passwork-tokens.css"><link rel="stylesheet" href="/attio-buttons.css"><link rel="stylesheet" href="/passwork.css"><link rel="stylesheet" href="/passwork-motion.css">
 <link rel="stylesheet" href="/client-logos.css"><link rel="stylesheet" href="/hero-entrance.css"><link rel="stylesheet" href="/hero-scroll.css"><link rel="stylesheet" href="/security-switcher.css">
 <link rel="stylesheet" href="/live-dashboard-base.css"><link rel="stylesheet" href="/live-dashboard-light.css">
 <link rel="stylesheet" href="/team-dashboards.css"><link rel="stylesheet" href="/team-dashboards-light.css">
+<script defer src="/vendor/gsap/gsap.min.js"></script>
+<script defer src="/vendor/gsap/ScrollTrigger.min.js"></script>
 <script type="module" src="/passwork.js"></script></head><body>
 <a class="skip-link" href="#main">Перейти к содержимому</a>
 <header class="site-header"><div class="header-inner">
-<a class="brand" href="#top" aria-label="Пассворк — на главную"><img src="/passwork-assets/imgLogo.svg" alt="Пассворк" class="" ></a>
+<a class="brand" href="#top" aria-label="Пассворк — на главную"><img class="brand-dark" src="/passwork-assets/logo-dark.svg" alt="Пассворк"><img class="brand-light" src="/passwork-assets/logo-light.svg" alt="" aria-hidden="true"></a>
 <span class="brand-divider"></span><img src="/passwork-assets/imgVector.svg" alt="Сделано в России" class="astra" >
 <nav id="main-nav" aria-label="Основная навигация"><a href="#about">Компания</a><a href="#teams">Сценарии</a><a href="#security">Ресурсы</a><button data-dialog="support">Поддержка</button><button data-dialog="pricing">Цены</button></nav>
 <span class="nav-divider"></span><button class="button button-small header-demo" data-dialog="demo">Запросить демо</button>
@@ -19,7 +21,7 @@
 </div></header>
 <main id="main">
 <section class="hero" id="top">
-<div class="hero-gradient" aria-hidden="true"></div><img src="/passwork-assets/imgImage.png" alt="" class="hero-noise" ><img src="/passwork-assets/imgImage1.png" alt="" class="hero-texture" >
+<div class="hero-gradient" aria-hidden="true"></div><img src="/passwork-assets/imgVector1.svg" alt="" class="hero-dots" >
 <div class="hero-copy-scroll"><div class="hero-copy"><h1><span class="hero-title-line">Пассворк — основа вашей</span> <span class="hero-title-line">информационной безопасности</span></h1>
 <p>Управление корпоративными паролями, доступами и действиями — в одном контуре</p>
 <div class="hero-actions"><button class="button " data-dialog="demo">Запросить демо</button><button class="button button-outline" data-dialog="implementation">Обсудить внедрение<img src="/passwork-assets/imgTrailingIcon.svg" alt="" class="" ></button></div></div></div>
@@ -32,31 +34,115 @@
 <div class="page-grid">
 <section aria-label="Пассворк выбирают"><div class="client-logos" role="list"><div class="client-logo" role="listitem" aria-label="ВкусВилл, Открытая мобильная платформа" style="--logo-delay:0ms"><div class="client-logo-viewport" aria-hidden="true"><div class="client-logo-track"><span class="client-logo-frame"><img src="/passwork-assets/imgVkusvillTextlogo20211.svg" alt="" class="" width="133" height="17"></span><span class="client-logo-frame"><span class="client-logo-art" style="width:87px;height:31px;--logo-art:url(/passwork-assets/client-logos/open-mobile-platform.svg)"></span></span><span class="client-logo-frame"><img src="/passwork-assets/imgVkusvillTextlogo20211.svg" alt="" class="" width="133" height="17"></span></div></div></div><div class="client-logo" role="listitem" aria-label="ПИК, Группа Черкизово" style="--logo-delay:100ms"><div class="client-logo-viewport" aria-hidden="true"><div class="client-logo-track"><span class="client-logo-frame"><img src="/passwork-assets/imgFrame.svg" alt="" class="" width="67" height="21"></span><span class="client-logo-frame"><span class="client-logo-art" style="width:115px;height:24px;--logo-art:url(/passwork-assets/client-logos/cherkizovo.svg)"></span></span><span class="client-logo-frame"><img src="/passwork-assets/imgFrame.svg" alt="" class="" width="67" height="21"></span></div></div></div><div class="client-logo" role="listitem" aria-label="ВТБ, ДИТ Москвы" style="--logo-delay:200ms"><div class="client-logo-viewport" aria-hidden="true"><div class="client-logo-track"><span class="client-logo-frame"><img src="/passwork-assets/imgGroup1.svg" alt="" class="" width="79" height="29"></span><span class="client-logo-frame"><span class="client-logo-art" style="width:93px;height:33px;--logo-art:url(/passwork-assets/client-logos/dit-moscow.svg)"></span></span><span class="client-logo-frame"><img src="/passwork-assets/imgGroup1.svg" alt="" class="" width="79" height="29"></span></div></div></div><div class="client-logo" role="listitem" aria-label="Иви, HeadHunter" style="--logo-delay:300ms"><div class="client-logo-viewport" aria-hidden="true"><div class="client-logo-track"><span class="client-logo-frame"><img src="/passwork-assets/imgFrame1.svg" alt="" class="" width="65" height="19"></span><span class="client-logo-frame"><img src="/passwork-assets/imgHeadHunterLogo1.svg" alt="" class="" width="35" height="35"></span><span class="client-logo-frame"><img src="/passwork-assets/imgFrame1.svg" alt="" class="" width="65" height="19"></span></div></div></div><div class="client-logo" role="listitem" aria-label="Okko, СберЗдоровье" style="--logo-delay:400ms"><div class="client-logo-viewport" aria-hidden="true"><div class="client-logo-track"><span class="client-logo-frame"><img src="/passwork-assets/imgOkkoLogo1.svg" alt="" class="" width="76" height="28"></span><span class="client-logo-frame"><span class="client-logo-art" style="width:112px;height:34px;--logo-art:url(/passwork-assets/client-logos/sber-health.png)"></span></span><span class="client-logo-frame"><img src="/passwork-assets/imgOkkoLogo1.svg" alt="" class="" width="76" height="28"></span></div></div></div><div class="client-logo" role="listitem" aria-label="HeadHunter, Иви" style="--logo-delay:500ms"><div class="client-logo-viewport" aria-hidden="true"><div class="client-logo-track"><span class="client-logo-frame"><img src="/passwork-assets/imgHeadHunterLogo1.svg" alt="" class="" width="35" height="35"></span><span class="client-logo-frame"><img src="/passwork-assets/imgFrame1.svg" alt="" class="" width="65" height="19"></span><span class="client-logo-frame"><img src="/passwork-assets/imgHeadHunterLogo1.svg" alt="" class="" width="35" height="35"></span></div></div></div></div></section>
 <section class="about" id="about"><span class="eyebrow">О проекте</span><h2>Пассворк — корпоративный менеджер паролей <span>для ИТ-команд, DevOps и специалистов по безопасности. Он помогает хранить пароли, управлять доступом и отслеживать действия внутри инфраструктуры</span></h2></section>
-<section class="split-intro certification" id="certification"><h2>Пассворк<br> сертифицирован<br> ФСТЭК России</h2><div><p>Сертификат доверия подтверждает соответствие требованиям безопасности регулируемых отраслей. Разворачивается внутри компании, поддерживает ГОСТ-шифрование, исключает передачу данных во внешние сервисы</p><button class="button button-dark" data-dialog="demo">Запросить демо</button></div></section>
-<section class="orbit-scene" aria-label="Защита паролей и доступов"><div class="scene-dots" aria-hidden="true"><img src="/passwork-assets/imgVector2.svg" alt="" class="" ></div><div class="orbit"><svg class="passwork-radar" viewBox="0 0 320 320" role="img" aria-labelledby="passwork-radar-title">
-<title id="passwork-radar-title">Пассворк: ГОСТ, коды 2FA, доступ по ролям и закрытый контур</title>
-<circle class="pipeline-radar-ring-outer" cx="160" cy="160" r="148" fill="none" stroke="rgba(28,40,64,.9)" stroke-width="1" style="animation-delay:.4s"/>
-<circle class="pipeline-radar-ring-inner" cx="160" cy="160" r="100" fill="none" stroke="rgba(28,40,64,.9)" stroke-width="1"/>
-<circle class="radar-center" cx="160" cy="160" r="56" fill="#fff" stroke="rgba(28,40,64,.05)" stroke-width="1"/>
-<image href="/passwork-assets/passwork-mark.svg" x="137" y="138.5" width="46" height="43" preserveAspectRatio="xMidYMid meet"/>
-<g class="radar-tag-enter" style="--enter-delay:0ms">
-<g class="pipeline-radar-bob" style="animation-delay:1000ms;animation-duration:3800ms">
-<rect x="49.5" y="94" width="51" height="26" rx="9" fill="#e0fced" stroke="#cbf7e1" stroke-width="1.27"/>
-<text x="75" y="107" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" letter-spacing="-.13" fill="#007d53">ГОСТ</text>
-</g></g><g class="radar-tag-enter" style="--enter-delay:120ms">
-<g class="pipeline-radar-bob" style="animation-delay:1650ms;animation-duration:4150ms">
-<rect x="229.0" y="46" width="78" height="26" rx="9" fill="#fdf7c4" stroke="#fcef7e" stroke-width="1.27"/>
-<text x="268" y="59" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" letter-spacing="-.13" fill="#665a00">Коды 2FA</text>
-</g></g><g class="radar-tag-enter" style="--enter-delay:240ms">
-<g class="pipeline-radar-bob" style="animation-delay:2300ms;animation-duration:4500ms">
-<rect x="16.0" y="255" width="124" height="26" rx="9" fill="#e5eeff" stroke="#d6e5ff" stroke-width="1.27"/>
-<text x="78" y="268" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" letter-spacing="-.13" fill="#215bc4">Доступ по ролям</text>
-</g></g><g class="radar-tag-enter" style="--enter-delay:360ms">
-<g class="pipeline-radar-bob" style="animation-delay:2950ms;animation-duration:4850ms">
-<rect x="184.0" y="268" width="124" height="26" rx="9" fill="#f5f0ff" stroke="#e8ddfe" stroke-width="1.27"/>
-<text x="246" y="281" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" letter-spacing="-.13" fill="#6238b5">Закрытый контур</text>
-</g></g></svg></div></section>
-<p class="bounty-caption">Безопасность проверяют <strong>30 000</strong> независимых экспертов на платформе <span>Standoff Bug Bounty</span></p>
+<section class="certification" id="certification" aria-labelledby="certification-heading">
+<div class="section-intro"><h2 id="certification-heading">Пассворк сертифицирован<br> ФСТЭК России</h2><div><p>Сертификат доверия подтверждает соответствие требованиям безопасности регулируемых отраслей. Разворачивается внутри компании, поддерживает ГОСТ-шифрование, исключает передачу данных во внешние сервисы</p><button class="button button-dark" data-dialog="demo">Запросить демо</button></div></div>
+<div class="certification-cards" role="list">
+<article class="certification-card" role="listitem"><div class="certification-art"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" overflow="visible" style="display: block;" width="211.955" height="224.524" viewBox="0 0 211.955 224.524" fill="none" class="certification-svg" data-art="gis" aria-hidden="true" focusable="false">
+<g>
+<g class="certification-layer"><path d="M0.416447 163L105.977 224.106V209.921L0.416447 148.815V163Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M211.538 163L105.978 224.106V209.921L211.538 148.815V163Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M105.977 87.7094L211.538 148.815L105.977 209.921L0.416447 148.815L105.977 87.7094Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M105.978 224.108V209.922" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+</g><g class="certification-layer"><path d="M0.416447 148.815L105.977 209.92V195.735L0.416447 134.629V148.815Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M211.538 148.815L105.978 209.92V195.735L211.538 134.629V148.815Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M105.977 73.5258L211.538 134.632L105.977 195.737L0.416447 134.632L105.977 73.5258Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M105.978 209.922V195.737" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+</g><g class="certification-layer"><path d="M0.416447 134.631L105.977 195.737V181.551L0.416447 120.446V134.631Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M211.538 134.631L105.978 195.737V181.551L211.538 120.446V134.631Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M105.977 59.34L211.538 120.446L105.977 181.552L0.416543 120.446L105.977 59.34Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M105.978 195.736V181.551" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+</g><g class="certification-layer"><path d="M0.416447 120.445L105.977 181.551V167.366L0.416447 106.26V120.445Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M211.538 120.445L105.978 181.551V167.366L211.538 106.26V120.445Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M105.977 45.1549L211.538 106.261L105.977 167.366L0.416543 106.261L105.977 45.1549Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M105.978 181.551V167.366" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+</g><g class="certification-layer"><path d="M0.416447 97.5301L105.977 158.636V145.542L0.416447 84.436V97.5301Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M211.538 97.5301L105.978 158.636V145.542L211.538 84.436V97.5301Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M105.977 23.3325L211.538 84.4382L105.977 145.544L0.416447 84.4382L105.977 23.3325Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M105.978 158.637V145.543" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+</g><g class="certification-layer"><path d="M0.416447 74.616L105.977 135.722V122.628L0.416447 61.5219V74.616Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M211.538 74.616L105.978 135.722V122.628L211.538 61.5219V74.616Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M105.977 0.416447L211.538 61.5222L105.977 122.628L0.416447 61.5222L105.977 0.416447Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M105.978 135.721V122.627" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+</g></g>
+</svg></div><div class="certification-copy"><h3>Госорганы</h3><p>ГИС 1 класса</p></div></article>
+<article class="certification-card" role="listitem"><div class="certification-art"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" overflow="visible" style="display: block;" width="202.865" height="224.524" viewBox="0 0 202.865 224.524" fill="none" class="certification-svg" data-art="kii" aria-hidden="true" focusable="false">
+<g>
+<g class="certification-layer"><path d="M0.416513 140.571L38.8985 162.848V45.8977L0.416513 23.6215V140.571Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832887" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M78.9843 139.642L38.8981 162.846V45.8963L78.9843 22.6919V139.642Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832887" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M40.5019 0.416443L78.9848 22.6926L38.8985 45.8969L0.416513 23.6208L40.5019 0.416443Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832887" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M38.8981 162.847V45.897" stroke="#ADB1B7" stroke-width="0.832887" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M0.416513 129.433L38.8985 151.709L78.9848 128.504" stroke="#ADB1B7" stroke-width="0.832887" stroke-linecap="round" stroke-linejoin="round" />
+</g><g class="certification-layer"><path d="M38.8983 162.847L96.6217 196.261V173.985L38.8983 140.571V162.847Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832887" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M136.707 173.056L96.6213 196.26V173.984L136.707 150.78V173.056Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832887" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M78.9845 117.366L136.707 150.78L96.6217 173.984L38.8983 140.57L78.9845 117.366Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832887" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M96.6213 196.261V173.985" stroke="#ADB1B7" stroke-width="0.832887" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M38.8981 151.709L96.6215 185.124L136.707 161.919" stroke="#ADB1B7" stroke-width="0.832887" stroke-linecap="round" stroke-linejoin="round" />
+</g><g class="certification-layer"><path d="M96.6213 196.262L144.724 224.107V167.488L96.6213 139.643V196.262Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832887" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M202.449 190.693L144.725 224.107V167.489L202.449 134.075V190.693Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832887" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M154.345 106.229L202.448 134.074L144.724 167.488L96.6213 139.643L154.345 106.229Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832887" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M144.725 224.105V167.487" stroke="#ADB1B7" stroke-width="0.832887" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M96.6213 185.124L144.724 212.969L202.448 179.555" stroke="#ADB1B7" stroke-width="0.832887" stroke-linecap="round" stroke-linejoin="round" />
+</g></g>
+</svg></div><div class="certification-copy"><h3>Инфраструктура</h3><p>КИИ 1 категории</p></div></article>
+<article class="certification-card" role="listitem"><div class="certification-art"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" overflow="visible" style="display: block;" width="180.656" height="224.524" viewBox="0 0 180.656 224.524" fill="none" class="certification-svg" data-art="asu-tp" aria-hidden="true" focusable="false">
+<g>
+<g class="certification-layer"><path d="M100.849 122.783L175.457 165.971V46.3738L100.849 3.18598V122.783Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M180.239 163.201L175.457 165.97V46.3725L180.239 43.6041V163.201Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M105.632 0.416447L180.239 43.6043L175.457 46.3727L100.849 3.1849L105.632 0.416447Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M175.457 165.97V46.3735" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+</g><g class="certification-layer"><path d="M86.5014 131.086L161.109 174.274V66.8582L86.5014 23.6704V131.086Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M165.891 171.506L161.108 174.274V66.8586L165.891 64.0901V171.506Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M91.2849 20.9028L165.892 64.0906L161.109 66.859L86.5014 23.6712L91.2849 20.9028Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M161.108 174.274V66.8579" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+</g><g class="certification-layer"><path d="M72.1544 139.393L146.762 182.581V87.3464L72.1544 44.1586V139.393Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M151.544 179.813L146.762 182.582V87.347L151.544 84.5786V179.813Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M76.9368 41.3911L151.544 84.5789L146.762 87.3473L72.1544 44.1595L76.9368 41.3911Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M146.762 182.581V87.3461" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+</g><g class="certification-layer"><path d="M57.8064 147.698L132.414 190.886V107.833L57.8064 64.645V147.698Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M137.196 188.116L132.414 190.885V107.831L137.196 105.063V188.116Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M62.5888 61.8754L137.196 105.063L132.414 107.832L57.8064 64.6439L62.5888 61.8754Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M132.414 190.886V107.832" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+</g><g class="certification-layer"><path d="M43.4585 156.004L118.066 199.191V128.319L43.4585 85.1313V156.004Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M122.848 196.422L118.066 199.19V128.318L122.848 125.549V196.422Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M48.2408 82.3618L122.848 125.55L118.066 128.318L43.4585 85.1302L48.2408 82.3618Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M118.066 199.191V128.319" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+</g><g class="certification-layer"><path d="M29.1114 164.309L103.719 207.497V148.805L29.1114 105.618V164.309Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M108.501 204.729L103.719 207.497V148.806L108.501 146.038V204.729Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M33.8938 102.848L108.501 146.036L103.719 148.804L29.1114 105.617L33.8938 102.848Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M103.719 207.496V148.805" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+</g><g class="certification-layer"><path d="M14.7644 172.614L89.3716 215.802V169.292L14.7644 126.104V172.614Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M94.1542 213.034L89.3718 215.802V169.292L94.1542 166.524V213.034Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M19.5468 123.336L94.154 166.524L89.3716 169.293L14.7644 126.105L19.5468 123.336Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M89.3718 215.801V169.291" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+</g><g class="certification-layer"><path d="M0.416447 180.919L75.0236 224.107V189.778L0.416447 146.59V180.919Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M79.8062 221.339L75.0238 224.107V189.779L79.8062 187.01V221.339Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M5.19882 143.823L79.806 187.011L75.0236 189.779L0.416447 146.591L5.19882 143.823Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M75.0238 224.107V189.778" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+</g></g>
+</svg></div><div class="certification-copy"><h3>Производство</h3><p>АСУ ТП 1 класса</p></div></article>
+<article class="certification-card" role="listitem"><div class="certification-art certification-art-wide"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" overflow="visible" style="display: block;" width="258.747" height="197.86" viewBox="0 0 258.747 197.86" fill="none" class="certification-svg" data-art="ispdn" aria-hidden="true" focusable="false">
+<g>
+<g><path d="M0.416446 122.794L129.374 197.444V181.535L0.416446 106.885V122.794Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M258.33 122.794L129.373 197.444V181.535L258.33 106.885V122.794Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M0.416446 106.884L129.374 181.533V165.625L0.416446 90.975V106.884Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M258.33 106.884L129.373 181.534V165.625L258.33 90.9752V106.884Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M0.416446 90.9738L129.374 165.623V149.714L0.416446 75.0649V90.9738Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M258.33 90.9738L129.373 165.623V149.714L258.33 75.0649V90.9738Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M129.374 53.0375L201.252 94.6455L129.374 136.253L57.4957 94.6455L129.374 53.0375Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M129.373 53.0377L201.251 94.6456V75.0654L129.373 33.4575V53.0377Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M129.374 53.0377L57.4957 94.6456V75.0654L129.374 33.4575V53.0377Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<g class="certification-layer"><path d="M82.8645 94.6457L129.374 121.569V114.226L82.8645 87.3032V94.6457Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M175.882 94.6457L129.373 121.569V114.226L175.882 87.3032V94.6457Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M129.374 60.3813L175.883 87.3041L129.374 114.227L82.8645 87.3041L129.374 60.3813Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M129.373 124.57V117.227" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+</g><g class="certification-layer"><path d="M82.8647 90.3056L129.374 117.228V103.767L82.8647 76.8442V90.3056Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M175.882 90.3056L129.373 117.228V103.767L175.882 76.8442V90.3056Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M129.374 49.9204L175.883 76.8431L129.374 103.766L82.8647 76.8431L129.374 49.9204Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M129.373 117.227V103.766" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+</g><path fill-rule="evenodd" clip-rule="evenodd" d="M129.374 0.416446L258.331 75.0659L129.374 149.715L0.416446 75.0659L129.374 0.416446ZM129.374 33.458L201.252 75.0659L129.374 116.674L57.4955 75.0659L129.374 33.458Z" fill="#F7F7F8" stroke="#ADB1B7" stroke-width="0.832893" stroke-linecap="round" stroke-linejoin="round" />
+</g></g>
+</svg></div><div class="certification-copy"><h3>Операторы ПДн</h3><p>ИСПДн 1 уровня</p></div></article>
+</div></section>
 <section class="teams-heading" id="teams"><span class="eyebrow">О проекте</span><h2>Пассворк решает<br> задачи разных команд</h2></section>
 <div class="team-tabs" role="tablist" aria-label="Пассворк для вашей команды"><button id="team-tab-0" role="tab" aria-selected="true" aria-controls="team-panel" tabindex="0" data-team="0">IT-команды</button><button id="team-tab-1" role="tab" aria-selected="false" aria-controls="team-panel" tabindex="-1" data-team="1">DevOps</button><button id="team-tab-2" role="tab" aria-selected="false" aria-controls="team-panel" tabindex="-1" data-team="2">Безопасность</button><button id="team-tab-3" role="tab" aria-selected="false" aria-controls="team-panel" tabindex="-1" data-team="3">Госорганизации</button><button id="team-tab-4" role="tab" aria-selected="false" aria-controls="team-panel" tabindex="-1" data-team="4">Производство</button></div>
 <section class="team-scene" id="team-panel" role="tabpanel" aria-labelledby="team-tab-0" tabindex="0">
@@ -64,7 +150,7 @@
 <div class="team-dashboard-window team-screenshot"><div class="pw-team-dashboard pw-embed" role="img" aria-label="Анимированная демонстрация Пассворка для IT-команд"></div>
 <noscript><img src="/passwork-assets/imgContainer16.png" alt="Интерфейс Пассворка" class="" width="1044" height="610" style="width:100%;height:auto"></noscript></div></section><p class="team-caption" aria-live="polite">Разграничение доступа по ролям и группам</p>
 <section class="security-switcher" id="security" aria-labelledby="security-heading">
-<div class="split-intro security-intro"><h2 id="security-heading">Российское решение для корпоративной безопасности</h2><div><p>Управляйте корпоративными паролями и доступом сотрудников в единой системе.<br> Размещайте Пассворк на своих серверах.</p><button class="button button-dark" data-dialog="demo">Запросить демо</button></div></div>
+<div class="section-intro"><h2 id="security-heading">Российское решение для корпоративной безопасности</h2><div><p>Управляйте корпоративными паролями и доступом сотрудников в единой системе.<br> Размещайте Пассворк на своих серверах.</p><button class="button button-dark" data-dialog="demo">Запросить демо</button></div></div>
 <div class="security-switcher-grid" role="group" aria-roledescription="карусель" aria-label="Особенности безопасности" tabindex="0">
 <div class="security-switcher-copy">
 <article class="security-choice" aria-hidden="true"><p class="feature-label">Сертификация</p><h3>ФСТЭК России, 4 уровень доверия</h3><p class="security-choice-description">Сертификат ФСТЭК подтверждает соответствие требованиям безопасности госсектора и критической инфраструктуры. Пассворк разработан в России и включён в реестр отечественного ПО Минцифры</p><div class="security-choice-footer"><div class="security-choice-progress" aria-hidden="true"><span><img src="/passwork-assets/security/progress.svg" alt=""></span></div><div class="security-next-choices"><button type="button" class="security-next-choice" data-feature-index="1">Размещение внутри инфраструктуры</button><button type="button" class="security-next-choice" data-feature-index="2">ГОСТ-шифрование</button></div></div></article>

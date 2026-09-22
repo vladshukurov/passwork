@@ -21,45 +21,6 @@
   -webkit-mask: var(--logo-art) center / contain no-repeat;
   mask: var(--logo-art) center / contain no-repeat;
 }
-.client-logo-track,
-.client-logo-frame {
-  animation-duration: 5.6s;
-  animation-timing-function: linear;
-  animation-delay: var(--logo-delay);
-  animation-iteration-count: infinite;
-  animation-fill-mode: both;
-  animation-play-state: paused;
-}
-.client-logo-track { animation-name: client-logo-roll; }
-.client-logo-frame:nth-child(1) { animation-name: client-logo-first; }
-.client-logo-frame:nth-child(2) { animation-name: client-logo-second; }
-.client-logo-frame:nth-child(3) { animation-name: client-logo-third; }
-.client-logos.is-animating .client-logo-track,
-.client-logos.is-animating .client-logo-frame { animation-play-state: running; }
-@keyframes client-logo-roll {
-  0%, 25% {
-    transform: translate3d(0, 0, 0);
-    animation-timing-function: cubic-bezier(.76, 0, .24, 1);
-  }
-  40%, 75% {
-    transform: translate3d(0, -70px, 0);
-    animation-timing-function: cubic-bezier(.76, 0, .24, 1);
-  }
-  90%, 100% { transform: translate3d(0, -140px, 0); }
-}
-@keyframes client-logo-first {
-  0%, 32% { opacity: 1; }
-  40%, 100% { opacity: 0; }
-}
-@keyframes client-logo-second {
-  0%, 25% { opacity: 0; }
-  33%, 82% { opacity: 1; }
-  90%, 100% { opacity: 0; }
-}
-@keyframes client-logo-third {
-  0%, 75% { opacity: 0; }
-  83%, 100% { opacity: 1; }
-}
 @media (max-width: 800px) {
   .client-logo-art { max-width: 67%; transform: scale(.9); }
 }

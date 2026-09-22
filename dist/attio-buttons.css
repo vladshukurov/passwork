@@ -17,19 +17,19 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  height: 46px;
-  padding: 0 14px;
+  height: var(--pw-button-height);
+  padding: 0 var(--pw-button-padding);
   border: 1px solid transparent;
-  border-radius: 12px;
-  background-color: #f3f3f3;
+  border-radius: var(--pw-radius-control);
+  background-color: var(--pw-surface-muted);
   background-image: radial-gradient(at center -10%, var(--pw-button-from) 0%, var(--pw-button-to) 100%);
-  color: #1c1d1f;
-  font: 500 16px/22px Inter, Museo, sans-serif;
+  color: var(--pw-text);
+  font: var(--pw-weight) var(--pw-button-font-size)/22px var(--pw-font-ui);
   white-space: nowrap;
   cursor: pointer;
   transition-property: color, border-color, background-color, --pw-button-from, --pw-button-to;
-  transition-duration: 300ms;
-  transition-timing-function: cubic-bezier(.2, 0, 0, 1);
+  transition-duration: var(--pw-duration-ui);
+  transition-timing-function: var(--pw-ease-ui);
 }
 .button:hover,
 .button:focus-visible {
@@ -43,7 +43,7 @@
   --pw-button-to: #eee;
 }
 .button:focus-visible {
-  outline: 3px solid #266df04d;
+  outline: 3px solid var(--pw-focus);
   outline-offset: 0;
 }
 .button:disabled {
@@ -56,21 +56,21 @@
 }
 .button img { width: 20px; height: 20px; flex: none; }
 .button-dark {
-  --pw-button-from: #202124;
-  --pw-button-to: #202124;
-  background-color: #202124;
-  border-color: #505967;
+  --pw-button-from: var(--pw-control);
+  --pw-button-to: var(--pw-control);
+  background-color: var(--pw-control);
+  border-color: var(--pw-control-border);
   color: #f3f4f6;
 }
 .button-dark:hover,
 .button-dark:focus-visible {
-  --pw-button-from: #505967;
-  --pw-button-to: #202124;
+  --pw-button-from: var(--pw-control-border);
+  --pw-button-to: var(--pw-control);
   color: #fff;
 }
 .button-dark:active {
-  --pw-button-from: #383e47;
-  --pw-button-to: #383e47;
+  --pw-button-from: var(--pw-control-pressed);
+  --pw-button-to: var(--pw-control-pressed);
   color: #fff;
 }
 .button-outline {
@@ -84,7 +84,7 @@
 .button-outline:active { background-color: #ffffff24; }
 .button-outline:disabled { background-color: transparent; border-color: #ffffff40; color: #ffffff66; }
 .button-outline img { filter: brightness(0) invert(1); }
-.button-small { height: 32px; padding: 0 10px; gap: 6px; border-radius: 10px; font-size: 12px; line-height: 18px; }
+.button-small { height: 32px; padding: 0 10px; gap: 6px; border-radius: var(--pw-radius-control); font-size: 12px; line-height: 18px; }
 @media (prefers-reduced-motion: reduce) {
   .button { transition: none; }
 }

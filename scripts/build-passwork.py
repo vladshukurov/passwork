@@ -1,6 +1,7 @@
 """Build the local Passwork page from the supplied Figma design."""
 from pathlib import Path
 import json
+import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 assets = json.loads((ROOT / 'source/passwork-assets.json').read_text())
@@ -14,6 +15,42 @@ def image(key, alt='', cls='', extra=''):
 
 def button(label='Запросить демо', cls='', kind='demo'):
     return f'<button class="button {cls}" data-dialog="{kind}">{label}</button>'
+
+def certification_art(name):
+    """Keep all original faces together and retain the export's painter order."""
+    ns = 'http://www.w3.org/2000/svg'
+    ET.register_namespace('', ns)
+    svg = ET.parse(ROOT / f'dist/passwork-assets/certification/{name}.svg').getroot()
+    group = svg.find(f'{{{ns}}}g')
+    paths = list(group)
+    sizes = {'gis': [4]*6, 'kii': [5]*3, 'asu-tp': [4]*8, 'ispdn': [18]}[name]
+    assert sum(sizes) == len(paths), f'Artwork changed: {name}'
+    for node in svg.iter():
+        node.attrib.pop('id', None)
+    for path in paths:
+        group.remove(path)
+    offset = 0
+    for size in sizes:
+        layer = ET.SubElement(group, f'{{{ns}}}g', {'class': 'certification-layer'})
+        layer.extend(paths[offset:offset+size])
+        offset += size
+    # The frame has open side faces, so do not pull them apart. Lift the two
+    # complete inner chip slabs instead, retaining their original paint order.
+    if name == 'ispdn':
+        frame = group[0]
+        frame.attrib.clear()
+        for start, end in [(13, 17), (9, 13)]:
+            chip = ET.Element(f'{{{ns}}}g', {'class': 'certification-layer'})
+            for path in paths[start:end]:
+                frame.remove(path)
+                chip.append(path)
+            frame.insert(start, chip)
+    svg.set('class', 'certification-svg')
+    svg.set('data-art', name)
+    svg.set('aria-hidden', 'true')
+    svg.set('focusable', 'false')
+    svg.set('preserveAspectRatio', 'xMidYMid meet')
+    return ET.tostring(svg, encoding='unicode')
 
 def security_next_items(active):
     titles = ['ФСТЭК России, 4 уровень доверия', 'Размещение внутри инфраструктуры', 'ГОСТ-шифрование']
@@ -80,14 +117,16 @@ page = f'''<!doctype html>
 <meta name="description" content="Управление корпоративными паролями, доступами и действиями — в одном контуре.">
 <link rel="icon" href="{assets['imgKey02']}" type="image/svg+xml">
 <link rel="preload" href="/passwork-assets/MuseoSansCyrl-500.otf" as="font" type="font/otf" crossorigin>
-<link rel="stylesheet" href="/code/design-tokens.css"><link rel="stylesheet" href="/attio-buttons.css"><link rel="stylesheet" href="/passwork.css"><link rel="stylesheet" href="/passwork-motion.css">
+<link rel="stylesheet" href="/code/design-tokens.css"><link rel="stylesheet" href="/passwork-tokens.css"><link rel="stylesheet" href="/attio-buttons.css"><link rel="stylesheet" href="/passwork.css"><link rel="stylesheet" href="/passwork-motion.css">
 <link rel="stylesheet" href="/client-logos.css"><link rel="stylesheet" href="/hero-entrance.css"><link rel="stylesheet" href="/hero-scroll.css"><link rel="stylesheet" href="/security-switcher.css">
 <link rel="stylesheet" href="/live-dashboard-base.css"><link rel="stylesheet" href="/live-dashboard-light.css">
 <link rel="stylesheet" href="/team-dashboards.css"><link rel="stylesheet" href="/team-dashboards-light.css">
+<script defer src="/vendor/gsap/gsap.min.js"></script>
+<script defer src="/vendor/gsap/ScrollTrigger.min.js"></script>
 <script type="module" src="/passwork.js"></script></head><body>
 <a class="skip-link" href="#main">Перейти к содержимому</a>
 <header class="site-header"><div class="header-inner">
-<a class="brand" href="#top" aria-label="Пассворк — на главную">{image('imgLogo','Пассворк')}</a>
+<a class="brand" href="#top" aria-label="Пассворк — на главную"><img class="brand-dark" src="/passwork-assets/logo-dark.svg" alt="Пассворк"><img class="brand-light" src="/passwork-assets/logo-light.svg" alt="" aria-hidden="true"></a>
 <span class="brand-divider"></span>{image('imgVector','Сделано в России','astra')}
 <nav id="main-nav" aria-label="Основная навигация"><a href="#about">Компания</a><a href="#teams">Сценарии</a><a href="#security">Ресурсы</a><button data-dialog="support">Поддержка</button><button data-dialog="pricing">Цены</button></nav>
 <span class="nav-divider"></span>{button(cls='button-small header-demo')}
@@ -95,7 +134,7 @@ page = f'''<!doctype html>
 </div></header>
 <main id="main">
 <section class="hero" id="top">
-<div class="hero-gradient" aria-hidden="true"></div>{image('imgImage','','hero-noise')}{image('imgImage1','','hero-texture')}
+<div class="hero-gradient" aria-hidden="true"></div>{image('imgVector1','','hero-dots')}
 <div class="hero-copy-scroll"><div class="hero-copy"><h1><span class="hero-title-line">Пассворк — основа вашей</span> <span class="hero-title-line">информационной безопасности</span></h1>
 <p>Управление корпоративными паролями, доступами и действиями — в одном контуре</p>
 <div class="hero-actions">{button()}{button('Обсудить внедрение'+image('imgTrailingIcon'),'button-outline','implementation')}</div></div></div>
@@ -108,9 +147,14 @@ page = f'''<!doctype html>
 <div class="page-grid">
 <section aria-label="Пассворк выбирают"><div class="client-logos" role="list">{logo_html}</div></section>
 <section class="about" id="about"><span class="eyebrow">О проекте</span><h2>Пассворк — корпоративный менеджер паролей <span>для ИТ-команд, DevOps и специалистов по безопасности. Он помогает хранить пароли, управлять доступом и отслеживать действия внутри инфраструктуры</span></h2></section>
-<section class="split-intro certification" id="certification"><h2>Пассворк<br>сертифицирован<br>ФСТЭК России</h2><div><p>Сертификат доверия подтверждает соответствие требованиям безопасности регулируемых отраслей. Разворачивается внутри компании, поддерживает ГОСТ-шифрование, исключает передачу данных во внешние сервисы</p>{button(cls='button-dark')}</div></section>
-<section class="orbit-scene" aria-label="Защита паролей и доступов"><div class="scene-dots" aria-hidden="true">{image('imgVector2')}</div><div class="orbit">{orbit_html}</div></section>
-<p class="bounty-caption">Безопасность проверяют <strong>30 000</strong> независимых экспертов на платформе <span>Standoff Bug Bounty</span></p>
+<section class="certification" id="certification" aria-labelledby="certification-heading">
+<div class="section-intro"><h2 id="certification-heading">Пассворк сертифицирован<br>ФСТЭК России</h2><div><p>Сертификат доверия подтверждает соответствие требованиям безопасности регулируемых отраслей. Разворачивается внутри компании, поддерживает ГОСТ-шифрование, исключает передачу данных во внешние сервисы</p>{button(cls='button-dark')}</div></div>
+<div class="certification-cards" role="list">
+<article class="certification-card" role="listitem"><div class="certification-art">{certification_art('gis')}</div><div class="certification-copy"><h3>Госорганы</h3><p>ГИС 1 класса</p></div></article>
+<article class="certification-card" role="listitem"><div class="certification-art">{certification_art('kii')}</div><div class="certification-copy"><h3>Инфраструктура</h3><p>КИИ 1 категории</p></div></article>
+<article class="certification-card" role="listitem"><div class="certification-art">{certification_art('asu-tp')}</div><div class="certification-copy"><h3>Производство</h3><p>АСУ ТП 1 класса</p></div></article>
+<article class="certification-card" role="listitem"><div class="certification-art certification-art-wide">{certification_art('ispdn')}</div><div class="certification-copy"><h3>Операторы ПДн</h3><p>ИСПДн 1 уровня</p></div></article>
+</div></section>
 <section class="teams-heading" id="teams"><span class="eyebrow">О проекте</span><h2>Пассворк решает<br>задачи разных команд</h2></section>
 <div class="team-tabs" role="tablist" aria-label="Пассворк для вашей команды">{teams}</div>
 <section class="team-scene" id="team-panel" role="tabpanel" aria-labelledby="team-tab-0" tabindex="0">
@@ -118,7 +162,7 @@ page = f'''<!doctype html>
 <div class="team-dashboard-window team-screenshot"><div class="pw-team-dashboard pw-embed" role="img" aria-label="Анимированная демонстрация Пассворка для IT-команд"></div>
 <noscript>{image('imgContainer16','Интерфейс Пассворка',extra='width="1044" height="610" style="width:100%;height:auto"')}</noscript></div></section><p class="team-caption" aria-live="polite">Разграничение доступа по ролям и группам</p>
 <section class="security-switcher" id="security" aria-labelledby="security-heading">
-<div class="split-intro security-intro"><h2 id="security-heading">Российское решение для корпоративной безопасности</h2><div><p>Управляйте корпоративными паролями и доступом сотрудников в единой системе.<br>Размещайте Пассворк на своих серверах.</p>{button(cls='button-dark')}</div></div>
+<div class="section-intro"><h2 id="security-heading">Российское решение для корпоративной безопасности</h2><div><p>Управляйте корпоративными паролями и доступом сотрудников в единой системе.<br>Размещайте Пассворк на своих серверах.</p>{button(cls='button-dark')}</div></div>
 <div class="security-switcher-grid" role="group" aria-roledescription="карусель" aria-label="Особенности безопасности" tabindex="0">
 <div class="security-switcher-copy">
 <article class="security-choice" aria-hidden="true"><p class="feature-label">Сертификация</p><h3>ФСТЭК России, 4 уровень доверия</h3><p class="security-choice-description">Сертификат ФСТЭК подтверждает соответствие требованиям безопасности госсектора и критической инфраструктуры. Пассворк разработан в России и включён в реестр отечественного ПО Минцифры</p>{security_next_items(0)}</article>
