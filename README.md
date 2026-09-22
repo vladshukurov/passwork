@@ -1,6 +1,6 @@
 # Пассворк — сайт
 
-[Репозиторий](https://github.com/vladshukurov/passwork)
+[Открыть сайт](https://passwork-omega.vercel.app/) · [Репозиторий](https://github.com/vladshukurov/passwork)
 
 Vercel собирает из `dist` только ресурсы, необходимые странице, через
 `scripts/build-pages.py --base-path /` и публикует каталог `_site` в корне домена.
