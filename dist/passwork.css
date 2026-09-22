@@ -49,10 +49,9 @@ body{font-family:var(--pw-font)}
 .certification-copy p,.feature-label,.feature-copy>p:last-child{color:var(--pw-text-secondary)}
 .team-tabs button,.product-tabs button{border-radius:var(--pw-radius-control)}
 .team-tabs button[aria-selected="true"]{background:var(--pw-control);border-color:var(--pw-control-border);color:var(--pw-surface-muted)}
-.product-tabs button,.team-tabs button{transform:translateY(0);transition:background-color 260ms var(--pw-ease-ui),color 260ms var(--pw-ease-ui),border-color 260ms var(--pw-ease-ui),box-shadow 260ms var(--pw-ease-ui),transform 260ms var(--pw-ease-ui)}
-.product-tabs button:not([aria-selected="true"]):hover,.team-tabs button:not([aria-selected="true"]):hover{transform:translateY(-1px)}
+.product-tabs button,.team-tabs button{transition:background-color 260ms var(--pw-ease-ui),color 260ms var(--pw-ease-ui),border-color 260ms var(--pw-ease-ui),box-shadow 260ms var(--pw-ease-ui)}
 .product-tabs button[aria-selected="true"],.team-tabs button[aria-selected="true"]{box-shadow:0 8px 20px -14px #0b193070}
-.product-tabs button:active,.team-tabs button:active{transform:translateY(0) scale(.985);transition-duration:90ms}
+.product-tabs button:active,.team-tabs button:active{transition-duration:90ms}
 .security-next-choice{transition:opacity 300ms var(--pw-ease-ui),color 300ms var(--pw-ease-ui)}
 .header-inner nav a,.header-inner nav button{transition:color 220ms var(--pw-ease-ui),background-color 220ms var(--pw-ease-ui)}
 .menu-toggle span{transition:transform 260ms var(--pw-ease-ui),background-color 220ms var(--pw-ease-ui)}
