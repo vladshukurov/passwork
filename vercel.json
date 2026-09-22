@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "buildCommand": null,
-  "outputDirectory": "dist"
+  "buildCommand": "python3 scripts/build-pages.py --base-path /",
+  "outputDirectory": "_site"
 }

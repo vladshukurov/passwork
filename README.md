@@ -2,10 +2,10 @@
 
 [Репозиторий](https://github.com/vladshukurov/passwork)
 
-Vercel публикует статическую версию из `dist` в корне домена по конфигурации
-`vercel.json`. После изменений в генераторе выполните `python3 scripts/build-passwork.py`
+Vercel собирает из `dist` только ресурсы, необходимые странице, через
+`scripts/build-pages.py --base-path /` и публикует каталог `_site` в корне домена.
+После изменений в генераторе выполните `python3 scripts/build-passwork.py`
 и сохраните обновлённый `dist` в Git. Локально сайт доступен через `serve.py`.
-Сборка для прежнего GitHub Pages (`scripts/build-pages.py`) оставлена как вспомогательная.
 
 Главная страница на порту 8772 теперь соответствует макету [Passwork | Pragmatica, 2142:24179](https://www.figma.com/design/cJNZoxguk02Zbmg4X320R8/Passwork?node-id=2142-24179).
 
