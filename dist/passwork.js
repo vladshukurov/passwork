@@ -1,11 +1,11 @@
-import {gsap, mountPageMotion} from './page-motion.js?v=motion-20260923e';
+import {gsap, mountPageMotion} from './page-motion.js?v=motion-20260923ab';
 import {mountHeroDashboard} from './live-dashboard.js?v=security-20260923d';
-import {mountClientLogos} from './client-logos.js';
-import {mountHeroScroll} from './hero-scroll.js?v=motion-20260923e';
+import {mountClientLogos} from './client-logos.js?v=motion-20260923ab';
+import {mountHeroScroll} from './hero-scroll.js?v=motion-20260923ab';
 import {mountOrbitAnimation} from './orbit-animation.js';
-import {mountSecuritySwitcher} from './security-switcher.js?v=security-20260923e';
+import {mountSecuritySwitcher} from './security-switcher.js?v=motion-20260923ab';
 import {mountTeamDashboard,teamScenarios} from './team-dashboards.js';
-import {snapshotScreen,dissolveScreen,fadeThroughScreen} from './screen-transitions.js?v=motion-20260923e';
+import {snapshotScreen,dissolveScreen,fadeThroughScreen} from './screen-transitions.js?v=motion-20260923ab';
 
 mountClientLogos(document.querySelector('.client-logos'));
 mountOrbitAnimation(document.querySelector('.orbit-scene'));

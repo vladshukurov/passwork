@@ -16,5 +16,4 @@ export const siteMotion = Object.freeze({
   screenFade: .32,
   screenFadeDelay: .08,
   glintSweep: 2.6,
-  glintRest: 4.4,
 });

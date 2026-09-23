@@ -1,4 +1,4 @@
-import {gsap, ScrollTrigger} from './page-motion.js?v=motion-20260923e';
+import {gsap, ScrollTrigger} from './page-motion.js?v=motion-20260923ab';
 
 export function mountHeroScroll(hero, header) {
   if (!hero || !header) return () => {};

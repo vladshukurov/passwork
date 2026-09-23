@@ -1,5 +1,5 @@
 // Locally vendored GSAP 3.15.0; no runtime CDN dependency.
-import {siteMotion} from './site-motion-tokens.js?v=motion-20260923z';
+import {siteMotion} from './site-motion-tokens.js?v=motion-20260923aa';
 export const {gsap, ScrollTrigger} = window;
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,12 +11,18 @@ function mountDotGlints() {
     cleanups=[];
     if(!preference.matches)return;
     document.querySelectorAll('.dot-glint').forEach((glint,index) => {
+      // A single restrained sweep introduces each dot field as it enters view.
       const sweep=gsap.fromTo(glint,
         {webkitMaskPosition:'100% 0%',maskPosition:'100% 0%'},
         {webkitMaskPosition:'0% 0%',maskPosition:'0% 0%',duration:siteMotion.glintSweep,
-          ease:'none',repeat:-1,repeatDelay:siteMotion.glintRest,delay:.6+index*.9});
-      let visible=true;
-      const update=()=>visible && !document.hidden?sweep.resume():sweep.pause();
+          ease:'sine.inOut',paused:true,delay:.35+index*.15});
+      let visible=false;
+      let started=false;
+      const update=()=>{
+        if(!visible || document.hidden){sweep.pause();return;}
+        if(!started){started=true;sweep.play(0);}
+        else if(!sweep.progress() || sweep.progress()<1)sweep.resume();
+      };
       const observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;update();});
       observer.observe(glint.parentElement);
       document.addEventListener('visibilitychange',update);

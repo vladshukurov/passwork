@@ -1,4 +1,4 @@
-import { gsap } from './page-motion.js?v=motion-20260923e';
+import { gsap } from './page-motion.js?v=motion-20260923ab';
 import { siteMotion } from './site-motion-tokens.js?v=motion-20260923k';
 
 export function snapshotScreen(source) {

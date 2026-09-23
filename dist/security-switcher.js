@@ -1,7 +1,7 @@
 // One pinned editorial scene. The blue stage stays put while its artwork and
 // the active story change with scroll progress.
 import { mountSecurityDashboardMotion } from './security-dashboard-motion.js';
-import { gsap } from './page-motion.js?v=motion-20260923e';
+import { gsap } from './page-motion.js?v=motion-20260923ab';
 import { chapterAt, chapterScrollTop, pinnedProgress } from './security-scroll-progress.js';
 
 export function mountSecuritySwitcher(section) {

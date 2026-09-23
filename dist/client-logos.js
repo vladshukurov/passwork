@@ -1,4 +1,4 @@
-import {gsap} from './page-motion.js';
+import {gsap} from './page-motion.js?v=motion-20260923ab';
 export function mountClientLogos(row) {
   if (!row) return () => {};
   const media=gsap.matchMedia();

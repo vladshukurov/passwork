@@ -118,13 +118,13 @@ page = f'''<!doctype html>
 <meta name="description" content="Управление корпоративными паролями, доступами и действиями — в одном контуре.">
 <link rel="icon" href="{assets['imgKey02']}" type="image/svg+xml">
 <link rel="preload" href="/passwork-assets/MuseoSansCyrl-500.otf" as="font" type="font/otf" crossorigin>
-<link rel="stylesheet" href="/code/design-tokens.css"><link rel="stylesheet" href="/passwork-tokens.css"><link rel="stylesheet" href="/attio-buttons.css"><link rel="stylesheet" href="/passwork.css?v=motion-20260923z"><link rel="stylesheet" href="/passwork-motion.css">
-<link rel="stylesheet" href="/client-logos.css"><link rel="stylesheet" href="/hero-entrance.css"><link rel="stylesheet" href="/hero-scroll.css?v=motion-20260923z"><link rel="stylesheet" href="/security-switcher.css?v=security-20260923d">
+<link rel="stylesheet" href="/code/design-tokens.css"><link rel="stylesheet" href="/passwork-tokens.css"><link rel="stylesheet" href="/attio-buttons.css"><link rel="stylesheet" href="/passwork.css?v=motion-20260923ab"><link rel="stylesheet" href="/passwork-motion.css">
+<link rel="stylesheet" href="/client-logos.css"><link rel="stylesheet" href="/hero-entrance.css"><link rel="stylesheet" href="/hero-scroll.css?v=motion-20260923ab"><link rel="stylesheet" href="/security-switcher.css?v=security-20260923d">
 <link rel="stylesheet" href="/live-dashboard-base.css"><link rel="stylesheet" href="/live-dashboard-light.css">
 <link rel="stylesheet" href="/team-dashboards.css"><link rel="stylesheet" href="/team-dashboards-light.css">
 <script defer src="/vendor/gsap/gsap.min.js"></script>
 <script defer src="/vendor/gsap/ScrollTrigger.min.js"></script>
-<script type="module" src="/passwork.js?v=security-20260923e"></script></head><body>
+<script type="module" src="/passwork.js?v=motion-20260923ab"></script></head><body>
 <a class="skip-link" href="#main">Перейти к содержимому</a>
 <header class="site-header"><div class="header-inner">
 <a class="brand" href="#top" aria-label="Пассворк — на главную"><img class="brand-dark" src="/passwork-assets/logo-dark.svg" alt="Пассворк"><img class="brand-light" src="/passwork-assets/logo-light.svg" alt="" aria-hidden="true"></a>

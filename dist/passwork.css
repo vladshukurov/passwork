@@ -19,7 +19,7 @@
   /* Fine neutral dithering masks 8-bit banding without redrawing the source palette. */
   --pw-gradient-grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.68' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='128' height='128' filter='url(%23n)' opacity='.14'/%3E%3C/svg%3E");
 }
-.team-scene{
+.hero-gradient,.team-scene{
   background-image:var(--pw-gradient-grain),url('/passwork-assets/blue-gradient-figma.png');
   background-position:0 0,center;
   background-size:128px 128px,cover;
@@ -27,7 +27,21 @@
   background-blend-mode:soft-light,normal;
 }
 .hero-gradient{
-  background:url('/passwork-assets/blue-gradient-hd.png') center/cover no-repeat;
+  /* Smooth the locally supplied artwork without changing its palette. */
+  inset:-64px;
+  background-image:url('/passwork-assets/blue-gradient-figma.png');
+  background-position:center;
+  background-size:cover;
+  filter:blur(56px);
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  z-index:-2;
+  inset:0;
+  pointer-events:none;
+  background:var(--pw-gradient-grain) 0 0 / 128px 128px repeat;
+  mix-blend-mode:soft-light;
 }
 .hero-noise,.hero-texture{display:none}
 .team-scene{background-color:#397dca}
@@ -118,7 +132,7 @@ body{font-family:var(--pw-font)}
 .team-dashboard-window{isolation:isolate}
 .team-dashboard-window>.pw-team-dashboard{position:absolute;inset:0;width:100%;height:100%}
 .screen-switch-outgoing{position:absolute!important;inset:0!important;z-index:5;width:100%!important;height:100%!important;pointer-events:none;overflow:hidden}
-.hero-dots.dot-glint,.team-scene>.scene-dots.dot-glint,.security-stage-dots.dot-glint{opacity:1;filter:brightness(0) invert(1) drop-shadow(0 0 3px #fff);-webkit-mask-image:linear-gradient(112deg,transparent 42%,#0008 47%,#000 50%,#0008 53%,transparent 58%);mask-image:linear-gradient(112deg,transparent 42%,#0008 47%,#000 50%,#0008 53%,transparent 58%);-webkit-mask-size:250% 100%;mask-size:250% 100%;-webkit-mask-position:100% 0;mask-position:100% 0}
+.hero-dots.dot-glint,.team-scene>.scene-dots.dot-glint,.security-stage-dots.dot-glint{opacity:.42;filter:brightness(0) invert(1) drop-shadow(0 0 1px #ffffff80);-webkit-mask-image:linear-gradient(112deg,transparent 45%,#0006 48%,#000 50%,#0006 52%,transparent 55%);mask-image:linear-gradient(112deg,transparent 45%,#0006 48%,#000 50%,#0006 52%,transparent 55%);-webkit-mask-size:250% 100%;mask-size:250% 100%;-webkit-mask-position:100% 0;mask-position:100% 0}
 .site-header:not(.is-past-hero) .header-demo{--pw-button-from:#fff;--pw-button-to:#f6f8fc;background-color:#fff;border-color:#fff;color:#202124;box-shadow:0 1px 4px #102a551a}
 .site-header:not(.is-past-hero) .header-demo:hover{--pw-button-from:#fff;--pw-button-to:#eaf1fc;border-color:#fff;color:#172c4d;box-shadow:0 2px 9px #102a5529}
 .site-header:not(.is-past-hero) .header-demo:active{--pw-button-from:#eef3fb;--pw-button-to:#e5edfa;box-shadow:0 1px 3px #102a551c}
