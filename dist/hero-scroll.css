@@ -41,11 +41,9 @@
   transition: opacity .36s ease;
 }
 .site-header.is-scroll-header::before {
-  /* A crisp opaque blue surface prevents the white product UI from bleeding
-     into the navigation. No blur and no fading lower edge on the blue scene. */
-  background: linear-gradient(90deg,#244d7f 0%,#32679f 52%,#477fbd 100%);
-  border-bottom: 1px solid #ffffff1f;
-  box-shadow: 0 1px 0 #153a6838;
+  /* The original Git header tint, with a slightly smoother fade into the hero. */
+  inset: 0 0 -40px;
+  background: linear-gradient(180deg,#2d578df5 0%,#2d578de0 34%,#2d578dbf 55%,#2d578d70 76%,#2d578d00 100%);
 }
 .site-header.is-scroll-header::after {
   background: linear-gradient(180deg, #ffffffd1 0%, #ffffff9c 58%, #ffffff00 100%);

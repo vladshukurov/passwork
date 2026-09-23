@@ -19,7 +19,7 @@
   /* Fine neutral dithering masks 8-bit banding without redrawing the source palette. */
   --pw-gradient-grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.68' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='128' height='128' filter='url(%23n)' opacity='.14'/%3E%3C/svg%3E");
 }
-.hero-gradient,.team-scene{
+.team-scene{
   background-image:var(--pw-gradient-grain),url('/passwork-assets/blue-gradient-figma.png');
   background-position:0 0,center;
   background-size:128px 128px,cover;
@@ -27,21 +27,7 @@
   background-blend-mode:soft-light,normal;
 }
 .hero-gradient{
-  /* Original Git artwork and framing, with only slight band smoothing. */
-  inset:-20px;
-  background-image:url('/passwork-assets/blue-gradient-hd.png');
-  background-position:center;
-  background-size:cover;
-  filter:blur(12px);
-}
-.hero::before{
-  content:'';
-  position:absolute;
-  z-index:-2;
-  inset:0;
-  pointer-events:none;
-  background:var(--pw-gradient-grain) 0 0 / 128px 128px repeat;
-  mix-blend-mode:soft-light;
+  background:url('/passwork-assets/blue-gradient-hd.png') center/cover no-repeat;
 }
 .hero-noise,.hero-texture{display:none}
 .team-scene{background-color:#397dca}
