@@ -50,8 +50,9 @@ assert.doesNotMatch(rule(security, '.security-visual .security-certificate'), /b
 assert.doesNotMatch(rule(security, '.security-visual .protection-card'), /box-shadow\s*:/);
 
 // Keep the original blue art, but smooth its bands without blurring foreground UI.
-assert.match(rule(page, '.hero-gradient'), /background-attachment\s*:\s*fixed/, 'Keep the source gradient framed while the hero scrolls');
-assert.match(rule(page, '.hero-gradient'), /filter\s*:\s*blur\(24px\)/);
+assert.match(rule(page, '.hero-gradient'), /blue-gradient-hd\.png/, 'Keep the original Git hero artwork');
+assert.doesNotMatch(rule(page, '.hero-gradient'), /background-attachment\s*:\s*fixed/, 'Keep the original Git hero framing');
+assert.match(rule(page, '.hero-gradient'), /filter\s*:\s*blur\(12px\)/);
 assert.match(rule(page, '.certification-art :is(img,.certification-svg)'), /height\s*:\s*202px/);
 assert.match(motion, /layer\s*:\s*\.28\b/);
 

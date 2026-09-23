@@ -27,13 +27,12 @@
   background-blend-mode:soft-light,normal;
 }
 .hero-gradient{
-  /* Keep the source gradient framed to the viewport while the hero scrolls. */
-  inset:-64px;
-  background-image:url('/passwork-assets/blue-gradient-figma.png');
+  /* Original Git artwork and framing, with only slight band smoothing. */
+  inset:-20px;
+  background-image:url('/passwork-assets/blue-gradient-hd.png');
   background-position:center;
   background-size:cover;
-  background-attachment:fixed;
-  filter:blur(24px);
+  filter:blur(12px);
 }
 .hero::before{
   content:'';
