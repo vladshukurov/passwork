@@ -39,7 +39,8 @@ def main():
             for match in REFERENCES.finditer(text):
                 ref = next(group for group in match.groups() if group is not None)
                 url = urlsplit(ref)
-                if url.scheme or url.netloc or not url.path or '${' in ref:
+                # Encoded SVG filter fragments inside data URLs are not files.
+                if url.scheme or url.netloc or not url.path or unquote(url.path).startswith('#') or '${' in ref:
                     continue
                 dependency = (DIST / unquote(url.path).lstrip('/') if ref.startswith('/')
                               else path.parent / unquote(url.path)).resolve()

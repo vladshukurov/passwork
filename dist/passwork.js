@@ -1,10 +1,11 @@
-import {gsap, mountPageMotion} from './page-motion.js';
-import {mountHeroDashboard} from './live-dashboard.js';
+import {gsap, mountPageMotion} from './page-motion.js?v=motion-20260923e';
+import {mountHeroDashboard} from './live-dashboard.js?v=security-20260923d';
 import {mountClientLogos} from './client-logos.js';
-import {mountHeroScroll} from './hero-scroll.js';
+import {mountHeroScroll} from './hero-scroll.js?v=motion-20260923e';
 import {mountOrbitAnimation} from './orbit-animation.js';
-import {mountSecuritySwitcher} from './security-switcher.js';
+import {mountSecuritySwitcher} from './security-switcher.js?v=security-20260923e';
 import {mountTeamDashboard,teamScenarios} from './team-dashboards.js';
+import {snapshotScreen,dissolveScreen,fadeThroughScreen} from './screen-transitions.js?v=motion-20260923e';
 
 mountClientLogos(document.querySelector('.client-logos'));
 mountOrbitAnimation(document.querySelector('.orbit-scene'));
@@ -25,15 +26,21 @@ const productViews=[null,
   {title:'Журнал действий',description:'История работы с паролями и доступами внутри компании.',body:`<table class="preview-table"><thead><tr><th>Время</th><th>Действие</th><th>Пользователь</th></tr></thead><tbody><tr><td>12:41</td><td>Обновлён пароль</td><td>Администратор</td></tr><tr><td>12:35</td><td>Предоставлен доступ</td><td>IT-команда</td></tr><tr><td>12:28</td><td>Создан новый сейф</td><td>Администратор</td></tr></tbody></table>`}
 ];
 
-function animateSwitch(element){
-  if(reduced.matches)return;
-  gsap.fromTo(element,{opacity:0,y:6},{opacity:1,y:0,duration:.38,ease:'power2.out',overwrite:true,clearProps:'opacity,transform'});
-}
 function setSelection(buttons,index,panel){
   buttons.forEach((button,i)=>{button.setAttribute('aria-selected',String(i===index));button.tabIndex=i===index?0:-1;});
   panel.setAttribute('aria-labelledby',buttons[index].id);
 }
+let activeProduct=0;
+let productSwitch;
+let outgoingProductScreen;
 function selectProduct(index){
+  if(index===activeProduct)return;
+  productSwitch?.progress(1);
+  outgoingProductScreen?.remove();
+  gsap.set([liveDashboard,detail],{clearProps:'opacity,filter'});
+  const outgoing=!reduced.matches?snapshotScreen(activeProduct===0?liveDashboard:detail):null;
+  outgoingProductScreen=outgoing;
+  activeProduct=index;
   setSelection(productTabs,index,productPanel);
   detail.hidden=index===0;
   stopDashboard?.();stopDashboard=null;
@@ -41,8 +48,13 @@ function selectProduct(index){
   const view=productViews[index];
   if(view){
     detail.innerHTML=`<aside class="preview-sidebar"><img src="${logo}" alt="Пассворк"><p>Рабочее пространство</p><p>Избранное</p><p>Все пароли</p><p class="active">${view.title}</p></aside><div class="preview-content"><span class="preview-kicker">Пассворк / Рабочее пространство</span><h3>${view.title}</h3><p>${view.description}</p>${view.body}</div>`;
-    animateSwitch(detail);
-  }else {stopDashboard=mountHeroDashboard(liveDashboard);animateSwitch(liveDashboard);}
+  }else stopDashboard=mountHeroDashboard(liveDashboard);
+  if(outgoing){
+    const incoming=index===0?liveDashboard:detail;
+    productSwitch=dissolveScreen(outgoing,incoming,()=>{
+      if(outgoingProductScreen===outgoing)outgoingProductScreen=null;
+    });
+  }
 }
 productTabs.forEach((button,i)=>button.addEventListener('click',()=>selectProduct(i)));
 
@@ -52,15 +64,38 @@ const teamDashboard=document.querySelector('.pw-team-dashboard');
 const caption=document.querySelector('.team-caption');
 let activeTeam=0;
 let stopTeamDashboard=mountTeamDashboard(teamDashboard,0);
+let teamSwitch;
+let outgoingTeamScreen;
+let outgoingTeamCaption;
 function selectTeam(index){
   if(index===activeTeam)return;
+  teamSwitch?.progress(1);
+  outgoingTeamScreen?.remove();
+  outgoingTeamCaption?.remove();
+  gsap.set(teamDashboard,{clearProps:'opacity,filter'});
+  gsap.set(caption,{clearProps:'opacity,filter'});
+  const animate=!reduced.matches;
+  if(animate){
+    outgoingTeamScreen=snapshotScreen(teamDashboard);
+    outgoingTeamCaption=caption.cloneNode(true);
+    outgoingTeamCaption.classList.add('team-caption-outgoing');
+    outgoingTeamCaption.removeAttribute('aria-live');
+    outgoingTeamCaption.setAttribute('aria-hidden','true');
+    caption.parentElement.append(outgoingTeamCaption);
+  }
   stopTeamDashboard?.();
   activeTeam=index;
   setSelection(teamTabs,index,teamPanel);
   const team=teamScenarios[index];
   caption.textContent=team.caption;
   stopTeamDashboard=mountTeamDashboard(teamDashboard,index);
-  animateSwitch(teamDashboard);
+  if(!animate)return;
+  const outgoing=outgoingTeamScreen;
+  const oldCaption=outgoingTeamCaption;
+  teamSwitch=fadeThroughScreen(outgoing,teamDashboard,oldCaption,caption,()=>{
+    if(outgoingTeamScreen===outgoing)outgoingTeamScreen=null;
+    if(outgoingTeamCaption===oldCaption)outgoingTeamCaption=null;
+  });
 }
 teamTabs.forEach((button,i)=>button.addEventListener('click',()=>selectTeam(i)));
 function tabKeyboard(buttons,select){buttons.forEach((button,i)=>button.addEventListener('keydown',event=>{let next;if(event.key==='ArrowRight')next=(i+1)%buttons.length;else if(event.key==='ArrowLeft')next=(i-1+buttons.length)%buttons.length;else if(event.key==='Home')next=0;else if(event.key==='End')next=buttons.length-1;else return;event.preventDefault();select(next);buttons[next].focus();}));}

@@ -14,6 +14,9 @@
 .pw-window-bar{position:absolute;inset:0 0 auto;height:62px;display:flex;align-items:center;gap:22px;padding:0 20px;background:linear-gradient(#f9fafb,#f4f5f7);border-bottom:1px solid #eeeff1;color:#9298a1;font-size:14px}
 .pw-window-dots{display:flex;gap:9px;align-items:center}.pw-window-dots i{width:13px;height:13px;background:#ff6258;border-radius:50%}.pw-window-dots i:nth-child(2){background:#ffc047}.pw-window-dots i:nth-child(3){background:#41c95a}
 .pw-window-arrows{display:flex;align-items:center;gap:24px;border-right:1px solid #dddfe4;padding-right:20px;font:300 30px/1 Arial}.pw-window-arrows span:last-child{color:#d2d5db}
+.pw-window-chevron{display:block;width:9px;height:9px;border-top:2px solid currentColor;border-right:2px solid currentColor;flex:none}
+.pw-window-chevron--back{transform:rotate(-135deg)}
+.pw-window-chevron--forward{transform:rotate(45deg)}
 .pw-window-user{margin-left:auto;display:flex;align-items:center;gap:14px}.pw-window-avatar{width:31px;height:31px;display:grid;place-items:center;background:#e1e8f3;color:#677b9a;border-radius:50%;font-size:12px}
 .pw-live-dashboard .pw-side{background:var(--pw-side);border-right:1px solid var(--pw-line)}
 .pw-live-dashboard .pw-main{background:white}

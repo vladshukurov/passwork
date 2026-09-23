@@ -692,7 +692,7 @@ ${DASHBOARD_HEADER_MARKUP}
 // source/live-dashboard/entry.ts
 var toolbar = `<div class="pw-window-bar" aria-hidden="true">
   <div class="pw-window-dots"><i></i><i></i><i></i></div>
-  <div class="pw-window-arrows"><span>\u2039</span><span>\u203A</span></div>
+  <div class="pw-window-arrows" aria-hidden="true"><span class="pw-window-chevron pw-window-chevron--back"></span><span class="pw-window-chevron pw-window-chevron--forward"></span></div>
   <span class="pw-window-title">\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0438 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0438</span>
   <div class="pw-window-user"><span>\u0410\u043D\u0434\u0440\u0435\u0439 \u041F\u044C\u044F\u043D\u043A\u043E\u0432</span><span class="pw-window-avatar">\u0410</span></div>
 </div>`;

@@ -1,5 +1,15 @@
-/* Attio's scroll scene, adapted to the Passwork layout and original palette. */
+/* Sticky copy and product stage share a scene; copy fades before their bounds meet. */
 .hero-copy-scroll { position: relative; z-index: 2; }
+@media (min-width: 1101px) {
+  /* More breathing room before the sticky product tabs; the CTA row recedes
+     with the copy rather than colliding with the tabs during scroll. */
+  .hero-actions { margin-top: 36px; }
+  .product-showcase { margin-top: 84px; }
+}
+@media (min-width: 1101px) and (max-width: 1600px) {
+  .hero-actions { margin-top: 20px; }
+  .product-showcase { margin-top: 68px; }
+}
 .hero-window-shell { position: relative; margin-top: 28px; }
 .hero-window-scale { position: relative; z-index: 3; transform-origin: 50% 0; }
 .hero-window-scale > .product-window { margin-top: 0; }
@@ -25,16 +35,24 @@
   content: '';
   position: absolute;
   z-index: -1;
-  inset: 0 0 -40px;
+  inset: 0;
   pointer-events: none;
   opacity: 0;
-  transition: opacity .3s;
+  transition: opacity .36s ease;
 }
 .site-header.is-scroll-header::before {
-  background: linear-gradient(180deg, #2d578df5 0%, #2d578dbf 55%, #2d578d00 100%);
+  /* A crisp opaque blue surface prevents the white product UI from bleeding
+     into the navigation. No blur and no fading lower edge on the blue scene. */
+  background: linear-gradient(90deg,#244d7f 0%,#32679f 52%,#477fbd 100%);
+  border-bottom: 1px solid #ffffff1f;
+  box-shadow: 0 1px 0 #153a6838;
 }
 .site-header.is-scroll-header::after {
-  background: linear-gradient(180deg, #fffffff5 0%, #ffffffdf 55%, #ffffff00 100%);
+  background: linear-gradient(180deg, #ffffffd1 0%, #ffffff9c 58%, #ffffff00 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  -webkit-mask-image: linear-gradient(#000 0%, #000 58%, transparent 100%);
+  mask-image: linear-gradient(#000 0%, #000 58%, transparent 100%);
 }
 .site-header.is-scroll-header.is-over-product::before { opacity: 1; }
 .site-header.is-scroll-header.is-past-hero::after { opacity: 1; }
@@ -64,12 +82,9 @@
   .has-scroll-motion .hero-copy-scroll {
     position: sticky;
     top: calc(157 * var(--unit));
-    opacity: var(--hero-copy-opacity, 1);
-    transform: translate3d(0, var(--hero-copy-y, 0px), 0);
-    will-change: opacity, transform;
-  }
-  .has-scroll-motion.is-scrolled .hero-copy-scroll {
-    pointer-events: none;
+    transform: translate3d(0, var(--hero-copy-y, 0px), 0) scale(var(--hero-copy-scale, 1));
+    transform-origin: 50% 0;
+    will-change: transform;
   }
   .has-scroll-motion .product-showcase {
     position: sticky;
