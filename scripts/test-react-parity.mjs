@@ -115,8 +115,10 @@ assert.match(reactSource, /токенов', 'Держите ключи, токе
 assert.doesNotMatch(reactSource, /className="platforms-gap"/, 'Platform cards should not have a blank spacer');
 assert.match(figmaStyles, /\.platforms-cards\s*\{[^}]*gap:\s*3px;[^}]*padding:\s*3px/s,
   'Platform cards should have compact spacing above and between them');
-assert.match(figmaStyles, /\.platform-card\s*\{[^}]*border-radius:\s*6px/s,
-  'Platform cards should have subtly rounded corners');
+assert.match(figmaStyles, /\.platform-card\s*\{[^}]*border-radius:\s*0/s,
+  'Platform cards should have square corners');
+assert.doesNotMatch(figmaStyles.match(/\.platform-feature\s*\{([^}]*)\}/)?.[1] ?? '', /border-radius:/,
+  'The blue feature should have square corners too');
 assert.match(figmaStyles, /\.platforms-cards\s*\{[^}]*background:\s*var\(--pw-border\)/s,
   'The card gutters should use the shared border color as a solid surface');
 assert.doesNotMatch(figmaStyles.match(/\.platforms-cards\s*\{([^}]*)\}/)?.[1] ?? '', /(?:^|;)\s*border(?:-(?:width|style|color|top|right|bottom|left))?:/,
