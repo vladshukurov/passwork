@@ -1,5 +1,5 @@
-import { gsap } from './page-motion.js?v=motion-20260923ab';
-import { siteMotion } from './site-motion-tokens.js?v=motion-20260923k';
+import { gsap } from './page-motion.js';
+import { siteMotion } from './site-motion-tokens.js';
 
 export function snapshotScreen(source) {
   const snapshot = source.cloneNode(true);

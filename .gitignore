@@ -4,6 +4,8 @@ __pycache__/
 .venv/
 venv/
 node_modules/
+storybook-static/
+react-dist/
 .env
 .env.*
 !.env.example

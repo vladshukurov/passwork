@@ -1,7 +1,7 @@
 // One pinned editorial scene. The blue stage stays put while its artwork and
 // the active story change with scroll progress.
 import { mountSecurityDashboardMotion } from './security-dashboard-motion.js';
-import { gsap } from './page-motion.js?v=motion-20260923ab';
+import { gsap } from './page-motion.js';
 import { chapterAt, chapterScrollTop, pinnedProgress } from './security-scroll-progress.js';
 
 export function mountSecuritySwitcher(section) {
@@ -19,7 +19,7 @@ export function mountSecuritySwitcher(section) {
   const buttons = choices.map(choice => choice.querySelector('.security-story-heading'));
   const dashboards = visuals.map(visual => mountSecurityDashboardMotion(visual.querySelector('.protection-card')));
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const desktop = matchMedia('(min-width: 801px)');
+  const desktop = matchMedia('(min-width: 901px) and (min-height: 761px) and (prefers-reduced-motion: no-preference)');
   const scenes = [...visuals];
   let active = -1;
   let scrollFrame = 0;
@@ -96,12 +96,11 @@ export function mountSecuritySwitcher(section) {
     }[event.key];
     if (next === undefined) return;
     event.preventDefault();
-    gallery.focus({ preventScroll: true });
+    buttons[next].focus({ preventScroll: true });
     jumpTo(next);
   };
   const buttonHandlers = buttons.map(button => {
     const handler = () => {
-      gallery.focus({ preventScroll: true });
       jumpTo(Number(button.dataset.featureIndex));
     };
     button.addEventListener('click', handler);

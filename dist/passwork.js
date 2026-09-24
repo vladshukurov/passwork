@@ -1,24 +1,33 @@
-import {gsap, mountPageMotion} from './page-motion.js?v=motion-20260923ab';
-import {mountHeroDashboard} from './live-dashboard.js?v=security-20260923d';
-import {mountClientLogos} from './client-logos.js?v=motion-20260923ab';
-import {mountHeroScroll} from './hero-scroll.js?v=motion-20260923ab';
+import {gsap, mountPageMotion} from './page-motion.js';
+import {mountHeroDashboard} from './live-dashboard.js';
+import {mountClientLogos} from './client-logos.js';
+import {mountHeroScroll} from './hero-scroll.js';
 import {mountOrbitAnimation} from './orbit-animation.js';
-import {mountSecuritySwitcher} from './security-switcher.js?v=motion-20260923ab';
+import {mountSecuritySwitcher} from './security-switcher.js';
 import {mountTeamDashboard,teamScenarios} from './team-dashboards.js';
-import {snapshotScreen,dissolveScreen,fadeThroughScreen} from './screen-transitions.js?v=motion-20260923ab';
+import {snapshotScreen,dissolveScreen,fadeThroughScreen} from './screen-transitions.js';
 
-mountClientLogos(document.querySelector('.client-logos'));
-mountOrbitAnimation(document.querySelector('.orbit-scene'));
-mountSecuritySwitcher(document.querySelector('.security-switcher'));
+let activeTeardown;
+
+export function mountPasswork() {
+if (activeTeardown) return activeTeardown;
+const listeners=[];
+const listen=(element,type,handler,options)=>{
+  element.addEventListener(type,handler,options);
+  listeners.push(()=>element.removeEventListener(type,handler,options));
+};
+const stopLogos=mountClientLogos(document.querySelector('.client-logos'));
+const stopOrbit=mountOrbitAnimation(document.querySelector('.orbit-scene'));
+const stopSecurity=mountSecuritySwitcher(document.querySelector('.security-switcher'));
 
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-mountPageMotion();
+const stopPageMotion=mountPageMotion();
 const productPanel=document.querySelector('#product-panel');
 const detail=document.querySelector('.product-detail');
 const productTabs=[...document.querySelectorAll('[data-product]')];
 const liveDashboard=document.querySelector('.pw-live-dashboard');
 let stopDashboard=mountHeroDashboard(liveDashboard);
-mountHeroScroll(document.querySelector('.hero'),document.querySelector('.site-header'));
+const stopHeroScroll=mountHeroScroll(document.querySelector('.hero'),document.querySelector('.site-header'));
 const logo=document.querySelector('.brand-light').src;
 const productViews=[null,
   {title:'Управление доступом',description:'Доступ к нужным паролям — для нужных людей.',body:`<table class="preview-table"><thead><tr><th>Команда</th><th>Уровень доступа</th><th>Статус</th></tr></thead><tbody><tr><td>Администраторы</td><td>Полный доступ</td><td><span class="status-pill">Активен</span></td></tr><tr><td>IT-команда</td><td>Редактирование</td><td><span class="status-pill">Активен</span></td></tr><tr><td>Сотрудники</td><td>Просмотр</td><td><span class="status-pill">Активен</span></td></tr></tbody></table>`},
@@ -56,7 +65,7 @@ function selectProduct(index){
     });
   }
 }
-productTabs.forEach((button,i)=>button.addEventListener('click',()=>selectProduct(i)));
+productTabs.forEach((button,i)=>listen(button,'click',()=>selectProduct(i)));
 
 const teamTabs=[...document.querySelectorAll('[data-team]')];
 const teamPanel=document.querySelector('#team-panel');
@@ -97,16 +106,16 @@ function selectTeam(index){
     if(outgoingTeamCaption===oldCaption)outgoingTeamCaption=null;
   });
 }
-teamTabs.forEach((button,i)=>button.addEventListener('click',()=>selectTeam(i)));
-function tabKeyboard(buttons,select){buttons.forEach((button,i)=>button.addEventListener('keydown',event=>{let next;if(event.key==='ArrowRight')next=(i+1)%buttons.length;else if(event.key==='ArrowLeft')next=(i-1+buttons.length)%buttons.length;else if(event.key==='Home')next=0;else if(event.key==='End')next=buttons.length-1;else return;event.preventDefault();select(next);buttons[next].focus();}));}
+teamTabs.forEach((button,i)=>listen(button,'click',()=>selectTeam(i)));
+function tabKeyboard(buttons,select){buttons.forEach((button,i)=>listen(button,'keydown',event=>{let next;if(event.key==='ArrowRight')next=(i+1)%buttons.length;else if(event.key==='ArrowLeft')next=(i-1+buttons.length)%buttons.length;else if(event.key==='Home')next=0;else if(event.key==='End')next=buttons.length-1;else return;event.preventDefault();select(next);buttons[next].focus();}));}
 tabKeyboard(productTabs,selectProduct);tabKeyboard(teamTabs,selectTeam);
 
 const menuButton=document.querySelector('.menu-toggle');
 const menu=document.querySelector('#main-nav');
 function closeMenu(){menu.classList.remove('open');menuButton.setAttribute('aria-expanded','false');menuButton.setAttribute('aria-label','Открыть меню');}
-menuButton.addEventListener('click',()=>{const open=menu.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open));menuButton.setAttribute('aria-label',open?'Закрыть меню':'Открыть меню');});
-menu.addEventListener('click',event=>{if(event.target.closest('a,button'))closeMenu();});
-document.addEventListener('keydown',event=>{if(event.key==='Escape')closeMenu();});
+listen(menuButton,'click',()=>{const open=menu.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open));menuButton.setAttribute('aria-label',open?'Закрыть меню':'Открыть меню');});
+listen(menu,'click',event=>{if(event.target.closest('a,button'))closeMenu();});
+listen(document,'keydown',event=>{if(event.key==='Escape')closeMenu();});
 
 const dialog=document.querySelector('.contact-dialog');
 const form=document.querySelector('#contact-form');
@@ -117,7 +126,32 @@ const dialogCopy={
   pricing:['Стоимость Пассворка','Подготовьте запрос на расчёт стоимости для вашей компании.'],
   support:['Поддержка Пассворка','Оставьте контактные данные для обращения в поддержку.']
 };
-document.querySelectorAll('[data-dialog]').forEach(button=>button.addEventListener('click',()=>{const [title,description]=dialogCopy[button.dataset.dialog];document.querySelector('#dialog-title').textContent=title;document.querySelector('.dialog-description').textContent=description;form.hidden=false;result.hidden=true;form.reset();dialog.showModal();}));
-document.querySelector('.dialog-close').addEventListener('click',()=>dialog.close());
-dialog.addEventListener('click',event=>{if(event.target===dialog){const box=dialog.getBoundingClientRect();if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom)dialog.close();}});
-form.addEventListener('submit',event=>{event.preventDefault();if(!form.reportValidity())return;form.hidden=true;result.hidden=false;result.textContent='Заявка подготовлена. Это локальный прототип — данные не отправлены и не сохранены.';});
+document.querySelectorAll('[data-dialog]').forEach(button=>listen(button,'click',()=>{const [title,description]=dialogCopy[button.dataset.dialog];document.querySelector('#dialog-title').textContent=title;document.querySelector('.dialog-description').textContent=description;form.hidden=false;result.hidden=true;form.reset();dialog.showModal();}));
+listen(document.querySelector('.dialog-close'),'click',()=>dialog.close());
+listen(dialog,'click',event=>{if(event.target===dialog){const box=dialog.getBoundingClientRect();if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom)dialog.close();}});
+listen(form,'submit',event=>{event.preventDefault();if(!form.reportValidity())return;form.hidden=true;result.hidden=false;result.textContent='Заявка подготовлена. Это локальный прототип — данные не отправлены и не сохранены.';});
+
+activeTeardown=()=>{
+  if(!activeTeardown)return;
+  activeTeardown=null;
+  listeners.forEach(remove=>remove());
+  productSwitch?.kill();
+  teamSwitch?.kill();
+  outgoingProductScreen?.remove();
+  outgoingTeamScreen?.remove();
+  outgoingTeamCaption?.remove();
+  stopDashboard?.();
+  stopTeamDashboard?.();
+  stopHeroScroll();
+  stopPageMotion();
+  stopSecurity();
+  stopOrbit();
+  stopLogos();
+  if(dialog.open)dialog.close();
+};
+return activeTeardown;
+}
+
+// The archived static page mounts itself; React calls the same interface after
+// committing its markup and owns teardown on unmount/HMR.
+if (!document.querySelector('.react-site-header')) mountPasswork();

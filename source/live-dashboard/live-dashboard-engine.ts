@@ -337,6 +337,7 @@ export function initLiveDashboard(embed: HTMLElement, { animate = true }: { anim
     return `${digits.slice(0, 3)} ${digits.slice(3)}`;
   };
   function totpTick() {
+    if (offscreen || document.hidden) return;
     const now = Date.now();
     const slot = Math.floor(now / 30000);
     const remaining = 30 - ((now / 1000) % 30);
@@ -366,32 +367,43 @@ export function initLiveDashboard(embed: HTMLElement, { animate = true }: { anim
   renderDetail();
 
   /* ---------- пауза вне экрана / в фоновой вкладке ---------- */
+  const isPaused = () => offscreen || document.hidden;
+  const playbackWaiters = new Set<() => void>();
+  const wakePlayback = () => {
+    if (alive && isPaused()) return;
+    const waiters = [...playbackWaiters];
+    playbackWaiters.clear();
+    waiters.forEach(resolve => resolve());
+    if (alive) totpTick();
+  };
+  const waitForPlayback = () => new Promise<void>(resolve => {
+    if (!alive || !isPaused()) resolve();
+    else playbackWaiters.add(resolve);
+  });
   const intersection =
     typeof IntersectionObserver !== 'undefined'
       ? new IntersectionObserver(
           (entries) => {
             offscreen = !entries[0].isIntersecting;
+            wakePlayback();
           },
           { threshold: 0.02 },
         )
       : null;
   if (intersection) intersection.observe(embed);
-  const isPaused = () => offscreen || document.hidden;
+  document.addEventListener('visibilitychange', wakePlayback);
 
-  const sleep = (ms: number) =>
-    new Promise<void>((resolve) => {
-      let left = ms;
-      let last = performance.now();
-      const tick = () => {
-        if (!alive) return resolve();
-        const now = performance.now();
-        if (!isPaused()) left -= now - last;
-        last = now;
-        if (left <= 0) resolve();
-        else later(tick, Math.min(left, 90));
-      };
-      later(tick, Math.min(ms, 90));
-    });
+  const sleep = async (ms: number) => {
+    let left = ms;
+    while (alive && left > 0) {
+      await waitForPlayback();
+      if (!alive) return;
+      const slice = Math.min(left, 90);
+      const started = performance.now();
+      await new Promise<void>(resolve => { later(resolve, slice); });
+      if (!isPaused()) left -= performance.now() - started;
+    }
+  };
 
   const typeSearch = async (text: string) => {
     for (const ch of text) {
@@ -449,10 +461,17 @@ export function initLiveDashboard(embed: HTMLElement, { animate = true }: { anim
     new Promise<void>((resolve) => {
       let elapsed = 0;
       let last: number | null = null;
-      const step = (ts: number) => {
+      const step = async (ts: number) => {
         if (!alive) return resolve();
+        if (isPaused()) {
+          await waitForPlayback();
+          if (!alive) return resolve();
+          last = null;
+          requestAnimationFrame(step);
+          return;
+        }
         if (last == null) last = ts;
-        if (!isPaused()) elapsed += Math.min(48, ts - last);
+        elapsed += Math.min(48, ts - last);
         last = ts;
         const p = Math.min(1, elapsed / duration);
         frame(p);
@@ -686,6 +705,8 @@ export function initLiveDashboard(embed: HTMLElement, { animate = true }: { anim
     resizeObserver?.disconnect();
     if (!resizeObserver) window.removeEventListener('resize', fit);
     intersection?.disconnect();
+    document.removeEventListener('visibilitychange', wakePlayback);
+    wakePlayback();
     closeAccess();
     cursor.unhover();
     cursor.hide();

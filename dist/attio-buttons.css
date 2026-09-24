@@ -73,10 +73,11 @@
 }
 .button-dark:hover,
 .button-dark:focus-visible {
-  --pw-button-from: var(--pw-control-border);
-  --pw-button-to: var(--pw-control);
+  --pw-button-from: #303030;
+  --pw-button-to: #303030;
+  border-color: #303030;
   color: #fff;
-  box-shadow: 0 2px 8px #11182738, 0 0 0 1px #ffffff1f inset;
+  box-shadow: 0 2px 6px #0000001f, 0 0 0 1px #ffffff10 inset;
 }
 .button-dark:active {
   --pw-button-from: var(--pw-control-pressed);

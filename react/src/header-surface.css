@@ -1,0 +1,88 @@
+/* React migration: one continuous surface across the product stage.
+   The legacy white cut-out matched the screenshot but exposed hard vertical
+   edges while the fixed header crossed it. Keep the static site unchanged. */
+.react-site-header.is-scroll-header {
+  height: 72px;
+  padding-top: 0;
+  transition: opacity .32s ease, color .42s ease;
+}
+
+.react-site-header.is-scroll-header.is-header-hidden {
+  opacity: 0;
+  transform: none;
+}
+
+.react-site-header.is-scroll-header::before,
+.react-site-header.is-scroll-header::after {
+  inset: 0 0 -12px;
+  --header-veil-mask: linear-gradient(180deg,
+    #000 0%,
+    #000 61%,
+    #000e 73%,
+    #0009 84%,
+    transparent 100%);
+  transition: opacity .42s ease, background-color .5s ease;
+}
+
+.react-site-header .brand img { transition: opacity .42s ease; }
+
+.react-site-header.is-scroll-header::before {
+  background-color: #345d99;
+}
+
+.react-site-header.is-scroll-header.is-over-dark-section::after {
+  background: #151619;
+}
+.react-site-header.hero-surface-experiment.is-scroll-header.is-over-dark-section::after {
+  background: #345d99;
+}
+.react-site-header.is-scroll-header.is-over-dark-section {
+  color: #ffffffb8;
+}
+.react-site-header.is-scroll-header.is-over-dark-section .brand-dark { opacity: 1; }
+.react-site-header.is-scroll-header.is-over-dark-section .brand-light { opacity: 0; }
+.react-site-header.is-scroll-header.is-over-dark-section .header-demo {
+  background: #fff;
+  border-color: #fff;
+  color: #1c1d1f;
+}
+.react-site-header.is-scroll-header.is-over-dark-section .header-demo:hover { background: #f3f5f8; border-color: #f3f5f8; }
+.react-site-header.is-scroll-header.is-over-dark-section .header-inner nav :is(a,button):hover { color: #fff; }
+.react-site-header.is-scroll-header.is-over-dark-section .menu-toggle span { background: #fff; }
+
+/* Never turn the middle of the product into a different-coloured rectangle. */
+.react-site-header.is-scroll-header.is-over-product-window:not(.is-past-hero)::after {
+  opacity: 0;
+  clip-path: none;
+}
+
+.react-site-header.is-scroll-header.is-over-product-window:not(.is-past-hero) {
+  color: #ffffffa6;
+}
+
+.react-site-header.is-over-product-window:not(.is-past-hero) .brand-light {
+  opacity: 0;
+}
+.react-site-header.is-over-product-window:not(.is-past-hero) .brand-dark {
+  opacity: 1;
+}
+.react-site-header.is-over-product-window:not(.is-past-hero) .header-inner nav :is(a,button):hover {
+  color: #fff;
+}
+.react-site-header.is-over-product-window:not(.is-past-hero) .menu-toggle span {
+  background: #fff;
+}
+.react-site-header.is-over-product-window:not(.is-past-hero) .header-demo {
+  --pw-button-from: #fff;
+  --pw-button-to: #f6f8fc;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .react-site-header.is-scroll-header,
+  .react-site-header.is-scroll-header::before,
+  .react-site-header.is-scroll-header::after {
+    transition: none;
+  }
+}

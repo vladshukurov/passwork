@@ -5,7 +5,7 @@ import { LIVE_DASHBOARD_MARKUP } from './live-dashboard-markup';
 // The toolbar, light palette and coordinate scaling adapt it to the supplied homepage.
 const toolbar = `<div class="pw-window-bar" aria-hidden="true">
   <div class="pw-window-dots"><i></i><i></i><i></i></div>
-  <div class="pw-window-arrows"><span>‹</span><span>›</span></div>
+  <div class="pw-window-arrows" aria-hidden="true"><span class="pw-window-chevron pw-window-chevron--back"></span><span class="pw-window-chevron pw-window-chevron--forward"></span></div>
   <span class="pw-window-title">Настройки и пользователи</span>
   <div class="pw-window-user"><span>Андрей Пьянков</span><span class="pw-window-avatar">А</span></div>
 </div>`;

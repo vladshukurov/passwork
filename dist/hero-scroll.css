@@ -32,39 +32,52 @@
 }
 .site-header.is-scroll-header::before,
 .site-header.is-scroll-header::after {
+  /* A single edge profile for the hero artwork and the white page surface. */
+  --header-veil-mask: linear-gradient(180deg,
+    #000 0%,
+    #000 63%,
+    #000f 70%,
+    #000d 78%,
+    #0009 85%,
+    #0004 92%,
+    transparent 100%);
   content: '';
   position: absolute;
   z-index: -1;
-  inset: 0;
+  inset: 0 0 -52px;
   pointer-events: none;
   opacity: 0;
+  -webkit-mask-image: var(--header-veil-mask);
+  mask-image: var(--header-veil-mask);
   transition: opacity .36s ease;
 }
 .site-header.is-scroll-header::before {
-  /* The original Git header tint, with a slightly smoother fade into the hero. */
-  inset: 0 0 -40px;
-  background: linear-gradient(180deg,#2d578df5 0%,#2d578de0 34%,#2d578dbf 55%,#2d578d70 76%,#2d578d00 100%);
+  background-color: #345d99;
+  background-image: url('/passwork-assets/blue-gradient-figma.png');
+  background-position: center var(--header-art-y, -64px);
+  background-size: auto var(--header-art-height, 1900px);
+  background-repeat: no-repeat;
 }
 .site-header.is-scroll-header::after {
-  inset: 0 0 -18px;
-  background: linear-gradient(180deg, #ffffffd1 0%, #ffffff9c 58%, #ffffff00 100%);
-  -webkit-mask-image: linear-gradient(#000 0%, #000 58%, transparent 100%);
-  mask-image: linear-gradient(#000 0%, #000 58%, transparent 100%);
+  background: #fff;
 }
 .site-header.is-scroll-header.is-over-product::before { opacity: 1; }
+.site-header.is-scroll-header.is-over-product-window::after {
+  opacity: 1;
+  clip-path: inset(0 var(--header-window-right) 0 var(--header-window-left));
+}
 .site-header.is-scroll-header.is-past-hero::after { opacity: 1; }
-.site-header.is-scroll-header.is-past-hero {
+.site-header.is-scroll-header:is(.is-past-hero,.is-over-product-window) {
   color: #6f7988;
 }
-.site-header.is-past-hero .astra { filter: brightness(.2); }
 .brand { display:grid; }
 .brand img { grid-area:1/1; filter:none; }
 .brand-light { opacity:0; }
-.site-header.is-past-hero .brand-light { opacity:1; }
-.site-header.is-past-hero .brand-dark { opacity:0; }
+.site-header:is(.is-past-hero,.is-over-product-window) .brand-light { opacity:1; }
+.site-header:is(.is-past-hero,.is-over-product-window) .brand-dark { opacity:0; }
 .preview-sidebar>img { filter:none; }
-.site-header.is-past-hero .header-inner nav :is(a,button):hover { color: #1c1d1f; }
-.site-header.is-past-hero .menu-toggle span { background: #1c1d1f; }
+.site-header:is(.is-past-hero,.is-over-product-window) .header-inner nav :is(a,button):hover { color: #1c1d1f; }
+.site-header:is(.is-past-hero,.is-over-product-window) .menu-toggle span { background: #1c1d1f; }
 
 @media (min-width: 1101px) and (prefers-reduced-motion: no-preference) {
   .hero.has-scroll-motion {

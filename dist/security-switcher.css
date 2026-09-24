@@ -145,8 +145,9 @@
   .security-story-detail, .security-story-heading { transition: none; }
 }
 
-/* Pin the intro and gallery as one viewport-height composition. */
-@media (min-width: 801px) {
+/* Pin only when the two-column composition fits vertically. Short screens and
+   reduced-motion users keep the intro and gallery in normal document flow. */
+@media (min-width: 901px) and (min-height: 761px) and (prefers-reduced-motion: no-preference) {
   .security-scroll-track { height: calc(100svh + 225svh); }
   .security-switcher { --security-intro-height: 35svh; position: sticky; top: 0; height: 100svh; min-height: 0; }
   .security-switcher > .section-intro {
@@ -173,13 +174,8 @@
   .security-story-detail { transition: grid-template-rows .42s cubic-bezier(.22,1,.36,1), opacity .3s ease; }
   .security-story-detail p { margin: 10px 0 20px; }
 }
-@media (min-width: 801px) and (max-height: 760px) {
-  .security-switcher { --security-intro-height: 30svh; }
-  .security-switcher-copy { padding-top: clamp(32px, 6svh, 56px); padding-bottom: 24px; }
-  .security-copy-heading .feature-label { margin-bottom: clamp(18px, 3svh, 28px); }
-  .security-story-list { flex-basis: 190px; }
-  .security-story-detail p { margin: 8px 0 12px; }
-}
+.security-scroll-track { scroll-margin-top: 85px; }
+@media (max-width: 800px) { .security-scroll-track { scroll-margin-top: 73px; } }
 
 /* The blue stage is the persistent surface. Each illustration supplies its
    own white card; there is no generic white shell covering transitions. */

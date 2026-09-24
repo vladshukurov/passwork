@@ -112,6 +112,8 @@ body{font-family:var(--pw-font)}
 .certification-layer>path:last-child{stroke:var(--pw-art-front)}
 .certification-layer{transform-box:fill-box;transform-origin:center}
 .certification-art{position:relative}
+.certification-svg{pointer-events:none}
+.certification-svg path{pointer-events:visiblePainted}
 .certification-art :is(img,.certification-svg){position:relative;width:auto;height:202px;max-width:64%;margin-top:45px;overflow:visible}
 .certification-art-wide :is(img,.certification-svg){height:178px;max-width:66%;margin-top:70px}
 @media(max-width:720px){
@@ -143,6 +145,41 @@ body{font-family:var(--pw-font)}
 .hero .product-tabs button[aria-selected="true"]{color:#fff;background:#ffffff21;border-color:#ffffff66;box-shadow:0 1px 2px #0c285f14 inset}
 .hero .product-tabs button[aria-selected="true"] img{filter:brightness(0) invert(1)}
 .hero .product-tabs button:not([aria-selected="true"]):hover{color:#fff;background:#ffffff16;border-color:#ffffff3b}
+
+/* Brand proof belongs to the trust story, not next to the primary identity. */
+.certification-origin{margin-top:32px;opacity:.6}
+.certification-origin img{width:112px;height:auto}
+.certification-origin img{filter:brightness(0)}
+.about{gap:0}
+.teams-heading{gap:0}
+.contact-dialog h2{margin-top:0}
+
+/* Navigation and CTA now share one type scale and button geometry. */
+.site-header .header-demo{height:34px;padding-inline:11px;font:500 15px/20px var(--pw-font)}
+.site-header:not(.is-past-hero) .header-demo:hover{--pw-button-from:#fff;--pw-button-to:#f5f5f5;border-color:#ebebeb;color:#202124}
+.site-header.is-past-hero .header-demo:hover{--pw-button-from:#f8f8f8;--pw-button-to:#eee;border-color:#dedede;color:#202124}
+.site-header.is-over-product-window .header-demo{--pw-button-from:#f5f7fb;--pw-button-to:#eef2f8;background-color:#f1f4fa;border-color:#e1e7f0;color:#202124;box-shadow:none}
+.site-header.is-over-product-window .header-demo:hover{--pw-button-from:#f8f8f8;--pw-button-to:#eee;border-color:#dedede;color:#202124}
+
+/* The tabs are a compact control belonging to the product window below. */
+.hero .product-tabs{display:flex;width:max-content;max-width:100%;margin:0 auto;justify-content:center;gap:4px;padding:5px;border:1px solid #ffffff36;border-radius:11px;background:#153d7640}
+.hero .product-tabs button{width:auto;min-width:0;min-height:42px;padding:8px 16px}
+.hero-window-shell{margin-top:14px}
+
+/* Clear just the caption's reading area in the dot layer; keep the blue art intact. */
+.team-scene>.scene-dots:not(.dot-glint){-webkit-mask-image:radial-gradient(ellipse 37% 9% at 50% 74%,transparent 38%,#000 100%);mask-image:radial-gradient(ellipse 37% 9% at 50% 74%,transparent 38%,#000 100%)}
+.team-scene>.scene-dots.dot-glint{clip-path:inset(0 0 30% 0)}
+
+@media(max-width:800px){
+  .site-header .header-demo{height:34px;padding-inline:11px;font-size:15px}
+  .header-inner nav a,.header-inner nav button{font-size:15px}
+  .hero .product-tabs{display:flex;width:100%;justify-content:flex-start;overflow-x:auto}
+  .hero .product-tabs button{flex:none;width:auto;min-height:40px;padding-inline:12px}
+}
+@media(max-width:480px){
+  .site-header .header-demo{height:34px;padding-inline:10px;font-size:15px}
+  .hero-actions .button{padding-inline:16px}
+}
 @media(max-width:800px){
   .product-tabs,.team-tabs{display:flex;justify-content:flex-start;gap:var(--showcase-tab-gap);overflow-x:auto;scrollbar-width:none}
   .product-tabs button,.team-tabs button{flex:0 0 180px;width:180px;min-height:40px;padding:8px 16px}
@@ -153,4 +190,7 @@ body{font-family:var(--pw-font)}
 @media(max-width:480px){
   .team-scene{height:310px}
   .team-caption{font-size:12px;line-height:18px;bottom:12px}
+}
+@media(max-width:800px){
+  .hero .product-tabs button{flex:none;width:auto;min-height:40px;padding-inline:12px}
 }

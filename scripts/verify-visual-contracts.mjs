@@ -30,13 +30,13 @@ assert.match(pageMotion, /getBoundingClientRect\(\)\.bottom <= 0/, 'Deep-link re
 assert.doesNotMatch(rule(security, '.security-story-detail p'), /height\s*:\s*4\.7em/);
 assert.match(rule(security, '.security-story-detail p'), /max-width\s*:\s*min\(510px,\s*calc\(100%\s*-\s*8px\)\)/, 'Text wrapping must have room for the pin-width rounding difference');
 
-// The header's fade should be soft but should not cover the product screen.
+// Both header surfaces use the same veil geometry, without blurring content.
 const fade = rule(header, '.site-header.is-scroll-header::before,\n.site-header.is-scroll-header::after');
-assert.match(fade, /inset\s*:\s*0\s*;/, 'Both header layers share the same origin');
-assert.match(rule(header, '.site-header.is-scroll-header::before'), /inset\s*:\s*0\s+0\s+-40px/, 'Blue header tint should fade below the navigation like the Git version');
-assert.match(rule(header, '.site-header.is-scroll-header::before'), /#2d578df5/, 'Keep the original Git header colour');
-assert.match(rule(header, '.site-header.is-scroll-header::after'), /inset\s*:\s*0\s+0\s+-18px/, 'Light gradient extends slightly below navigation');
-assert.doesNotMatch(rule(header, '.site-header.is-scroll-header::after'), /backdrop-filter/, 'Light header must not blur page content');
+assert.match(fade, /inset\s*:\s*0\s+0\s+-52px/, 'Both header layers share the same fade extent');
+assert.match(fade, /mask-image\s*:\s*var\(--header-veil-mask\)/, 'Both layers must share one opacity curve');
+assert.match(rule(header, '.site-header.is-scroll-header::before'), /blue-gradient-figma\.png/, 'The blue veil should reuse the hero art');
+assert.match(rule(header, '.site-header.is-scroll-header::after'), /background\s*:\s*#fff/, 'The light veil stays white');
+assert.doesNotMatch(fade, /backdrop-filter/, 'Header layers must not blur page content');
 assert.doesNotMatch(rule(security, '.security-switcher-stage'), /border-right\s*:/, 'Blue stage must not have a gray right stripe');
 assert.doesNotMatch(rule(security, '.security-switcher-grid'), /margin-right\s*:\s*-1px/, 'The parent grid border must remain visible at the right edge');
 assert.match(rule(security, '.security-stage-fade'), /opacity\s*:\s*1/, 'Restore the original illustration fade strength');
@@ -58,7 +58,7 @@ assert.match(rule(page, '.hero-gradient'), /blue-gradient-figma\.png/, 'Keep the
 assert.match(rule(page, '.hero-gradient'), /filter\s*:\s*blur\(56px\)/, 'Keep the local background smoothing');
 assert.doesNotMatch(rule(page, '.hero-gradient'), /background-attachment\s*:/, 'Do not change the local hero framing');
 assert.match(rule(page, '.hero-dots.dot-glint,.team-scene>.scene-dots.dot-glint,.security-stage-dots.dot-glint'), /opacity\s*:\s*\.42/, 'Dot glints stay understated');
-assert.doesNotMatch(pageMotion, /repeat\s*:\s*-1|repeatDelay\s*:/, 'Dot glints should reveal each field once, not flash in a loop');
+assert.match(pageMotion, /repeat:recurring\?-1:0,repeatDelay:recurring\?5:0/, 'React dot glints repeat gently; the archived site remains one-shot');
 assert.match(pageMotion, /IntersectionObserver/, 'Dot glints run when their section enters view');
 assert.match(rule(page, '.certification-art :is(img,.certification-svg)'), /height\s*:\s*202px/);
 assert.match(motion, /layer\s*:\s*\.28\b/);

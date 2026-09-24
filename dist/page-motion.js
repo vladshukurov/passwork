@@ -1,5 +1,5 @@
 // Locally vendored GSAP 3.15.0; no runtime CDN dependency.
-import {siteMotion} from './site-motion-tokens.js?v=motion-20260923aa';
+import {siteMotion} from './site-motion-tokens.js';
 export const {gsap, ScrollTrigger} = window;
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,18 +10,21 @@ function mountDotGlints() {
     cleanups.forEach(cleanup=>cleanup());
     cleanups=[];
     if(!preference.matches)return;
+    const recurring=Boolean(document.querySelector('.react-site-header'));
     document.querySelectorAll('.dot-glint').forEach((glint,index) => {
-      // A single restrained sweep introduces each dot field as it enters view.
+      // React fields repeat quietly while visible; the archived site keeps its one-shot sweep.
       const sweep=gsap.fromTo(glint,
         {webkitMaskPosition:'100% 0%',maskPosition:'100% 0%'},
         {webkitMaskPosition:'0% 0%',maskPosition:'0% 0%',duration:siteMotion.glintSweep,
-          ease:'sine.inOut',paused:true,delay:.35+index*.15});
+          ease:'sine.inOut',paused:true,delay:.35+index*.15,
+          repeat:recurring?-1:0,repeatDelay:recurring?5:0});
       let visible=false;
       let started=false;
       const update=()=>{
         if(!visible || document.hidden){sweep.pause();return;}
         if(!started){started=true;sweep.play(0);}
-        else if(!sweep.progress() || sweep.progress()<1)sweep.resume();
+        else if(recurring)sweep.restart();
+        else if(sweep.progress()<1)sweep.resume();
       };
       const observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;update();});
       observer.observe(glint.parentElement);
@@ -78,9 +81,17 @@ export function mountPageMotion() {
     // Separate inner entrance targets from the hero's scroll-controlled wrapper.
     if (window.scrollY < 8) {
       gsap.from('.header-inner', {opacity:0,y:-8,duration:.6,ease:'power2.out',clearProps:'opacity,transform'});
-      gsap.from('.hero h1,.hero-copy > p,.hero-actions,.product-tabs', {
-        opacity:0,y:12,duration:siteMotion.entrance,stagger:.09,ease:'power3.out',clearProps:'opacity,transform'
-      });
+      if (document.querySelector('.react-site-header')) {
+        // React's ScrollTrigger owns copy opacity and CTA scale. Keep its
+        // entrance on the independent Y axis, including the Figma origin mark.
+        gsap.from('.hero-origin,.hero h1,.hero-copy > p,.product-tabs', {
+          y:12,duration:siteMotion.entrance,stagger:.09,ease:'power3.out',clearProps:'transform'
+        });
+      } else {
+        gsap.from('.hero h1,.hero-copy > p,.hero-actions,.product-tabs', {
+          opacity:0,y:12,duration:siteMotion.entrance,stagger:.09,ease:'power3.out',clearProps:'opacity,transform'
+        });
+      }
     }
     document.querySelectorAll('.certification-card').forEach((card,cardIndex) => {
       // A deep link may restore below these cards before ScrollTrigger initializes.
@@ -111,6 +122,29 @@ export function mountPageMotion() {
         clearProps:'opacity,transform',scrollTrigger:{trigger,start:'top 86%',once:true}
       });
     });
+    // Later sections use the same restrained entrance as the original page.
+    // Animate inner content, not full-width surfaces or dot-pattern backgrounds.
+    [
+      ['.pricing-heading', 'h2'],
+      ['.pricing-team-selector', '.pricing-team-readout,.pricing-range-control'],
+      ['.pricing-plans', '.pricing-plan'],
+      ['.secrets .section-intro', ':scope > *'],
+      ['.secrets-cards', '.secrets-card'],
+      ['.trust-heading', 'h2,p'],
+      ['.trust-cards', '.trust-card'],
+      ['.platforms-intro', 'h2,:scope > div'],
+      ['.platform-feature', '.platform-feature-copy,.platform-feature-art'],
+      ['.platforms-cards', '.platform-card'],
+    ].forEach(([triggerSelector,targetSelector]) => {
+      const trigger=document.querySelector(triggerSelector);
+      if(!trigger || trigger.getBoundingClientRect().bottom <= 0)return;
+      const targets=trigger.querySelectorAll(targetSelector);
+      if(!targets.length)return;
+      gsap.from(targets, {
+        opacity:0,y:14,duration:siteMotion.reveal,stagger:.07,ease:siteMotion.revealEase,
+        clearProps:'opacity,transform',scrollTrigger:{trigger,start:'top 88%',once:true}
+      });
+    });
     document.querySelectorAll('.team-tabs').forEach(block => {
       if(block.getBoundingClientRect().bottom <= 0)return;
       gsap.from(block,{opacity:0,y:14,duration:siteMotion.reveal,ease:siteMotion.revealEase,
@@ -128,15 +162,15 @@ export function mountPageMotion() {
         timeline.timeScale(siteMotion.hoverSpeed).restart();
       };
       const leave = () => timeline.timeScale(siteMotion.returnSpeed).reverse();
-      card.addEventListener('pointerenter',enter);
-      card.addEventListener('pointerleave',leave);
+      svg.addEventListener('pointerenter',enter);
+      svg.addEventListener('pointerleave',leave);
       const visibility = () => {if(document.hidden) timeline.pause(0);};
       const observer = new IntersectionObserver(([entry]) => {if(!entry.isIntersecting) timeline.pause(0);});
       observer.observe(card);
       document.addEventListener('visibilitychange',visibility);
       cleanups.push(() => {
-        card.removeEventListener('pointerenter',enter);
-        card.removeEventListener('pointerleave',leave);
+        svg.removeEventListener('pointerenter',enter);
+        svg.removeEventListener('pointerleave',leave);
         document.removeEventListener('visibilitychange',visibility);
         observer.disconnect();
         timeline.kill();

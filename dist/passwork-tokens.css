@@ -19,7 +19,7 @@
   --pw-control-border: #505967;
   --pw-control-pressed: #383e47;
   --pw-font: Museo, Arial, sans-serif;
-  --pw-font-ui: Inter, Museo, Arial, sans-serif;
+  --pw-font-ui: Museo, Arial, sans-serif;
   --pw-weight: 500;
   --pw-heading-size: clamp(32px, 2.5vw, 48px);
   --pw-heading-leading: 1.083333;
@@ -44,7 +44,7 @@
   --pw-radius-dialog: 16px;
   --pw-button-height: 46px;
   --pw-button-font-size: 16px;
-  --pw-button-padding: 14px;
+  --pw-button-padding: 22px;
   --pw-duration-fast: 150ms;
   --pw-duration-ui: 300ms;
   --pw-ease-ui: cubic-bezier(.2, 0, 0, 1);

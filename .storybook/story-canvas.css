@@ -1,0 +1,33 @@
+.sb-show-main{background:#fafafb}
+.story-shell{padding:36px;min-height:100vh;background:#fafafb;color:#1c1d1f}
+.story-shell--blue{background:#315f9b;color:#fff}
+.story-shell--white{background:#fff}
+.story-shell h1{font:500 32px/1.15 Museo,Arial,sans-serif;margin:0 0 10px}
+.story-shell>p{max-width:760px;color:#6f7988;margin:0 0 28px}
+.story-shell--blue>p{color:#ffffffbb}
+.story-row{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.story-frame{border:1px solid #e4e7ec;background:#fff;border-radius:12px;overflow:hidden}
+.story-note{font:500 13px/1.55 Museo,Arial,sans-serif;color:#6f7988;margin-top:18px}
+.story-token-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;max-width:1100px}
+.story-token{border:1px solid #e4e7ec;border-radius:10px;background:#fff;padding:12px;min-height:94px}
+.story-token-swatch{width:100%;height:42px;border-radius:6px;border:1px solid #00000010;margin-bottom:9px}
+.story-token code{font:12px/1.4 monospace;color:#475569}
+.story-demo-wrap{width:min(100%,1200px);margin:auto}
+.story-demo-wrap .page-grid{width:100%;margin:0}
+.story-demo-wrap .certification-cards{height:auto}
+.story-demo-wrap .certification-card{min-height:436px}
+.story-demo-wrap .team-scene{height:600px}
+.story-demo-wrap .security-switcher-grid{min-height:680px}
+.story-iframe{width:100%;height:680px;border:1px solid #e4e7ec;border-radius:8px;background:#fff}
+.react-story-stage{padding:56px;background:#fff;min-height:180px}
+.react-story-stage--blue{background:#345d99}
+.react-header-stage{position:relative;min-height:140px;overflow:hidden;background:#345d99}
+.react-header-stage--page{background:#fff}
+.react-header-stage--product{background:linear-gradient(90deg,#345d99 12%,#fff 12%,#fff 88%,#345d99 88%)}
+.react-header-stage .site-header.is-scroll-header{position:relative;inset:auto;transform:none}
+.react-header-stage .site-header.is-scroll-header.is-header-hidden{transform:translateY(-105px)}
+.react-tabs-stage{min-height:150px;padding:32px;background:#fff}
+.react-tabs-stage--blue{background:#345d99}
+.react-intro-stage{max-width:1400px;margin:auto;background:#fff}
+.react-intro-stage .section-intro{border:1px solid #e4e7ec}
+.react-security-stage{max-width:680px;margin:32px;padding:32px;background:#fff}

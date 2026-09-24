@@ -1,6 +1,17 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "buildCommand": "python3 scripts/build-pages.py --base-path /",
-  "outputDirectory": "_site"
+  "buildCommand": "npm run react:build",
+  "outputDirectory": "react-dist",
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self' data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' blob:; media-src 'self' blob:; frame-src 'self'; form-action 'none'"
+        }
+      ]
+    }
+  ]
 }

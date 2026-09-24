@@ -103,44 +103,64 @@ export function initDashboardDemo(embed: HTMLElement, workspace: HTMLElement, co
   drawCursor();
   options.onProgress?.(0);
 
-  const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting && entry.intersectionRatio >= .15; }, { threshold: [0, .15] });
+  const canPlay = () => alive && visible && !document.hidden && !motion.matches && panel?.dataset.active !== 'false' && index < cues.length;
+  function syncPlayback() {
+    const playing = canPlay();
+    cursor.classList.toggle('is-visible', playing);
+    embed.dataset.demoPaused = String(!playing);
+    if (!playing) {
+      if (raf) cancelAnimationFrame(raf);
+      raf = 0;
+      previous = 0;
+    } else if (!raf) {
+      raf = requestAnimationFrame(tick);
+    }
+  }
+  const observer = new IntersectionObserver(([entry]) => {
+    visible = entry.isIntersecting && entry.intersectionRatio >= .15;
+    syncPlayback();
+  }, { threshold: [0, .15] });
   observer.observe(embed);
+  const panelObserver = panel ? new MutationObserver(syncPlayback) : null;
+  panelObserver?.observe(panel!, { attributes: true, attributeFilter: ['data-active'] });
+  document.addEventListener('visibilitychange', syncPlayback);
+  motion.addEventListener('change', syncPlayback);
   const tick = (now: number) => {
+    raf = 0;
     if (!alive) return;
+    if (!canPlay()) { syncPlayback(); return; }
     const delta = previous ? Math.min(48, now - previous) : 0;
     previous = now;
-    const paused = !visible || document.hidden || motion.matches || panel?.dataset.active === 'false';
-    cursor.classList.toggle('is-visible', !paused);
-    embed.dataset.demoPaused = String(paused);
-    if (!paused) {
-      if (!started) { started = true; cues[0].start?.(); }
-      elapsed = Math.min(total, elapsed + delta);
-      cueElapsed += delta;
-      while (index < cues.length && cueElapsed >= cues[index].duration) {
-        const cue = cues[index];
-        cue.frame?.(1);
-        cue.finish?.();
-        cueElapsed -= cue.duration;
-        index += 1;
-        cues[index]?.start?.();
-      }
-      options.onProgress?.(elapsed / total);
-      if (index === cues.length) {
-        cursor.classList.remove('is-visible');
-        options.onComplete?.();
-        return;
-      }
-      cues[index].frame?.(cueElapsed / cues[index].duration);
+    if (!started) { started = true; cues[0].start?.(); }
+    elapsed = Math.min(total, elapsed + delta);
+    cueElapsed += delta;
+    while (index < cues.length && cueElapsed >= cues[index].duration) {
+      const cue = cues[index];
+      cue.frame?.(1);
+      cue.finish?.();
+      cueElapsed -= cue.duration;
+      index += 1;
+      cues[index]?.start?.();
     }
+    options.onProgress?.(elapsed / total);
+    if (index === cues.length) {
+      syncPlayback();
+      options.onComplete?.();
+      return;
+    }
+    cues[index].frame?.(cueElapsed / cues[index].duration);
     raf = requestAnimationFrame(tick);
   };
-  raf = requestAnimationFrame(tick);
+  syncPlayback();
 
   return {
     dispose() {
       alive = false;
       cancelAnimationFrame(raf);
       observer.disconnect();
+      panelObserver?.disconnect();
+      document.removeEventListener('visibilitychange', syncPlayback);
+      motion.removeEventListener('change', syncPlayback);
       clearHighlight();
       layer.remove();
       workspace.innerHTML = '';

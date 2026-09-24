@@ -1,11 +1,20 @@
 """Build the local Passwork page from the supplied Figma design."""
 from pathlib import Path
+import hashlib
 import json
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 assets = json.loads((ROOT / 'source/passwork-assets.json').read_text())
 security_assets = json.loads((ROOT / 'source/security-assets.json').read_text())
+footer = (ROOT / 'source/site-footer.html').read_text().strip()
+
+# One content-derived version for HTML entry points. Internal module URLs stay
+# stable and are revalidated by both the local server and Vercel (max-age=0).
+runtime_files = sorted([*(ROOT / 'dist').glob('*.css'), *(ROOT / 'dist').glob('*.js')])
+asset_version = hashlib.sha256(b''.join(
+    path.name.encode() + b'\0' + path.read_bytes() for path in runtime_files
+)).hexdigest()[:12]
 
 def security_image(key, cls=''):
     return f'<img src="{security_assets[key]}" alt="" class="{cls}">'
@@ -118,19 +127,18 @@ page = f'''<!doctype html>
 <meta name="description" content="Управление корпоративными паролями, доступами и действиями — в одном контуре.">
 <link rel="icon" href="{assets['imgKey02']}" type="image/svg+xml">
 <link rel="preload" href="/passwork-assets/MuseoSansCyrl-500.otf" as="font" type="font/otf" crossorigin>
-<link rel="stylesheet" href="/code/design-tokens.css"><link rel="stylesheet" href="/passwork-tokens.css"><link rel="stylesheet" href="/attio-buttons.css"><link rel="stylesheet" href="/passwork.css?v=motion-20260923ab"><link rel="stylesheet" href="/passwork-motion.css">
-<link rel="stylesheet" href="/client-logos.css"><link rel="stylesheet" href="/hero-entrance.css"><link rel="stylesheet" href="/hero-scroll.css?v=motion-20260923ab"><link rel="stylesheet" href="/security-switcher.css?v=security-20260923d">
+<link rel="stylesheet" href="/code/design-tokens.css"><link rel="stylesheet" href="/passwork-tokens.css"><link rel="stylesheet" href="/attio-buttons.css"><link rel="stylesheet" href="/passwork.css?v={asset_version}"><link rel="stylesheet" href="/passwork-motion.css">
+<link rel="stylesheet" href="/client-logos.css"><link rel="stylesheet" href="/hero-entrance.css"><link rel="stylesheet" href="/hero-scroll.css?v={asset_version}"><link rel="stylesheet" href="/security-switcher.css?v={asset_version}">
 <link rel="stylesheet" href="/live-dashboard-base.css"><link rel="stylesheet" href="/live-dashboard-light.css">
-<link rel="stylesheet" href="/team-dashboards.css"><link rel="stylesheet" href="/team-dashboards-light.css">
+<link rel="stylesheet" href="/team-dashboards.css"><link rel="stylesheet" href="/team-dashboards-light.css"><link rel="stylesheet" href="/site-footer.css">
 <script defer src="/vendor/gsap/gsap.min.js"></script>
 <script defer src="/vendor/gsap/ScrollTrigger.min.js"></script>
-<script type="module" src="/passwork.js?v=motion-20260923ab"></script></head><body>
+<script type="module" src="/passwork.js?v={asset_version}"></script></head><body>
 <a class="skip-link" href="#main">Перейти к содержимому</a>
 <header class="site-header"><div class="header-inner">
 <a class="brand" href="#top" aria-label="Пассворк — на главную"><img class="brand-dark" src="/passwork-assets/logo-dark.svg" alt="Пассворк"><img class="brand-light" src="/passwork-assets/logo-light.svg" alt="" aria-hidden="true"></a>
-<span class="brand-divider"></span>{image('imgVector','Сделано в России','astra')}
 <nav id="main-nav" aria-label="Основная навигация"><a href="#about">Компания</a><a href="#teams">Сценарии</a><a href="#security">Ресурсы</a><button data-dialog="support">Поддержка</button><button data-dialog="pricing">Цены</button></nav>
-<span class="nav-divider"></span>{button(cls='button-small header-demo')}
+{button(cls='header-demo')}
 <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Открыть меню"><span></span><span></span></button>
 </div></header>
 <main id="main">
@@ -147,23 +155,23 @@ page = f'''<!doctype html>
 </div></div></div></div></section>
 <div class="page-grid">
 <section aria-label="Пассворк выбирают"><div class="client-logos" role="list">{logo_html}</div></section>
-<section class="about" id="about"><span class="eyebrow">О проекте</span><h2>Пассворк — корпоративный менеджер паролей <span>для ИТ-команд, DevOps и специалистов по безопасности. Он помогает хранить пароли, управлять доступом и отслеживать действия внутри инфраструктуры</span></h2></section>
+<section class="about" id="about"><h2>Пассворк — корпоративный менеджер паролей <span>для ИТ-команд, DevOps и специалистов по безопасности. Он помогает хранить пароли, управлять доступом и отслеживать действия внутри инфраструктуры</span></h2></section>
 <section class="certification" id="certification" aria-labelledby="certification-heading">
-<div class="section-intro"><h2 id="certification-heading">Пассворк сертифицирован<br>ФСТЭК России</h2><div><p>Сертификат доверия подтверждает соответствие требованиям безопасности регулируемых отраслей. Разворачивается внутри компании, поддерживает ГОСТ-шифрование, исключает передачу данных во внешние сервисы</p>{button(cls='button-dark')}</div></div>
+<div class="section-intro"><h2 id="certification-heading">Пассворк сертифицирован<br>ФСТЭК России</h2><div><p>Сертификат доверия подтверждает соответствие требованиям безопасности регулируемых отраслей. Разворачивается внутри компании, поддерживает ГОСТ-шифрование, исключает передачу данных во внешние сервисы</p>{button(cls='button-dark')}<div class="certification-origin">{image('imgVector','Сделано в России')}</div></div></div>
 <div class="certification-cards" role="list">
 <article class="certification-card" role="listitem"><div class="certification-art">{certification_art('gis')}</div><div class="certification-copy"><h3>Госорганы</h3><p>ГИС 1 класса</p></div></article>
 <article class="certification-card" role="listitem"><div class="certification-art">{certification_art('kii')}</div><div class="certification-copy"><h3>Инфраструктура</h3><p>КИИ 1 категории</p></div></article>
 <article class="certification-card" role="listitem"><div class="certification-art">{certification_art('asu-tp')}</div><div class="certification-copy"><h3>Производство</h3><p>АСУ ТП 1 класса</p></div></article>
 <article class="certification-card" role="listitem"><div class="certification-art certification-art-wide">{certification_art('ispdn')}</div><div class="certification-copy"><h3>Операторы ПДн</h3><p>ИСПДн 1 уровня</p></div></article>
 </div></section>
-<section class="teams-heading" id="teams"><span class="eyebrow">О проекте</span><h2>Пассворк решает<br>задачи разных команд</h2></section>
+<section class="teams-heading" id="teams"><h2>Пассворк решает<br>задачи разных команд</h2></section>
 <div class="team-tabs" role="tablist" aria-label="Пассворк для вашей команды">{teams}</div>
 <section class="team-scene" id="team-panel" role="tabpanel" aria-labelledby="team-tab-0" tabindex="0">
 {image('img1PxDots8PxPitch800600Source','','scene-dots')}{image('img1PxDots8PxPitch800600Source','','scene-dots dot-glint', 'aria-hidden="true"')}
 <div class="team-dashboard-window team-screenshot"><div class="pw-team-dashboard pw-embed" role="img" aria-label="Анимированная демонстрация Пассворка для IT-команд"></div>
 <noscript>{image('imgContainer16','Интерфейс Пассворка',extra='width="1044" height="610" style="width:100%;height:auto"')}</noscript></div>
 <p class="team-caption" aria-live="polite">Разграничение доступа по ролям и группам</p></section>
-<div class="security-scroll-track"><section class="security-switcher" id="security" aria-labelledby="security-heading">
+<div class="security-scroll-track" id="security"><section class="security-switcher" aria-labelledby="security-heading">
 <div class="section-intro"><h2 id="security-heading">Российское решение для корпоративной безопасности</h2><div><p>Управляйте корпоративными паролями и доступом сотрудников в единой системе.<br>Размещайте Пассворк на своих серверах.</p>{button(cls='button-dark')}</div></div>
 <div class="security-switcher-grid" role="group" aria-roledescription="карусель" aria-label="Особенности безопасности" tabindex="0">
 <div class="security-switcher-copy">
@@ -205,7 +213,8 @@ page = f'''<!doctype html>
 </div></div></div>
 {security_image('imgRectangle240650873', 'security-stage-fade')}</div></div>
 </section></div></div></main>
-<dialog class="contact-dialog" aria-labelledby="dialog-title"><button class="dialog-close" aria-label="Закрыть окно">×</button><span class="eyebrow">Пассворк</span><h2 id="dialog-title">Запросить демо</h2><p class="dialog-description"></p>
+{footer}
+<dialog class="contact-dialog" aria-labelledby="dialog-title"><button class="dialog-close" aria-label="Закрыть окно">×</button><h2 id="dialog-title">Запросить демо</h2><p class="dialog-description"></p>
 <form id="contact-form"><label>Имя<input name="name" autocomplete="name" required placeholder="Как к вам обращаться"></label><label>Рабочая почта<input name="email" type="email" autocomplete="email" required placeholder="you@company.ru"></label><label>Компания<input name="company" autocomplete="organization" required placeholder="Название компании"></label><p class="form-note">Это локальный прототип: данные не отправляются.</p><button class="button button-dark" type="submit">Подготовить заявку</button></form><div class="form-result" role="status" hidden></div></dialog>
 </body></html>'''
 (ROOT / 'dist/index.html').write_text(page.replace('<br>', '<br> '))

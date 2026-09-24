@@ -1,0 +1,5 @@
+/* React-only additions to the shared --pw-* foundation. */
+:root {
+  --pw-type-body: 16px;
+  --pw-button-font-size: var(--pw-type-body);
+}
