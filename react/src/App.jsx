@@ -380,6 +380,8 @@ export function Trust() {
 
 const platformIcons = {
   desktop: [['apple', 'macOS'], ['windows', 'Windows'], ['linux', 'Linux']],
+  mobile: [['apple', 'iOS'], ['googleplay', 'Android']],
+  browser: [['googlechrome', 'Chrome'], ['firefoxbrowser', 'Firefox'], ['microsoftedge', 'Edge'], ['safari', 'Safari']],
 };
 
 function PlatformAvailability({ platforms, light = false }) {
@@ -408,15 +410,18 @@ export function Platforms() {
     </article>
     <div className="platforms-cards">
       <article className="platform-card platform-card-mobile">
-        <div className="platform-card-copy"><h3>Мобильное приложение</h3><p>Открывайте рабочие пароли с телефона, когда вы не за компьютером</p></div>
+        <div className="platform-card-copy"><h3>Мобильное приложение</h3><p>Открывайте рабочие пароли с телефона, когда вы не за компьютером</p>
+          <PlatformAvailability platforms={platformIcons.mobile} /></div>
         <img className="platform-phone-art" src="/passwork-assets/figma-platform-phone-auth-2026.png" alt="Экран мобильного приложения Пассворк" loading="lazy" />
       </article>
       <article className="platform-card platform-card-2fa">
-        <div className="platform-card-copy"><h3>2FA</h3><p>Подтверждайте вход с помощью приложения аутентификатора Пассворк</p></div>
+        <div className="platform-card-copy"><h3>2FA</h3><p>Подтверждайте вход с помощью приложения аутентификатора Пассворк</p>
+          <PlatformAvailability platforms={platformIcons.mobile} /></div>
         <img className="platform-phone-art" src="/passwork-assets/figma-platform-phone-app-2026.png" alt="Экран приложения Пассворк" loading="lazy" />
       </article>
       <article className="platform-card platform-card-browser">
-        <div className="platform-card-copy"><h3>Расширение для браузера</h3><p>Ищите и создавайте учётные данные, не покидая браузер.<br />Работает с Chrome, Firefox, Edge и Safari</p></div>
+        <div className="platform-card-copy"><h3>Расширение для браузера</h3><p>Ищите и создавайте учётные данные, не покидая браузер</p>
+          <PlatformAvailability platforms={platformIcons.browser} /></div>
         <div className="platform-access-screens" role="img" aria-label="Интерфейс расширения Пассворка в браузере">
           <img src="/passwork-assets/figma-platform-access-folder-2026.png" alt="" loading="lazy" />
           <img src="/passwork-assets/figma-platform-access-create-2026.png" alt="" loading="lazy" />

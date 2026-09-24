@@ -125,7 +125,9 @@ assert.doesNotMatch(figmaStyles.match(/\.platform-card\s*\{([^}]*)\}/)?.[1] ?? '
   'Platform cards should have no border');
 assert.match(read('dist/security-switcher.css'), /\.security-switcher-grid\s*\{[^}]*border-block:\s*1px solid var\(--stroke\)/s,
   'The pinned security gallery should have matching borders above and below');
-assert.equal((reactSource.match(/<PlatformAvailability /g) || []).length, 1,
-  'Only the desktop feature should carry a platform badge');
+assert.equal((reactSource.match(/<PlatformAvailability /g) || []).length, 4,
+  'Desktop, mobile, 2FA and browser cards should each show their platform badge');
+assert.doesNotMatch(reactSource, /Работает с Chrome, Firefox, Edge и Safari/,
+  'The browser list should be conveyed by icons, not repeated in the description');
 
 console.log('React contracts: CSS, assets, page components, pricing, footer, tab/story data and runtime bridge OK');

@@ -1,6 +1,6 @@
 /* Security stories: one pinned composition on desktop, natural flow on mobile. */
 .security-switcher { --security-unit: 1px; position: relative; background: var(--pw-page); }
-.security-switcher > .section-intro { min-height: 0; padding-top: clamp(72px, 6.25vw, 112px); padding-bottom: clamp(56px, 4.5vw, 80px); border-bottom: 0; background:var(--pw-page); }
+.security-switcher > .section-intro { min-height: 0; border-bottom: 0; background:var(--pw-page); }
 .security-switcher > .section-intro h2 { color:var(--pw-text); }
 .security-switcher > .section-intro > div { height:auto; }
 .security-switcher > .section-intro p { max-width:567px; color:var(--pw-text); }
@@ -92,7 +92,7 @@
 }
 @media (max-width: 800px) {
   .security-switcher { --security-unit: 1px; }
-  .security-switcher > .section-intro { grid-template-columns: minmax(0,1fr); padding-top: 64px; padding-bottom: 56px; }
+  .security-switcher > .section-intro { grid-template-columns: minmax(0,1fr); }
   .security-switcher-grid { display: flex; flex-direction: column; height: auto; min-height: 0; }
   .security-switcher-stage { height: 340px; }
   .security-visual { padding: 20px; }
@@ -149,12 +149,8 @@
    reduced-motion users keep the intro and gallery in normal document flow. */
 @media (min-width: 901px) and (min-height: 761px) and (prefers-reduced-motion: no-preference) {
   .security-scroll-track { height: calc(100svh + 225svh); }
-  .security-switcher { --security-intro-height: 35svh; --security-stage-inset: 7svh; position: relative; height: 100%; min-height: 0; }
+  .security-switcher { --security-stage-inset: 7svh; position: relative; height: 100%; min-height: 0; }
   .security-switcher > .section-intro {
-    height: var(--security-intro-height);
-    min-height: 0;
-    padding-top: clamp(60px, 8svh, 96px);
-    padding-bottom: clamp(32px, 4svh, 52px);
     align-items: start;
   }
   .security-switcher-grid {

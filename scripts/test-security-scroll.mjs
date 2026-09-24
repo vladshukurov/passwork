@@ -29,6 +29,10 @@ const dashboardMotion = readFileSync(new URL('../dist/security-dashboard-motion.
 assert.match(css, /\.security-switcher-grid\s*\{\s*position:\s*sticky;\s*top:\s*var\(--security-stage-inset\)/);
 assert.match(css, /\.security-switcher > \.section-intro\s*\{[^}]*border-bottom:\s*0/s,
   'The scrolling intro must not create a second line above the pinned gallery');
+assert.doesNotMatch(css, /\.security-switcher > \.section-intro\s*\{[^}]*(?:padding-top|padding-bottom):/s,
+  'The security introduction should inherit the same vertical padding as certification');
+assert.doesNotMatch(css, /--security-intro-height:/,
+  'The introduction should size to its content instead of forcing extra space below');
 assert.match(css, /height:\s*calc\(100svh - var\(--security-stage-inset\) - var\(--security-stage-inset\)\)/);
 assert.match(css, /\.security-visual \.protection-card\s*\{[^}]*border-radius:\s*calc\(11\.437 \* var\(--security-unit\)\);/s,
   'Security artwork should have rounded bottom corners');
