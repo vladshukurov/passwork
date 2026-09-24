@@ -368,15 +368,15 @@ function PlatformAvailability({ platforms, light = false }) {
 export function Platforms() {
   return <section className="platforms" id="platforms" aria-labelledby="platforms-heading"><div className="platforms-inner">
     <div className="platforms-intro">
-      <h2 id="platforms-heading">Используйте Пассворк<br />в браузере, на телефоне</h2>
-      <div><p>Безопасное хранение и доставка секретов в ваши приложения и инфраструктуру. Полный контроль доступа и аудит без компромиссов в скорости разработки</p>
+      <h2 id="platforms-heading">Пассворк на компьютере,<br />телефоне и в браузере</h2>
+      <div><p>Работайте с корпоративными паролями в приложениях для компьютера и телефона или прямо в браузере.</p>
         <a className="button button-dark" href="https://passwork.ru/manuals/apps/desktop-app/" target="_blank" rel="noopener noreferrer" aria-label="Скачать Пассворк — инструкция по установке">Скачать Пассворк</a>
       </div>
     </div>
     <article className="platform-feature">
       <img className="platform-feature-gradient" src="/passwork-assets/figma-platform-wide-gradient-2026.png" alt="" aria-hidden="true" />
       <img className="platform-feature-dots" src="/passwork-assets/figma-platform-wide-dots-2026.svg" alt="" aria-hidden="true" />
-      <div className="platform-feature-copy"><h3>Десктопное приложение</h3><p>Полная функциональность управления паролями в нативном приложении для ПК</p>
+      <div className="platform-feature-copy"><h3>Десктопное приложение</h3><p>Все возможности Пассворка в приложении для macOS, Windows и Linux.</p>
         <PlatformAvailability platforms={platformIcons.desktop} light /></div>
       <img className="platform-feature-art" src="/passwork-assets/figma-platform-browser-hero-2026.png" alt="Десктопное приложение Пассворк: работа с паролем и доступами" loading="lazy" />
     </article>
