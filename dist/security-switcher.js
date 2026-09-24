@@ -2,18 +2,19 @@
 // the active story change with scroll progress.
 import { mountSecurityDashboardMotion } from './security-dashboard-motion.js';
 import { gsap } from './page-motion.js';
-import { chapterAt, chapterScrollTop, pinnedProgress } from './security-scroll-progress.js';
+import { chapterAt, centeredChapterScrollTop, centeredSceneProgress } from './security-scroll-progress.js';
 
 export function mountSecuritySwitcher(section) {
   if (!section) return () => {};
   const gallery = section.querySelector('.security-switcher-grid');
+  const intro = section.querySelector('.section-intro');
   const track = section.closest('.security-scroll-track');
   const choices = [...section.querySelectorAll('.security-story')];
   const visualNodes = [...section.querySelectorAll('.security-visual')];
   // The exported visual DOM is certificate, infrastructure, GOST; reading order
   // follows the Figma story: GOST, certificate, infrastructure.
   const visuals = [visualNodes[2], visualNodes[0], visualNodes[1]];
-  if (!gallery || !track || choices.length !== 3 || choices.length !== visuals.length) return () => {};
+  if (!gallery || !intro || !track || choices.length !== 3 || choices.length !== visuals.length) return () => {};
 
   const bars = choices.map(choice => choice.querySelector('.security-story-progress span'));
   const buttons = choices.map(choice => choice.querySelector('.security-story-heading'));
@@ -57,11 +58,10 @@ export function mountSecuritySwitcher(section) {
     if (animate && outgoing) {
       // Fade through the blue stage: the two white illustrations never overlap.
       gsap.set(outgoing, { visibility: 'visible', filter: 'none' });
-      gsap.set(incoming, { autoAlpha: 0, filter: 'blur(2px)' });
+      gsap.set(incoming, { autoAlpha: 0, filter: 'none' });
       artTransition = gsap.timeline({ onComplete: () => { artTransition = null; } })
         .to(outgoing, { autoAlpha: 0, duration: .12, ease: 'sine.inOut' })
-        .to(incoming, { autoAlpha: 1, filter: 'blur(0px)', duration: .28,
-          ease: 'sine.out', onComplete: () => gsap.set(incoming, { filter: 'none' }) });
+        .to(incoming, { autoAlpha: 1, duration: .28, ease: 'sine.out' });
     } else {
       if (outgoing) gsap.set(outgoing, { autoAlpha: 0, filter: 'none' });
       gsap.set(incoming, { autoAlpha: 1, filter: 'none' });
@@ -79,7 +79,8 @@ export function mountSecuritySwitcher(section) {
     if (!Number.isInteger(index) || index < 0 || index >= choices.length) return;
     if (desktop.matches && !reduced.matches) {
       const start = window.scrollY + track.getBoundingClientRect().top;
-      const target = chapterScrollTop(start, track.offsetHeight, window.innerHeight, index, choices.length);
+      const target = centeredChapterScrollTop(start, intro.offsetHeight, gallery.offsetHeight,
+        track.offsetHeight, window.innerHeight, index, choices.length);
       window.scrollTo({ top: target, behavior: 'smooth' });
     } else {
       select(index, !reduced.matches);
@@ -115,7 +116,8 @@ export function mountSecuritySwitcher(section) {
 
   function updateScroll() {
     if (desktop.matches && !reduced.matches) {
-      setProgress(pinnedProgress(track.getBoundingClientRect().top, track.offsetHeight, window.innerHeight));
+      setProgress(centeredSceneProgress(track.getBoundingClientRect().top, intro.offsetHeight,
+        gallery.offsetHeight, track.offsetHeight, window.innerHeight));
     } else {
       select(Math.max(0, active));
       bars.forEach((bar, i) => gsap.set(bar, { scaleX: i < Math.max(0, active) ? 1 : 0 }));

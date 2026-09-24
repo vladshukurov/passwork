@@ -40,11 +40,13 @@ export function mountSecurityDashboardMotion(card) {
   const descriptionStart = tempo(700);
   const codeStart = tempo(2350);
   const finish = Math.max(codeStart + codeLength * 6, descriptionStart + sentence.length * 13, ...definitions.map(([, delay, duration]) => delay + duration));
-  const animations = definitions.map(([element, delay, duration, y, blur]) => {
-    const animation = element.animate([
-      {opacity: 0, transform: `translateY(${y}px)`, filter: `blur(${blur}px)`},
-      {opacity: 1, transform: 'translateY(0)', filter: 'blur(0px)'},
-    ], {delay, duration, easing, fill: 'both'});
+  const animations = definitions.map(([element, delay, duration, y]) => {
+    // The card's CSS transform centers it in the stage; animating transform here
+    // would replace that centering for the entire lifetime of a filled animation.
+    const keyframes = element === card
+      ? [{opacity: 0}, {opacity: 1}]
+      : [{opacity: 0, transform: `translateY(${y}px)`}, {opacity: 1, transform: 'translateY(0)'}];
+    const animation = element.animate(keyframes, {delay, duration, easing, fill: 'both'});
     animation.pause();
     return animation;
   });

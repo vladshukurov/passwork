@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import siteHtml from '../../dist/index.html?raw';
 import Button from './Button.jsx';
 import { peopleAtProgress, progressAtPeople } from './pricing-scale.js';
@@ -153,7 +153,7 @@ function Security() {
   const stage = by('.security-switcher-stage');
   return <div className="security-scroll-track" id="security"><section className="security-switcher" aria-labelledby="security-heading">
     <SectionIntro headingId="security-heading" title="Российское решение для корпоративной безопасности"
-      description={<>Управляйте корпоративными паролями и доступом сотрудников в единой системе.<br />Размещайте Пассворк на своих серверах.</>} />
+      description={<>Управляйте корпоративными паролями и доступом сотрудников в единой системе.<br />Размещайте Пассворк на своих серверах</>} />
     <div className="security-switcher-grid" role="group" aria-roledescription="карусель" aria-label="Особенности безопасности" tabIndex="0">
       <div className="security-switcher-copy">
         <div className="security-copy-heading"><div className="feature-label">Безопасность</div><h3>Защита данных<br />под вашим контролем</h3></div>
@@ -166,9 +166,9 @@ function Security() {
 }
 
 const securityStories = [
-  ['ГОСТ-шифрование', 'Поддержка ГОСТ Р 34.10-2012 и ГОСТ Р 34.11-2012. Данные остаются на серверах вашей компании.'],
-  ['Сертификат ФСТЭК России', 'Пассворк имеет сертификат ФСТЭК России по 4 уровню доверия — для систем с повышенными требованиями к защите информации.'],
-  ['В собственном контуре', 'Разверните Пассворк на своих серверах: пароли, файлы и резервные копии останутся внутри инфраструктуры компании.'],
+  ['ГОСТ-шифрование', 'Поддержка ГОСТ Р 34.10-2012 и ГОСТ Р 34.11-2012. Данные остаются на серверах вашей компании'],
+  ['Сертификат ФСТЭК России', 'Сертификат ФСТЭК России по 4 уровню доверия для систем с повышенными требованиями к защите информации'],
+  ['В собственном контуре', 'Разверните Пассворк на своих серверах. Пароли, файлы и резервные копии останутся внутри инфраструктуры компании'],
 ];
 
 export function SecurityStory({ index, title, description, active = index === 0 }) {
@@ -184,7 +184,7 @@ export function SecurityStory({ index, title, description, active = index === 0 
 const plans = [
   {
     name: 'Стандарт', price: '11 ₽',
-    description: 'Подходит для небольших команд и повседневного управления паролями и доступами',
+    description: 'Общие сейфы, права доступа и история действий для команды',
     features: [
       'Совместная работа с паролями и сейфами',
       'API и импорт/экспорт для интеграций',
@@ -196,7 +196,7 @@ const plans = [
   },
   {
     name: 'Расширенная', price: '17 ₽', featured: true,
-    description: 'Для крупных компаний с повышенными требованиями к безопасности, контролю и масштабированию',
+    description: 'Единый вход, политики доступа и отказоустойчивость для крупных команд',
     features: [
       'SAML SSO и синхронизация с LDAP',
       'Роли администраторов и групповые политики',
@@ -208,7 +208,7 @@ const plans = [
   },
   {
     name: 'ФСТЭК', price: '14 ₽',
-    description: 'Сертифицированная версия для организаций с повышенными требованиями к безопасности и соответствию',
+    description: 'Сертифицированная защита для регулируемых организаций и госсистем',
     features: [
       'Сертификация ФСТЭК 4-го уровня доверия',
       'Для КИИ и регулируемых организаций',
@@ -221,6 +221,34 @@ const plans = [
 ];
 
 const formatRubles = amount => new Intl.NumberFormat('ru-RU').format(amount);
+function AnimatedPrice({ amount }) {
+  const node = useRef(null);
+  const initial = useRef(amount);
+  const displayed = useRef(amount);
+
+  useEffect(() => {
+    if (!node.current || displayed.current === amount) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      displayed.current = amount;
+      node.current.textContent = `${formatRubles(amount)} ₽`;
+      return;
+    }
+    const from = displayed.current;
+    const started = performance.now();
+    let frame = 0;
+    const tick = now => {
+      const progress = Math.min(1, (now - started) / 720);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      displayed.current = Math.round(from + (amount - from) * eased);
+      node.current.textContent = `${formatRubles(displayed.current)} ₽`;
+      if (progress < 1) frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [amount]);
+
+  return <span className="pricing-plan-amount" ref={node}>{formatRubles(initial.current)} ₽</span>;
+}
 function DarkHeadingDots() {
   return <>
     <img className="dark-heading-dots" src="/passwork-assets/figma-dark-heading-dots-2026.png" width="1212" height="866" alt="" aria-hidden="true" />
@@ -287,8 +315,9 @@ export function Pricing() {
           </div>}
           <div className="pricing-plan-intro"><h3>{plan.name}</h3><p>{plan.description}</p></div>
           <div className="pricing-plan-offer">
-            <p className="pricing-plan-total">{largeTeam ? 'По запросу' : `${formatRubles(Number.parseInt(plan.price, 10) * teamSize * 365)} ₽`}</p>
-            <p className="pricing-plan-term">{largeTeam ? 'Индивидуальный расчёт' : `≈${plan.price} за пользователя в день`}</p>
+            <p className="pricing-plan-kicker">Стоимость команды за год</p>
+            <p className="pricing-plan-total">{largeTeam ? <span className="pricing-plan-on-request">По запросу</span> : <AnimatedPrice amount={Number.parseInt(plan.price, 10) * teamSize * 365} />}</p>
+            <p className="pricing-plan-term">{largeTeam ? 'Для команды от 101 человека' : `${plan.price} за пользователя в день`}</p>
             <Button dialog="pricing" className="pricing-plan-action">{plan.action}</Button>
           </div>
           <ul className="pricing-features">{plan.features.map(feature => <li key={feature}>
@@ -301,16 +330,16 @@ export function Pricing() {
 }
 
 const secretFeatures = [
-  ['Хранение API-ключей и токенов', 'Централизованное хранилище для API-ключей, токенов и паролей', 'key-round.svg'],
-  ['Интеграция с CI/CD', 'Нативная интеграция с GitLab CI, Jenkins, GitHub Actions через API и webhooks', 'figma-secrets-cicd-2026.svg'],
-  ['Работа с конфигурациями', 'Хранение конфигурационных файлов, переменных окружения и секретов', 'figma-secrets-config-2026.svg'],
-  ['Гранулярный контроль доступа', 'Разграничение прав на уровне отдельных секретов, проектов и команд', 'figma-secrets-access-2026.svg'],
+  ['Хранение API-ключей и токенов', 'Держите ключи, токены и пароли в защищённом хранилище', 'key-round.svg'],
+  ['Интеграция с CI/CD', 'Передавайте секреты в GitLab CI, Jenkins и GitHub Actions через API и вебхуки', 'figma-secrets-cicd-2026.svg'],
+  ['Работа с конфигурациями', 'Храните файлы конфигурации и переменные окружения рядом с секретами', 'figma-secrets-config-2026.svg'],
+  ['Гранулярный контроль доступа', 'Назначайте права для каждого секрета, проекта и команды', 'figma-secrets-access-2026.svg'],
 ];
 
 export function Secrets() {
   return <section className="secrets" id="secrets" aria-labelledby="secrets-heading"><div className="secrets-inner">
     <SectionIntro headingId="secrets-heading" title={<>Менеджер секретов<br />{' '}для разработчиков<br />{' '}и DevOps</>}
-      description="Безопасное хранение и доставка секретов в ваши приложения и инфраструктуру. Полный контроль доступа и аудит без компромиссов в скорости разработки" />
+      description="Храните ключи, токены и конфигурации в одном месте. Выдавайте доступ команде и передавайте секреты в приложения через API" />
     <div className="secrets-cards" role="list">{secretFeatures.map(([title, description, icon]) =>
       <article className="secrets-card" role="listitem" key={title}>
         <img className="secrets-card-icon" src={`/passwork-assets/${icon}`} width="24" height="24" alt="" />
@@ -337,7 +366,7 @@ export function Trust() {
       <div className="trust-heading">
         <DarkHeadingDots />
         <h2 id="trust-heading">Соответствие требованиям и доверие регуляторов</h2>
-        <p>Пассворк включён в реестр отечественного ПО, имеет лицензии ФСТЭК и ФСБ, проходит сертификацию и участвует в программе Bug Bounty<br className="trust-desktop-break" /> для независимой проверки безопасности</p>
+        <p>Пассворк включён в реестр отечественного ПО и имеет лицензии ФСТЭК и ФСБ. Программа Bug Bounty помогает находить и устранять уязвимости</p>
       </div>
       <div className="trust-cards" role="list">
         {trustSignals.map(signal => <article className={`trust-card trust-card-${signal.kind}`} role="listitem" key={signal.kind}>
@@ -351,9 +380,6 @@ export function Trust() {
 
 const platformIcons = {
   desktop: [['apple', 'macOS'], ['windows', 'Windows'], ['linux', 'Linux']],
-  mobile: [['apple', 'iOS'], ['googleplay', 'Google Play']],
-  twoFactor: [['apple', 'iOS'], ['googleplay', 'Google Play']],
-  browser: [['googlechrome', 'Chrome'], ['firefoxbrowser', 'Firefox'], ['microsoftedge', 'Edge'], ['safari', 'Safari']],
 };
 
 function PlatformAvailability({ platforms, light = false }) {
@@ -369,31 +395,28 @@ export function Platforms() {
   return <section className="platforms" id="platforms" aria-labelledby="platforms-heading"><div className="platforms-inner">
     <div className="platforms-intro">
       <h2 id="platforms-heading">Пассворк на компьютере,<br />телефоне и в браузере</h2>
-      <div><p>Работайте с корпоративными паролями в приложениях для компьютера и телефона или прямо в браузере.</p>
+      <div><p>Управляйте паролями, подтверждайте вход и получайте доступ к данным с удобного устройства</p>
         <a className="button button-dark" href="https://passwork.ru/manuals/apps/desktop-app/" target="_blank" rel="noopener noreferrer" aria-label="Скачать Пассворк — инструкция по установке">Скачать Пассворк</a>
       </div>
     </div>
     <article className="platform-feature">
       <img className="platform-feature-gradient" src="/passwork-assets/figma-platform-wide-gradient-2026.png" alt="" aria-hidden="true" />
       <img className="platform-feature-dots" src="/passwork-assets/figma-platform-wide-dots-2026.svg" alt="" aria-hidden="true" />
-      <div className="platform-feature-copy"><h3>Десктопное приложение</h3><p>Все возможности Пассворка в приложении для macOS, Windows и Linux.</p>
+      <div className="platform-feature-copy"><h3>Десктопное приложение</h3><p>Управляйте паролями и доступами в приложении для macOS, Windows и Linux</p>
         <PlatformAvailability platforms={platformIcons.desktop} light /></div>
       <img className="platform-feature-art" src="/passwork-assets/figma-platform-browser-hero-2026.png" alt="Десктопное приложение Пассворк: работа с паролем и доступами" loading="lazy" />
     </article>
     <div className="platforms-cards">
       <article className="platform-card platform-card-mobile">
-        <div className="platform-card-copy"><h3>Мобильное приложение</h3><p>Быстрый доступ к вашим корпоративным паролям с мобильного устройства</p>
-          <PlatformAvailability platforms={platformIcons.mobile} /></div>
+        <div className="platform-card-copy"><h3>Мобильное приложение</h3><p>Открывайте рабочие пароли с телефона, когда вы не за компьютером</p></div>
         <img className="platform-phone-art" src="/passwork-assets/figma-platform-phone-auth-2026.png" alt="Экран мобильного приложения Пассворк" loading="lazy" />
       </article>
       <article className="platform-card platform-card-2fa">
-        <div className="platform-card-copy"><h3>2FA</h3><p>Удобная проверка входа с помощью приложения аутентификатора Пассворк</p>
-          <PlatformAvailability platforms={platformIcons.twoFactor} /></div>
+        <div className="platform-card-copy"><h3>2FA</h3><p>Подтверждайте вход с помощью приложения аутентификатора Пассворк</p></div>
         <img className="platform-phone-art" src="/passwork-assets/figma-platform-phone-app-2026.png" alt="Экран приложения Пассворк" loading="lazy" />
       </article>
       <article className="platform-card platform-card-browser">
-        <div className="platform-card-copy"><h3>Расширение для браузера</h3><p>Ищите и создавайте учетные данные, не покидая браузер.<br />Работает с Chrome, Firefox, Edge и Safari</p>
-          <PlatformAvailability platforms={platformIcons.browser} /></div>
+        <div className="platform-card-copy"><h3>Расширение для браузера</h3><p>Ищите и создавайте учётные данные, не покидая браузер.<br />Работает с Chrome, Firefox, Edge и Safari</p></div>
         <div className="platform-access-screens" role="img" aria-label="Интерфейс расширения Пассворка в браузере">
           <img src="/passwork-assets/figma-platform-access-folder-2026.png" alt="" loading="lazy" />
           <img src="/passwork-assets/figma-platform-access-create-2026.png" alt="" loading="lazy" />
@@ -407,9 +430,9 @@ export function Footer() {
   return <footer className="site-footer"><div className="footer-inner">
     <div className="footer-main">
       <div className="footer-brand">
-        <a href="#top" aria-label="Пассворк — к началу страницы"><img className="footer-logo" src="/passwork-assets/logo-light.svg" alt="Пассворк" /></a>
-        <p>Управление корпоративными паролями<br />и доступами в одном контуре.</p>
-        <Button variant="dark">Запросить демо</Button>
+        <a href="#top" aria-label="Пассворк — к началу страницы"><img className="footer-logo" src="/passwork-assets/logo-dark.svg" alt="Пассворк" /></a>
+        <p>Корпоративные пароли и доступы<br />под контролем вашей команды</p>
+        <Button>Запросить демо</Button>
         <img className="footer-russia" src="/passwork-assets/imgVector.svg" alt="Сделано в России" />
       </div>
       <nav className="footer-column" aria-label="Продукт">
@@ -481,7 +504,7 @@ function App() {
       <ClientLogos /><About /><Certification />
       <section className="teams-heading" id="teams"><h2>Пассворк решает<br />задачи разных команд</h2></section>
       <TeamTabs /><TeamScene /><Security /><SectionDivider inGrid />
-    </div><Pricing /><SectionDivider /><Secrets /><SectionDivider openBottom /><Trust /><Platforms /></main>
+    </div><Pricing /><SectionDivider /><Secrets /><SectionDivider openBottom /><Trust /><Platforms /><SectionDivider openBottom /></main>
     <Footer />
     <ContactDialog />
   </>;

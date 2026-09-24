@@ -18,6 +18,7 @@ assert.ok(peopleAtProgress(243) <= 26);
 assert.match(app, /id="pricing-team-size" type="range" min="0" max="1000" step="1"/);
 assert.doesNotMatch(app, /id="pricing-team-count"/, 'Team size should be read-only; the slider owns this interaction');
 assert.match(app, /className="pricing-plan-pattern"/);
+assert.match(app, /\(now - started\) \/ 720/, 'Price updates should ease over a readable 720 ms');
 assert.match(app, /className="pricing-plan-glint dot-glint"/);
 assert.doesNotMatch(app, /pricing-plan-total">≈/, 'Annual team price must not carry an approximation glyph');
 assert.doesNotMatch(app, /Демонстрационный расчёт\. Итоговая стоимость — по запросу\./);

@@ -16,3 +16,17 @@ export function chapterScrollTop(trackTop, trackHeight, viewportHeight, index, c
   const travel = Math.max(1, trackHeight - viewportHeight);
   return trackTop + travel * ((index + .015) / chapterCount);
 }
+
+// The gallery pins after its top reaches a centered position in the viewport.
+// Its progress starts there, after the introduction has scrolled past.
+export function centeredSceneProgress(trackTop, introHeight, galleryHeight, trackHeight, viewportHeight) {
+  const inset = (viewportHeight - galleryHeight) / 2;
+  const travel = Math.max(1, trackHeight - introHeight - galleryHeight);
+  return clamp01((inset - introHeight - trackTop) / travel);
+}
+
+export function centeredChapterScrollTop(trackTop, introHeight, galleryHeight, trackHeight, viewportHeight, index, chapterCount) {
+  const inset = (viewportHeight - galleryHeight) / 2;
+  const travel = Math.max(1, trackHeight - introHeight - galleryHeight);
+  return trackTop + introHeight - inset + travel * ((index + .015) / chapterCount);
+}

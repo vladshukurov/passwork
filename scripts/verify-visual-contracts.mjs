@@ -21,9 +21,9 @@ const rule = (source, selector) => {
 // Chapters must remain in their DOM order while the active detail expands.
 assert.doesNotMatch(security, /\.security-story\.is-active\s*\{[^}]*\border\s*:\s*-1\b/);
 assert.match(rule(security, '.security-scroll-track'), /height\s*:\s*calc\(100svh\s*\+\s*225svh\)/);
-assert.match(rule(security, '.security-switcher'), /height\s*:\s*100svh/);
-assert.match(rule(security, '.security-switcher'), /position\s*:\s*sticky/);
-assert.match(rule(security, '.security-switcher-grid'), /height\s*:\s*calc\(100svh\s*-\s*var\(--security-intro-height\)\)/);
+assert.match(rule(security, '.security-switcher'), /height\s*:\s*100%/);
+assert.match(rule(security, '.security-switcher-grid'), /position\s*:\s*sticky/);
+assert.match(rule(security, '.security-switcher-grid'), /height\s*:\s*calc\(100svh\s*-\s*var\(--security-stage-inset\)\s*-\s*var\(--security-stage-inset\)\)/);
 assert.doesNotMatch(securityMotion, /ScrollTrigger\.create|pin\s*:/, 'The security pin must survive reload at its hash');
 assert.match(builder, /class="security-scroll-track"/, 'The sticky section needs a scroll track');
 assert.match(pageMotion, /getBoundingClientRect\(\)\.bottom <= 0/, 'Deep-link reload must skip expired entrance triggers');
@@ -39,7 +39,7 @@ assert.match(rule(header, '.site-header.is-scroll-header::after'), /background\s
 assert.doesNotMatch(fade, /backdrop-filter/, 'Header layers must not blur page content');
 assert.doesNotMatch(rule(security, '.security-switcher-stage'), /border-right\s*:/, 'Blue stage must not have a gray right stripe');
 assert.doesNotMatch(rule(security, '.security-switcher-grid'), /margin-right\s*:\s*-1px/, 'The parent grid border must remain visible at the right edge');
-assert.match(rule(security, '.security-stage-fade'), /opacity\s*:\s*1/, 'Restore the original illustration fade strength');
+assert.match(rule(security, '.security-stage-fade'), /display\s*:\s*none/, 'Do not fade or blur the lower illustration');
 assert.match(rule(security, '.security-stage-dots'), /object-fit\s*:\s*cover/, 'Security dots must retain their square pitch instead of stretching with the stage');
 assert.match(rule(security, '.security-story:not(.is-active) .security-story-heading:hover'), /color\s*:\s*#525e70/, 'Only inactive story labels change colour on hover');
 assert.doesNotMatch(security, /\.security-story-heading:hover[^}]*color\s*:\s*#266df0/, 'Active story labels should not flash blue');

@@ -61,9 +61,9 @@ assert.ok(existsSync(new URL('dist/passwork-assets/figma-dark-heading-dots-2026.
 assert.match(reactSource, /<Pricing \/><SectionDivider \/><Secrets \/><SectionDivider openBottom \/><Trust \/>/,
   'Pricing, secrets, and trust sections must follow the Figma order');
 assert.match(reactSource, /<TeamTabs \/><TeamScene \/><Security \/><SectionDivider inGrid \/>/,
-  'The grid divider belongs between security and pricing, not certification and teams');
-assert.match(reactSource, /<Trust \/><Platforms \/><\/main>/,
-  'Platform applications must follow trust and precede the footer');
+  'The grid divider belongs between security and pricing');
+assert.match(reactSource, /<Trust \/><Platforms \/><SectionDivider openBottom \/><\/main>/,
+  'Platform applications must follow trust and have a divider before the footer');
 assert.doesNotMatch(reactSource, /<Trust \/><SectionDivider \/>/, 'No empty gap may separate trust from applications');
 assert.match(reactSource, /<article className="platform-feature">/, 'Platform layout must have the full-width browser feature');
 assert.match(reactSource, /<div className="platforms-cards">/, 'Platform layout must have a three-card app row');
@@ -111,6 +111,21 @@ for (const filename of ['figma-made-in-russia-2026.svg', 'figma-pricing-check-20
   'figma-secrets-config-2026.svg', 'figma-secrets-access-2026.svg']) {
   assert.ok(existsSync(new URL(`dist/passwork-assets/${filename}`, root)), `Missing site asset ${filename}`);
 }
-assert.match(reactSource, /токенов', 'Централизованное хранилище[^\n]*'key-round\.svg'/);
+assert.match(reactSource, /токенов', 'Держите ключи, токены и пароли[^\n]*'key-round\.svg'/);
+assert.doesNotMatch(reactSource, /className="platforms-gap"/, 'Platform cards should not have a blank spacer');
+assert.match(figmaStyles, /\.platforms-cards\s*\{[^}]*gap:\s*3px;[^}]*padding:\s*3px/s,
+  'Platform cards should have compact spacing above and between them');
+assert.match(figmaStyles, /\.platform-card\s*\{[^}]*border-radius:\s*0/s,
+  'Platform cards should have square corners');
+assert.match(figmaStyles, /\.platforms-cards\s*\{[^}]*background:\s*#eaeef4/s,
+  'The muted blue-gray surface should sit in the gutters around the cards');
+assert.match(figmaStyles, /\.platform-card\s*\{[^}]*background:\s*#fff;[^}]*border-radius/s,
+  'Platform cards should stay white as in the Figma composition');
+assert.doesNotMatch(figmaStyles.match(/\.platform-card\s*\{([^}]*)\}/)?.[1] ?? '', /(?:^|;)\s*border(?:-(?:width|style|color|top|right|bottom|left))?:/,
+  'Platform cards should have no border');
+assert.match(read('dist/security-switcher.css'), /\.security-switcher-grid\s*\{[^}]*border-block:\s*1px solid var\(--stroke\)/s,
+  'The pinned security gallery should have matching borders above and below');
+assert.equal((reactSource.match(/<PlatformAvailability /g) || []).length, 1,
+  'Only the desktop feature should carry a platform badge');
 
 console.log('React contracts: CSS, assets, page components, pricing, footer, tab/story data and runtime bridge OK');
