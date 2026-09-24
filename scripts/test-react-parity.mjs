@@ -113,7 +113,7 @@ for (const filename of ['figma-made-in-russia-2026.svg', 'figma-pricing-check-20
 }
 assert.match(reactSource, /токенов', 'Держите ключи, токены и пароли[^\n]*'key-round\.svg'/);
 assert.doesNotMatch(reactSource, /className="platforms-gap"/, 'Platform cards should not have a blank spacer');
-assert.match(figmaStyles, /\.platforms-cards\s*\{[^}]*gap:\s*3px;[^}]*padding:\s*3px/s,
+assert.match(figmaStyles, /\.platforms-cards\s*\{[^}]*gap:\s*2px;[^}]*padding:\s*2px/s,
   'Platform cards should have compact spacing above and between them');
 assert.match(figmaStyles, /\.platform-card\s*\{[^}]*border-radius:\s*0/s,
   'Platform cards should have square corners');
