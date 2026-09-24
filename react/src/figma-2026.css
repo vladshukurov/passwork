@@ -408,15 +408,15 @@ body, .page-grid, .secrets, .section-divider, .platforms, .site-footer { backgro
 .platforms-intro > div { display: flex; flex-direction: column; align-items: flex-start; gap: 28px; }
 .platforms-intro p { color: #1c1d1f; font: 500 20px/26px var(--pw-font); letter-spacing: -.17px; }
 .platforms-intro .button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding-inline: 22px; text-decoration: none; }
-.platform-feature { position: relative; height: clamp(410px, 30.8854vw, 593px); overflow: hidden; background: #356eb7; border-bottom: 1px solid var(--pw-border); }
+.platform-feature { position: relative; height: clamp(410px, 30.8854vw, 593px); overflow: hidden; background: #356eb7; }
 .platform-feature-gradient { position: absolute; top: 0; left: -5.4%; width: 110.8%; height: 100.8%; max-width: none; object-fit: cover; }
 .platform-feature-dots { position: absolute; top: clamp(-189px, -9.84375vw, -126px); left: 0; width: 100%; max-width: none; height: auto; pointer-events: none; }
 .platform-feature-copy { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: clamp(32px, 2.9167vw, 56px); }
 .platform-feature h3 { color: #fff; font: 500 clamp(26px, 1.875vw, 36px)/1.111 var(--pw-font); letter-spacing: -1.045px; }
 .platform-feature p { max-width: 1000px; color: #ffffffa6; font: 500 clamp(16px, 1.0417vw, 20px)/1.3 var(--pw-font); letter-spacing: -.17px; }
 .platform-feature-art { position: absolute; z-index: 1; top: clamp(190px, 12.955vw, 249px); left: 11.5%; width: 76.8%; max-width: none; height: auto; filter: drop-shadow(3px 3px 8px #0808080a); }
-.platforms-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px; padding: 3px; border-bottom: 1px solid var(--pw-border); background: #eaeef4; }
-.platform-card { position: relative; min-width: 0; height: clamp(350px, 22.7083vw, 436px); overflow: hidden; background: #fff; border-radius: 0; }
+.platforms-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px; margin-inline: -1px; padding: 3px; background: var(--pw-border); }
+.platform-card { position: relative; min-width: 0; height: clamp(350px, 22.7083vw, 436px); overflow: hidden; background: #fff; border-radius: 6px; }
 .platform-card-copy { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; gap: 9px; padding: clamp(20px, 1.667vw, 32px); }
 .platform-card h3 { color: #1c1d1f; font: 500 clamp(16px, 1.0417vw, 20px)/1.3 var(--pw-font); letter-spacing: -.17px; }
 .platform-card p { color: #6f7988; font: 500 clamp(13px, .8333vw, 16px)/1.375 var(--pw-font); letter-spacing: -.348px; }
