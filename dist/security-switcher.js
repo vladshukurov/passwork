@@ -20,6 +20,11 @@ export function mountSecuritySwitcher(section) {
   const buttons = choices.map(choice => choice.querySelector('.security-story-heading'));
   const dashboards = visuals.map(visual => mountSecurityDashboardMotion(visual.querySelector('.protection-card')));
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const main = section.closest('main');
+  const transitionDuration = () => {
+    const milliseconds = Number.parseFloat(getComputedStyle(main || section).getPropertyValue('--motion-security-duration'));
+    return Number.isFinite(milliseconds) && milliseconds > 0 ? milliseconds / 1000 : .36;
+  };
   const desktop = matchMedia('(min-width: 901px) and (min-height: 761px) and (prefers-reduced-motion: no-preference)');
   const scenes = [...visuals];
   let active = -1;
@@ -55,13 +60,13 @@ export function mountSecuritySwitcher(section) {
     });
     const incoming = visuals[index];
     const outgoing = visuals[previous];
-    if (animate && outgoing) {
-      // Fade through the blue stage: the two white illustrations never overlap.
-      gsap.set(outgoing, { visibility: 'visible', filter: 'none' });
+    if (animate && outgoing && !reduced.matches && !main?.classList.contains('motion-security-off')) {
+      // Keep the stage occupied throughout the change; no empty blue frame.
+      gsap.set(outgoing, { autoAlpha: 1, filter: 'none' });
       gsap.set(incoming, { autoAlpha: 0, filter: 'none' });
       artTransition = gsap.timeline({ onComplete: () => { artTransition = null; } })
-        .to(outgoing, { autoAlpha: 0, duration: .12, ease: 'sine.inOut' })
-        .to(incoming, { autoAlpha: 1, duration: .28, ease: 'sine.out' });
+        .to(outgoing, { autoAlpha: 0, duration: transitionDuration(), ease: 'sine.inOut' }, 0)
+        .to(incoming, { autoAlpha: 1, duration: transitionDuration(), ease: 'sine.inOut' }, 0);
     } else {
       if (outgoing) gsap.set(outgoing, { autoAlpha: 0, filter: 'none' });
       gsap.set(incoming, { autoAlpha: 1, filter: 'none' });

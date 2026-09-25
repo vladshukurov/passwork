@@ -4,26 +4,27 @@ export const {gsap, ScrollTrigger} = window;
 gsap.registerPlugin(ScrollTrigger);
 
 function mountDotGlints() {
+  // React owns its dot treatments through the preview controls. Avoid a
+  // second GSAP mask tween fighting the selected CSS animation.
+  if (document.querySelector('.react-site-header')) return () => {};
   const preference=matchMedia('(prefers-reduced-motion: no-preference)');
   let cleanups=[];
   const mount=()=>{
     cleanups.forEach(cleanup=>cleanup());
     cleanups=[];
     if(!preference.matches)return;
-    const recurring=Boolean(document.querySelector('.react-site-header'));
     document.querySelectorAll('.dot-glint').forEach((glint,index) => {
-      // React fields repeat quietly while visible; the archived site keeps its one-shot sweep.
+      // The archived static site keeps its original one-shot sweep.
       const sweep=gsap.fromTo(glint,
         {webkitMaskPosition:'100% 0%',maskPosition:'100% 0%'},
         {webkitMaskPosition:'0% 0%',maskPosition:'0% 0%',duration:siteMotion.glintSweep,
           ease:'sine.inOut',paused:true,delay:.35+index*.15,
-          repeat:recurring?-1:0,repeatDelay:recurring?5:0});
+          repeat:0});
       let visible=false;
       let started=false;
       const update=()=>{
         if(!visible || document.hidden){sweep.pause();return;}
         if(!started){started=true;sweep.play(0);}
-        else if(recurring)sweep.restart();
         else if(sweep.progress()<1)sweep.resume();
       };
       const observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;update();});
@@ -157,20 +158,25 @@ export function mountPageMotion() {
       const svg = card.querySelector('[data-art]');
       const layers = [...svg.querySelectorAll('.certification-layer')];
       const timeline=certificationHoverTimeline(svg,layers);
-      const enter = event => {
-        if(event.pointerType==='touch')return;
-        timeline.timeScale(siteMotion.hoverSpeed).restart();
+      const main=card.closest('main');
+      const speed=()=>{
+        const milliseconds=Number.parseFloat(getComputedStyle(main || card).getPropertyValue('--motion-certification-duration'));
+        return Number.isFinite(milliseconds) && milliseconds>0?320/milliseconds:1;
       };
-      const leave = () => timeline.timeScale(siteMotion.returnSpeed).reverse();
-      svg.addEventListener('pointerenter',enter);
-      svg.addEventListener('pointerleave',leave);
+      const enter = event => {
+        if(event.pointerType==='touch' || main?.classList.contains('motion-certification-off'))return;
+        timeline.timeScale(siteMotion.hoverSpeed*speed()).restart();
+      };
+      const leave = () => timeline.timeScale(siteMotion.returnSpeed*speed()).reverse();
+      card.addEventListener('pointerenter',enter);
+      card.addEventListener('pointerleave',leave);
       const visibility = () => {if(document.hidden) timeline.pause(0);};
       const observer = new IntersectionObserver(([entry]) => {if(!entry.isIntersecting) timeline.pause(0);});
       observer.observe(card);
       document.addEventListener('visibilitychange',visibility);
       cleanups.push(() => {
-        svg.removeEventListener('pointerenter',enter);
-        svg.removeEventListener('pointerleave',leave);
+        card.removeEventListener('pointerenter',enter);
+        card.removeEventListener('pointerleave',leave);
         document.removeEventListener('visibilitychange',visibility);
         observer.disconnect();
         timeline.kill();

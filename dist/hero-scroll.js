@@ -11,6 +11,7 @@ export function mountHeroScroll(hero, header) {
   const origin = copy.querySelector('.hero-origin');
   const description = copy.querySelector('p');
   const actions = copy.querySelector('.hero-actions');
+  const main = hero.closest('main');
   const media = gsap.matchMedia();
   const originalInert = header.inert;
   let previousY = window.scrollY, direction = 0, distance = 0;
@@ -80,12 +81,19 @@ export function mountHeroScroll(hero, header) {
     updateHeader();
   }});
   media.add('(min-width: 1101px) and (prefers-reduced-motion: no-preference)', () => {
-    hero.classList.add('has-scroll-motion');
     const baseScale = () => .86+.14*gsap.utils.clamp(0,1,(innerHeight-500)/300);
+    const motionEnabled = () => !main?.classList.contains('motion-hero-off');
+    const motionDuration = () => {
+      const milliseconds = Number.parseFloat(getComputedStyle(main || hero).getPropertyValue('--motion-hero-duration'));
+      return Number.isFinite(milliseconds) && milliseconds > 0 ? milliseconds / 1000 : .55;
+    };
     const gapAtRest = {title:180,description:130};
+    const progressState = {value:0};
+    let progressTween;
+    let settingsFrame = 0;
     const measure = () => {
       hero.style.setProperty('--hero-window-height',shell.offsetHeight+'px');
-      hero.style.setProperty('--hero-window-overflow',Math.ceil(shell.offsetHeight*Math.max(0,baseScale()*1.12-1))+'px');
+      hero.style.setProperty('--hero-window-overflow',Math.ceil(shell.offsetHeight*Math.max(0,baseScale()*1.05-1))+'px');
       if (window.scrollY <= 16) {
         const tabsTop=tabs.getBoundingClientRect().top;
         gapAtRest.title=Math.max(48,tabsTop-title.getBoundingClientRect().bottom);
@@ -99,24 +107,56 @@ export function mountHeroScroll(hero, header) {
       const gap=tabsTop-node.getBoundingClientRect().bottom;
       return smoothstep(gsap.utils.clamp(0,1,(gap-8)/Math.max(1,restGap-8)));
     };
-    const render = self => {
-      const movement=smoothstep(gsap.utils.clamp(0,1,self.progress/.72));
+    const renderMotion = progress => {
+      const movement=smoothstep(gsap.utils.clamp(0,1,progress/.76));
+      gsap.set(hero,{
+        '--hero-copy-y':`${-40*movement}px`,
+        '--hero-copy-scale':1-.04*movement,
+        '--hero-window-scale':baseScale()*(1+.05*progress)
+      });
+    };
+    const resetScene = () => {
+      progressTween?.kill();
+      progressTween=undefined;
+      hero.classList.remove('has-scroll-motion');
+      hero.style.removeProperty('--hero-copy-y');
+      hero.style.removeProperty('--hero-copy-scale');
+      hero.style.removeProperty('--hero-window-scale');
+      gsap.set([title,description,...(origin ? [origin] : [])],{clearProps:'opacity'});
+      gsap.set(actions,{clearProps:'opacity,transform'});
+      actions.inert=false;
+      copy.inert=false;
+    };
+    const render = (self,{immediate=false}={}) => {
+      if(!motionEnabled()) {
+        resetScene();
+        return;
+      }
+      hero.classList.add('has-scroll-motion');
       // Copy keeps a geometry-based fade so no line can ghost through the UI.
       // Read all bounds before changing transforms, avoiding a forced layout
       // when the user reverses quickly through the sticky product scene.
       const tabsTop=tabs.getBoundingClientRect().top;
       const descriptionOpacity=fadeBeforeContact(description,gapAtRest.description,tabsTop);
       const titleOpacity=fadeBeforeContact(title,gapAtRest.title,tabsTop);
-      // Keep CTA motion tied to the same scroll position as the copy. Their
-      // slightly deeper scale eases the bright surfaces away before the tabs
+      // Keep CTA motion tied to the same scroll position as the copy. Its
+      // slightly deeper scale eases the bright surface away before the tabs
       // arrive, without moving the row on a separate trajectory.
       const actionPhase=smoothstep(gsap.utils.clamp(0,1,(self.progress*(self.end-self.start))/115));
       const actionOpacity=1-actionPhase;
-      gsap.set(hero,{
-        '--hero-copy-y':`${-40*movement}px`,
-        '--hero-copy-scale':1-.04*movement,
-        '--hero-window-scale':baseScale()*(1+.12*self.progress)
-      });
+      if(immediate) {
+        progressTween?.kill();
+        progressState.value=self.progress;
+        renderMotion(progressState.value);
+      } else {
+        progressTween=gsap.to(progressState,{
+          value:self.progress,
+          duration:motionDuration(),
+          ease:'power2.out',
+          overwrite:'auto',
+          onUpdate:()=>renderMotion(progressState.value)
+        });
+      }
       gsap.set(actions,{opacity:actionOpacity,scale:1-.1*actionPhase,transformOrigin:'50% 0%'});
       actions.inert=actionOpacity<.02;
       gsap.set(description,{opacity:descriptionOpacity});
@@ -126,21 +166,28 @@ export function mountHeroScroll(hero, header) {
     };
     const trigger=ScrollTrigger.create({trigger:hero,start:'top top',
       end:()=>'+='+gsap.utils.clamp(320,520,innerHeight*.45),
-      onUpdate:render,onRefresh:render});
-    render(trigger);
+      onUpdate:render,onRefresh:self=>render(self,{immediate:true})});
+    render(trigger,{immediate:true});
+    const settingsObserver = new MutationObserver(() => {
+      cancelAnimationFrame(settingsFrame);
+      settingsFrame=requestAnimationFrame(() => {
+        if(motionEnabled()) {
+          const wasEnabled=hero.classList.contains('has-scroll-motion');
+          hero.classList.add('has-scroll-motion');
+          if(!wasEnabled) ScrollTrigger.refresh();
+          else render(trigger);
+        } else resetScene();
+      });
+    });
+    if(main) settingsObserver.observe(main,{attributes:true,attributeFilter:['class','style']});
     return () => {
+      cancelAnimationFrame(settingsFrame);
+      settingsObserver.disconnect();
       ScrollTrigger.removeEventListener('refreshInit',measure);
       trigger.kill();
-      hero.classList.remove('has-scroll-motion');
+      resetScene();
       hero.style.removeProperty('--hero-window-height');
       hero.style.removeProperty('--hero-window-overflow');
-      hero.style.removeProperty('--hero-copy-y');
-      hero.style.removeProperty('--hero-copy-scale');
-      hero.style.removeProperty('--hero-window-scale');
-      gsap.set([title,description,...(origin ? [origin] : [])],{clearProps:'opacity'});
-      gsap.set(actions,{clearProps:'opacity,transform'});
-      actions.inert=false;
-      copy.inert=false;
     };
   });
   let active=true;

@@ -49,8 +49,10 @@ assert.match(dashboardCss, /\.pw-window-chevron--forward/);
 
 // Motion belongs inside illustrations; no decorative shadow/aura behind them.
 assert.doesNotMatch(page, /\.certification-art::before/);
-assert.doesNotMatch(rule(security, '.security-ui-card'), /box-shadow\s*:/);
-assert.doesNotMatch(rule(security, '.security-visual .security-certificate'), /box-shadow\s*:/);
+assert.match(rule(security, '.security-visual .security-attestation'), /border-radius\s*:\s*18px/,
+  'The certification story uses the new evidence card');
+assert.doesNotMatch(rule(security, '.security-visual .security-attestation'), /filter\s*:\s*blur\(/,
+  'The new security evidence card must remain sharp');
 assert.doesNotMatch(rule(security, '.security-visual .protection-card'), /box-shadow\s*:/);
 
 // Keep the original blue art, but smooth its bands without blurring foreground UI.
@@ -58,7 +60,8 @@ assert.match(rule(page, '.hero-gradient'), /blue-gradient-figma\.png/, 'Keep the
 assert.match(rule(page, '.hero-gradient'), /filter\s*:\s*blur\(56px\)/, 'Keep the local background smoothing');
 assert.doesNotMatch(rule(page, '.hero-gradient'), /background-attachment\s*:/, 'Do not change the local hero framing');
 assert.match(rule(page, '.hero-dots.dot-glint,.team-scene>.scene-dots.dot-glint,.security-stage-dots.dot-glint'), /opacity\s*:\s*\.42/, 'Dot glints stay understated');
-assert.match(pageMotion, /repeat:recurring\?-1:0,repeatDelay:recurring\?5:0/, 'React dot glints repeat gently; the archived site remains one-shot');
+assert.match(pageMotion, /if \(document\.querySelector\('\.react-site-header'\)\) return \(\) => \{\};/,
+  'React owns its stationary dots; the archived site keeps its separate one-shot treatment');
 assert.match(pageMotion, /IntersectionObserver/, 'Dot glints run when their section enters view');
 assert.match(rule(page, '.certification-art :is(img,.certification-svg)'), /height\s*:\s*202px/);
 assert.match(motion, /layer\s*:\s*\.28\b/);

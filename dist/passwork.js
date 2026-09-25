@@ -21,6 +21,12 @@ const stopOrbit=mountOrbitAnimation(document.querySelector('.orbit-scene'));
 const stopSecurity=mountSecuritySwitcher(document.querySelector('.security-switcher'));
 
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+const main=document.querySelector('main');
+const motionEnabled=key=>!main?.classList.contains(`motion-${key}-off`) && !reduced.matches;
+const motionDuration=(key,fallback)=>{
+  const milliseconds=Number.parseFloat(getComputedStyle(main).getPropertyValue(`--motion-${key}-duration`));
+  return Number.isFinite(milliseconds) && milliseconds>0?milliseconds/1000:fallback;
+};
 const stopPageMotion=mountPageMotion();
 const productPanel=document.querySelector('#product-panel');
 const detail=document.querySelector('.product-detail');
@@ -47,7 +53,7 @@ function selectProduct(index){
   productSwitch?.progress(1);
   outgoingProductScreen?.remove();
   gsap.set([liveDashboard,detail],{clearProps:'opacity,filter'});
-  const outgoing=!reduced.matches?snapshotScreen(activeProduct===0?liveDashboard:detail):null;
+  const outgoing=motionEnabled('tabs')?snapshotScreen(activeProduct===0?liveDashboard:detail):null;
   outgoingProductScreen=outgoing;
   activeProduct=index;
   setSelection(productTabs,index,productPanel);
@@ -62,7 +68,7 @@ function selectProduct(index){
     const incoming=index===0?liveDashboard:detail;
     productSwitch=dissolveScreen(outgoing,incoming,()=>{
       if(outgoingProductScreen===outgoing)outgoingProductScreen=null;
-    });
+    },motionDuration('tabs',.32));
   }
 }
 productTabs.forEach((button,i)=>listen(button,'click',()=>selectProduct(i)));
@@ -83,7 +89,7 @@ function selectTeam(index){
   outgoingTeamCaption?.remove();
   gsap.set(teamDashboard,{clearProps:'opacity,filter'});
   gsap.set(caption,{clearProps:'opacity,filter'});
-  const animate=!reduced.matches;
+  const animate=motionEnabled('tabs');
   if(animate){
     outgoingTeamScreen=snapshotScreen(teamDashboard);
     outgoingTeamCaption=caption.cloneNode(true);
@@ -104,7 +110,7 @@ function selectTeam(index){
   teamSwitch=fadeThroughScreen(outgoing,teamDashboard,oldCaption,caption,()=>{
     if(outgoingTeamScreen===outgoing)outgoingTeamScreen=null;
     if(outgoingTeamCaption===oldCaption)outgoingTeamCaption=null;
-  });
+  },motionDuration('tabs',.32));
 }
 teamTabs.forEach((button,i)=>listen(button,'click',()=>selectTeam(i)));
 function tabKeyboard(buttons,select){buttons.forEach((button,i)=>listen(button,'keydown',event=>{let next;if(event.key==='ArrowRight')next=(i+1)%buttons.length;else if(event.key==='ArrowLeft')next=(i-1+buttons.length)%buttons.length;else if(event.key==='Home')next=0;else if(event.key==='End')next=buttons.length-1;else return;event.preventDefault();select(next);buttons[next].focus();}));}
@@ -112,10 +118,43 @@ tabKeyboard(productTabs,selectProduct);tabKeyboard(teamTabs,selectTeam);
 
 const menuButton=document.querySelector('.menu-toggle');
 const menu=document.querySelector('#main-nav');
-function closeMenu(){menu.classList.remove('open');menuButton.setAttribute('aria-expanded','false');menuButton.setAttribute('aria-label','Открыть меню');}
-listen(menuButton,'click',()=>{const open=menu.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open));menuButton.setAttribute('aria-label',open?'Закрыть меню':'Открыть меню');});
+const menuHeader=menuButton.closest('.site-header');
+const menuFooter=document.querySelector('.site-footer');
+const mainWasInert=main?.inert ?? false;
+const footerWasInert=menuFooter?.inert ?? false;
+function closeMenu({restoreFocus=false}={}){
+  const wasOpen=menu.classList.contains('open');
+  menu.classList.remove('open');
+  menuHeader.classList.remove('is-menu-open');
+  document.body.classList.remove('mobile-menu-open');
+  if(main)main.inert=mainWasInert;
+  if(menuFooter)menuFooter.inert=footerWasInert;
+  menuButton.setAttribute('aria-expanded','false');
+  menuButton.setAttribute('aria-label','Открыть меню');
+  if(restoreFocus&&wasOpen)menuButton.focus({preventScroll:true});
+}
+listen(menuButton,'click',()=>{
+  if(menu.classList.contains('open')){closeMenu();return;}
+  menu.classList.add('open');
+  menuHeader.classList.add('is-menu-open');
+  document.body.classList.add('mobile-menu-open');
+  if(main)main.inert=true;
+  if(menuFooter)menuFooter.inert=true;
+  menuButton.setAttribute('aria-expanded','true');
+  menuButton.setAttribute('aria-label','Закрыть меню');
+});
 listen(menu,'click',event=>{if(event.target.closest('a,button'))closeMenu();});
-listen(document,'keydown',event=>{if(event.key==='Escape')closeMenu();});
+listen(menuHeader.querySelector('.brand'),'click',()=>closeMenu());
+listen(menuHeader.querySelector('.header-demo'),'click',()=>closeMenu());
+listen(window,'resize',()=>{if(innerWidth>800)closeMenu();});
+listen(document,'keydown',event=>{
+  if(event.key==='Escape'){closeMenu({restoreFocus:true});return;}
+  if(event.key!=='Tab'||!menu.classList.contains('open'))return;
+  const focusable=[...menuHeader.querySelectorAll('.brand, #main-nav a, #main-nav button, .header-demo, .menu-toggle')];
+  const current=focusable.indexOf(document.activeElement);
+  if(event.shiftKey&&current===0){event.preventDefault();focusable.at(-1).focus();}
+  else if(!event.shiftKey&&current===focusable.length-1){event.preventDefault();focusable[0].focus();}
+});
 
 const dialog=document.querySelector('.contact-dialog');
 const form=document.querySelector('#contact-form');
@@ -133,6 +172,7 @@ listen(form,'submit',event=>{event.preventDefault();if(!form.reportValidity())re
 
 activeTeardown=()=>{
   if(!activeTeardown)return;
+  closeMenu();
   activeTeardown=null;
   listeners.forEach(remove=>remove());
   productSwitch?.kill();

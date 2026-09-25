@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 
 const root = new URL('../', import.meta.url);
 const exists = path => existsSync(new URL(path, root));
@@ -20,5 +20,33 @@ for (const path of [
   'react-dist/passwork-assets/figma-trust-fstek-2026.png',
 ]) assert.ok(exists(path), `Missing production asset: ${path}`);
 assert.ok(!exists('react-dist/attio-original.html'), 'React deployment must not publish the archived site');
+const productionJs = readdirSync(new URL('react-dist/assets/', root))
+  .filter(file => file.endsWith('.js'))
+  .map(file => read(`react-dist/assets/${file}`))
+  .join('\n');
+assert.doesNotMatch(productionJs, /Настроить вид|Скругления|Микроинтеракции/,
+  'Preview-only appearance switches must not ship in production');
+const appSource = read('react/src/App.jsx');
+if (appSource.includes('FramePreviewControls')) {
+  assert.match(appSource, /import\.meta\.env\.DEV && params\.has\('frame'\)/,
+    'Local appearance switches must be development-only');
+} else {
+  assert.doesNotMatch(appSource, /framePreview|Настроить вид/,
+    'The release source must not include appearance switches');
+}
+const builtFiles = [
+  'react-dist/index.html',
+  ...readdirSync(new URL('react-dist/assets/', root))
+    .filter(file => /\.(?:js|css)$/.test(file))
+    .map(file => `react-dist/assets/${file}`),
+  ...readdirSync(new URL('react-dist/', root))
+    .filter(file => file.endsWith('.css'))
+    .map(file => `react-dist/${file}`),
+];
+for (const file of builtFiles) {
+  for (const [asset] of read(file).matchAll(/\/(?:passwork-assets|vendor|code)\/[A-Za-z0-9_./%+-]+\.(?:png|jpe?g|webp|svg|gif|woff2?|js|css)/g)) {
+    assert.ok(exists(`react-dist/${decodeURIComponent(asset.slice(1))}`), `Missing production asset ${asset} referenced by ${file}`);
+  }
+}
 
 console.log('React/Vercel build configuration and production assets OK');

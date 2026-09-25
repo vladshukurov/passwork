@@ -14,10 +14,13 @@ assert.match(navigation, /footer a\[href\^="#"\]/, 'Footer anchors should use th
 assert.match(navigation, /behavior: 'instant'/, 'Long journeys should bypass intermediate pinned scenes');
 assert.match(navigation, /behavior: 'smooth'/, 'The final approach should still scroll smoothly');
 
-// A glint should be perceptible on entry, recur without a long invisible wait,
-// and restart after returning to a section, while still pausing offscreen.
-assert.match(motion, /sweep\.restart\(\)/, 'Dot sweep should restart when its section re-enters view');
-assert.match(motion, /repeatDelay:recurring\?[0-6]:0/, 'Visible dot fields should not wait nine seconds between passes');
+// React's stationary dot fields use a configurable CSS sweep. The archived
+// static page retains its independent one-shot GSAP treatment.
+assert.match(motion, /if \(document\.querySelector\('\.react-site-header'\)\) return \(\) => \{\};/,
+  'The static GSAP sweep must not compete with the React dot controls');
+assert.match(css, /main\.dot-motion-sweep \.dot-glint,[\s\S]*?animation:\s*pw-dot-sweep var\(--dot-duration\) linear infinite/s,
+  'React dots must repeat the configurable diagonal light sweep');
+assert.match(css, /@keyframes pw-dot-sweep/, 'The diagonal sweep needs its own keyframes');
 assert.match(css, /\.react-site-header ~ main \.hero-dots\.dot-glint,[\s\S]*?opacity:\s*\.3[5-9]/,
   'Hero, team and security dots need a readable moving highlight');
 assert.match(css, /\.pricing-plan-glint\.dot-glint\s*\{[^}]*opacity:\s*\.3[5-9]/s,

@@ -18,7 +18,9 @@ assert.ok(peopleAtProgress(243) <= 26);
 assert.match(app, /id="pricing-team-size" type="range" min="0" max="1000" step="1"/);
 assert.doesNotMatch(app, /id="pricing-team-count"/, 'Team size should be read-only; the slider owns this interaction');
 assert.match(app, /className="pricing-plan-pattern"/);
-assert.match(app, /\(now - started\) \/ 720/, 'Price updates should ease over a readable 720 ms');
+assert.match(app, /\(now - started\) \/ duration/, 'Price updates should use their adjustable duration');
+assert.match(app, /function AnimatedPrice\(\{ amount, duration = 650, enabled = true \}\)/,
+  'Price animation should expose its duration and reduced-motion switch');
 assert.match(app, /className="pricing-plan-glint dot-glint"/);
 assert.doesNotMatch(app, /pricing-plan-total">≈/, 'Annual team price must not carry an approximation glyph');
 assert.doesNotMatch(app, /Демонстрационный расчёт\. Итоговая стоимость — по запросу\./);
@@ -30,9 +32,19 @@ assert.match(app, /Офлайн-доступ с контролем админи�
 assert.match(app, /Совместимость с российскими ОС/);
 assert.match(app, /SAML SSO и синхронизация с LDAP/, 'Advanced plan should explain its distinctive integrations');
 assert.match(app, /Сертификация ФСТЭК 4-го уровня доверия/, 'FSTEK plan should explain its certified value');
-assert.match(css, /\.pricing-range-wrap::before\s*\{[^}]*left:\s*13px;\s*right:\s*13px/s);
+assert.match(css, /\.pricing-range-main\s*\{[^}]*width:\s*min\(100%,\s*1180px\)/s,
+  'The pricing control should stay visually compact on wide screens');
+assert.match(css, /\.pricing-range-wrap::before\s*\{[^}]*left:\s*8px;\s*right:\s*8px;[^}]*height:\s*3px/s,
+  'The pricing track should use the slimmer geometry');
+assert.match(css, /linear-gradient\(to right,\s*#f7f9fc 0 var\(--pricing-progress\),\s*#ffffff26 var\(--pricing-progress\) 100%\)/,
+  'The pricing track should use the quiet white treatment');
+assert.match(css, /\.pricing-range-wrap input::\-webkit-slider-thumb\s*\{[^}]*width:\s*16px;\s*height:\s*16px;[^}]*border:\s*2px solid #f7f9fc;[^}]*background:\s*#fff/s,
+  'The pricing thumb should stay compact and white');
+assert.match(css, /input:focus-visible::\-webkit-slider-thumb[^}]*#78a9db/,
+  'Keyboard focus should remain clearly visible without outlining the full track');
 assert.match(css, /\.site-footer[^\n]*:hover/);
 assert.doesNotMatch(css, /\.site-footer[^\n]*:hover[^\n]*var\(--pw-accent\)/);
-assert.match(motion, /repeat:\s*recurring\s*\?\s*-1\s*:\s*0/, 'React dot glints should repeat gently while in view');
+assert.match(motion, /if \(document\.querySelector\('\.react-site-header'\)\) return \(\) => \{\};/,
+  'React should own the featured plan dot sweep without a second GSAP tween');
 
 console.log('Pricing scale, dotted featured card and neutral footer hover OK');

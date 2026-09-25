@@ -36,8 +36,8 @@ assert.doesNotMatch(css, /--security-intro-height:/,
 assert.match(css, /height:\s*calc\(100svh - var\(--security-stage-inset\) - var\(--security-stage-inset\)\)/);
 assert.match(css, /\.security-visual \.protection-card\s*\{[^}]*border-radius:\s*calc\(11\.437 \* var\(--security-unit\)\);/s,
   'Security artwork should have rounded bottom corners');
-assert.match(css, /\.security-story-list\s*\{[^}]*margin-bottom:\s*clamp\(56px, 7svh, 88px\)/s,
-  'Pinned story list should not sit against the bottom edge');
+assert.match(css, /\.security-switcher-copy\s*\{[^}]*padding:\s*clamp\(54px, 7svh, 76px\)\s+clamp\(36px, 4\.2vw, 76px\)\s+clamp\(36px, 4\.2vw, 76px\)/s,
+  'Pinned story list should have bottom breathing room through its container padding');
 assert.match(css, /\.security-visual \.infrastructure-card\s*\{[^}]*left:\s*50%;[^}]*top:\s*50%;[^}]*transform:\s*translate\(-50%, -50%\)/s,
   'The infrastructure illustration should be centered in the stage');
 assert.doesNotMatch(controller, /filter:\s*'blur\(/, 'Chapter transitions should not blur the illustrations');

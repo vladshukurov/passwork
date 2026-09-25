@@ -125,7 +125,7 @@ page = f'''<!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Пассворк — основа вашей информационной безопасности</title>
 <meta name="description" content="Управление корпоративными паролями, доступами и действиями — в одном контуре.">
-<link rel="icon" href="{assets['imgKey02']}" type="image/svg+xml">
+<link rel="icon" href="/passwork-assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/passwork-assets/MuseoSansCyrl-500.otf" as="font" type="font/otf" crossorigin>
 <link rel="stylesheet" href="/code/design-tokens.css"><link rel="stylesheet" href="/passwork-tokens.css"><link rel="stylesheet" href="/attio-buttons.css"><link rel="stylesheet" href="/passwork.css?v={asset_version}"><link rel="stylesheet" href="/passwork-motion.css">
 <link rel="stylesheet" href="/client-logos.css"><link rel="stylesheet" href="/hero-entrance.css"><link rel="stylesheet" href="/hero-scroll.css?v={asset_version}"><link rel="stylesheet" href="/security-switcher.css?v={asset_version}">
@@ -175,7 +175,7 @@ page = f'''<!doctype html>
 <div class="section-intro"><h2 id="security-heading">Российское решение для корпоративной безопасности</h2><div><p>Управляйте корпоративными паролями и доступом сотрудников в единой системе.<br>Размещайте Пассворк на своих серверах.</p>{button(cls='button-dark')}</div></div>
 <div class="security-switcher-grid" role="group" aria-roledescription="карусель" aria-label="Особенности безопасности" tabindex="0">
 <div class="security-switcher-copy">
-<div class="security-copy-heading"><div class="feature-label">Безопасность</div><h3>Защита данных<br>под вашим контролем</h3></div>
+<div class="security-copy-heading"><h3>Защита данных<br>под вашим контролем</h3></div>
 <div class="security-story-list">{security_choices}</div>
 </div>
 <div class="security-switcher-stage">
@@ -183,8 +183,12 @@ page = f'''<!doctype html>
 {security_image('imgIcon1', 'security-stage-background')}
 {security_image('img1PxDots8PxPitch800600Source', 'security-stage-dots')}
 {security_image('img1PxDots8PxPitch800600Source', 'security-stage-dots dot-glint')}
-<div class="security-visual" aria-hidden="true" role="img" aria-label="ФСТЭК России: Пассворк, 4 уровень доверия">
-<div class="security-ui-card security-certificate" aria-hidden="true"><div class="security-ui-header"><span>ФСТЭК России</span>{image('imgShield02')}</div><div class="security-certificate-brand">Пассворк</div><p class="security-ui-subtitle">Корпоративный менеджер паролей</p><div class="security-certificate-level"><b>4</b><span>уровень<br>доверия</span></div><div class="security-ui-footer">Сертификация ФСТЭК России</div></div>
+<div class="security-visual" aria-hidden="true" role="img" aria-label="Сертификация Пассворка ФСТЭК России: 4 уровень доверия, применение в ГИС, КИИ, АСУ ТП и ИСПДн">
+<div class="security-ui-card security-attestation" aria-hidden="true">
+  <div class="security-attestation-top"><span class="security-attestation-mark"><img src="/passwork-assets/passwork-mark.svg" alt=""></span><span>Пассворк</span><span class="security-attestation-status"><i></i>Сертифицирован</span></div>
+  <div class="security-attestation-main"><span class="security-attestation-kicker">ФСТЭК России</span><strong>Подтверждённый уровень защиты</strong><div class="security-attestation-level"><b>4</b><span>уровень<br>доверия</span></div></div>
+  <div class="security-attestation-scope"><span>Применение</span><div><span>ГИС</span><span>КИИ</span><span>АСУ ТП</span><span>ИСПДн</span></div></div>
+</div>
 </div>
 <div class="security-visual" aria-hidden="true" role="img" aria-label="Пассворк, пароли и резервные копии соединены внутри закрытого контура компании">
 <div aria-hidden="true" style="display:contents"><div class="protection-card infrastructure-card">

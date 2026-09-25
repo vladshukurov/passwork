@@ -1,5 +1,4 @@
 import { gsap } from './page-motion.js';
-import { siteMotion } from './site-motion-tokens.js';
 
 export function snapshotScreen(source) {
   const snapshot = source.cloneNode(true);
@@ -13,25 +12,21 @@ export function snapshotScreen(source) {
   return snapshot;
 }
 
-// Hero screens can dissolve into each other because their content stays
-// contained within one stationary product window.
-export function dissolveScreen(outgoing, incoming, onComplete) {
-  const blur = incoming.clientWidth < 700 ? siteMotion.screenBlurCompact : siteMotion.screenBlurDesktop;
+// Screens crossfade inside one stationary product window, without blur or a blank frame.
+export function dissolveScreen(outgoing, incoming, onComplete, duration = .32) {
   const timeline = gsap.timeline({ onComplete: () => {
     outgoing.remove();
     gsap.set(incoming, { clearProps: 'opacity,filter' });
     onComplete?.();
   } });
-  timeline.set(incoming, { opacity: 0, filter: `blur(${blur}px)` }, 0);
-  timeline.fromTo(outgoing, { opacity: 1 }, { opacity: 0, duration: siteMotion.screenFade, ease: 'sine.inOut' }, 0);
-  timeline.to(incoming, { opacity: 1, filter: 'blur(0px)', duration: siteMotion.screenFocus,
-    ease: 'sine.out' }, siteMotion.screenFadeDelay);
+  timeline.set(incoming, { opacity: 0 }, 0);
+  timeline.fromTo(outgoing, { opacity: 1 }, { opacity: 0, duration, ease: 'sine.inOut' }, 0);
+  timeline.to(incoming, { opacity: 1, duration, ease: 'sine.inOut' }, 0);
   return timeline;
 }
 
-// Distinct team dashboards fade through a neutral frame. They must never be
-// legible on top of each other; only the arriving screen gets a 2px focus-in.
-export function fadeThroughScreen(outgoing, incoming, outgoingCaption, incomingCaption, onComplete) {
+// Team dashboard and caption share the same short, stationary crossfade.
+export function fadeThroughScreen(outgoing, incoming, outgoingCaption, incomingCaption, onComplete, duration = .32) {
   const timeline = gsap.timeline({ onComplete: () => {
     outgoing.remove();
     outgoingCaption.remove();
@@ -39,10 +34,9 @@ export function fadeThroughScreen(outgoing, incoming, outgoingCaption, incomingC
     gsap.set(incomingCaption, { clearProps: 'opacity' });
     onComplete?.();
   } });
-  timeline.set(incoming, { opacity: 0, filter: 'blur(2px)' }, 0);
+  timeline.set(incoming, { opacity: 0 }, 0);
   timeline.set(incomingCaption, { opacity: 0 }, 0);
-  timeline.to([outgoing, outgoingCaption], { opacity: 0, duration: .2, ease: 'sine.inOut' }, 0);
-  timeline.to(incoming, { opacity: 1, filter: 'blur(0px)', duration: .46, ease: 'sine.out' }, .2);
-  timeline.to(incomingCaption, { opacity: 1, duration: .38, ease: 'sine.out' }, .24);
+  timeline.to([outgoing, outgoingCaption], { opacity: 0, duration, ease: 'sine.inOut' }, 0);
+  timeline.to([incoming, incomingCaption], { opacity: 1, duration, ease: 'sine.inOut' }, 0);
   return timeline;
 }

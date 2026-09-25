@@ -8,10 +8,11 @@
     "test:stories": "node scripts/test-storybook-inventory.mjs",
     "react:dev": "vite --config react/vite.config.js --host 127.0.0.1 --port 8773",
     "react:build": "vite build --config react/vite.config.js",
-    "react:check": "node scripts/test-react-parity.mjs && node scripts/test-new-section-entrances.mjs",
+    "react:check": "node scripts/test-react-parity.mjs && node scripts/test-new-section-entrances.mjs && node scripts/test-feature-scroll-state.mjs && node scripts/test-feature-frame.mjs",
     "react:verify": "npm run react:check && npm run react:build && node scripts/test-react-deployment.mjs"
   },
   "dependencies": {
+    "lucide-react": "^1.48.0",
     "react": "19.1.1",
     "react-dom": "19.1.1"
   },
