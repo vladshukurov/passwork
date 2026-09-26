@@ -1,0 +1,236 @@
+{
+  "version": "1.0",
+  "name": "Управляемая производственная линия",
+  "artboard": {
+    "width": 600,
+    "height": 600,
+    "padding": 64
+  },
+  "stylePreset": {
+    "background": "#fafafb",
+    "stroke": "#a7b1bf",
+    "secondaryStroke": "#a7b1bf",
+    "strokeWidth": 0.85,
+    "fill": "#f7f8fb",
+    "fillOpacity": 1,
+    "hiddenStroke": "#a7b1bf",
+    "hiddenStrokeOpacity": 0,
+    "hiddenDash": [],
+    "cornerRadius": 0,
+    "topFillOpacity": 1,
+    "leftFillOpacity": 1,
+    "rightFillOpacity": 1
+  },
+  "objects": [
+    {
+      "id": "line-base",
+      "name": "line-base",
+      "type": "slab",
+      "transform": {
+        "x": -180,
+        "y": -70,
+        "z": 0
+      },
+      "geometry": {
+        "width": 400,
+        "depth": 140,
+        "height": 60,
+        "thickness": 18,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "conveyor",
+      "name": "conveyor",
+      "type": "box",
+      "transform": {
+        "x": -150,
+        "y": -38,
+        "z": 18
+      },
+      "geometry": {
+        "width": 345,
+        "depth": 76,
+        "height": 20,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "part-0",
+      "name": "part-0",
+      "type": "box",
+      "transform": {
+        "x": -125,
+        "y": -25,
+        "z": 38
+      },
+      "geometry": {
+        "width": 40,
+        "depth": 50,
+        "height": 35,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "part-1",
+      "name": "part-1",
+      "type": "box",
+      "transform": {
+        "x": -15,
+        "y": -25,
+        "z": 38
+      },
+      "geometry": {
+        "width": 40,
+        "depth": 50,
+        "height": 35,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "part-2",
+      "name": "part-2",
+      "type": "box",
+      "transform": {
+        "x": 95,
+        "y": -25,
+        "z": 38
+      },
+      "geometry": {
+        "width": 40,
+        "depth": 50,
+        "height": 35,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "press-support",
+      "name": "press-support",
+      "type": "box",
+      "transform": {
+        "x": -40,
+        "y": -65,
+        "z": 18
+      },
+      "geometry": {
+        "width": 90,
+        "depth": 18,
+        "height": 142,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "press-head",
+      "name": "press-head",
+      "type": "box",
+      "transform": {
+        "x": -40,
+        "y": -47,
+        "z": 125
+      },
+      "geometry": {
+        "width": 90,
+        "depth": 92,
+        "height": 24,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    }
+  ]
+}

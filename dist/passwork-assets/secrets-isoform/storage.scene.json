@@ -1,0 +1,270 @@
+{
+  "version": "1.0",
+  "name": "Защищённое хранилище",
+  "artboard": {
+    "width": 600,
+    "height": 600,
+    "padding": 64
+  },
+  "stylePreset": {
+    "background": "#fafafb",
+    "stroke": "#a7b1bf",
+    "secondaryStroke": "#a7b1bf",
+    "strokeWidth": 0.85,
+    "fill": "#f7f8fb",
+    "fillOpacity": 1,
+    "hiddenStroke": "#a7b1bf",
+    "hiddenStrokeOpacity": 0,
+    "hiddenDash": [],
+    "cornerRadius": 0,
+    "topFillOpacity": 1,
+    "leftFillOpacity": 1,
+    "rightFillOpacity": 1
+  },
+  "objects": [
+    {
+      "id": "nested-open-corners",
+      "name": "Nested open corners",
+      "type": "group",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "geometry": {
+        "width": 100,
+        "depth": 80,
+        "height": 60,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      },
+      "children": [
+        {
+          "id": "outer-architectural-corner",
+          "name": "Outer architectural corner",
+          "type": "corner",
+          "transform": {
+            "x": -200,
+            "y": -200,
+            "z": 75
+          },
+          "geometry": {
+            "width": 400,
+            "depth": 400,
+            "height": 250,
+            "thickness": 23,
+            "count": 4,
+            "gap": 18,
+            "widthEnd": 36,
+            "heightEnd": 160,
+            "axis": "x",
+            "orientation": "x",
+            "motif": "none",
+            "seed": 1,
+            "opening": "none",
+            "openingWidth": 40,
+            "openingHeight": 52,
+            "openingBottom": 18,
+            "openingOffset": 0,
+            "cornerSide": "back"
+          }
+        },
+        {
+          "id": "middle-architectural-corner",
+          "name": "Middle architectural corner",
+          "type": "corner",
+          "transform": {
+            "x": -145,
+            "y": -145,
+            "z": 70
+          },
+          "geometry": {
+            "width": 290,
+            "depth": 290,
+            "height": 165,
+            "thickness": 22,
+            "count": 4,
+            "gap": 18,
+            "widthEnd": 36,
+            "heightEnd": 160,
+            "axis": "x",
+            "orientation": "x",
+            "motif": "none",
+            "seed": 1,
+            "opening": "none",
+            "openingWidth": 40,
+            "openingHeight": 52,
+            "openingBottom": 18,
+            "openingOffset": 0,
+            "cornerSide": "back"
+          }
+        },
+        {
+          "id": "inner-architectural-corner",
+          "name": "Inner architectural corner",
+          "type": "corner",
+          "transform": {
+            "x": -94,
+            "y": -94,
+            "z": 65
+          },
+          "geometry": {
+            "width": 188,
+            "depth": 188,
+            "height": 120,
+            "thickness": 18,
+            "count": 4,
+            "gap": 18,
+            "widthEnd": 36,
+            "heightEnd": 160,
+            "axis": "x",
+            "orientation": "x",
+            "motif": "none",
+            "seed": 1,
+            "opening": "none",
+            "openingWidth": 40,
+            "openingHeight": 52,
+            "openingBottom": 18,
+            "openingOffset": 0,
+            "cornerSide": "front"
+          }
+        }
+      ]
+    },
+    {
+      "id": "central-cube",
+      "name": "Central cube",
+      "type": "box",
+      "transform": {
+        "x": -62.5,
+        "y": -62.5,
+        "z": 197
+      },
+      "geometry": {
+        "width": 125,
+        "depth": 125,
+        "height": 48,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "foreground-separated-rails",
+      "name": "Foreground separated rails",
+      "type": "group",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "geometry": {
+        "width": 100,
+        "depth": 80,
+        "height": 60,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      },
+      "children": [
+        {
+          "id": "left-front-rail",
+          "name": "Left front rail",
+          "type": "box",
+          "transform": {
+            "x": -172,
+            "y": 147,
+            "z": 53
+          },
+          "geometry": {
+            "width": 284,
+            "depth": 31,
+            "height": 97,
+            "thickness": 12,
+            "count": 4,
+            "gap": 18,
+            "widthEnd": 36,
+            "heightEnd": 160,
+            "axis": "x",
+            "orientation": "x",
+            "motif": "none",
+            "seed": 1,
+            "opening": "none",
+            "openingWidth": 40,
+            "openingHeight": 52,
+            "openingBottom": 18,
+            "openingOffset": 0,
+            "cornerSide": "back"
+          }
+        },
+        {
+          "id": "right-front-rail",
+          "name": "Right front rail",
+          "type": "box",
+          "transform": {
+            "x": 138,
+            "y": -163,
+            "z": 53
+          },
+          "geometry": {
+            "width": 31,
+            "depth": 269,
+            "height": 97,
+            "thickness": 12,
+            "count": 4,
+            "gap": 18,
+            "widthEnd": 36,
+            "heightEnd": 160,
+            "axis": "x",
+            "orientation": "x",
+            "motif": "none",
+            "seed": 1,
+            "opening": "none",
+            "openingWidth": 40,
+            "openingHeight": 52,
+            "openingBottom": 18,
+            "openingOffset": 0,
+            "cornerSide": "back"
+          }
+        }
+      ]
+    }
+  ]
+}

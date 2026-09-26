@@ -1,0 +1,271 @@
+{
+  "version": "1.0",
+  "name": "Резервируемая инфраструктура",
+  "artboard": {
+    "width": 600,
+    "height": 600,
+    "padding": 64
+  },
+  "stylePreset": {
+    "background": "#fafafb",
+    "stroke": "#a7b1bf",
+    "secondaryStroke": "#a7b1bf",
+    "strokeWidth": 0.85,
+    "fill": "#f7f8fb",
+    "fillOpacity": 1,
+    "hiddenStroke": "#a7b1bf",
+    "hiddenStrokeOpacity": 0,
+    "hiddenDash": [],
+    "cornerRadius": 0,
+    "topFillOpacity": 1,
+    "leftFillOpacity": 1,
+    "rightFillOpacity": 1
+  },
+  "objects": [
+    {
+      "id": "network-base",
+      "name": "network-base",
+      "type": "slab",
+      "transform": {
+        "x": -180,
+        "y": -100,
+        "z": 0
+      },
+      "geometry": {
+        "width": 360,
+        "depth": 200,
+        "height": 60,
+        "thickness": 18,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "network-link",
+      "name": "network-link",
+      "type": "wire",
+      "transform": {
+        "x": -80,
+        "y": 0,
+        "z": 25
+      },
+      "geometry": {
+        "width": 100,
+        "depth": 80,
+        "height": 60,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      },
+      "end": {
+        "x": 160,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "id": "server-0-0",
+      "name": "server-0-0",
+      "type": "box",
+      "transform": {
+        "x": -145,
+        "y": -60,
+        "z": 30
+      },
+      "geometry": {
+        "width": 100,
+        "depth": 120,
+        "height": 34,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "server-0-1",
+      "name": "server-0-1",
+      "type": "box",
+      "transform": {
+        "x": -145,
+        "y": -60,
+        "z": 78
+      },
+      "geometry": {
+        "width": 100,
+        "depth": 120,
+        "height": 34,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "server-0-2",
+      "name": "server-0-2",
+      "type": "box",
+      "transform": {
+        "x": -145,
+        "y": -60,
+        "z": 126
+      },
+      "geometry": {
+        "width": 100,
+        "depth": 120,
+        "height": 34,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "server-1-0",
+      "name": "server-1-0",
+      "type": "box",
+      "transform": {
+        "x": 45,
+        "y": -60,
+        "z": 30
+      },
+      "geometry": {
+        "width": 100,
+        "depth": 120,
+        "height": 34,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "server-1-1",
+      "name": "server-1-1",
+      "type": "box",
+      "transform": {
+        "x": 45,
+        "y": -60,
+        "z": 78
+      },
+      "geometry": {
+        "width": 100,
+        "depth": 120,
+        "height": 34,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "server-1-2",
+      "name": "server-1-2",
+      "type": "box",
+      "transform": {
+        "x": 45,
+        "y": -60,
+        "z": 126
+      },
+      "geometry": {
+        "width": 100,
+        "depth": 120,
+        "height": 34,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    }
+  ]
+}

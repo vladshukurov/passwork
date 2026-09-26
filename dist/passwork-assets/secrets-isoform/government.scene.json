@@ -1,0 +1,236 @@
+{
+  "version": "1.0",
+  "name": "Государственная информационная система",
+  "artboard": {
+    "width": 600,
+    "height": 600,
+    "padding": 64
+  },
+  "stylePreset": {
+    "background": "#fafafb",
+    "stroke": "#a7b1bf",
+    "secondaryStroke": "#a7b1bf",
+    "strokeWidth": 0.85,
+    "fill": "#f7f8fb",
+    "fillOpacity": 1,
+    "hiddenStroke": "#a7b1bf",
+    "hiddenStrokeOpacity": 0,
+    "hiddenDash": [],
+    "cornerRadius": 0,
+    "topFillOpacity": 1,
+    "leftFillOpacity": 1,
+    "rightFillOpacity": 1
+  },
+  "objects": [
+    {
+      "id": "civic-foundation",
+      "name": "civic-foundation",
+      "type": "slab",
+      "transform": {
+        "x": -150,
+        "y": -150,
+        "z": 0
+      },
+      "geometry": {
+        "width": 300,
+        "depth": 300,
+        "height": 60,
+        "thickness": 18,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "registry-0-0",
+      "name": "registry-0-0",
+      "type": "box",
+      "transform": {
+        "x": -110,
+        "y": -110,
+        "z": 30
+      },
+      "geometry": {
+        "width": 95,
+        "depth": 95,
+        "height": 46,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "registry-0-1",
+      "name": "registry-0-1",
+      "type": "box",
+      "transform": {
+        "x": -110,
+        "y": 15,
+        "z": 30
+      },
+      "geometry": {
+        "width": 95,
+        "depth": 95,
+        "height": 46,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "registry-1-0",
+      "name": "registry-1-0",
+      "type": "box",
+      "transform": {
+        "x": 15,
+        "y": -110,
+        "z": 30
+      },
+      "geometry": {
+        "width": 95,
+        "depth": 95,
+        "height": 46,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "registry-1-1",
+      "name": "registry-1-1",
+      "type": "box",
+      "transform": {
+        "x": 15,
+        "y": 15,
+        "z": 30
+      },
+      "geometry": {
+        "width": 95,
+        "depth": 95,
+        "height": 46,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "civic-platform",
+      "name": "civic-platform",
+      "type": "slab",
+      "transform": {
+        "x": -112,
+        "y": -112,
+        "z": 96
+      },
+      "geometry": {
+        "width": 224,
+        "depth": 224,
+        "height": 60,
+        "thickness": 18,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "civic-core",
+      "name": "civic-core",
+      "type": "box",
+      "transform": {
+        "x": -54,
+        "y": -54,
+        "z": 136
+      },
+      "geometry": {
+        "width": 108,
+        "depth": 108,
+        "height": 60,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    }
+  ]
+}

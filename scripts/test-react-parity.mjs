@@ -122,15 +122,13 @@ assert.match(secretIllustrations, /data-secret-art="storage"/);
 assert.match(secretIllustrations, /data-secret-art="cicd"/);
 assert.match(secretIllustrations, /data-secret-art="config"/);
 assert.match(secretIllustrations, /data-secret-art="access"/);
-assert.match(secretIllustrations, /M627 290v93/);
-assert.match(secretIllustrations, /M627 427v72/,
-  'The storage arches need both central depth edges from the reference');
-assert.match(secretIllustrations, /secrets-illustration-layer/);
+assert.match(secretIllustrations, /secrets-isoform\/storage.svg\?raw/);
+assert.match(secretIllustrations, /secrets-isoform\/config.svg\?raw/);
 if (pageMotion.includes('function secretsHoverTimeline(svg)')) {
-  assert.match(pageMotion, /svg\.dataset\.secretArt==='storage'/,
+  assert.match(pageMotion, /articulatedTimeline\(svg, svg\.dataset\.secretArt\)/,
     'The storage artwork needs its own object-specific hover sequence');
-  assert.match(pageMotion, /strokeDashoffset:0/,
-    'The CI/CD artwork should animate the signal along its routes');
+  assert.match(pageMotion, /data-object/,
+    'Illustration motion must target complete Isoform objects');
 } else {
   assert.doesNotMatch(pageMotion, /document\.querySelectorAll\('\.secrets-card'\)/,
     'Static release artwork must not mount hover handlers');

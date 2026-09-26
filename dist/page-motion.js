@@ -39,6 +39,7 @@ function mountDotGlints() {
 }
 
 function certificationHoverTimeline(svg,layers) {
+  if(svg.dataset.isoform)return isoformCertificationTimeline(svg);
   const art=svg.dataset.art;
   const faces=[...svg.querySelectorAll('path[fill]')];
   const timeline=gsap.timeline({paused:true,defaults:{overwrite:'auto'}});
@@ -74,6 +75,85 @@ function certificationHoverTimeline(svg,layers) {
 
   return timeline;
 }
+
+
+function isoformCertificationTimeline(svg) {
+  return articulatedTimeline(svg, svg.dataset.art);
+}
+
+// Whole solids unfold along isometric axes. No individual edge morphing.
+function articulatedTimeline(svg, kind) {
+  const timeline=gsap.timeline({paused:true});
+  const object=id=>svg.querySelector(`[data-object="${id}"]`);
+  const move=(id,pose,at=0)=>timeline.to(object(id),{...pose,duration:.85,ease:'power3.inOut'},at);
+  const tint=(id,at)=>timeline.to(object(id).querySelectorAll('path:not([fill="none"])'),
+    {fill:'var(--pw-art-hover-face)',duration:.3},at);
+  switch(kind) {
+    case 'government':
+      move('civic-core',{y:-64});
+      move('civic-platform',{y:-34},.05);
+      [[0,0,0,-15],[0,1,-30,10],[1,0,30,10],[1,1,0,30]].forEach(([a,b,x,y],i)=>
+        move(`registry-${a}-${b}`,{x,y},.1+i*.04));
+      tint('civic-core',.2); break;
+    case 'infrastructure':
+      [0,1].forEach(tower=>[0,1,2].forEach(level=>{
+        // Opposing server drawers extend along the two ground-plane axes.
+        const distance=14+level*12;
+        move(`server-${tower}-${level}`,{x:(tower?1:-1)*distance,y:distance*.577},level*.09+tower*.14);
+      }));
+      tint('server-0-2',.18); tint('server-1-2',.28); break;
+    case 'production':
+      // Raise the housing, then a travelling wave carries parts along the belt.
+      move('press-support',{y:-10}); move('press-head',{y:-28},.06);
+      move('conveyor',{x:8.66,y:5},.1);
+      ['part-0','part-1','part-2'].forEach((id,i)=>{
+        timeline.to(object(id),{y:-20,duration:.3,ease:'sine.out'},.15+i*.13)
+          .to(object(id),{x:26,y:15,duration:.5,ease:'power2.inOut'},.45+i*.13);
+        tint(id,.25+i*.13);
+      }); break;
+    case 'personal':
+      move('cells-boundary',{y:-12});
+      [[0,0,0,-24],[0,1,-32,0],[1,0,32,0],[1,1,0,24]].forEach(([a,b,x,y],i)=>{
+        move(`cell-${a}-${b}`,{x,y},.08+i*.06); tint(`cell-${a}-${b}`,.2+i*.06);
+      }); break;
+    case 'storage':
+      move('outer-architectural-corner',{y:-18});
+      move('middle-architectural-corner',{y:-10},.12);
+      move('inner-architectural-corner',{y:16},.24);
+      move('central-cube',{y:-48},.15);
+      move('left-front-rail',{x:-28,y:16.16},.08);
+      move('right-front-rail',{x:28,y:16.16},.08);
+      tint('central-cube',.2); break;
+    case 'cicd':
+      // Bases stay on the route endpoints while each paired layer unfolds.
+      ['source','left','right'].forEach((id,i)=>{
+        move(`${id}-base`,{y:-10},0);
+        // Compression propagates through the pipeline, then receivers open.
+        timeline.to(object(`${id}-lid`),{y:14,duration:.25,ease:'power2.in'},i*.23)
+          .to(object(`${id}-lid`),{y:-32,duration:.55,ease:'power3.out'},.25+i*.23);
+        tint(`${id}-lid`,.16+i*.23);
+      });
+      move('junction',{y:-10});
+      ['route-source','route-left','route-right'].forEach(id=>move(id,{y:-10})); break;
+    case 'config':
+      // File trays fan out in their own plane, rather than floating vertically.
+      move('config-base',{x:-28,y:-16.16});
+      move('config-middle',{x:12,y:6.93},.09);
+      move('config-top',{x:48,y:27.71},.18);
+      tint('config-top',.22); tint('config-middle',.16); break;
+    case 'access':
+      move('outer-boundary',{y:-14}); move('inner-boundary',{y:-28},.12);
+      move('gate-left',{x:-40,y:23.09},.24);
+      move('gate-right',{x:40,y:23.09},.38);
+      move('protected-core',{y:-20},.5); tint('protected-core',.5); break;
+  }
+  return timeline;
+}
+
+function secretsHoverTimeline(svg) {
+  return articulatedTimeline(svg, svg.dataset.secretArt);
+}
+
 
 export function mountPageMotion() {
   const stopGlints=mountDotGlints();
@@ -165,7 +245,7 @@ export function mountPageMotion() {
       };
       const enter = event => {
         if(event.pointerType==='touch' || main?.classList.contains('motion-certification-off'))return;
-        timeline.timeScale(siteMotion.hoverSpeed*speed()).restart();
+        timeline.timeScale(siteMotion.hoverSpeed*speed()).play();
       };
       const leave = () => timeline.timeScale(siteMotion.returnSpeed*speed()).reverse();
       card.addEventListener('pointerenter',enter);
@@ -180,7 +260,38 @@ export function mountPageMotion() {
         document.removeEventListener('visibilitychange',visibility);
         observer.disconnect();
         timeline.kill();
+        svg.querySelectorAll('[data-motion-packet]').forEach(packet=>packet.remove());
         gsap.killTweensOf([...layers,...svg.querySelectorAll('path')]);
+      });
+    });
+    document.querySelectorAll('.secrets-card').forEach(card => {
+      const svg=card.querySelector('.secrets-illustration');
+      if(!svg)return;
+      const timeline=secretsHoverTimeline(svg);
+      const main=card.closest('main');
+      const speed=()=>{
+        const milliseconds=Number.parseFloat(getComputedStyle(main || card).getPropertyValue('--motion-certification-duration'));
+        return Number.isFinite(milliseconds) && milliseconds>0?320/milliseconds:1;
+      };
+      const enter=event=>{
+        if(event.pointerType==='touch' || main?.classList.contains('motion-certification-off'))return;
+        timeline.timeScale(siteMotion.hoverSpeed*speed()).play();
+      };
+      const leave=()=>timeline.timeScale(siteMotion.returnSpeed*speed()).reverse();
+      const visibility=()=>{if(document.hidden)timeline.pause(0);};
+      const observer=new IntersectionObserver(([entry])=>{if(!entry.isIntersecting)timeline.pause(0);});
+      card.addEventListener('pointerenter',enter);
+      card.addEventListener('pointerleave',leave);
+      observer.observe(card);
+      document.addEventListener('visibilitychange',visibility);
+      cleanups.push(()=>{
+        card.removeEventListener('pointerenter',enter);
+        card.removeEventListener('pointerleave',leave);
+        document.removeEventListener('visibilitychange',visibility);
+        observer.disconnect();
+        timeline.kill();
+        svg.querySelectorAll('[data-motion-packet]').forEach(packet=>packet.remove());
+        gsap.killTweensOf([...svg.querySelectorAll('[data-object], path')]);
       });
     });
     return () => cleanups.forEach(cleanup=>cleanup());

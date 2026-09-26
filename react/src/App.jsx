@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import siteHtml from '../../dist/index.html?raw';
 import Button from './Button.jsx';
 import FeatureDetailPreview from './FeatureDetailPreview.jsx';
+import CertificationIllustration from './CertificationIllustrations.jsx';
 import { AccessIllustration, CicdIllustration, ConfigurationsIllustration, SecureStorageIllustration } from './SecretsIllustrations.jsx';
 import './feature-detail-preview.css';
 import { peopleAtProgress, progressAtPeople } from './pricing-scale.js';
@@ -250,11 +251,10 @@ export function SectionIntro({ headingId, title, description }) {
   </div></div>;
 }
 
-function CertificationCard({ node }) {
-  const artwork = node.querySelector('.certification-art');
+function CertificationCard({ node, index }) {
   const copy = node.querySelector('.certification-copy');
   return <article className="certification-card" role="listitem">
-    <div className={artwork.className} dangerouslySetInnerHTML={{ __html: artwork.innerHTML }} />
+    <div className="certification-art"><CertificationIllustration index={index} /></div>
     <div className="certification-copy"><h3>{tidyCopy(copy.querySelector('h3').textContent)}</h3><p>{tidyCopy(copy.querySelector('p').textContent)}</p></div>
   </article>;
 }
@@ -263,7 +263,7 @@ function Certification() {
   return <section className="certification" id="certification" aria-labelledby="certification-heading">
     <SectionIntro headingId="certification-heading" title={<>Пассворк сертифицирован <br />ФСТЭК России</>}
       description="Сертификат доверия подтверждает соответствие требованиям безопасности регулируемых отраслей. Разворачивается внутри компании, поддерживает ГОСТ-шифрование, исключает передачу данных во внешние сервисы" />
-    <div className="certification-cards" role="list">{[...by('.certification-cards').children].map((node, index) => <CertificationCard key={index} node={node} />)}</div>
+    <div className="certification-cards" role="list">{[...by('.certification-cards').children].map((node, index) => <CertificationCard key={index} index={index} node={node} />)}</div>
   </section>;
 }
 

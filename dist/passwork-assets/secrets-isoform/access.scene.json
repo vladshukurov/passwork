@@ -1,0 +1,176 @@
+{
+  "version": "1.0",
+  "name": "Уровни доступа к секрету",
+  "artboard": {
+    "width": 600,
+    "height": 600,
+    "padding": 64
+  },
+  "stylePreset": {
+    "background": "#fafafb",
+    "stroke": "#a7b1bf",
+    "secondaryStroke": "#a7b1bf",
+    "strokeWidth": 0.85,
+    "fill": "#f7f8fb",
+    "fillOpacity": 1,
+    "hiddenStroke": "#a7b1bf",
+    "hiddenStrokeOpacity": 0,
+    "hiddenDash": [],
+    "cornerRadius": 0,
+    "topFillOpacity": 1,
+    "leftFillOpacity": 1,
+    "rightFillOpacity": 1
+  },
+  "objects": [
+    {
+      "id": "outer-boundary",
+      "name": "outer-boundary",
+      "type": "corner",
+      "transform": {
+        "x": -190,
+        "y": -190,
+        "z": 0
+      },
+      "geometry": {
+        "width": 380,
+        "depth": 380,
+        "height": 128,
+        "thickness": 18,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "inner-boundary",
+      "name": "inner-boundary",
+      "type": "corner",
+      "transform": {
+        "x": -125,
+        "y": -125,
+        "z": 0
+      },
+      "geometry": {
+        "width": 250,
+        "depth": 250,
+        "height": 83,
+        "thickness": 18,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "protected-core",
+      "name": "protected-core",
+      "type": "box",
+      "transform": {
+        "x": -42,
+        "y": -42,
+        "z": 32
+      },
+      "geometry": {
+        "width": 84,
+        "depth": 84,
+        "height": 70,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "gate-left",
+      "name": "gate-left",
+      "type": "box",
+      "transform": {
+        "x": -166,
+        "y": 147,
+        "z": 0
+      },
+      "geometry": {
+        "width": 266,
+        "depth": 22,
+        "height": 72,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "gate-right",
+      "name": "gate-right",
+      "type": "box",
+      "transform": {
+        "x": 147,
+        "y": -166,
+        "z": 0
+      },
+      "geometry": {
+        "width": 22,
+        "depth": 266,
+        "height": 72,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    }
+  ]
+}

@@ -1,0 +1,206 @@
+{
+  "version": "1.0",
+  "name": "Изолированные ячейки персональных данных",
+  "artboard": {
+    "width": 600,
+    "height": 600,
+    "padding": 64
+  },
+  "stylePreset": {
+    "background": "#fafafb",
+    "stroke": "#a7b1bf",
+    "secondaryStroke": "#a7b1bf",
+    "strokeWidth": 0.85,
+    "fill": "#f7f8fb",
+    "fillOpacity": 1,
+    "hiddenStroke": "#a7b1bf",
+    "hiddenStrokeOpacity": 0,
+    "hiddenDash": [],
+    "cornerRadius": 0,
+    "topFillOpacity": 1,
+    "leftFillOpacity": 1,
+    "rightFillOpacity": 1
+  },
+  "objects": [
+    {
+      "id": "cells-base",
+      "name": "cells-base",
+      "type": "slab",
+      "transform": {
+        "x": -135,
+        "y": -110,
+        "z": 0
+      },
+      "geometry": {
+        "width": 270,
+        "depth": 270,
+        "height": 60,
+        "thickness": 18,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "cells-boundary",
+      "name": "cells-boundary",
+      "type": "corner",
+      "transform": {
+        "x": -135,
+        "y": -110,
+        "z": 18
+      },
+      "geometry": {
+        "width": 270,
+        "depth": 270,
+        "height": 105,
+        "thickness": 18,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "cell-0-0",
+      "name": "cell-0-0",
+      "type": "box",
+      "transform": {
+        "x": -95,
+        "y": -65,
+        "z": 18
+      },
+      "geometry": {
+        "width": 85,
+        "depth": 80,
+        "height": 58,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "cell-0-1",
+      "name": "cell-0-1",
+      "type": "box",
+      "transform": {
+        "x": -95,
+        "y": 55,
+        "z": 18
+      },
+      "geometry": {
+        "width": 85,
+        "depth": 80,
+        "height": 58,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "cell-1-0",
+      "name": "cell-1-0",
+      "type": "box",
+      "transform": {
+        "x": 25,
+        "y": -65,
+        "z": 18
+      },
+      "geometry": {
+        "width": 85,
+        "depth": 80,
+        "height": 58,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "cell-1-1",
+      "name": "cell-1-1",
+      "type": "box",
+      "transform": {
+        "x": 25,
+        "y": 55,
+        "z": 18
+      },
+      "geometry": {
+        "width": 85,
+        "depth": 80,
+        "height": 58,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    }
+  ]
+}

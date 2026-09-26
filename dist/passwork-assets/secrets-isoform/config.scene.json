@@ -1,0 +1,146 @@
+{
+  "version": "1.0",
+  "name": "Файлы конфигурации и параметры",
+  "artboard": {
+    "width": 600,
+    "height": 600,
+    "padding": 64
+  },
+  "stylePreset": {
+    "background": "#fafafb",
+    "stroke": "#a7b1bf",
+    "secondaryStroke": "#a7b1bf",
+    "strokeWidth": 0.85,
+    "fill": "#f7f8fb",
+    "fillOpacity": 1,
+    "hiddenStroke": "#a7b1bf",
+    "hiddenStrokeOpacity": 0,
+    "hiddenDash": [],
+    "cornerRadius": 0,
+    "topFillOpacity": 1,
+    "leftFillOpacity": 1,
+    "rightFillOpacity": 1
+  },
+  "objects": [
+    {
+      "id": "foundation",
+      "name": "foundation",
+      "type": "slab",
+      "transform": {
+        "x": -125,
+        "y": -100,
+        "z": 0
+      },
+      "geometry": {
+        "width": 250,
+        "depth": 200,
+        "height": 60,
+        "thickness": 18,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "config-base",
+      "name": "config-base",
+      "type": "slab",
+      "transform": {
+        "x": -100,
+        "y": -78,
+        "z": 30
+      },
+      "geometry": {
+        "width": 200,
+        "depth": 156,
+        "height": 60,
+        "thickness": 18,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "slots",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "config-middle",
+      "name": "config-middle",
+      "type": "slab",
+      "transform": {
+        "x": -100,
+        "y": -78,
+        "z": 72
+      },
+      "geometry": {
+        "width": 200,
+        "depth": 156,
+        "height": 60,
+        "thickness": 18,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "slots",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "config-top",
+      "name": "config-top",
+      "type": "slab",
+      "transform": {
+        "x": -100,
+        "y": -78,
+        "z": 114
+      },
+      "geometry": {
+        "width": 200,
+        "depth": 156,
+        "height": 60,
+        "thickness": 18,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "slots",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    }
+  ]
+}

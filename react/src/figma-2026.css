@@ -152,6 +152,8 @@ main :is(p, li) { text-wrap: pretty; }
 .certification-copy h3 { font: 500 20px/26px var(--pw-font); letter-spacing: -.17px; }
 .certification-copy p { font: 500 16px/20px var(--pw-font); letter-spacing: -.348px; }
 .certification-art :is(img, .certification-svg) { height: 200px; max-width: 62%; margin-top: 46px; }
+.certification-svg[data-isoform] { max-width: 76%; }
+.certification-svg[data-isoform] path[fill="none"] { fill: none; }
 .certification-art-wide :is(img, .certification-svg) { height: 176px; max-width: 64%; margin-top: 71px; }
 .teams-heading { padding: 152px 24px 56px; }
 .team-tabs { padding-block: 20px; }
@@ -160,6 +162,7 @@ main :is(p, li) { text-wrap: pretty; }
 
 .pricing {
   background: #151619;
+  overflow: clip;
   color: #fff;
   scroll-margin-top: 85px;
 }
@@ -262,6 +265,12 @@ main :is(p, li) { text-wrap: pretty; }
 .pricing-plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .pricing-plan { position: relative; min-width: 0; min-height: 0; padding-bottom: 30px; overflow: hidden; }
 .pricing-plan + .pricing-plan { border-left: 1px solid #ffffff1f; }
+/* Share content rows so longer descriptions cannot shift prices and CTAs. */
+@media (min-width: 801px) {
+  @supports (grid-template-rows: subgrid) {
+    .pricing-plan { display: grid; grid-row: span 3; grid-template-rows: subgrid; }
+  }
+}
 .pricing-plan-featured {
   background: #295585;
 }
@@ -890,8 +899,8 @@ main.motion-certification-on .certification-art::before { position: absolute; in
 .main-features-chapter:last-child { border-bottom: 0; }
 .main-features-chapter-heading { padding: clamp(30px, 3vw, 50px); background: var(--pw-light-page); }
 .main-features-chapter-heading h3 { max-width: 760px; margin: 0; color: var(--pw-text); font: 500 clamp(24px, 2.05vw, 34px)/1.2 var(--pw-font); letter-spacing: -.035em; }
-.main-features-art { position: relative; display: grid; place-items: center; width: 100%; aspect-ratio: 965 / 612; overflow: hidden; border-block: 1px solid var(--pw-border); background: linear-gradient(150.16deg, #d4e3ff 25.868%, #266df0 97.099%); }
-.main-features-art::after { position: absolute; inset: 0; background: url('/passwork-assets/feature-figma-pattern.svg') left center / 109.7% auto no-repeat; content: ''; pointer-events: none; }
+.main-features-art { position: relative; display: grid; place-items: center; width: 100%; aspect-ratio: 965 / 612; overflow: hidden; border-block: 1px solid var(--pw-border); background: linear-gradient(145deg, #e0eaff 0%, #ccddf9 55%, #9dbceb 100%); }
+.main-features-art::after { position: absolute; inset: 0; background-image: radial-gradient(circle, #7398ca 0.8px, transparent 1px); background-size: 16px 16px; background-position: 8px 8px; opacity: .65; content: ''; pointer-events: none; }
 .main-features-screen { position: relative; z-index: 1; display: block; width: 82.9%; max-height: 88%; height: auto; aspect-ratio: 8 / 5; object-fit: cover; border-radius: 8px; }
 .main-features-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--pw-border); }
 .main-features-detail { display: flex; flex-direction: column; gap: 24px; min-width: 0; min-height: 420px; padding: clamp(18px, 1.67vw, 32px); background: var(--pw-light-page); }
