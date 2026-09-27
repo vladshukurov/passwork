@@ -42,9 +42,13 @@ const ring = (id: string, r: number, height: number) => [
   box(`${id}-front-x`, -r + T, r - T, T, 2 * r - T, T, height),
   box(`${id}-front-y`, r - T, -r + T, T, T, 2 * r - 2 * T, height),
 ];
+// Must match the cap offsets in src/motion/isoform-motion.js.
+const TANK_GROWTH = [60, 36, 12];
 // Alternate geometry the page morphs to on hover (same topology as at rest).
 const morphs: Record<string, Record<string, any>> = {
   storage: { 'drawer-2': box('drawer-2', -78, 90, T + 106, 156, 64, 32) },
+  production: Object.fromEntries([-110, 0, 110].map((cx, i) =>
+    [`tank-${i}`, box(`tank-${i}`, cx - 40, -40, T + 12, 80, 80, 110 + TANK_GROWTH[i])])),
 };
 // Layers float with one shared gap; this is the series' depth device.
 const G = 10;
@@ -71,16 +75,13 @@ const scenes: Record<string, { name: string; objects: any[]; order?: string[] }>
     ]),
   ], order: ['server-0-0', 'server-0-1', 'server-0-2', 'server-cap-0', 'server-1-0', 'server-1-1', 'server-1-2', 'server-cap-1'] },
   production: { name: 'Технологическая установка', objects: [
-    // Tanks with floating caps on a double frame, joined by one overhead pipe.
+    // Three tanks with floating caps on a double frame; on hover the tanks
+    // grow (see morphs) and the caps ride up with them.
     plate('frame-base', -180, -70, T - 18, 360, 140, 'none', 8),
     plate('frame', -170, -60, T, 340, 120, 'none', 12),
     ...[-110, 0, 110].map((cx, i) => box(`tank-${i}`, cx - 40, -40, T + 12, 80, 80, 110)),
     ...[-110, 0, 110].map((cx, i) => plate(`tank-cap-${i}`, cx - 40, -40, T + 122 + G, 80, 80, 'none', 8)),
-    ...[-110, 0, 110].map((cx, i) => box(`riser-${i}`, cx - 8, -8, T + 140, 16, 16, 18)),
-    box('pipe', -118, -8, T + 158, 236, 16, 14),
-    // Couplings that run along the pipe on hover: the process flow.
-    ...[0, 1, 2].map(i => box(`flow-${i}`, -110 + i * 80, -12, T + 155, 20, 24, 20)),
-  ], order: ['frame-base', 'frame', 'tank-0', 'tank-cap-0', 'tank-1', 'tank-cap-1', 'tank-2', 'tank-cap-2', 'riser-0', 'riser-1', 'riser-2', 'pipe', 'flow-0', 'flow-1', 'flow-2'] },
+  ], order: ['frame-base', 'frame', 'tank-0', 'tank-cap-0', 'tank-1', 'tank-cap-1', 'tank-2', 'tank-cap-2'] },
   personal: { name: 'Изолированные персональные данные', objects: [
     // A record with a floating cap inside two isolation rings.
     ...ring('outer', 120, 34), ...ring('inner', 78, 60),

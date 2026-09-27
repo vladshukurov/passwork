@@ -8,7 +8,7 @@ const iso = ([x = 0, y = 0, z = 0]) => ({x: (x - y) * COS, y: (x + y) * SIN - z}
 
 // Per scene: how its pieces move on hover. Each piece is
 // [object id, [x, y, z] offset, optional {delay, duration, ease}]; anything
-// not listed rests.
+// not listed rests. morphDelay staggers outlines that change shape.
 // Mechanisms (drawers, switches, flow) use an in-out curve like a real part;
 // layered diagrams open with the site's ease-out.
 const mechanical = {ease: 'power2.inOut', enter: .55, leave: .45};
@@ -24,10 +24,10 @@ export const scenes = {
   // Servers slide out of both racks in a cascade, like drawers on rails.
   infrastructure: {...mechanical, pieces: [0, 1].flatMap(tower => [0, 1, 2].map(level =>
     [`server-${tower}-${level}`, [0, [20, 42, 30][level] + tower * 10, 0], {delay: tower * .1 + (2 - level) * .06}]))},
-  // While hovered, couplings run along the pipe in a seamless loop: the first
-  // fades in at the inlet, the last fades out at the outlet.
-  production: {ease: 'power2.out', enter: .5, leave: .4, pieces: [0, 1, 2].map(i =>
-    [`flow-${i}`, [80, 0, 0], {loop: .9, fade: i === 0 ? 'in' : i === 2 ? 'out' : null}])},
+  // Tanks grow in a wave (their outlines morph, see data-open); caps ride on top.
+  production: {...mechanical, enter: .6, pieces: [0, 1, 2].map(i =>
+    [`tank-cap-${i}`, [0, 0, [60, 36, 12][i]], {delay: i * .08}]),
+    morphDelay: {'tank-0': 0, 'tank-1': .08, 'tank-2': .16}},
   // Isolation walls slide back from the record; its cap lifts.
   personal: {...mechanical, pieces: [
     ...[['back-x', [0, -1]], ['back-y', [-1, 0]], ['front-x', [0, 1]], ['front-y', [1, 0]]].flatMap(([wall, [x, y]]) => [
@@ -66,15 +66,17 @@ function pieces(svg) {
   return sceneOf(svg).pieces.map(([id, offset, options = {}]) => {
     const node = svg.querySelector(`[data-object="${id}"]`);
     return node && {node, delay: options.delay ?? 0, duration: options.duration, ease: options.ease,
-      loop: options.loop, fade: options.fade, ...iso(offset)};
+      ...iso(offset)};
   }).filter(Boolean);
 }
 
 // Faces with an alternate outline (data-open) change shape instead of moving,
 // e.g. a drawer that grows out of its cabinet.
 function morphs(svg) {
+  const delays = sceneOf(svg).morphDelay ?? {};
   return [...svg.querySelectorAll('path[data-open]')].map(path =>
-    ({path, rest: path.getAttribute('d'), open: path.dataset.open}));
+    ({path, rest: path.getAttribute('d'), open: path.dataset.open,
+      delay: delays[path.closest('[data-object]')?.dataset.object] ?? 0}));
 }
 
 // Hover: each scene moves with its own mechanism; closing never replays delays.
@@ -83,23 +85,16 @@ export function mountArtHover(gsap, svg) {
   const parts = pieces(svg);
   const shapes = morphs(svg);
   const open = () => {
-    parts.forEach(part => {
-      if (!part.loop) return gsap.to(part.node, {x: part.x, y: part.y, duration: part.duration ?? enter,
-        ease: part.ease ?? ease, delay: part.delay, overwrite: true});
-      // Continuous motion: restart from rest and repeat until the pointer leaves.
-      gsap.set(part.node, {x: 0, y: 0, opacity: 1, overwrite: true});
-      gsap.to(part.node, {x: part.x, y: part.y, duration: part.loop, ease: 'none', repeat: -1});
-      if (part.fade) gsap.fromTo(part.node, {opacity: part.fade === 'in' ? 0 : 1},
-        {opacity: part.fade === 'in' ? 1 : 0, duration: part.loop, ease: 'none', repeat: -1});
-    });
-    shapes.forEach(({path, open: d}) => gsap.to(path, {attr: {d}, duration: enter, ease, overwrite: true}));
+    parts.forEach(part => gsap.to(part.node, {x: part.x, y: part.y, duration: part.duration ?? enter,
+      ease: part.ease ?? ease, delay: part.delay, overwrite: true}));
+    shapes.forEach(({path, open: d, delay}) => gsap.to(path, {attr: {d}, duration: enter, ease, delay, overwrite: true}));
   };
   const close = () => {
-    parts.forEach(({node}) => gsap.to(node, {x: 0, y: 0, opacity: 1, duration: leave, ease, overwrite: true}));
+    parts.forEach(({node}) => gsap.to(node, {x: 0, y: 0, duration: leave, ease, overwrite: true}));
     shapes.forEach(({path, rest: d}) => gsap.to(path, {attr: {d}, duration: leave, ease, overwrite: true}));
   };
   const reset = () => {
-    parts.forEach(({node}) => gsap.set(node, {x: 0, y: 0, opacity: 1, overwrite: true}));
+    parts.forEach(({node}) => gsap.set(node, {x: 0, y: 0, overwrite: true}));
     shapes.forEach(({path, rest}) => gsap.set(path, {attr: {d: rest}, overwrite: true}));
   };
   return {open, close, reset, nodes: [...parts.map(part => part.node), ...shapes.map(shape => shape.path)]};
