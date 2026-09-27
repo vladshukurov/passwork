@@ -1,0 +1,6 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "passwork", "runtimeExecutable": "npm", "runtimeArgs": ["run", "dev"], "port": 8773, "url": "http://127.0.0.1:8773" }
+  ]
+}

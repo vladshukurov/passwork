@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { poses } from '../dist/isoform-motion.js';
+import { poses } from '../src/motion/isoform-motion.js';
 
 // Every animated piece must exist in its exported scene, and every face must
 // be addressable so the page can shade it through CSS tokens.
 for (const [name, pose] of Object.entries(poses)) {
-  const svg = readFileSync(`dist/passwork-assets/secrets-isoform/${name}.svg`, 'utf8');
-  const scene = JSON.parse(readFileSync(`dist/passwork-assets/secrets-isoform/${name}.scene.json`, 'utf8'));
+  const svg = readFileSync(`src/art/isoform/${name}.svg`, 'utf8');
+  const scene = JSON.parse(readFileSync(`src/art/isoform/${name}.scene.json`, 'utf8'));
   assert.ok(scene.objects.length, `${name}: editable scene is empty`);
   assert.doesNotMatch(svg, /<image|<mask|NaN|undefined/);
   const ids = [...svg.matchAll(/data-object="([^"]+)"/g)].map(match => match[1]);

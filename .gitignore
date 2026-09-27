@@ -1,15 +1,9 @@
 .DS_Store
-__pycache__/
-*.py[cod]
-.venv/
-venv/
 node_modules/
-storybook-static/
-react-dist/
 .env
 .env.*
 !.env.example
 *.log
 .playwright-mcp/
-_site/
 .vercel/
+dist/
