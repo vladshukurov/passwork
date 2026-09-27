@@ -383,16 +383,76 @@
       }
     },
     {
-      "id": "flow",
-      "name": "flow",
+      "id": "flow-0",
+      "name": "flow-0",
       "type": "box",
       "transform": {
-        "x": -124,
+        "x": -110,
         "y": -12,
         "z": 169
       },
       "geometry": {
-        "width": 28,
+        "width": 20,
+        "depth": 24,
+        "height": 20,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "flow-1",
+      "name": "flow-1",
+      "type": "box",
+      "transform": {
+        "x": -30,
+        "y": -12,
+        "z": 169
+      },
+      "geometry": {
+        "width": 20,
+        "depth": 24,
+        "height": 20,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "flow-2",
+      "name": "flow-2",
+      "type": "box",
+      "transform": {
+        "x": 50,
+        "y": -12,
+        "z": 169
+      },
+      "geometry": {
+        "width": 20,
         "depth": 24,
         "height": 20,
         "thickness": 12,

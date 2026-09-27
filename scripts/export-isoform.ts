@@ -78,9 +78,9 @@ const scenes: Record<string, { name: string; objects: any[]; order?: string[] }>
     ...[-110, 0, 110].map((cx, i) => plate(`tank-cap-${i}`, cx - 40, -40, T + 122 + G, 80, 80, 'none', 8)),
     ...[-110, 0, 110].map((cx, i) => box(`riser-${i}`, cx - 8, -8, T + 140, 16, 16, 18)),
     box('pipe', -118, -8, T + 158, 236, 16, 14),
-    // A coupling that travels along the pipe on hover: the process flow.
-    box('flow', -124, -12, T + 155, 28, 24, 20),
-  ], order: ['frame-base', 'frame', 'tank-0', 'tank-cap-0', 'tank-1', 'tank-cap-1', 'tank-2', 'tank-cap-2', 'riser-0', 'riser-1', 'riser-2', 'pipe', 'flow'] },
+    // Couplings that run along the pipe on hover: the process flow.
+    ...[0, 1, 2].map(i => box(`flow-${i}`, -110 + i * 80, -12, T + 155, 20, 24, 20)),
+  ], order: ['frame-base', 'frame', 'tank-0', 'tank-cap-0', 'tank-1', 'tank-cap-1', 'tank-2', 'tank-cap-2', 'riser-0', 'riser-1', 'riser-2', 'pipe', 'flow-0', 'flow-1', 'flow-2'] },
   personal: { name: 'Изолированные персональные данные', objects: [
     // A record with a floating cap inside two isolation rings.
     ...ring('outer', 120, 34), ...ring('inner', 78, 60),
