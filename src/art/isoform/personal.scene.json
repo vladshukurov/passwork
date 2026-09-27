@@ -274,8 +274,38 @@
       "geometry": {
         "width": 68,
         "depth": 68,
-        "height": 92,
+        "height": 78,
         "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "record-cap",
+      "name": "record-cap",
+      "type": "slab",
+      "transform": {
+        "x": -40,
+        "y": -40,
+        "z": 102
+      },
+      "geometry": {
+        "width": 80,
+        "depth": 80,
+        "height": 60,
+        "thickness": 8,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,

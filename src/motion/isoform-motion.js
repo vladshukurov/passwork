@@ -8,40 +8,47 @@ const iso = ([x = 0, y = 0, z = 0]) => ({x: (x - y) * COS, y: (x + y) * SIN - z}
 
 // Exploded view per scene: [object id, [x, y, z]]. Anything not listed rests.
 export const poses = {
+  // Every scene opens by pulling its floating layers further apart.
   government: [
-    ['civic-step', [0, 0, 6]],
     ...[0, 1].flatMap(col => [0, 1].map(row =>
-      [`registry-${col}-${row}`, [col ? 18 : -18, row ? 18 : -18, 14]])),
-    ['civic-platform', [0, 0, 34]],
-    ['civic-core', [0, 0, 64]],
+      [`registry-${col}-${row}`, [col ? 14 : -14, row ? 14 : -14, 14]])),
+    ['civic-platform', [0, 0, 28]],
+    ['civic-core', [0, 0, 44]],
+    ['civic-cap', [0, 0, 62]],
   ],
   infrastructure: [0, 1].flatMap(tower => [
-    ...[0, 1, 2].map(level => [`server-${tower}-${level}`, [tower ? 14 : -14, 0, level * 12]]),
-    [`server-cap-${tower}`, [tower ? 14 : -14, 0, 52]],
+    ...[0, 1, 2].map(level => [`server-${tower}-${level}`, [tower ? 12 : -12, 0, level * 10]]),
+    [`server-cap-${tower}`, [tower ? 12 : -12, 0, 42]],
   ]),
-  // Exploded upwards in layers: tanks, risers, then the pipe.
   production: [
-    ...[0, 1, 2].map(i => [`tank-${i}`, [0, 0, 10]]),
-    ...[0, 1, 2].map(i => [`riser-${i}`, [0, 0, 24]]),
-    ['pipe', [0, 0, 38]],
+    ...[0, 1, 2].map(i => [`tank-${i}`, [0, 0, 8]]),
+    ...[0, 1, 2].map(i => [`tank-cap-${i}`, [0, 0, 20]]),
+    ...[0, 1, 2].map(i => [`riser-${i}`, [0, 0, 30]]),
+    ['pipe', [0, 0, 40]],
   ],
-  // Isolation rings lift away from the record, outer ring highest.
+  // Isolation walls step back from the record; its cap lifts.
   personal: [
-    ...['back-x', 'back-y', 'front-x', 'front-y'].map(wall => [`inner-${wall}`, [0, 0, 22]]),
-    ...['back-x', 'back-y', 'front-x', 'front-y'].map(wall => [`outer-${wall}`, [0, 0, 40]]),
+    ...[['back-x', [0, -1]], ['back-y', [-1, 0]], ['front-x', [0, 1]], ['front-y', [1, 0]]].flatMap(([wall, [x, y]]) => [
+      [`inner-${wall}`, [x * 12, y * 12, 0]],
+      [`outer-${wall}`, [x * 24, y * 24, 0]],
+    ]),
+    ['record-cap', [0, 0, 24]],
   ],
-  // The top drawer slides out: its geometry morphs (see data-open in the SVG).
-  storage: [],
+  // The top drawer slides out through its morph; the lid lifts a little.
+  storage: [['safe-lid', [0, 0, 18]]],
   cicd: [
-    ['source-lid', [0, 0, 34]],
-    ['left-lid', [0, 0, 30]],
-    ['right-lid', [0, 0, 30]],
+    ['source-lid', [0, 0, 28]],
+    ['left-lid', [0, 0, 24]],
+    ['right-lid', [0, 0, 24]],
   ],
-  // Switches flip to their opposite position.
-  config: [['switch-0', [0, 65, 0]], ['switch-1', [0, -65, 0]], ['switch-2', [0, 65, 0]]],
-  // The centre permission rises furthest; neighbours follow in rings.
+  // Switches flip to their opposite position; the deck lifts off the body.
+  config: [
+    ...[0, 1, 2].flatMap(i => [[`switch-base-${i}`, [0, 0, 8]], [`switch-rail-${i}`, [0, 0, 8]]]),
+    ['switch-0', [0, 70, 8]], ['switch-1', [0, -70, 8]], ['switch-2', [0, 70, 8]],
+  ],
+  // Blocks rise to new levels; the centre permission rises furthest.
   access: [0, 1, 2].flatMap(col => [0, 1, 2].map(row =>
-    [`cell-${col}-${row}`, [0, 0, [[8, 22, 8], [22, 40, 22], [8, 22, 8]][col][row]]])),
+    [`cell-${col}-${row}`, [0, 0, [[8, 20, 8], [20, 34, 20], [8, 20, 8]][col][row]]])),
 };
 
 function pieces(svg) {

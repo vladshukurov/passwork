@@ -23,9 +23,9 @@
   },
   "objects": [
     {
-      "id": "cell-0-0",
-      "name": "cell-0-0",
-      "type": "box",
+      "id": "tile-0-0",
+      "name": "tile-0-0",
+      "type": "slab",
       "transform": {
         "x": -130,
         "y": -130,
@@ -34,8 +34,68 @@
       "geometry": {
         "width": 80,
         "depth": 80,
-        "height": 48,
+        "height": 60,
+        "thickness": 8,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "cell-0-0",
+      "name": "cell-0-0",
+      "type": "box",
+      "transform": {
+        "x": -122,
+        "y": -122,
+        "z": 32
+      },
+      "geometry": {
+        "width": 64,
+        "depth": 64,
+        "height": 44,
         "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "tile-0-1",
+      "name": "tile-0-1",
+      "type": "slab",
+      "transform": {
+        "x": -130,
+        "y": -40,
+        "z": 14
+      },
+      "geometry": {
+        "width": 80,
+        "depth": 80,
+        "height": 60,
+        "thickness": 8,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,
@@ -57,15 +117,45 @@
       "name": "cell-0-1",
       "type": "box",
       "transform": {
+        "x": -122,
+        "y": -32,
+        "z": 32
+      },
+      "geometry": {
+        "width": 64,
+        "depth": 64,
+        "height": 28,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "tile-0-2",
+      "name": "tile-0-2",
+      "type": "slab",
+      "transform": {
         "x": -130,
-        "y": -40,
+        "y": 50,
         "z": 14
       },
       "geometry": {
         "width": 80,
         "depth": 80,
-        "height": 32,
-        "thickness": 12,
+        "height": 60,
+        "thickness": 8,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,
@@ -87,15 +177,45 @@
       "name": "cell-0-2",
       "type": "box",
       "transform": {
-        "x": -130,
-        "y": 50,
+        "x": -122,
+        "y": 58,
+        "z": 32
+      },
+      "geometry": {
+        "width": 64,
+        "depth": 64,
+        "height": 14,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "tile-1-0",
+      "name": "tile-1-0",
+      "type": "slab",
+      "transform": {
+        "x": -40,
+        "y": -130,
         "z": 14
       },
       "geometry": {
         "width": 80,
         "depth": 80,
-        "height": 16,
-        "thickness": 12,
+        "height": 60,
+        "thickness": 8,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,
@@ -117,15 +237,45 @@
       "name": "cell-1-0",
       "type": "box",
       "transform": {
+        "x": -32,
+        "y": -122,
+        "z": 32
+      },
+      "geometry": {
+        "width": 64,
+        "depth": 64,
+        "height": 28,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "tile-1-1",
+      "name": "tile-1-1",
+      "type": "slab",
+      "transform": {
         "x": -40,
-        "y": -130,
+        "y": -40,
         "z": 14
       },
       "geometry": {
         "width": 80,
         "depth": 80,
-        "height": 32,
-        "thickness": 12,
+        "height": 60,
+        "thickness": 8,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,
@@ -147,15 +297,45 @@
       "name": "cell-1-1",
       "type": "box",
       "transform": {
+        "x": -32,
+        "y": -32,
+        "z": 32
+      },
+      "geometry": {
+        "width": 64,
+        "depth": 64,
+        "height": 14,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "tile-1-2",
+      "name": "tile-1-2",
+      "type": "slab",
+      "transform": {
         "x": -40,
-        "y": -40,
+        "y": 50,
         "z": 14
       },
       "geometry": {
         "width": 80,
         "depth": 80,
-        "height": 16,
-        "thickness": 12,
+        "height": 60,
+        "thickness": 8,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,
@@ -177,15 +357,45 @@
       "name": "cell-1-2",
       "type": "box",
       "transform": {
-        "x": -40,
-        "y": 50,
+        "x": -32,
+        "y": 58,
+        "z": 32
+      },
+      "geometry": {
+        "width": 64,
+        "depth": 64,
+        "height": 28,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "tile-2-0",
+      "name": "tile-2-0",
+      "type": "slab",
+      "transform": {
+        "x": 50,
+        "y": -130,
         "z": 14
       },
       "geometry": {
         "width": 80,
         "depth": 80,
-        "height": 32,
-        "thickness": 12,
+        "height": 60,
+        "thickness": 8,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,
@@ -207,15 +417,45 @@
       "name": "cell-2-0",
       "type": "box",
       "transform": {
+        "x": 58,
+        "y": -122,
+        "z": 32
+      },
+      "geometry": {
+        "width": 64,
+        "depth": 64,
+        "height": 14,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "tile-2-1",
+      "name": "tile-2-1",
+      "type": "slab",
+      "transform": {
         "x": 50,
-        "y": -130,
+        "y": -40,
         "z": 14
       },
       "geometry": {
         "width": 80,
         "depth": 80,
-        "height": 16,
-        "thickness": 12,
+        "height": 60,
+        "thickness": 8,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,
@@ -237,15 +477,45 @@
       "name": "cell-2-1",
       "type": "box",
       "transform": {
+        "x": 58,
+        "y": -32,
+        "z": 32
+      },
+      "geometry": {
+        "width": 64,
+        "depth": 64,
+        "height": 28,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "tile-2-2",
+      "name": "tile-2-2",
+      "type": "slab",
+      "transform": {
         "x": 50,
-        "y": -40,
+        "y": 50,
         "z": 14
       },
       "geometry": {
         "width": 80,
         "depth": 80,
-        "height": 32,
-        "thickness": 12,
+        "height": 60,
+        "thickness": 8,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,
@@ -267,14 +537,14 @@
       "name": "cell-2-2",
       "type": "box",
       "transform": {
-        "x": 50,
-        "y": 50,
-        "z": 14
+        "x": 58,
+        "y": 58,
+        "z": 32
       },
       "geometry": {
-        "width": 80,
-        "depth": 80,
-        "height": 16,
+        "width": 64,
+        "depth": 64,
+        "height": 14,
         "thickness": 12,
         "count": 4,
         "gap": 18,

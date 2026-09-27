@@ -44,47 +44,55 @@ const ring = (id: string, r: number, height: number) => [
 ];
 // Alternate geometry the page morphs to on hover (same topology as at rest).
 const morphs: Record<string, Record<string, any>> = {
-  storage: { 'drawer-2': box('drawer-2', -78, 90, T + 92, 156, 64, 34) },
+  storage: { 'drawer-2': box('drawer-2', -78, 90, T + 106, 156, 64, 32) },
 };
+// Layers float with one shared gap; this is the series' depth device.
+const G = 10;
 const lidded = (id: string, x: number, y: number, size: number, height: number) => [
   box(`${id}-base`, x, y, T, size, size, height),
-  plate(`${id}-lid`, x, y, T + height, size, size, 'none', 12),
+  plate(`${id}-lid`, x, y, T + height + G, size, size, 'none', 10),
 ];
 
 const scenes: Record<string, { name: string; objects: any[]; order?: string[] }> = {
   government: { name: 'Государственная информационная система', objects: [
-    plate('civic-step', -120, -120, T, 240, 240, 'none', T),
+    // Four floating tiers: base, registries, platform, core with its cap.
+    plate('civic-base', -125, -125, T + 20, 250, 250, 'none', 10),
     ...[-100, 10].flatMap((x, col) => [-100, 10].map((y, row) =>
-      box(`registry-${col}-${row}`, x, y, 2 * T, 90, 90, 36))),
-    plate('civic-platform', -110, -110, 64, 220, 220, 'none', T),
-    box('civic-core', -50, -50, 78, 100, 100, 56),
-  ], order: ['civic-step', 'registry-0-0', 'registry-0-1', 'registry-1-0', 'registry-1-1', 'civic-platform', 'civic-core'] },
+      box(`registry-${col}-${row}`, x, y, T + 30, 90, 90, 34))),
+    plate('civic-platform', -110, -110, T + 64 + G, 220, 220, 'none', 12),
+    box('civic-core', -50, -50, T + 86, 100, 100, 48),
+    plate('civic-cap', -58, -58, T + 134 + G, 116, 116, 'none', 8),
+  ], order: ['civic-base', 'registry-0-0', 'registry-0-1', 'registry-1-0', 'registry-1-1', 'civic-platform', 'civic-core', 'civic-cap'] },
   infrastructure: { name: 'Резервируемая инфраструктура', objects: [
+    // Two racks of floating server slabs, each under a cap.
     ...[-120, 20].flatMap((x, tower) => [
-      ...[0, 1, 2].map(level => box(`server-${tower}-${level}`, x, -60, T + level * 38, 100, 120, 32)),
-      plate(`server-cap-${tower}`, x - 5, -65, T + 3 * 38, 110, 130, 'none', 10),
+      ...[0, 1, 2].map(level => box(`server-${tower}-${level}`, x, -60, T + level * (28 + G), 100, 120, 28)),
+      plate(`server-cap-${tower}`, x - 5, -65, T + 3 * (28 + G), 110, 130, 'none', 8),
     ]),
   ], order: ['server-0-0', 'server-0-1', 'server-0-2', 'server-cap-0', 'server-1-0', 'server-1-1', 'server-1-2', 'server-cap-1'] },
   production: { name: 'Технологическая установка', objects: [
-    // Three equal tanks on a frame, joined overhead by one continuous pipe.
-    plate('frame', -170, -60, T, 340, 120, 'none', 14),
-    ...[-110, 0, 110].map((cx, i) => box(`tank-${i}`, cx - 40, -40, 2 * T, 80, 80, 120)),
-    ...[-110, 0, 110].map((cx, i) => box(`riser-${i}`, cx - 8, -8, 2 * T + 120, 16, 16, 20)),
-    box('pipe', -118, -8, 2 * T + 140, 236, 16, 14),
-  ], order: ['frame', 'tank-0', 'tank-1', 'tank-2', 'riser-0', 'riser-1', 'riser-2', 'pipe'] },
+    // Tanks with floating caps on a double frame, joined by one overhead pipe.
+    plate('frame-base', -180, -70, T - 18, 360, 140, 'none', 8),
+    plate('frame', -170, -60, T, 340, 120, 'none', 12),
+    ...[-110, 0, 110].map((cx, i) => box(`tank-${i}`, cx - 40, -40, T + 12, 80, 80, 110)),
+    ...[-110, 0, 110].map((cx, i) => plate(`tank-cap-${i}`, cx - 40, -40, T + 122 + G, 80, 80, 'none', 8)),
+    ...[-110, 0, 110].map((cx, i) => box(`riser-${i}`, cx - 8, -8, T + 140, 16, 16, 18)),
+    box('pipe', -118, -8, T + 158, 236, 16, 14),
+  ], order: ['frame-base', 'frame', 'tank-0', 'tank-cap-0', 'tank-1', 'tank-cap-1', 'tank-2', 'tank-cap-2', 'riser-0', 'riser-1', 'riser-2', 'pipe'] },
   personal: { name: 'Изолированные персональные данные', objects: [
-    // A record inside two isolation rings; walls are split so the painter
-    // draws back walls, the record, then front walls.
+    // A record with a floating cap inside two isolation rings.
     ...ring('outer', 120, 34), ...ring('inner', 78, 60),
-    box('record', -34, -34, T, 68, 68, 92),
-  ], order: ['outer-back-x', 'outer-back-y', 'inner-back-x', 'inner-back-y', 'record', 'inner-front-y', 'inner-front-x', 'outer-front-y', 'outer-front-x'] },
+    box('record', -34, -34, T, 68, 68, 78),
+    plate('record-cap', -40, -40, T + 78 + G, 80, 80, 'none', 8),
+  ], order: ['outer-back-x', 'outer-back-y', 'inner-back-x', 'inner-back-y', 'record', 'record-cap', 'inner-front-y', 'inner-front-x', 'outer-front-y', 'outer-front-x'] },
   storage: { name: 'Защищённое хранилище', objects: [
-    // A filing safe; drawer fronts sit flush and the top drawer slides out
-    // (see morphs below) instead of the whole block moving.
-    // Equal 12-unit margins and 6-unit gaps; fronts stand 8 units proud.
-    box('safe-body', -90, -90, T, 180, 180, 138),
-    ...[0, 1, 2].map(i => box(`drawer-${i}`, -78, 90, T + 12 + i * 40, 156, 8, 34)),
-  ], order: ['safe-body', 'drawer-0', 'drawer-1', 'drawer-2'] },
+    // A filing safe on a floating plinth under a floating lid. Drawer fronts
+    // have even 12-unit margins; the top one slides out (see morphs).
+    plate('safe-plinth', -100, -100, T, 200, 200, 'none', 8),
+    box('safe-body', -90, -90, T + 8 + G, 180, 180, 130),
+    ...[0, 1, 2].map(i => box(`drawer-${i}`, -78, 90, T + 30 + i * 38, 156, 8, 32)),
+    plate('safe-lid', -96, -96, T + 148 + G, 192, 192, 'none', 8),
+  ], order: ['safe-plinth', 'safe-body', 'drawer-0', 'drawer-1', 'drawer-2', 'safe-lid'] },
   cicd: { name: 'Передача секретов в CI/CD', objects: [
     ...lidded('source', -130, -130, 80, 90),
     box('route-right', -50, -98, 30, 100, 16, T),
@@ -93,15 +101,20 @@ const scenes: Record<string, { name: string; objects: any[]; order?: string[] }>
     ...lidded('left', -130, 50, 80, 30),
   ], order: ['source-base', 'source-lid', 'route-right', 'route-left', 'right-base', 'right-lid', 'left-base', 'left-lid'] },
   config: { name: 'Параметры конфигурации', objects: [
-    // Three switches; hover flips them.
+    // A control panel: body, floating deck, three switch bases and switches.
+    plate('panel-body', -165, -85, T, 330, 170, 'none', 16),
     ...[0, 1, 2].flatMap(i => [
-      box(`switch-base-${i}`, -150 + i * 105, -65, T, 84, 130, 30),
-      box(`switch-${i}`, -138 + i * 105, [-53, 12, -53][i], T + 30, 60, 50, 26),
+      box(`switch-base-${i}`, -150 + i * 105, -65, T + 16 + G, 84, 130, 20),
+      plate(`switch-rail-${i}`, -118 + i * 105, -55, T + 46, 20, 110, 'none', 4),
+      box(`switch-${i}`, -136 + i * 105, [-53, 17, -53][i], T + 50, 56, 40, 22),
     ]),
-  ], order: ['switch-base-0', 'switch-0', 'switch-base-1', 'switch-1', 'switch-base-2', 'switch-2'] },
+  ], order: ['panel-body', ...[0, 1, 2].flatMap(i => [`switch-base-${i}`, `switch-rail-${i}`, `switch-${i}`])] },
   access: { name: 'Гранулярные права доступа', objects: [
-    ...[0, 1, 2].flatMap(col => [0, 1, 2].map(row =>
-      box(`cell-${col}-${row}`, -130 + col * 90, -130 + row * 90, T, 80, 80, [[48, 32, 16], [32, 16, 32], [16, 32, 16]][col][row]))),
+    // Each permission: a tile with a floating block whose height is its level.
+    ...[0, 1, 2].flatMap(col => [0, 1, 2].flatMap(row => [
+      plate(`tile-${col}-${row}`, -130 + col * 90, -130 + row * 90, T, 80, 80, 'none', 8),
+      box(`cell-${col}-${row}`, -122 + col * 90, -122 + row * 90, T + 8 + G, 64, 64, [[44, 28, 14], [28, 14, 28], [14, 28, 14]][col][row]),
+    ])),
   ] },
 };
 
@@ -136,8 +149,13 @@ function render(scene: any, order?: string[], open: Record<string, any> = {}) {
   for (const b of boxes) {
     const target = open[b.owner] && expandScene({ ...scene, objects: [open[b.owner]] })[0];
     const targetFaces = target ? faceData(target, style) : [];
-    const markup = faceData(b, style).map((f: any, i: number) =>
+    const faces = faceData(b, style).map((f: any, i: number) =>
       `<path data-face="${f.kind}"${attr('d', f.path)}${targetFaces[i] ? attr('data-open', targetFaces[i].path) : ''}${attr('fill', tone.page)}${attr('stroke', tone.line)}/>`).join('');
+    // Silhouette drawn a touch heavier than inner edges: the object reads
+    // as one solid, and later objects still cover it in painter order.
+    const outlinePath = (box: any) => 'M ' + hull(makeBox(box).getVertices().map(project))
+      .map((p: any) => `${p.x.toFixed(2)} ${p.y.toFixed(2)}`).join(' L ') + ' Z';
+    const markup = faces + `<path data-edge="outline"${attr('d', outlinePath(b))}${target ? attr('data-open', outlinePath(target)) : ''} fill="none"${attr('stroke', tone.line)}/>`;
     const last = runs.at(-1);
     if (last?.owner === b.owner) last.parts.push(markup); else runs.push({ owner: b.owner, parts: [markup] });
   }

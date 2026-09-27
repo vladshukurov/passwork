@@ -34,7 +34,7 @@
       "geometry": {
         "width": 100,
         "depth": 120,
-        "height": 32,
+        "height": 28,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -64,7 +64,7 @@
       "geometry": {
         "width": 100,
         "depth": 120,
-        "height": 32,
+        "height": 28,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -94,7 +94,7 @@
       "geometry": {
         "width": 100,
         "depth": 120,
-        "height": 32,
+        "height": 28,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -125,7 +125,7 @@
         "width": 110,
         "depth": 130,
         "height": 60,
-        "thickness": 10,
+        "thickness": 8,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,
@@ -154,7 +154,7 @@
       "geometry": {
         "width": 100,
         "depth": 120,
-        "height": 32,
+        "height": 28,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -184,7 +184,7 @@
       "geometry": {
         "width": 100,
         "depth": 120,
-        "height": 32,
+        "height": 28,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -214,7 +214,7 @@
       "geometry": {
         "width": 100,
         "depth": 120,
-        "height": 32,
+        "height": 28,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -245,7 +245,7 @@
         "width": 110,
         "depth": 130,
         "height": 60,
-        "thickness": 10,
+        "thickness": 8,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,

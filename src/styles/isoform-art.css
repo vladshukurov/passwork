@@ -1,34 +1,39 @@
-/* Isoform illustrations: one neutral ink on page-coloured faces.
+/* Isoform illustrations: neutral ink, page-coloured faces, toned right faces.
    On hover ink and faces turn a clean brand blue in three tonal steps. */
-@property --iso-line { syntax: '<color>'; inherits: true; initial-value: #a3a9b2; }
+@property --iso-line { syntax: '<color>'; inherits: true; initial-value: #8e959f; }
+@property --iso-edge { syntax: '<color>'; inherits: true; initial-value: #b9bec6; }
 @property --iso-top { syntax: '<color>'; inherits: true; initial-value: #fafafb; }
 @property --iso-left { syntax: '<color>'; inherits: true; initial-value: #fafafb; }
-@property --iso-right { syntax: '<color>'; inherits: true; initial-value: #fafafb; }
+@property --iso-right { syntax: '<color>'; inherits: true; initial-value: #eceef1; }
 
 .iso-art {
-  --iso-line: #a3a9b2;
-  /* Pure line drawing: every face takes the page colour and only hides
-     what is behind it. */
+  /* Two inks: the silhouette (line) and quieter inner edges (edge). */
+  --iso-line: #8e959f;
+  --iso-edge: #b9bec6;
+  /* Line drawing with one quiet tone: only the shaded (right) faces step
+     down from the page colour, so volume reads at rest. */
   --iso-top: #fafafb;
   --iso-left: #fafafb;
-  --iso-right: #fafafb;
-  transition-property: --iso-line, --iso-top, --iso-left, --iso-right;
+  --iso-right: #eceef1;
+  transition-property: --iso-line, --iso-edge, --iso-top, --iso-left, --iso-right;
   transition-duration: var(--pw-motion-ui);
   transition-timing-function: var(--pw-ease-out);
 }
-svg.iso-art path { stroke: var(--iso-line); stroke-width: .85; vector-effect: non-scaling-stroke; }
+svg.iso-art path { stroke: var(--iso-edge); stroke-width: .75; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+svg.iso-art path[data-edge="outline"] { fill: none; stroke: var(--iso-line); stroke-width: 1.1; }
 svg.iso-art path[data-face="top"] { fill: var(--iso-top); }
 svg.iso-art path[data-face="left"] { fill: var(--iso-left); }
 svg.iso-art path[data-face="right"] { fill: var(--iso-right); }
 .iso-art [data-object] { will-change: transform; }
 
 @media (hover: hover) and (pointer: fine) {
-  /* Brand-blue tonal steps: light top, deeper sides, so volume reads in colour. */
+  /* Muted brand blue in soft tonal steps: light top, slightly deeper sides. */
   :is(.certification-card, .secrets-card):hover .iso-art {
-    --iso-line: #2f6fe4;
-    --iso-top: #f1f6ff;
-    --iso-left: #e2ecfe;
-    --iso-right: #d2e1fc;
+    --iso-line: #5a87e0;
+    --iso-edge: #a9c1ef;
+    --iso-top: #f6f9ff;
+    --iso-left: #edf3fe;
+    --iso-right: #e3ecfc;
   }
 }
 

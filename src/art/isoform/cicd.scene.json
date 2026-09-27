@@ -59,13 +59,13 @@
       "transform": {
         "x": -130,
         "y": -130,
-        "z": 104
+        "z": 114
       },
       "geometry": {
         "width": 80,
         "depth": 80,
         "height": 60,
-        "thickness": 12,
+        "thickness": 10,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,
@@ -179,13 +179,13 @@
       "transform": {
         "x": 50,
         "y": -130,
-        "z": 44
+        "z": 54
       },
       "geometry": {
         "width": 80,
         "depth": 80,
         "height": 60,
-        "thickness": 12,
+        "thickness": 10,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,
@@ -239,13 +239,13 @@
       "transform": {
         "x": -130,
         "y": 50,
-        "z": 44
+        "z": 54
       },
       "geometry": {
         "width": 80,
         "depth": 80,
         "height": 60,
-        "thickness": 12,
+        "thickness": 10,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,

@@ -23,18 +23,48 @@
   },
   "objects": [
     {
+      "id": "safe-plinth",
+      "name": "safe-plinth",
+      "type": "slab",
+      "transform": {
+        "x": -100,
+        "y": -100,
+        "z": 14
+      },
+      "geometry": {
+        "width": 200,
+        "depth": 200,
+        "height": 60,
+        "thickness": 8,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
       "id": "safe-body",
       "name": "safe-body",
       "type": "box",
       "transform": {
         "x": -90,
         "y": -90,
-        "z": 14
+        "z": 32
       },
       "geometry": {
         "width": 180,
         "depth": 180,
-        "height": 138,
+        "height": 130,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -59,12 +89,12 @@
       "transform": {
         "x": -78,
         "y": 90,
-        "z": 26
+        "z": 44
       },
       "geometry": {
         "width": 156,
         "depth": 8,
-        "height": 34,
+        "height": 32,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -89,12 +119,12 @@
       "transform": {
         "x": -78,
         "y": 90,
-        "z": 66
+        "z": 82
       },
       "geometry": {
         "width": 156,
         "depth": 8,
-        "height": 34,
+        "height": 32,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -119,13 +149,43 @@
       "transform": {
         "x": -78,
         "y": 90,
-        "z": 106
+        "z": 120
       },
       "geometry": {
         "width": 156,
         "depth": 8,
-        "height": 34,
+        "height": 32,
         "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "safe-lid",
+      "name": "safe-lid",
+      "type": "slab",
+      "transform": {
+        "x": -96,
+        "y": -96,
+        "z": 172
+      },
+      "geometry": {
+        "width": 192,
+        "depth": 192,
+        "height": 60,
+        "thickness": 8,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,
