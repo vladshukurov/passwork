@@ -94,7 +94,7 @@ function Pricing() {
     <SectionHeroSurface />
     <div className="pricing-inner">
     <DarkHeadingDots />
-    <div className="pricing-heading"><h2 id="pricing-heading">Выберите размер команды<br />и&nbsp;сравните возможности Пассворка</h2></div>
+    <div className="pricing-heading"><h2 id="pricing-heading">Выберите размер команды<br />{' '}и&nbsp;сравните возможности Пассворка</h2></div>
       <div className="pricing-team-selector">
         <div className={`pricing-team-readout${largeTeam ? ' is-large' : ''}`}><span>Размер команды</span>
           <strong>{largeTeam ? 'Больше 100 сотрудников' : `${teamSize} ${peopleLabel(teamSize)}`}</strong>

@@ -8,7 +8,7 @@ import { tidyCopy } from '../lib/typography.js';
 const teamLabels = ['IT-команды', 'DevOps', 'Безопасность', 'Госорганизации', 'Производство'];
 
 export function TeamsHeading() {
-  return <section className="teams-heading" id="teams"><h2>Пассворк решает<br />задачи разных команд</h2></section>;
+  return <section className="teams-heading" id="teams"><h2>Пассворк решает<br />{' '}задачи разных команд</h2></section>;
 }
 
 // Tabs, scenario dashboard and caption switch together with one crossfade.

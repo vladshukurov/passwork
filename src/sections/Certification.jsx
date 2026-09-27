@@ -19,7 +19,7 @@ function CertificationCard({ title, scope, art }) {
 
 function Certification() {
   return <section className="certification" id="certification" aria-labelledby="certification-heading">
-    <SectionIntro headingId="certification-heading" title={<>Пассворк сертифицирован <br />ФСТЭК России</>}
+    <SectionIntro headingId="certification-heading" title={<>Пассворк сертифицирован <br />{' '}ФСТЭК России</>}
       description="Сертификат доверия подтверждает соответствие требованиям безопасности регулируемых отраслей. Разворачивается внутри компании, поддерживает ГОСТ-шифрование, исключает передачу данных во внешние сервисы" />
     <div className="certification-cards" role="list">{certifications.map(([title, scope, art]) =>
       <CertificationCard key={title} title={title} scope={scope} art={art} />)}</div>

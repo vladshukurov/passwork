@@ -9,10 +9,10 @@ function Security() {
   const section = useController(mountSecuritySwitcher);
   return <div className="security-scroll-track" id="security"><section className="security-switcher" aria-labelledby="security-heading" ref={section}>
     <SectionIntro headingId="security-heading" title="Российское решение для корпоративной безопасности"
-      description={<>{tidyCopy('Управляйте корпоративными паролями и доступом сотрудников в единой системе.')}<br />{tidyCopy('Размещайте Пассворк на своих серверах')}</>} />
+      description={<>{tidyCopy('Управляйте корпоративными паролями и доступом сотрудников в единой системе.')}<br />{' '}{tidyCopy('Размещайте Пассворк на своих серверах')}</>} />
     <div className="security-switcher-grid" role="group" aria-roledescription="карусель" aria-label="Особенности безопасности" tabIndex="0">
       <div className="security-switcher-copy">
-        <div className="security-copy-heading"><h3>Защита данных<br />под вашим контролем</h3></div>
+        <div className="security-copy-heading"><h3>Защита данных<br />{' '}под вашим контролем</h3></div>
         <div className="security-story-list">{securityStories.map(([title, description], index) => <SecurityStory key={title}
           index={index} title={title} description={description} />)}</div>
       </div>

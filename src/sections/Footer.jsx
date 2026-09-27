@@ -6,7 +6,7 @@ function Footer() {
     <div className="footer-main">
       <div className="footer-brand">
         <a href="#top" aria-label="Пассворк — к началу страницы"><img className="footer-logo" src="/passwork-assets/logo-dark.svg" alt="Пассворк" /></a>
-        <p>Корпоративные пароли и доступы<br />под контролем вашей команды</p>
+        <p>Корпоративные пароли и доступы<br />{' '}под контролем вашей команды</p>
         <Button>Запросить демо</Button>
         <img className="footer-russia" src="/passwork-assets/imgVector.svg" alt="Сделано в России" />
       </div>

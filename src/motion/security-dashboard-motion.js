@@ -1,8 +1,11 @@
 // Shared entrance for Passwork's code and infrastructure screens.
 
-const tempo = value => value * .85;
-const easing = 'cubic-bezier(.33, 1, .68, 1)';
-const playbackRate = .5;
+// The whole card is readable within ~0.6s; only the code keeps typing after.
+// (It used to play at half speed, so the card sat empty for seconds.)
+const tempo = value => value * .25;
+const easing = 'cubic-bezier(.22, 1, .36, 1)';
+const playbackRate = 1;
+const CHAR_DESCRIPTION = 6, CHAR_CODE = 4;
 
 export function mountSecurityDashboardMotion(card) {
   if (!card) return null;
@@ -10,13 +13,13 @@ export function mountSecurityDashboardMotion(card) {
   const code = card.querySelector('pre');
   const rows = [...card.querySelectorAll('.check-row')];
   const definitions = [
-    [card, tempo(280), tempo(800), 16, 2.5],
-    [card.querySelector('.check-heading'), tempo(450), tempo(500), 8, 2],
-    [description, tempo(700), tempo(500), 8, 2],
-    [rows[0], tempo(1900), tempo(500), 8, 2],
-    [rows[1], tempo(2100), tempo(500), 8, 2],
-    [card.querySelector('.protection-code'), tempo(2350), tempo(500), 8, 2],
-    ...[...card.querySelectorAll('[data-motion-at]')].map(element => [element, tempo(Number(element.dataset.motionAt)), tempo(500), 8, 2]),
+    [card, 0, 360, 16, 2.5],
+    [card.querySelector('.check-heading'), 80, 360, 8, 2],
+    [description, 140, 360, 8, 2],
+    [rows[0], 260, 360, 8, 2],
+    [rows[1], 340, 360, 8, 2],
+    [card.querySelector('.protection-code'), 420, 360, 8, 2],
+    ...[...card.querySelectorAll('[data-motion-at]')].map(element => [element, tempo(Number(element.dataset.motionAt)), 400, 8, 2]),
   ];
   if (!description || definitions.some(([element]) => !element)) return null;
 
@@ -37,9 +40,9 @@ export function mountSecurityDashboardMotion(card) {
     while ((node = walker.nextNode())) tokens.push({node, text: node.textContent});
   }
   const codeLength = tokens.reduce((length, token) => length + token.text.length, 0);
-  const descriptionStart = tempo(700);
-  const codeStart = tempo(2350);
-  const finish = Math.max(codeStart + codeLength * 6, descriptionStart + sentence.length * 13, ...definitions.map(([, delay, duration]) => delay + duration));
+  const descriptionStart = 140;
+  const codeStart = 520;
+  const finish = Math.max(codeStart + codeLength * CHAR_CODE, descriptionStart + sentence.length * CHAR_DESCRIPTION, ...definitions.map(([, delay, duration]) => delay + duration));
   const animations = definitions.map(([element, delay, duration, y]) => {
     // The card's CSS transform centers it in the stage; animating transform here
     // would replace that centering for the entire lifetime of a filled animation.
@@ -62,12 +65,12 @@ export function mountSecurityDashboardMotion(card) {
   function render() {
     const time = reduced ? finish : elapsed;
     animations.forEach(animation => { animation.currentTime = time; });
-    const typedSentence = Math.max(0, Math.min(sentence.length, Math.round((time - descriptionStart) / 13)));
+    const typedSentence = Math.max(0, Math.min(sentence.length, Math.round((time - descriptionStart) / CHAR_DESCRIPTION)));
     if (typedSentence !== lastSentenceLength) {
       stream.textContent = sentence.slice(0, typedSentence);
       lastSentenceLength = typedSentence;
     }
-    const typedCode = Math.max(0, Math.min(codeLength, Math.round((time - codeStart) / 6)));
+    const typedCode = Math.max(0, Math.min(codeLength, Math.round((time - codeStart) / CHAR_CODE)));
     if (typedCode !== lastCodeLength) {
       let remaining = typedCode;
       for (const token of tokens) {
