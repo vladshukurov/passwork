@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "name": "Уровни доступа к секрету",
+  "name": "Гранулярные права доступа",
   "artboard": {
     "width": 600,
     "height": 600,
@@ -8,12 +8,12 @@
   },
   "stylePreset": {
     "background": "#fafafb",
-    "stroke": "#a7b1bf",
-    "secondaryStroke": "#a7b1bf",
+    "stroke": "#a3a9b2",
+    "secondaryStroke": "#a3a9b2",
     "strokeWidth": 0.85,
-    "fill": "#f7f8fb",
+    "fill": "#ffffff",
     "fillOpacity": 1,
-    "hiddenStroke": "#a7b1bf",
+    "hiddenStroke": "#a3a9b2",
     "hiddenStrokeOpacity": 0,
     "hiddenDash": [],
     "cornerRadius": 0,
@@ -23,19 +23,19 @@
   },
   "objects": [
     {
-      "id": "outer-boundary",
-      "name": "outer-boundary",
-      "type": "corner",
+      "id": "pedestal",
+      "name": "pedestal",
+      "type": "slab",
       "transform": {
-        "x": -190,
-        "y": -190,
+        "x": -150,
+        "y": -150,
         "z": 0
       },
       "geometry": {
-        "width": 380,
-        "depth": 380,
-        "height": 128,
-        "thickness": 18,
+        "width": 300,
+        "depth": 300,
+        "height": 60,
+        "thickness": 14,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,
@@ -53,48 +53,18 @@
       }
     },
     {
-      "id": "inner-boundary",
-      "name": "inner-boundary",
-      "type": "corner",
-      "transform": {
-        "x": -125,
-        "y": -125,
-        "z": 0
-      },
-      "geometry": {
-        "width": 250,
-        "depth": 250,
-        "height": 83,
-        "thickness": 18,
-        "count": 4,
-        "gap": 18,
-        "widthEnd": 36,
-        "heightEnd": 160,
-        "axis": "x",
-        "orientation": "x",
-        "motif": "none",
-        "seed": 1,
-        "opening": "none",
-        "openingWidth": 40,
-        "openingHeight": 52,
-        "openingBottom": 18,
-        "openingOffset": 0,
-        "cornerSide": "back"
-      }
-    },
-    {
-      "id": "protected-core",
-      "name": "protected-core",
+      "id": "cell-0-0",
+      "name": "cell-0-0",
       "type": "box",
       "transform": {
-        "x": -42,
-        "y": -42,
-        "z": 32
+        "x": -130,
+        "y": -130,
+        "z": 14
       },
       "geometry": {
-        "width": 84,
-        "depth": 84,
-        "height": 70,
+        "width": 80,
+        "depth": 80,
+        "height": 48,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -113,18 +83,18 @@
       }
     },
     {
-      "id": "gate-left",
-      "name": "gate-left",
+      "id": "cell-0-1",
+      "name": "cell-0-1",
       "type": "box",
       "transform": {
-        "x": -166,
-        "y": 147,
-        "z": 0
+        "x": -130,
+        "y": -40,
+        "z": 14
       },
       "geometry": {
-        "width": 266,
-        "depth": 22,
-        "height": 72,
+        "width": 80,
+        "depth": 80,
+        "height": 32,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -143,18 +113,198 @@
       }
     },
     {
-      "id": "gate-right",
-      "name": "gate-right",
+      "id": "cell-0-2",
+      "name": "cell-0-2",
       "type": "box",
       "transform": {
-        "x": 147,
-        "y": -166,
-        "z": 0
+        "x": -130,
+        "y": 50,
+        "z": 14
       },
       "geometry": {
-        "width": 22,
-        "depth": 266,
-        "height": 72,
+        "width": 80,
+        "depth": 80,
+        "height": 16,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "cell-1-0",
+      "name": "cell-1-0",
+      "type": "box",
+      "transform": {
+        "x": -40,
+        "y": -130,
+        "z": 14
+      },
+      "geometry": {
+        "width": 80,
+        "depth": 80,
+        "height": 32,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "cell-1-1",
+      "name": "cell-1-1",
+      "type": "box",
+      "transform": {
+        "x": -40,
+        "y": -40,
+        "z": 14
+      },
+      "geometry": {
+        "width": 80,
+        "depth": 80,
+        "height": 16,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "cell-1-2",
+      "name": "cell-1-2",
+      "type": "box",
+      "transform": {
+        "x": -40,
+        "y": 50,
+        "z": 14
+      },
+      "geometry": {
+        "width": 80,
+        "depth": 80,
+        "height": 32,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "cell-2-0",
+      "name": "cell-2-0",
+      "type": "box",
+      "transform": {
+        "x": 50,
+        "y": -130,
+        "z": 14
+      },
+      "geometry": {
+        "width": 80,
+        "depth": 80,
+        "height": 16,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "cell-2-1",
+      "name": "cell-2-1",
+      "type": "box",
+      "transform": {
+        "x": 50,
+        "y": -40,
+        "z": 14
+      },
+      "geometry": {
+        "width": 80,
+        "depth": 80,
+        "height": 32,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "cell-2-2",
+      "name": "cell-2-2",
+      "type": "box",
+      "transform": {
+        "x": 50,
+        "y": 50,
+        "z": 14
+      },
+      "geometry": {
+        "width": 80,
+        "depth": 80,
+        "height": 16,
         "thickness": 12,
         "count": 4,
         "gap": 18,

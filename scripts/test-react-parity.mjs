@@ -124,15 +124,8 @@ assert.match(secretIllustrations, /data-secret-art="config"/);
 assert.match(secretIllustrations, /data-secret-art="access"/);
 assert.match(secretIllustrations, /secrets-isoform\/storage.svg\?raw/);
 assert.match(secretIllustrations, /secrets-isoform\/config.svg\?raw/);
-if (pageMotion.includes('function secretsHoverTimeline(svg)')) {
-  assert.match(pageMotion, /articulatedTimeline\(svg, svg\.dataset\.secretArt\)/,
-    'The storage artwork needs its own object-specific hover sequence');
-  assert.match(pageMotion, /data-object/,
-    'Illustration motion must target complete Isoform objects');
-} else {
-  assert.doesNotMatch(pageMotion, /document\.querySelectorAll\('\.secrets-card'\)/,
-    'Static release artwork must not mount hover handlers');
-}
+assert.match(pageMotion, /mountArtHover\(gsap, svg\)/,
+  'Certification and secrets artwork share one hover controller');
 assert.doesNotMatch(figmaStyles, /main\.motion-ui-on \.secrets-card:hover\s*\{[^}]*background-color/s,
   'Secret cards should not flash white on hover');
 assert.match(reactSource, /Работа с конфигурациями[^\n]*ConfigurationsIllustration/);
@@ -233,7 +226,7 @@ assert.doesNotMatch(screenTransitions, /blur\(/,
   'Screen transitions should never obscure product UI with blur');
 assert.match(securityMotion, /--motion-security-duration/,
   'Security illustration transition must use its preview duration');
-assert.match(pageMotion, /card\.addEventListener\('pointerenter',enter\)/,
+assert.match(pageMotion, /card\.addEventListener\('pointerenter', enter\)/,
   'FSTEK artwork should respond from the entire card');
 if (reactSource.includes('function FramePreviewControls')) {
   assert.match(figmaStyles, /\.frame-preview-body\s*\{[^}]*overflow-y:\s*auto/s,

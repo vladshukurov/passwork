@@ -1,96 +1,130 @@
-// Run with Isoform Studio's tsx, passing its directory as the first argument.
+// Run with Isoform Studio's tsx, passing its directory as the first argument:
+//   "<studio>/node_modules/.bin/tsx" scripts/export-secrets-isoform.ts "<studio>"
+// Studio owns the geometry; this script owns the site's SVG markup. Every face
+// carries data-face so the page can shade top/left/right through CSS tokens.
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 const studio = process.argv[2];
 if (!studio) throw new Error('Pass the Isoform Studio directory');
 const load = (file: string) => import(pathToFileURL(resolve(studio, file)).href);
-const { svgString } = await load('src/export/svg.ts');
+const { expandScene } = await load('src/geometry/core.ts');
+const { faceData } = await load('src/export/svg.ts');
 const { makeNode, sceneSchema } = await load('src/scene/schema.ts');
-const { architecturalStudies } = await load('src/presets/architectural-studies.ts');
+
+// Fallback colours for opening the SVG outside the site; the page overrides them.
+const tone = { top: '#ffffff', left: '#f3f4f6', right: '#e8eaee', line: '#a3a9b2', page: '#fafafb' };
 const style = {
-  background: '#fafafb', stroke: '#a7b1bf', secondaryStroke: '#a7b1bf',
-  strokeWidth: .85, fill: '#f7f8fb', fillOpacity: 1,
-  hiddenStroke: '#a7b1bf', hiddenStrokeOpacity: 0, hiddenDash: [],
+  background: tone.page, stroke: tone.line, secondaryStroke: tone.line,
+  strokeWidth: .85, fill: tone.top, fillOpacity: 1,
+  hiddenStroke: tone.line, hiddenStrokeOpacity: 0, hiddenDash: [],
   cornerRadius: 0, topFillOpacity: 1, leftFillOpacity: 1, rightFillOpacity: 1,
 };
 const piece = (id: string, type: string, x: number, y: number, z: number, geometry: object) => ({
   ...makeNode(type, id), id, transform: { x, y, z }, geometry: { ...makeNode(type).geometry, ...geometry },
 });
-const box = (id: string, x: number, y: number, z: number, width: number, depth: number, height: number) => piece(id, 'box', x, y, z, {width, depth, height});
-const plate = (id: string, x: number, y: number, z: number, width=120, depth=120, motif='none') => piece(id, 'slab', x, y, z, {width, depth, thickness:18, motif});
-const wire = (id: string, x: number, y: number, z: number, dx: number, dy: number, dz: number) => ({...piece(id,'wire',x,y,z,{}),end:{x:dx,y:dy,z:dz}});
-const corner = (id: string, x: number, y: number, z: number, size: number, height: number, side='back') => piece(id,'corner',x,y,z,{width:size,depth:size,height,thickness:18,cornerSide:side});
-const storage = architecturalStudies['Study 04 · Nested Corners']();
-const rename = (nodes: any[]) => nodes.forEach((n:any) => { n.id=n.name.toLowerCase().replace(/[^a-z0-9]+/g,'-'); if(n.children)rename(n.children); });
-rename(storage.objects);
-const scenes = {
-  government: {name:'Государственная информационная система',objects:[
-    plate('civic-foundation',-150,-150,0,300,300),
-    ...[-110,15].flatMap((x,col)=>[-110,15].map((y,row)=>
-      box(`registry-${col}-${row}`,x,y,30,95,95,46))),
-    plate('civic-platform',-112,-112,96,224,224),
-    box('civic-core',-54,-54,136,108,108,60),
-  ]},
-  infrastructure: {name:'Резервируемая инфраструктура',objects:[
-    plate('network-base',-180,-100,0,360,200),
-    wire('network-link',-80,0,25,160,0,0),
-    ...[-145,45].flatMap((x,tower)=>[0,1,2].map((level)=>
-      box(`server-${tower}-${level}`,x,-60,30+level*48,100,120,34))),
-  ]},
-  production: {name:'Управляемая производственная линия',objects:[
-    plate('line-base',-180,-70,0,400,140),
-    box('conveyor',-150,-38,18,345,76,20),
-    ...[-125,-15,95].map((x,i)=>box(`part-${i}`,x,-25,38,40,50,35)),
-    box('press-support',-40,-65,18,90,18,142),
-    box('press-head',-40,-47,125,90,92,24),
-  ]},
-  personal: {name:'Изолированные ячейки персональных данных',objects:[
-    plate('cells-base',-135,-110,0,270,270),
-    corner('cells-boundary',-135,-110,18,270,105),
-    ...[-95,25].flatMap((x,col)=>[-65,55].map((y,row)=>
-      box(`cell-${col}-${row}`,x,y,18,85,80,58))),
-  ]},
-  storage: {name:'Защищённое хранилище',objects:storage.objects},
-  cicd: {name:'Передача секретов в CI/CD',objects:[
-    wire('route-source',0,0,60,0,0,220), wire('route-left',-20,20,40,-75,140,-22), wire('route-right',20,-20,40,140,-75,-22),
-    plate('source-base',-80,-80,280,160,160),plate('source-lid',-80,-80,321,160,160),
-    box('junction',-20,-20,20,40,40,40),
-    plate('left-base',-175,125,0,160,160),plate('left-lid',-175,125,41,160,160),
-    plate('right-base',125,-175,0,160,160),plate('right-lid',125,-175,41,160,160),
-  ]},
-  config: {name:'Файлы конфигурации и параметры',objects:[
-    plate('foundation',-125,-100,0,250,200),
-    plate('config-base',-100,-78,30,200,156,'slots'),
-    plate('config-middle',-100,-78,72,200,156,'slots'),
-    plate('config-top',-100,-78,114,200,156,'slots'),
-  ]},
-  access: {name:'Уровни доступа к секрету',objects:[
-    corner('outer-boundary',-190,-190,0,380,128),
-    corner('inner-boundary',-125,-125,0,250,83),
-    box('protected-core',-42,-42,32,84,84,70),
-    box('gate-left',-166,147,0,266,22,72),
-    box('gate-right',147,-166,0,22,266,72),
-  ]},
+const box = (id: string, x: number, y: number, z: number, width: number, depth: number, height: number, motif = 'none') =>
+  piece(id, 'box', x, y, z, { width, depth, height, motif });
+const plate = (id: string, x: number, y: number, z: number, width = 120, depth = 120, motif = 'none', thickness = 18) =>
+  piece(id, 'slab', x, y, z, { width, depth, thickness, motif });
+const corner = (id: string, x: number, y: number, z: number, size: number, height: number, side = 'back', thickness = 18) =>
+  piece(id, 'corner', x, y, z, { width: size, depth: size, height, thickness, cornerSide: side });
+
+// Series grammar: every scene stands on the same 300 × 300 pedestal, uses a
+// 10-unit grid, one 14-unit plate/wall thickness and a fixed scale, so the
+// eight cards read as one family. Connections are solid bars, never hairlines.
+const T = 14;
+const pedestal = () => plate('pedestal', -150, -150, 0, 300, 300, 'none', T);
+const lidded = (id: string, x: number, y: number, size: number, height: number) => [
+  box(`${id}-base`, x, y, T, size, size, height),
+  plate(`${id}-lid`, x, y, T + height, size, size, 'none', 12),
+];
+
+const scenes: Record<string, { name: string; objects: any[]; order?: string[] }> = {
+  government: { name: 'Государственная информационная система', objects: [
+    pedestal(),
+    plate('civic-step', -120, -120, T, 240, 240, 'none', T),
+    ...[-100, 10].flatMap((x, col) => [-100, 10].map((y, row) =>
+      box(`registry-${col}-${row}`, x, y, 2 * T, 90, 90, 36))),
+    plate('civic-platform', -110, -110, 64, 220, 220, 'none', T),
+    box('civic-core', -50, -50, 78, 100, 100, 56),
+  ], order: ['pedestal', 'civic-step', 'registry-0-0', 'registry-0-1', 'registry-1-0', 'registry-1-1', 'civic-platform', 'civic-core'] },
+  infrastructure: { name: 'Резервируемая инфраструктура', objects: [
+    pedestal(),
+    ...[-120, 20].flatMap((x, tower) => [
+      ...[0, 1, 2].map(level => box(`server-${tower}-${level}`, x, -60, T + level * 38, 100, 120, 32)),
+      plate(`server-cap-${tower}`, x - 5, -65, T + 3 * 38, 110, 130, 'none', 10),
+    ]),
+  ], order: ['pedestal', 'server-0-0', 'server-0-1', 'server-0-2', 'server-cap-0', 'server-1-0', 'server-1-1', 'server-1-2', 'server-cap-1'] },
+  production: { name: 'Управляемая технологическая линия', objects: [
+    // A cascade: each pipe leaves a taller unit and lands on the next roof,
+    // so the flow stays visible in the isometric view.
+    pedestal(),
+    box('stack', -126, -30, T, 26, 26, 170),
+    box('unit-0', -140, -45, T, 70, 90, 110),
+    box('unit-1', -30, -45, T, 70, 90, 80),
+    box('pipe-0', -70, -8, T + 80, 60, 16, T),
+    box('unit-2', 80, -45, T, 60, 90, 50),
+    box('pipe-1', 40, -8, T + 50, 60, 16, T),
+  ], order: ['pedestal', 'stack', 'unit-0', 'unit-1', 'pipe-0', 'unit-2', 'pipe-1'] },
+  personal: { name: 'Изолированные ячейки персональных данных', objects: [
+    pedestal(),
+    corner('cells-boundary', -150, -150, T, 300, 100, 'back', T),
+    ...[-100, 20].flatMap((x, col) => [-100, 20].map((y, row) =>
+      box(`cell-${col}-${row}`, x, y, T, 100, 100, 50))),
+  ] },
+  storage: { name: 'Защищённое хранилище', objects: [
+    // A filing safe: three full-width drawers, the upper one left ajar.
+    pedestal(),
+    box('safe-body', -90, -90, T, 180, 180, 138),
+    ...[6, 6, 22].map((out, i) => box(`drawer-${i}`, -75, 90, T + 8 + i * 44, 150, out, 38)),
+  ], order: ['pedestal', 'safe-body', 'drawer-0', 'drawer-1', 'drawer-2'] },
+  cicd: { name: 'Передача секретов в CI/CD', objects: [
+    pedestal(),
+    ...lidded('source', -130, -130, 80, 90),
+    box('route-right', -50, -98, 30, 100, 16, T),
+    box('route-left', -98, -50, 30, 16, 100, T),
+    ...lidded('right', 50, -130, 80, 30),
+    ...lidded('left', -130, 50, 80, 30),
+  ], order: ['pedestal', 'source-base', 'source-lid', 'route-right', 'route-left', 'right-base', 'right-lid', 'left-base', 'left-lid'] },
+  config: { name: 'Файлы конфигурации и параметры', objects: [
+    pedestal(),
+    ...['config-base', 'config-middle', 'config-top'].map((id, level) =>
+      plate(id, -110, -90, T + 26 + level * 30, 220, 180, 'none', 12)),
+  ] },
+  access: { name: 'Гранулярные права доступа', objects: [
+    pedestal(),
+    ...[0, 1, 2].flatMap(col => [0, 1, 2].map(row =>
+      box(`cell-${col}-${row}`, -130 + col * 90, -130 + row * 90, T, 80, 80, [[48, 32, 16], [32, 16, 32], [16, 32, 16]][col][row]))),
+  ] },
 };
-const destination=resolve('dist/passwork-assets/secrets-isoform');
-mkdirSync(destination,{recursive:true});
-for (const [key, definition] of Object.entries(scenes)) {
-  const scene=sceneSchema.parse({version:'1.0',...definition,artboard:{width:600,height:600,padding:64},stylePreset:style});
-  // Keep strokes in screen units, exactly like the FSTEK artwork.
-  let svg=svgString(scene).replace(/stroke-width="[^"]+"/g,'stroke-width="0.85" vector-effect="non-scaling-stroke"');
-  // Intersecting structures need an explicit painter order: roofs cover columns,
-  // and network routes sit on the platform rather than underneath its opaque face.
-  const orders: Record<string,string[]> = {
-    government:['civic-foundation','registry-0-0','registry-0-1','registry-1-0','registry-1-1','civic-platform','civic-core'],
-    infrastructure:['network-base','network-link','server-0-0','server-0-1','server-0-2','server-1-0','server-1-1','server-1-2'],
-  };
-  if(orders[key]) {
-    const groups=new Map([...svg.matchAll(/<g data-object="([^"]+)">[\s\S]*?<\/g>/g)].map(m=>[m[1],m[0]]));
-    let cursor=0;
-    svg=svg.replace(/<g data-object="[^"]+">[\s\S]*?<\/g>/g,()=>groups.get(orders[key][cursor++])!);
+
+// Fixed for the series: the pedestal lands in the same place in every card.
+const SCALE = .9, BASELINE = 100;
+const attr = (name: string, value: string | number) => ` ${name}="${value}"`;
+function render(scene: any, order?: string[]) {
+  const boxes = expandScene(scene).sort((a: any, b: any) => (a.x + a.y + a.z) - (b.x + b.y + b.z));
+  // Stable painter order: explicit order for intersecting structures, then depth.
+  if (order) boxes.sort((a: any, b: any) => order.indexOf(a.owner) - order.indexOf(b.owner));
+  const runs: { owner: string; parts: string[] }[] = [];
+  for (const b of boxes) {
+    const markup = faceData(b, style).map((f: any) =>
+      `<path data-face="${f.kind}"${attr('d', f.path)}${attr('fill', (tone as any)[f.kind])}${attr('stroke', tone.line)}/>`).join('');
+    const last = runs.at(-1);
+    if (last?.owner === b.owner) last.parts.push(markup); else runs.push({ owner: b.owner, parts: [markup] });
   }
-  writeFileSync(resolve(destination,`${key}.svg`),svg);
-  writeFileSync(resolve(destination,`${key}.scene.json`),JSON.stringify(scene,null,2)+'\n');
+  const { width: w, height: h } = scene.artboard;
+  const body = runs.map(r => `<g data-object="${r.owner}">${r.parts.join('')}</g>`).join('\n');
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><title>${scene.name}</title>`
+    + `<g data-iso stroke-width="0.85" stroke-linejoin="round" transform="translate(${w / 2} ${h / 2}) scale(${SCALE}) translate(0 ${BASELINE})">\n${body}\n</g></svg>`;
+  return svg.replace(/<path /g, '<path vector-effect="non-scaling-stroke" ');
+}
+
+const destination = resolve('dist/passwork-assets/secrets-isoform');
+mkdirSync(destination, { recursive: true });
+for (const [key, { order, ...definition }] of Object.entries(scenes)) {
+  const scene = sceneSchema.parse({ version: '1.0', ...definition, artboard: { width: 600, height: 600, padding: 64 }, stylePreset: style });
+  writeFileSync(resolve(destination, `${key}.svg`), render(scene, order));
+  writeFileSync(resolve(destination, `${key}.scene.json`), JSON.stringify(scene, null, 2) + '\n');
 }
 console.log('Exported editable Isoform scenes and SVG illustrations');

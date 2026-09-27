@@ -45,9 +45,16 @@
   --pw-button-height: 46px;
   --pw-button-font-size: 16px;
   --pw-button-padding: 22px;
-  --pw-duration-fast: 150ms;
-  --pw-duration-ui: 300ms;
-  --pw-ease-ui: cubic-bezier(.2, 0, 0, 1);
+  /* Motion: three durations and two curves for the whole site. GSAP mirrors
+     these in site-motion-tokens.js. */
+  --pw-motion-micro: 160ms;
+  --pw-motion-ui: 280ms;
+  --pw-motion-move: 560ms;
+  --pw-ease-out: cubic-bezier(.22, 1, .36, 1);
+  --pw-ease-in-out: cubic-bezier(.65, 0, .35, 1);
+  --pw-duration-fast: var(--pw-motion-micro);
+  --pw-duration-ui: var(--pw-motion-ui);
+  --pw-ease-ui: var(--pw-ease-out);
   --pw-shadow-dialog: 0 24px 100px #0a153540;
   --pw-section-top: calc(152 * var(--unit));
   --pw-section-x: calc(57 * var(--unit));

@@ -1,14 +1,22 @@
-// GSAP durations use seconds. Decorative dashboard scenarios own their timings.
+// One motion vocabulary for GSAP and CSS (see --pw-motion-* in passwork-tokens.css).
+// Durations are seconds. Decorative dashboard scenarios own their timings.
 export const siteMotion = Object.freeze({
-  reveal: .65,
-  revealEase: 'power3.out',
+  micro: .16,          // colour and press feedback
+  ui: .28,             // tabs, header, toggles
+  move: .56,           // anything that travels
+  reveal: .72,         // first appearance on scroll
+  ease: 'power4.out',  // = cubic-bezier(.22, 1, .36, 1)
+  easeInOut: 'power2.inOut',
+  stagger: .06,
+  revealY: 16,
+  revealStart: 'top 85%',
+  // Isoform artwork: pieces settle into place, hover opens an exploded view.
+  artEnter: .62,
+  artLeave: .48,
+  artStagger: .03,
+  artAssemble: 1.05,
+  artAssembleStagger: .045,
   entrance: .8,
-  layer: .28,
-  layerStagger: .018,
-  layerEase: 'sine.inOut',
-  hoverSpeed: 1.22,
-  returnSpeed: 1.32,
-  switch: .38,
   scrub: .45,
   screenBlurDesktop: 3.5,
   screenBlurCompact: 2,

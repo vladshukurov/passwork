@@ -8,12 +8,12 @@
   },
   "stylePreset": {
     "background": "#fafafb",
-    "stroke": "#a7b1bf",
-    "secondaryStroke": "#a7b1bf",
+    "stroke": "#a3a9b2",
+    "secondaryStroke": "#a3a9b2",
     "strokeWidth": 0.85,
-    "fill": "#f7f8fb",
+    "fill": "#ffffff",
     "fillOpacity": 1,
-    "hiddenStroke": "#a7b1bf",
+    "hiddenStroke": "#a3a9b2",
     "hiddenStrokeOpacity": 0,
     "hiddenDash": [],
     "cornerRadius": 0,
@@ -23,19 +23,19 @@
   },
   "objects": [
     {
-      "id": "network-base",
-      "name": "network-base",
+      "id": "pedestal",
+      "name": "pedestal",
       "type": "slab",
       "transform": {
-        "x": -180,
-        "y": -100,
+        "x": -150,
+        "y": -150,
         "z": 0
       },
       "geometry": {
-        "width": 360,
-        "depth": 200,
+        "width": 300,
+        "depth": 300,
         "height": 60,
-        "thickness": 18,
+        "thickness": 14,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,
@@ -50,41 +50,6 @@
         "openingBottom": 18,
         "openingOffset": 0,
         "cornerSide": "back"
-      }
-    },
-    {
-      "id": "network-link",
-      "name": "network-link",
-      "type": "wire",
-      "transform": {
-        "x": -80,
-        "y": 0,
-        "z": 25
-      },
-      "geometry": {
-        "width": 100,
-        "depth": 80,
-        "height": 60,
-        "thickness": 12,
-        "count": 4,
-        "gap": 18,
-        "widthEnd": 36,
-        "heightEnd": 160,
-        "axis": "x",
-        "orientation": "x",
-        "motif": "none",
-        "seed": 1,
-        "opening": "none",
-        "openingWidth": 40,
-        "openingHeight": 52,
-        "openingBottom": 18,
-        "openingOffset": 0,
-        "cornerSide": "back"
-      },
-      "end": {
-        "x": 160,
-        "y": 0,
-        "z": 0
       }
     },
     {
@@ -92,14 +57,14 @@
       "name": "server-0-0",
       "type": "box",
       "transform": {
-        "x": -145,
+        "x": -120,
         "y": -60,
-        "z": 30
+        "z": 14
       },
       "geometry": {
         "width": 100,
         "depth": 120,
-        "height": 34,
+        "height": 32,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -122,14 +87,14 @@
       "name": "server-0-1",
       "type": "box",
       "transform": {
-        "x": -145,
+        "x": -120,
         "y": -60,
-        "z": 78
+        "z": 52
       },
       "geometry": {
         "width": 100,
         "depth": 120,
-        "height": 34,
+        "height": 32,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -152,15 +117,45 @@
       "name": "server-0-2",
       "type": "box",
       "transform": {
-        "x": -145,
+        "x": -120,
         "y": -60,
-        "z": 126
+        "z": 90
       },
       "geometry": {
         "width": 100,
         "depth": 120,
-        "height": 34,
+        "height": 32,
         "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "server-cap-0",
+      "name": "server-cap-0",
+      "type": "slab",
+      "transform": {
+        "x": -125,
+        "y": -65,
+        "z": 128
+      },
+      "geometry": {
+        "width": 110,
+        "depth": 130,
+        "height": 60,
+        "thickness": 10,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,
@@ -182,14 +177,14 @@
       "name": "server-1-0",
       "type": "box",
       "transform": {
-        "x": 45,
+        "x": 20,
         "y": -60,
-        "z": 30
+        "z": 14
       },
       "geometry": {
         "width": 100,
         "depth": 120,
-        "height": 34,
+        "height": 32,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -212,14 +207,14 @@
       "name": "server-1-1",
       "type": "box",
       "transform": {
-        "x": 45,
+        "x": 20,
         "y": -60,
-        "z": 78
+        "z": 52
       },
       "geometry": {
         "width": 100,
         "depth": 120,
-        "height": 34,
+        "height": 32,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -242,15 +237,45 @@
       "name": "server-1-2",
       "type": "box",
       "transform": {
-        "x": 45,
+        "x": 20,
         "y": -60,
-        "z": 126
+        "z": 90
       },
       "geometry": {
         "width": 100,
         "depth": 120,
-        "height": 34,
+        "height": 32,
         "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "server-cap-1",
+      "name": "server-cap-1",
+      "type": "slab",
+      "transform": {
+        "x": 15,
+        "y": -65,
+        "z": 128
+      },
+      "geometry": {
+        "width": 110,
+        "depth": 130,
+        "height": 60,
+        "thickness": 10,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,

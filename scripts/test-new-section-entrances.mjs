@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 
 const entranceTargets = [
   '.pricing-heading', '.pricing-team-selector', '.pricing-plans',
-  '.secrets .section-intro', '.secrets-cards',
+  '.secrets .section-intro',
   '.trust-heading', '.trust-cards', '.platforms-intro',
   '.platform-feature', '.platforms-cards',
 ];

@@ -8,12 +8,12 @@
   },
   "stylePreset": {
     "background": "#fafafb",
-    "stroke": "#a7b1bf",
-    "secondaryStroke": "#a7b1bf",
+    "stroke": "#a3a9b2",
+    "secondaryStroke": "#a3a9b2",
     "strokeWidth": 0.85,
-    "fill": "#f7f8fb",
+    "fill": "#ffffff",
     "fillOpacity": 1,
-    "hiddenStroke": "#a7b1bf",
+    "hiddenStroke": "#a3a9b2",
     "hiddenStrokeOpacity": 0,
     "hiddenDash": [],
     "cornerRadius": 0,
@@ -23,8 +23,8 @@
   },
   "objects": [
     {
-      "id": "civic-foundation",
-      "name": "civic-foundation",
+      "id": "pedestal",
+      "name": "pedestal",
       "type": "slab",
       "transform": {
         "x": -150,
@@ -35,7 +35,37 @@
         "width": 300,
         "depth": 300,
         "height": 60,
-        "thickness": 18,
+        "thickness": 14,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "civic-step",
+      "name": "civic-step",
+      "type": "slab",
+      "transform": {
+        "x": -120,
+        "y": -120,
+        "z": 14
+      },
+      "geometry": {
+        "width": 240,
+        "depth": 240,
+        "height": 60,
+        "thickness": 14,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,
@@ -57,14 +87,14 @@
       "name": "registry-0-0",
       "type": "box",
       "transform": {
-        "x": -110,
-        "y": -110,
-        "z": 30
+        "x": -100,
+        "y": -100,
+        "z": 28
       },
       "geometry": {
-        "width": 95,
-        "depth": 95,
-        "height": 46,
+        "width": 90,
+        "depth": 90,
+        "height": 36,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -87,14 +117,14 @@
       "name": "registry-0-1",
       "type": "box",
       "transform": {
-        "x": -110,
-        "y": 15,
-        "z": 30
+        "x": -100,
+        "y": 10,
+        "z": 28
       },
       "geometry": {
-        "width": 95,
-        "depth": 95,
-        "height": 46,
+        "width": 90,
+        "depth": 90,
+        "height": 36,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -117,14 +147,14 @@
       "name": "registry-1-0",
       "type": "box",
       "transform": {
-        "x": 15,
-        "y": -110,
-        "z": 30
+        "x": 10,
+        "y": -100,
+        "z": 28
       },
       "geometry": {
-        "width": 95,
-        "depth": 95,
-        "height": 46,
+        "width": 90,
+        "depth": 90,
+        "height": 36,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -147,14 +177,14 @@
       "name": "registry-1-1",
       "type": "box",
       "transform": {
-        "x": 15,
-        "y": 15,
-        "z": 30
+        "x": 10,
+        "y": 10,
+        "z": 28
       },
       "geometry": {
-        "width": 95,
-        "depth": 95,
-        "height": 46,
+        "width": 90,
+        "depth": 90,
+        "height": 36,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -177,15 +207,15 @@
       "name": "civic-platform",
       "type": "slab",
       "transform": {
-        "x": -112,
-        "y": -112,
-        "z": 96
+        "x": -110,
+        "y": -110,
+        "z": 64
       },
       "geometry": {
-        "width": 224,
-        "depth": 224,
+        "width": 220,
+        "depth": 220,
         "height": 60,
-        "thickness": 18,
+        "thickness": 14,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,
@@ -207,14 +237,14 @@
       "name": "civic-core",
       "type": "box",
       "transform": {
-        "x": -54,
-        "y": -54,
-        "z": 136
+        "x": -50,
+        "y": -50,
+        "z": 78
       },
       "geometry": {
-        "width": 108,
-        "depth": 108,
-        "height": 60,
+        "width": 100,
+        "depth": 100,
+        "height": 56,
         "thickness": 12,
         "count": 4,
         "gap": 18,

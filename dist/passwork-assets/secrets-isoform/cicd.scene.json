@@ -8,12 +8,12 @@
   },
   "stylePreset": {
     "background": "#fafafb",
-    "stroke": "#a7b1bf",
-    "secondaryStroke": "#a7b1bf",
+    "stroke": "#a3a9b2",
+    "secondaryStroke": "#a3a9b2",
     "strokeWidth": 0.85,
-    "fill": "#f7f8fb",
+    "fill": "#ffffff",
     "fillOpacity": 1,
-    "hiddenStroke": "#a7b1bf",
+    "hiddenStroke": "#a3a9b2",
     "hiddenStrokeOpacity": 0,
     "hiddenDash": [],
     "cornerRadius": 0,
@@ -23,19 +23,19 @@
   },
   "objects": [
     {
-      "id": "route-source",
-      "name": "route-source",
-      "type": "wire",
+      "id": "pedestal",
+      "name": "pedestal",
+      "type": "slab",
       "transform": {
-        "x": 0,
-        "y": 0,
-        "z": 60
+        "x": -150,
+        "y": -150,
+        "z": 0
       },
       "geometry": {
-        "width": 100,
-        "depth": 80,
+        "width": 300,
+        "depth": 300,
         "height": 60,
-        "thickness": 12,
+        "thickness": 14,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,
@@ -50,97 +50,22 @@
         "openingBottom": 18,
         "openingOffset": 0,
         "cornerSide": "back"
-      },
-      "end": {
-        "x": 0,
-        "y": 0,
-        "z": 220
-      }
-    },
-    {
-      "id": "route-left",
-      "name": "route-left",
-      "type": "wire",
-      "transform": {
-        "x": -20,
-        "y": 20,
-        "z": 40
-      },
-      "geometry": {
-        "width": 100,
-        "depth": 80,
-        "height": 60,
-        "thickness": 12,
-        "count": 4,
-        "gap": 18,
-        "widthEnd": 36,
-        "heightEnd": 160,
-        "axis": "x",
-        "orientation": "x",
-        "motif": "none",
-        "seed": 1,
-        "opening": "none",
-        "openingWidth": 40,
-        "openingHeight": 52,
-        "openingBottom": 18,
-        "openingOffset": 0,
-        "cornerSide": "back"
-      },
-      "end": {
-        "x": -75,
-        "y": 140,
-        "z": -22
-      }
-    },
-    {
-      "id": "route-right",
-      "name": "route-right",
-      "type": "wire",
-      "transform": {
-        "x": 20,
-        "y": -20,
-        "z": 40
-      },
-      "geometry": {
-        "width": 100,
-        "depth": 80,
-        "height": 60,
-        "thickness": 12,
-        "count": 4,
-        "gap": 18,
-        "widthEnd": 36,
-        "heightEnd": 160,
-        "axis": "x",
-        "orientation": "x",
-        "motif": "none",
-        "seed": 1,
-        "opening": "none",
-        "openingWidth": 40,
-        "openingHeight": 52,
-        "openingBottom": 18,
-        "openingOffset": 0,
-        "cornerSide": "back"
-      },
-      "end": {
-        "x": 140,
-        "y": -75,
-        "z": -22
       }
     },
     {
       "id": "source-base",
       "name": "source-base",
-      "type": "slab",
+      "type": "box",
       "transform": {
-        "x": -80,
-        "y": -80,
-        "z": 280
+        "x": -130,
+        "y": -130,
+        "z": 14
       },
       "geometry": {
-        "width": 160,
-        "depth": 160,
-        "height": 60,
-        "thickness": 18,
+        "width": 80,
+        "depth": 80,
+        "height": 90,
+        "thickness": 12,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,
@@ -162,44 +87,14 @@
       "name": "source-lid",
       "type": "slab",
       "transform": {
-        "x": -80,
-        "y": -80,
-        "z": 321
+        "x": -130,
+        "y": -130,
+        "z": 104
       },
       "geometry": {
-        "width": 160,
-        "depth": 160,
+        "width": 80,
+        "depth": 80,
         "height": 60,
-        "thickness": 18,
-        "count": 4,
-        "gap": 18,
-        "widthEnd": 36,
-        "heightEnd": 160,
-        "axis": "x",
-        "orientation": "x",
-        "motif": "none",
-        "seed": 1,
-        "opening": "none",
-        "openingWidth": 40,
-        "openingHeight": 52,
-        "openingBottom": 18,
-        "openingOffset": 0,
-        "cornerSide": "back"
-      }
-    },
-    {
-      "id": "junction",
-      "name": "junction",
-      "type": "box",
-      "transform": {
-        "x": -20,
-        "y": -20,
-        "z": 20
-      },
-      "geometry": {
-        "width": 40,
-        "depth": 40,
-        "height": 40,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -218,19 +113,19 @@
       }
     },
     {
-      "id": "left-base",
-      "name": "left-base",
-      "type": "slab",
+      "id": "route-right",
+      "name": "route-right",
+      "type": "box",
       "transform": {
-        "x": -175,
-        "y": 125,
-        "z": 0
+        "x": -50,
+        "y": -98,
+        "z": 30
       },
       "geometry": {
-        "width": 160,
-        "depth": 160,
-        "height": 60,
-        "thickness": 18,
+        "width": 100,
+        "depth": 16,
+        "height": 14,
+        "thickness": 12,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,
@@ -248,19 +143,19 @@
       }
     },
     {
-      "id": "left-lid",
-      "name": "left-lid",
-      "type": "slab",
+      "id": "route-left",
+      "name": "route-left",
+      "type": "box",
       "transform": {
-        "x": -175,
-        "y": 125,
-        "z": 41
+        "x": -98,
+        "y": -50,
+        "z": 30
       },
       "geometry": {
-        "width": 160,
-        "depth": 160,
-        "height": 60,
-        "thickness": 18,
+        "width": 16,
+        "depth": 100,
+        "height": 14,
+        "thickness": 12,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,
@@ -280,17 +175,17 @@
     {
       "id": "right-base",
       "name": "right-base",
-      "type": "slab",
+      "type": "box",
       "transform": {
-        "x": 125,
-        "y": -175,
-        "z": 0
+        "x": 50,
+        "y": -130,
+        "z": 14
       },
       "geometry": {
-        "width": 160,
-        "depth": 160,
-        "height": 60,
-        "thickness": 18,
+        "width": 80,
+        "depth": 80,
+        "height": 30,
+        "thickness": 12,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,
@@ -312,15 +207,75 @@
       "name": "right-lid",
       "type": "slab",
       "transform": {
-        "x": 125,
-        "y": -175,
-        "z": 41
+        "x": 50,
+        "y": -130,
+        "z": 44
       },
       "geometry": {
-        "width": 160,
-        "depth": 160,
+        "width": 80,
+        "depth": 80,
         "height": 60,
-        "thickness": 18,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "left-base",
+      "name": "left-base",
+      "type": "box",
+      "transform": {
+        "x": -130,
+        "y": 50,
+        "z": 14
+      },
+      "geometry": {
+        "width": 80,
+        "depth": 80,
+        "height": 30,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "left-lid",
+      "name": "left-lid",
+      "type": "slab",
+      "transform": {
+        "x": -130,
+        "y": 50,
+        "z": 44
+      },
+      "geometry": {
+        "width": 80,
+        "depth": 80,
+        "height": 60,
+        "thickness": 12,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,
