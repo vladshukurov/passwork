@@ -629,11 +629,10 @@ main :is(p, li) { text-wrap: pretty; }
 
 /* Only the light on the stationary dot pattern changes; no drifting layer. */
 .platform-feature-dots.dot-glint { opacity: 0; filter: brightness(0) invert(1); -webkit-mask-image: linear-gradient(112deg, transparent 35%, #0009 42%, #000 50%, #0009 58%, transparent 65%); mask-image: linear-gradient(112deg, transparent 35%, #0009 42%, #000 50%, #0009 58%, transparent 65%); -webkit-mask-size: 250% 100%; mask-size: 250% 100%; -webkit-mask-position: 100% 0; mask-position: 100% 0; }
-@keyframes pw-dot-pulse { 0%, 100% { opacity: 0; } 50% { opacity: var(--dot-glow); } }
-main.dot-motion-sweep .dot-glint,
-.react-site-header ~ main.dot-motion-sweep .hero-dots.dot-glint,
-.react-site-header ~ main.dot-motion-sweep .team-scene > .scene-dots.dot-glint,
-.react-site-header ~ main.dot-motion-sweep .security-stage-dots.dot-glint {
+/* A slow light sweep across every stationary dot pattern. */
+#main .dot-glint {
+  --dot-duration: 7s;
+  --dot-glow: .85;
   opacity: 0;
   filter: brightness(0) invert(1);
   -webkit-mask-image: linear-gradient(135deg, transparent 39%, #0008 46%, #000 50%, #0008 54%, transparent 61%);
@@ -641,8 +640,8 @@ main.dot-motion-sweep .dot-glint,
   -webkit-mask-size: 220% 220%; mask-size: 220% 220%;
   animation: pw-dot-sweep var(--dot-duration) linear infinite;
 }
-main.dot-motion-sweep :is(.team-scene, .security-switcher) .dot-glint { animation-delay: -2s; }
-main.dot-motion-sweep :is(.pricing, .platforms, .trust) .dot-glint { animation-delay: -4s; }
+#main :is(.team-scene, .security-switcher) .dot-glint { animation-delay: -2s; }
+#main :is(.pricing, .platforms, .trust) .dot-glint { animation-delay: -4s; }
 @keyframes pw-dot-sweep {
   0% { opacity: 0; -webkit-mask-position: 100% 100%; mask-position: 100% 100%; }
   8% { opacity: var(--dot-glow); }
@@ -729,7 +728,7 @@ main.dot-motion-sweep :is(.pricing, .platforms, .trust) .dot-glint { animation-d
 }
 @media (prefers-reduced-motion: reduce) {
   .react-site-header .header-inner nav, .react-site-header .header-inner nav :is(a, button), .react-site-header .menu-toggle span { transition: none; }
-  main.dot-motion-sweep .dot-glint { animation: none; opacity: 0; }
+  #main .dot-glint { animation: none; opacity: 0; }
   :is(.platform-card, .trust-card) { transition: none; }
 }
 

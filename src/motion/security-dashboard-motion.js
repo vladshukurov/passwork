@@ -1,5 +1,5 @@
-// Shared Attio-style entrance for Passwork's code and infrastructure screens.
-// Original: source/attio-forecast-motion-source.js.
+// Shared entrance for Passwork's code and infrastructure screens.
+
 const tempo = value => value * .85;
 const easing = 'cubic-bezier(.33, 1, .68, 1)';
 const playbackRate = .5;

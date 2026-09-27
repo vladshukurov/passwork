@@ -49,7 +49,7 @@ export const poses = {
 };
 
 function pieces(svg) {
-  const kind = svg.dataset.art || svg.dataset.secretArt;
+  const kind = svg.dataset.art;
   return (poses[kind] || []).map(([id, offset]) => {
     const node = svg.querySelector(`[data-object="${id}"]`);
     return node && {node, ...iso(offset)};
