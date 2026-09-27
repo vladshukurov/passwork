@@ -1,15 +1,20 @@
-/* Isoform illustrations: one neutral ink, three face tones for volume.
-   Interaction deepens the ink; colour never floods the faces. */
+/* Isoform illustrations: one neutral ink on page-coloured faces.
+   On hover ink and faces turn a clean brand blue in three tonal steps. */
 @property --iso-line { syntax: '<color>'; inherits: true; initial-value: #a3a9b2; }
-
+@property --iso-top { syntax: '<color>'; inherits: true; initial-value: #fafafb; }
+@property --iso-left { syntax: '<color>'; inherits: true; initial-value: #fafafb; }
+@property --iso-right { syntax: '<color>'; inherits: true; initial-value: #fafafb; }
 
 .iso-art {
   --iso-line: #a3a9b2;
-  /* Tops share the page colour; sides step down for volume. */
-  --iso-top: var(--pw-light-page, #fafafb);
-  --iso-left: #f0f1f4;
-  --iso-right: #e6e8ec;
-  transition: --iso-line var(--pw-motion-ui) var(--pw-ease-out);
+  /* Pure line drawing: every face takes the page colour and only hides
+     what is behind it. */
+  --iso-top: #fafafb;
+  --iso-left: #fafafb;
+  --iso-right: #fafafb;
+  transition-property: --iso-line, --iso-top, --iso-left, --iso-right;
+  transition-duration: var(--pw-motion-ui);
+  transition-timing-function: var(--pw-ease-out);
 }
 svg.iso-art path { stroke: var(--iso-line); stroke-width: .85; vector-effect: non-scaling-stroke; }
 svg.iso-art path[data-face="top"] { fill: var(--iso-top); }
@@ -18,7 +23,13 @@ svg.iso-art path[data-face="right"] { fill: var(--iso-right); }
 .iso-art [data-object] { will-change: transform; }
 
 @media (hover: hover) and (pointer: fine) {
-  :is(.certification-card, .secrets-card):hover .iso-art { --iso-line: #747c88; }
+  /* Brand-blue tonal steps: light top, deeper sides, so volume reads in colour. */
+  :is(.certification-card, .secrets-card):hover .iso-art {
+    --iso-line: #2f6fe4;
+    --iso-top: #f1f6ff;
+    --iso-left: #e2ecfe;
+    --iso-right: #d2e1fc;
+  }
 }
 
 /* One frame for both card rows: same size, same baseline. */

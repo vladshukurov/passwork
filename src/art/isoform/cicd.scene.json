@@ -23,36 +23,6 @@
   },
   "objects": [
     {
-      "id": "pedestal",
-      "name": "pedestal",
-      "type": "slab",
-      "transform": {
-        "x": -150,
-        "y": -150,
-        "z": 0
-      },
-      "geometry": {
-        "width": 300,
-        "depth": 300,
-        "height": 60,
-        "thickness": 14,
-        "count": 4,
-        "gap": 18,
-        "widthEnd": 36,
-        "heightEnd": 160,
-        "axis": "x",
-        "orientation": "x",
-        "motif": "none",
-        "seed": 1,
-        "opening": "none",
-        "openingWidth": 40,
-        "openingHeight": 52,
-        "openingBottom": 18,
-        "openingOffset": 0,
-        "cornerSide": "back"
-      }
-    },
-    {
       "id": "source-base",
       "name": "source-base",
       "type": "box",

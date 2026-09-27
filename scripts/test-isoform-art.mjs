@@ -16,4 +16,9 @@ for (const [name, pose] of Object.entries(poses)) {
   assert.doesNotMatch(svg, /<ellipse|data-detail/, `${name}: surface ornament is back`);
 }
 assert.equal(Object.keys(poses).length, 8);
+// Morph targets must keep the rest outline's structure so GSAP can interpolate.
+const storage = readFileSync('src/art/isoform/storage.svg', 'utf8');
+for (const [, rest, open] of storage.matchAll(/ d="([^"]+)" data-open="([^"]+)"/g))
+  assert.equal(rest.replace(/[-\d.]+/g, '#'), open.replace(/[-\d.]+/g, '#'), 'drawer morph changes path structure');
+assert.ok(/data-open=/.test(storage), 'storage drawer has no open state');
 console.log('Eight Isoform scenes: tagged faces, editable sources and animation targets OK');

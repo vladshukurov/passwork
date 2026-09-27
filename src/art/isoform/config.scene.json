@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "name": "Файлы конфигурации и параметры",
+  "name": "Параметры конфигурации",
   "artboard": {
     "width": 600,
     "height": 600,
@@ -23,48 +23,18 @@
   },
   "objects": [
     {
-      "id": "pedestal",
-      "name": "pedestal",
-      "type": "slab",
+      "id": "switch-base-0",
+      "name": "switch-base-0",
+      "type": "box",
       "transform": {
         "x": -150,
-        "y": -150,
-        "z": 0
+        "y": -65,
+        "z": 14
       },
       "geometry": {
-        "width": 300,
-        "depth": 300,
-        "height": 60,
-        "thickness": 14,
-        "count": 4,
-        "gap": 18,
-        "widthEnd": 36,
-        "heightEnd": 160,
-        "axis": "x",
-        "orientation": "x",
-        "motif": "none",
-        "seed": 1,
-        "opening": "none",
-        "openingWidth": 40,
-        "openingHeight": 52,
-        "openingBottom": 18,
-        "openingOffset": 0,
-        "cornerSide": "back"
-      }
-    },
-    {
-      "id": "config-base",
-      "name": "config-base",
-      "type": "slab",
-      "transform": {
-        "x": -110,
-        "y": -90,
-        "z": 40
-      },
-      "geometry": {
-        "width": 220,
-        "depth": 180,
-        "height": 60,
+        "width": 84,
+        "depth": 130,
+        "height": 30,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -83,18 +53,18 @@
       }
     },
     {
-      "id": "config-middle",
-      "name": "config-middle",
-      "type": "slab",
+      "id": "switch-0",
+      "name": "switch-0",
+      "type": "box",
       "transform": {
-        "x": -110,
-        "y": -90,
-        "z": 70
+        "x": -138,
+        "y": -53,
+        "z": 44
       },
       "geometry": {
-        "width": 220,
-        "depth": 180,
-        "height": 60,
+        "width": 60,
+        "depth": 50,
+        "height": 26,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -113,18 +83,108 @@
       }
     },
     {
-      "id": "config-top",
-      "name": "config-top",
-      "type": "slab",
+      "id": "switch-base-1",
+      "name": "switch-base-1",
+      "type": "box",
       "transform": {
-        "x": -110,
-        "y": -90,
-        "z": 100
+        "x": -45,
+        "y": -65,
+        "z": 14
       },
       "geometry": {
-        "width": 220,
-        "depth": 180,
-        "height": 60,
+        "width": 84,
+        "depth": 130,
+        "height": 30,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "switch-1",
+      "name": "switch-1",
+      "type": "box",
+      "transform": {
+        "x": -33,
+        "y": 12,
+        "z": 44
+      },
+      "geometry": {
+        "width": 60,
+        "depth": 50,
+        "height": 26,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "switch-base-2",
+      "name": "switch-base-2",
+      "type": "box",
+      "transform": {
+        "x": 60,
+        "y": -65,
+        "z": 14
+      },
+      "geometry": {
+        "width": 84,
+        "depth": 130,
+        "height": 30,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "switch-2",
+      "name": "switch-2",
+      "type": "box",
+      "transform": {
+        "x": 72,
+        "y": -53,
+        "z": 44
+      },
+      "geometry": {
+        "width": 60,
+        "depth": 50,
+        "height": 26,
         "thickness": 12,
         "count": 4,
         "gap": 18,

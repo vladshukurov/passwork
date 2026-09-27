@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "name": "Роботизированная производственная ячейка",
+  "name": "Технологическая установка",
   "artboard": {
     "width": 600,
     "height": 600,
@@ -23,17 +23,17 @@
   },
   "objects": [
     {
-      "id": "pedestal",
-      "name": "pedestal",
+      "id": "frame",
+      "name": "frame",
       "type": "slab",
       "transform": {
-        "x": -150,
-        "y": -150,
-        "z": 0
+        "x": -170,
+        "y": -60,
+        "z": 14
       },
       "geometry": {
-        "width": 300,
-        "depth": 300,
+        "width": 340,
+        "depth": 120,
         "height": 60,
         "thickness": 14,
         "count": 4,
@@ -53,47 +53,17 @@
       }
     },
     {
-      "id": "conveyor",
-      "name": "conveyor",
-      "type": "slab",
-      "transform": {
-        "x": -130,
-        "y": -30,
-        "z": 14
-      },
-      "geometry": {
-        "width": 260,
-        "depth": 60,
-        "height": 60,
-        "thickness": 16,
-        "count": 4,
-        "gap": 18,
-        "widthEnd": 36,
-        "heightEnd": 160,
-        "axis": "x",
-        "orientation": "x",
-        "motif": "none",
-        "seed": 1,
-        "opening": "none",
-        "openingWidth": 40,
-        "openingHeight": 52,
-        "openingBottom": 18,
-        "openingOffset": 0,
-        "cornerSide": "back"
-      }
-    },
-    {
-      "id": "column",
-      "name": "column",
+      "id": "tank-0",
+      "name": "tank-0",
       "type": "box",
       "transform": {
-        "x": -50,
-        "y": -90,
-        "z": 14
+        "x": -150,
+        "y": -40,
+        "z": 28
       },
       "geometry": {
-        "width": 20,
-        "depth": 20,
+        "width": 80,
+        "depth": 80,
         "height": 120,
         "thickness": 12,
         "count": 4,
@@ -113,18 +83,18 @@
       }
     },
     {
-      "id": "part-0",
-      "name": "part-0",
+      "id": "tank-1",
+      "name": "tank-1",
       "type": "box",
       "transform": {
-        "x": -120,
-        "y": -20,
-        "z": 30
+        "x": -40,
+        "y": -40,
+        "z": 28
       },
       "geometry": {
-        "width": 40,
-        "depth": 40,
-        "height": 28,
+        "width": 80,
+        "depth": 80,
+        "height": 120,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -143,18 +113,18 @@
       }
     },
     {
-      "id": "part-1",
-      "name": "part-1",
+      "id": "tank-2",
+      "name": "tank-2",
       "type": "box",
       "transform": {
-        "x": -60,
-        "y": -20,
-        "z": 30
+        "x": 70,
+        "y": -40,
+        "z": 28
       },
       "geometry": {
-        "width": 40,
-        "depth": 40,
-        "height": 28,
+        "width": 80,
+        "depth": 80,
+        "height": 120,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -173,18 +143,18 @@
       }
     },
     {
-      "id": "part-2",
-      "name": "part-2",
+      "id": "riser-0",
+      "name": "riser-0",
       "type": "box",
       "transform": {
-        "x": 0,
-        "y": -20,
-        "z": 30
+        "x": -118,
+        "y": -8,
+        "z": 148
       },
       "geometry": {
-        "width": 40,
-        "depth": 40,
-        "height": 28,
+        "width": 16,
+        "depth": 16,
+        "height": 20,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -203,18 +173,18 @@
       }
     },
     {
-      "id": "part-3",
-      "name": "part-3",
+      "id": "riser-1",
+      "name": "riser-1",
       "type": "box",
       "transform": {
-        "x": 60,
-        "y": -20,
-        "z": 30
+        "x": -8,
+        "y": -8,
+        "z": 148
       },
       "geometry": {
-        "width": 40,
-        "depth": 40,
-        "height": 28,
+        "width": 16,
+        "depth": 16,
+        "height": 20,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -233,18 +203,18 @@
       }
     },
     {
-      "id": "press-rod",
-      "name": "press-rod",
+      "id": "riser-2",
+      "name": "riser-2",
       "type": "box",
       "transform": {
-        "x": -44,
-        "y": -4,
-        "z": 100
+        "x": 102,
+        "y": -8,
+        "z": 148
       },
       "geometry": {
-        "width": 8,
-        "depth": 8,
-        "height": 24,
+        "width": 16,
+        "depth": 16,
+        "height": 20,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -263,78 +233,18 @@
       }
     },
     {
-      "id": "press-head",
-      "name": "press-head",
+      "id": "pipe",
+      "name": "pipe",
       "type": "box",
       "transform": {
-        "x": -55,
-        "y": -15,
-        "z": 84
+        "x": -118,
+        "y": -8,
+        "z": 168
       },
       "geometry": {
-        "width": 30,
-        "depth": 30,
-        "height": 26,
-        "thickness": 12,
-        "count": 4,
-        "gap": 18,
-        "widthEnd": 36,
-        "heightEnd": 160,
-        "axis": "x",
-        "orientation": "x",
-        "motif": "none",
-        "seed": 1,
-        "opening": "none",
-        "openingWidth": 40,
-        "openingHeight": 52,
-        "openingBottom": 18,
-        "openingOffset": 0,
-        "cornerSide": "back"
-      }
-    },
-    {
-      "id": "press-body",
-      "name": "press-body",
-      "type": "box",
-      "transform": {
-        "x": -50,
-        "y": -10,
-        "z": 110
-      },
-      "geometry": {
-        "width": 20,
-        "depth": 20,
-        "height": 24,
-        "thickness": 12,
-        "count": 4,
-        "gap": 18,
-        "widthEnd": 36,
-        "heightEnd": 160,
-        "axis": "x",
-        "orientation": "x",
-        "motif": "none",
-        "seed": 1,
-        "opening": "none",
-        "openingWidth": 40,
-        "openingHeight": 52,
-        "openingBottom": 18,
-        "openingOffset": 0,
-        "cornerSide": "back"
-      }
-    },
-    {
-      "id": "press-arm",
-      "name": "press-arm",
-      "type": "box",
-      "transform": {
-        "x": -50,
-        "y": -90,
-        "z": 134
-      },
-      "geometry": {
-        "width": 20,
-        "depth": 100,
-        "height": 16,
+        "width": 236,
+        "depth": 16,
+        "height": 14,
         "thickness": 12,
         "count": 4,
         "gap": 18,

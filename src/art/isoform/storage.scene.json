@@ -23,36 +23,6 @@
   },
   "objects": [
     {
-      "id": "pedestal",
-      "name": "pedestal",
-      "type": "slab",
-      "transform": {
-        "x": -150,
-        "y": -150,
-        "z": 0
-      },
-      "geometry": {
-        "width": 300,
-        "depth": 300,
-        "height": 60,
-        "thickness": 14,
-        "count": 4,
-        "gap": 18,
-        "widthEnd": 36,
-        "heightEnd": 160,
-        "axis": "x",
-        "orientation": "x",
-        "motif": "none",
-        "seed": 1,
-        "opening": "none",
-        "openingWidth": 40,
-        "openingHeight": 52,
-        "openingBottom": 18,
-        "openingOffset": 0,
-        "cornerSide": "back"
-      }
-    },
-    {
       "id": "safe-body",
       "name": "safe-body",
       "type": "box",
@@ -87,14 +57,14 @@
       "name": "drawer-0",
       "type": "box",
       "transform": {
-        "x": -75,
+        "x": -78,
         "y": 90,
-        "z": 22
+        "z": 26
       },
       "geometry": {
-        "width": 150,
-        "depth": 6,
-        "height": 38,
+        "width": 156,
+        "depth": 8,
+        "height": 34,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -117,14 +87,14 @@
       "name": "drawer-1",
       "type": "box",
       "transform": {
-        "x": -75,
+        "x": -78,
         "y": 90,
         "z": 66
       },
       "geometry": {
-        "width": 150,
-        "depth": 6,
-        "height": 38,
+        "width": 156,
+        "depth": 8,
+        "height": 34,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -147,14 +117,14 @@
       "name": "drawer-2",
       "type": "box",
       "transform": {
-        "x": -75,
+        "x": -78,
         "y": 90,
-        "z": 110
+        "z": 106
       },
       "geometry": {
-        "width": 150,
-        "depth": 22,
-        "height": 38,
+        "width": 156,
+        "depth": 8,
+        "height": 34,
         "thickness": 12,
         "count": 4,
         "gap": 18,
