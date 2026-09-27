@@ -1,0 +1,30 @@
+/* Interaction states: one focus ring, one hover language, one press. */
+
+/* Focus: the same 3px ring everywhere keyboard focus can land. */
+:is(a, button, input, [tabindex]):focus-visible { outline: 3px solid var(--pw-focus); outline-offset: 3px; }
+:is(.security-story-list, .main-features-nav) .security-story-heading:focus-visible { outline: 3px solid var(--pw-focus); outline-offset: 4px; border-radius: 4px; }
+/* The range input shows focus on its thumb, like hover does. */
+.pricing-range-wrap input:focus-visible { outline: none; }
+.pricing-range-wrap input:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 3px var(--pw-focus), 0 2px 8px #0007; }
+.pricing-range-wrap input:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 3px var(--pw-focus), 0 2px 8px #0007; }
+
+/* Hover: inactive items step up to full ink; nothing moves. */
+:is(.security-story-list, .main-features-nav) .security-story:not(.is-active) .security-story-heading {
+  transition: color var(--pw-motion-micro) var(--pw-ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  :is(.security-story-list, .main-features-nav) .security-story:not(.is-active) .security-story-heading:hover { color: var(--pw-text); }
+  .site-footer .footer-column > :is(a, button):hover, .site-footer .footer-bottom a:hover { color: #fff; }
+}
+
+/* Press: controls acknowledge the click with a brief dip. */
+.product-tabs button, .team-tabs button { transition-property: background-color, color, transform; transition-duration: var(--pw-motion-ui), var(--pw-motion-ui), var(--pw-motion-micro); transition-timing-function: var(--pw-ease-out); }
+.product-tabs button:active, .team-tabs button:active { transform: scale(.97); }
+
+/* Selected text in the brand's light blue. */
+::selection { background: #cfe0ff; color: var(--pw-text); }
+.hero ::selection, .trust ::selection, .pricing ::selection, .site-footer ::selection { background: #ffffff38; color: #fff; }
+
+@media (prefers-reduced-motion: reduce) {
+  .product-tabs button:active, .team-tabs button:active { transform: none; }
+}
