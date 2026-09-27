@@ -439,24 +439,6 @@ main :is(p, li) { text-wrap: pretty; }
 /* Reversible blue-surface experiment. Set HERO_SURFACE_EXPERIMENT=false in App.jsx
    to restore the original #151619 sections without touching their contents. */
 .section-hero-surface { display: none; }
-main.hero-surface-experiment :is(.pricing, .trust) {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  background: #345d99;
-}
-main.hero-surface-experiment :is(.pricing, .trust) > :not(.section-hero-surface) {
-  position: relative;
-  z-index: 1;
-}
-main.hero-surface-experiment .section-hero-surface {
-  display: block;
-  position: absolute;
-  z-index: 0;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
 .section-hero-gradient {
   position: absolute;
   inset: -64px;
@@ -481,25 +463,6 @@ main.hero-surface-experiment .section-hero-surface {
   -webkit-mask-position: 100% 0;
   mask-position: 100% 0;
 }
-main.hero-surface-experiment .pricing-range-wrap::before {
-  background: linear-gradient(to right,
-    #e5f2ff 0 var(--pricing-progress),
-    #143a6dad var(--pricing-progress) 100%);
-}
-main.hero-surface-experiment .pricing-range-wrap input::-webkit-slider-thumb {
-  border-color: #fff;
-  background: #174b88;
-}
-main.hero-surface-experiment .pricing-range-wrap input::-moz-range-thumb {
-  border-color: #fff;
-  background: #174b88;
-}
-main.hero-surface-experiment .pricing-plan-featured {
-  background: linear-gradient(160deg, #142d51 0%, #1c4678 100%);
-  box-shadow: inset 1px 0 #ffffff42, inset -1px 0 #ffffff42;
-}
-main.hero-surface-experiment .pricing-plan-featured .pricing-plan-gradient { opacity: .18; }
-main.hero-surface-experiment .pricing-plan-featured .pricing-plan-pattern { opacity: .42; }
 
 .site-footer .footer-column > a { padding-right: 0; }
 .site-footer .footer-column > a:hover,
@@ -586,7 +549,6 @@ main.hero-surface-experiment .pricing-plan-featured .pricing-plan-pattern { opac
   .pricing-features { padding: 16px 28px 0; }
   .trust-heading { min-height: 0; padding: 80px 28px 60px; }
   .trust-heading p { font-size: 17px; line-height: 24px; }
-  .trust-desktop-break { display: none; }
   .trust-card { height: 320px; }
   .platform-feature { height: 420px; }
   .platform-feature-copy { padding: 32px; }
@@ -663,49 +625,10 @@ main.hero-surface-experiment .pricing-plan-featured .pricing-plan-pattern { opac
 }
 
 /* Figma frame variant: the 1.5px background is the separator, never an outline. */
-main.rounded-frame { --frame-gap: #e4e7ec; --frame-dark: #313235; --frame-rule: 1px; --frame-radius: 4px; }
-.rounded-frame .page-grid { display: flex; flex-direction: column; gap: var(--frame-rule); padding: var(--frame-rule); border: 0; border-radius: var(--frame-radius); background: var(--frame-gap); }
-.rounded-frame .page-grid > :not(.section-divider):not(.security-scroll-track):not(.certification):not(.main-features) { margin: 0; overflow: hidden; border: 0; border-radius: var(--frame-radius); background-color: var(--pw-light-page); }
-.rounded-frame .page-grid > .team-scene { background-color: #397dca !important; }
-.rounded-frame .page-grid > .security-scroll-track { overflow: clip; border-radius: var(--frame-radius); background: var(--pw-light-page); }
-.rounded-frame .page-grid > .secrets > .secrets-inner { display: flex; flex-direction: column; gap: var(--frame-rule); padding: var(--frame-rule); background: var(--frame-gap); }
-.rounded-frame .security-switcher { overflow: visible; border-radius: inherit; background: var(--pw-light-page); }
-.rounded-frame .security-switcher > .section-intro { margin-bottom: var(--frame-rule); border: 0; border-radius: var(--frame-radius); box-shadow: 0 var(--frame-rule) 0 var(--frame-gap); }
-.rounded-frame .security-switcher-grid { overflow: clip; border: 0; border-radius: var(--frame-radius); }
-.rounded-frame .page-grid > .section-divider { display: block; height: 80px; border: 0; border-radius: var(--frame-radius); background: var(--pw-light-page); }
-.rounded-frame .page-grid > .section-divider > div { display: none; }
-.rounded-frame > .section-divider { display: block; height: 80px; background: var(--pw-light-page); }
-.rounded-frame > .section-divider > div { width: min(1520px, 79.375%); height: 100%; margin-inline: auto; padding: var(--frame-rule); border: 0; border-radius: var(--frame-radius); background: var(--frame-gap); }
-.rounded-frame > .section-divider > div::before { display: block; width: 100%; height: 100%; border-radius: var(--frame-radius); background: var(--pw-light-page); content: ''; }
-.rounded-frame > :is(.pricing, .secrets, .trust, .platforms) { width: 100%; margin: 0; overflow: visible; border-radius: 0; box-shadow: none; }
-.rounded-frame > :is(.pricing, .secrets, .trust, .platforms) > :is(.pricing-inner, .secrets-inner, .trust-inner, .platforms-inner) { display: flex; flex-direction: column; gap: var(--frame-rule); width: min(1520px, 79.375%); padding: var(--frame-rule); border: 0; border-radius: var(--frame-radius); background: var(--frame-gap); }
-.rounded-frame > :is(.pricing, .trust) > :is(.pricing-inner, .trust-inner) { background: var(--frame-dark); }
-.rounded-frame :is(.pricing-heading, .pricing-team-selector, .secrets .section-intro, .trust-heading, .platforms-intro, .platform-feature) { overflow: clip; border: 0; border-radius: var(--frame-radius); }
-.rounded-frame :is(.pricing-heading, .pricing-team-selector, .trust-heading) { background-color: #151619; }
-.rounded-frame .pricing-team-selector { margin-top: calc(-1 * var(--frame-rule)); }
-.rounded-frame :is(.secrets .section-intro, .platforms-intro) { background-color: var(--pw-light-page); }
-.rounded-frame .page-grid > .certification { display: flex; flex-direction: column; gap: var(--frame-rule); margin: 0; overflow: hidden; border: 0; border-radius: var(--frame-radius); background: var(--frame-gap); }
-.rounded-frame .certification > .section-intro { border: 0; border-radius: var(--frame-radius); background: var(--pw-light-page); }
-.rounded-frame :is(.client-logos, .certification-cards, .secrets-cards, .platforms-cards) { gap: var(--frame-rule); border: 0; background: var(--frame-gap); }
-.rounded-frame :is(.client-logos, .certification-cards, .secrets-cards) { padding: 0; }
-.rounded-frame :is(.pricing-plans, .trust-cards) { gap: var(--frame-rule); border: 0; background: var(--frame-dark); }
-.rounded-frame .platforms-cards { margin-inline: 0; padding: 0; }
-.rounded-frame :is(.client-logo, .certification-card, .pricing-plan, .secrets-card, .trust-card, .platform-card) { overflow: hidden; border: 0; border-radius: var(--frame-radius); background-color: var(--pw-light-page); }
-.rounded-frame .platform-card { background-color: var(--pw-light-page); }
-.rounded-frame .pricing-plan, .rounded-frame .trust-card { background-color: #151619; }
-.rounded-frame .pricing-plan-featured { background-color: #295585; }
-.rounded-frame .pricing-plan + .pricing-plan, .rounded-frame .secrets-card + .secrets-card { border: 0; }
-.rounded-frame .trust-card:last-child { border: 0; }
-.button, .rounded-frame .button, .site-footer .footer-column > button, .react-site-header nav button { transition: none; animation: none; }
-.rounded-frame .button:hover, .rounded-frame .button:active { transform: none; }
-.rounded-frame .team-tabs button { transition: background-color 220ms var(--pw-ease-ui), color 220ms var(--pw-ease-ui); }
+.button, .site-footer .footer-column > button, .react-site-header nav button { transition: none; animation: none; }
 
 /* Only the light on the stationary dot pattern changes; no drifting layer. */
 .platform-feature-dots.dot-glint { opacity: 0; filter: brightness(0) invert(1); -webkit-mask-image: linear-gradient(112deg, transparent 35%, #0009 42%, #000 50%, #0009 58%, transparent 65%); mask-image: linear-gradient(112deg, transparent 35%, #0009 42%, #000 50%, #0009 58%, transparent 65%); -webkit-mask-size: 250% 100%; mask-size: 250% 100%; -webkit-mask-position: 100% 0; mask-position: 100% 0; }
-main.dot-motion-off .dot-glint { opacity: 0; animation: none; }
-main.dot-motion-pulse .dot-glint { opacity: 0; filter: brightness(0) invert(1); -webkit-mask-image: none; mask-image: none; animation: pw-dot-pulse var(--dot-duration) ease-in-out infinite; }
-main.dot-motion-pulse :is(.team-scene, .security-switcher) .dot-glint { animation-delay: -1.5s; }
-main.dot-motion-pulse :is(.pricing, .platforms, .trust) .dot-glint { animation-delay: -3s; }
 @keyframes pw-dot-pulse { 0%, 100% { opacity: 0; } 50% { opacity: var(--dot-glow); } }
 main.dot-motion-sweep .dot-glint,
 .react-site-header ~ main.dot-motion-sweep .hero-dots.dot-glint,
@@ -729,15 +652,12 @@ main.dot-motion-sweep :is(.pricing, .platforms, .trust) .dot-glint { animation-d
 
 /* Motion-lab values are scoped to the live React preview. Surfaces never
    translate: only their state, copy and artwork respond to interaction. */
-main.motion-tabs-on :is(.product-tabs button, .team-tabs button) { transition-duration: var(--motion-tabs-duration); }
-main.motion-tabs-off :is(.product-tabs button, .team-tabs button) { transition: none; }
-main.motion-security-on .security-story-detail { transition-duration: var(--motion-security-duration); }
-main.motion-security-off :is(.security-story-detail, .security-story-heading) { transition: none; }
-main.motion-ui-on :is(.platform-card, .trust-card) { transition: background-color var(--motion-ui-duration) var(--pw-ease-ui); }
+:is(.product-tabs button, .team-tabs button) { transition-duration: var(--pw-motion-ui); }
+.security-story-detail { transition-duration: var(--pw-motion-ui); }
+:is(.platform-card, .trust-card) { transition: background-color var(--pw-motion-micro) var(--pw-ease-ui); }
 @media (hover: hover) and (pointer: fine) {
-  main.motion-ui-on .trust-card:hover { background-color: #1d2024; }
+  .trust-card:hover { background-color: #1d2024; }
 }
-main.motion-ui-off :is(.platform-card, .trust-card) { transition: none; }
 .mobile-nav-overline, .mobile-nav-footer { display: none; }
 
 /* The mobile navigation is a quiet extension of the header, not another card
@@ -807,20 +727,10 @@ main.motion-ui-off :is(.platform-card, .trust-card) { transition: none; }
   .react-site-header .brand img { width: 104px; height: auto; aspect-ratio: 114 / 25; }
   .react-site-header .header-demo { padding-inline: 8px; font-size: 11px; }
 }
-@media (max-width: 1100px) {
-  .rounded-frame > :is(.pricing, .secrets, .trust, .platforms) > :is(.pricing-inner, .secrets-inner, .trust-inner, .platforms-inner) { width: calc(100% - 48px); }
-  .rounded-frame > .section-divider > div { width: calc(100% - 48px); }
-}
-@media (max-width: 800px) {
-  .rounded-frame > :is(.pricing, .secrets, .trust, .platforms) > :is(.pricing-inner, .secrets-inner, .trust-inner, .platforms-inner) { width: calc(100% - 32px); }
-  .rounded-frame > .section-divider > div { width: calc(100% - 32px); }
-  .frame-preview-controls:not(.is-open) { width: 156px; }
-}
 @media (prefers-reduced-motion: reduce) {
   .react-site-header .header-inner nav, .react-site-header .header-inner nav :is(a, button), .react-site-header .menu-toggle span { transition: none; }
-  main.dot-motion-pulse .dot-glint, .dot-motion-pulse .dot-preview-light, main.dot-motion-sweep .dot-glint, .dot-motion-sweep .dot-preview-light { animation: none; opacity: 0; }
-  .rounded-frame .button, .rounded-frame .team-tabs button, main.motion-ui-on :is(.platform-card, .trust-card) { transition: none; }
-  .rounded-frame .button:hover { transform: none; }
+  main.dot-motion-sweep .dot-glint { animation: none; opacity: 0; }
+  :is(.platform-card, .trust-card) { transition: none; }
 }
 
 /* Recognition sits between pricing and applications in the same content width. */
@@ -845,10 +755,6 @@ main.motion-ui-off :is(.platform-card, .trust-card) { transition: none; }
 .award a:hover .award-logo-mono, .award a:focus-visible .award-logo-mono { opacity: 0; }
 .award a:hover .award-logo-color, .award a:focus-visible .award-logo-color { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .award img { transition: none; } }
-.rounded-frame > .awards > .awards-inner { display: flex; flex-direction: column; gap: var(--frame-rule); padding: var(--frame-rule); border: 0; border-radius: var(--frame-radius); background: var(--frame-gap); }
-.rounded-frame .awards-heading { border: 0; }
-.rounded-frame .awards-list { gap: var(--frame-rule); background: var(--frame-gap); }
-.rounded-frame .award { border: 0; background: var(--pw-light-page); }
 @media (max-width: 1100px) {
   .awards-inner { width: calc(100% - 48px); }
   .award { min-height: 158px; }
@@ -872,14 +778,14 @@ main.motion-ui-off :is(.platform-card, .trust-card) { transition: none; }
 .main-features-sidebar.security-switcher-copy { padding: clamp(44px, 4vw, 68px) clamp(32px, 4.2vw, 76px) clamp(46px, 4vw, 68px); }
 .main-features-sidebar .security-copy-heading h2 { max-width: 570px; margin: 0; color: var(--pw-text); font: 500 clamp(28px, 2vw, 34px)/1.14 var(--pw-font); letter-spacing: -.035em; }
 .main-features-nav { display: flex; flex-direction: column; width: 100%; max-width: 570px; }
-.main-features-nav .security-story-heading { transition-duration: var(--motion-features-duration, 360ms); }
+.main-features-nav .security-story-heading { transition-duration: var(--pw-motion-ui); }
 .main-features-content { min-width: 0; border-block: 1px solid var(--pw-border); background: var(--pw-light-page); }
 .main-features-chapter { display: flex; flex-direction: column; min-width: 0; scroll-margin-top: 7svh; border-bottom: 1px solid var(--pw-border); }
 .main-features-chapter:last-child { border-bottom: 0; }
 .main-features-chapter-heading { padding: clamp(30px, 3vw, 50px); background: var(--pw-light-page); }
 .main-features-chapter-heading h3 { max-width: 760px; margin: 0; color: var(--pw-text); font: 500 clamp(24px, 2.05vw, 34px)/1.2 var(--pw-font); letter-spacing: -.035em; }
 .main-features-art { position: relative; display: grid; place-items: center; width: 100%; aspect-ratio: 965 / 612; overflow: hidden; border-block: 1px solid var(--pw-border); background: linear-gradient(145deg, #e0eaff 0%, #ccddf9 55%, #9dbceb 100%); }
-.main-features-art::after { position: absolute; inset: 0; background-image: radial-gradient(circle, #7398ca 0.8px, transparent 1px); background-size: 16px 16px; background-position: 8px 8px; opacity: .65; content: ''; pointer-events: none; }
+.main-features-art::after { position: absolute; inset: 0; background-image: radial-gradient(circle, #7398ca .5px, transparent .75px); background-size: 8px 8px; background-position: 4px 4px; opacity: .5; content: ''; pointer-events: none; }
 .main-features-screen { position: relative; z-index: 1; display: block; width: 82.9%; max-height: 88%; height: auto; aspect-ratio: 8 / 5; object-fit: cover; border-radius: 8px; }
 .main-features-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--pw-border); }
 .main-features-detail { display: flex; flex-direction: column; gap: 24px; min-width: 0; min-height: 420px; padding: clamp(18px, 1.67vw, 32px); background: var(--pw-light-page); }
@@ -888,8 +794,6 @@ main.motion-ui-off :is(.platform-card, .trust-card) { transition: none; }
 .main-features-detail h4 { margin: 0; color: var(--pw-text); font: var(--pw-weight) 20px/26px var(--pw-font); letter-spacing: var(--pw-heading-tracking); }
 .main-features-detail p { margin: var(--pw-space-2) 0 0; color: var(--pw-text-muted); font: var(--pw-weight) 16px/22px var(--pw-font); letter-spacing: -.348px; }
 .main-features-detail-art { position: relative; flex: 1 1 auto; width: 100%; min-height: 220px; overflow: hidden; border-radius: 8px; background: #fff; }
-.rounded-frame .page-grid > .main-features { margin: 0; overflow: visible; border: 0; border-radius: var(--frame-radius); background: var(--pw-light-page); }
-.rounded-frame .main-features-grid { border-block: 0; }
 @media (min-width: 901px) {
   .main-features-grid { border-block: 0; }
   .main-features-sidebar { position: sticky; z-index: 2; top: 7svh; height: 86svh; }
@@ -929,4 +833,3 @@ main.motion-ui-off :is(.platform-card, .trust-card) { transition: none; }
 @media (prefers-reduced-motion: reduce) {
   .main-features-nav .security-story-heading { transition: none; }
 }
-main.motion-features-off .main-features-nav .security-story-heading { transition: none; }

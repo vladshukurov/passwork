@@ -13,7 +13,7 @@ const { faceData } = await load('src/export/svg.ts');
 const { makeNode, sceneSchema } = await load('src/scene/schema.ts');
 
 // Fallback colours for opening the SVG outside the site; the page overrides them.
-const tone = { top: '#ffffff', left: '#f3f4f6', right: '#e8eaee', line: '#a3a9b2', page: '#fafafb' };
+const tone = { top: '#fafafb', left: '#f0f1f4', right: '#e6e8ec', line: '#a3a9b2', page: '#fafafb' };
 const style = {
   background: tone.page, stroke: tone.line, secondaryStroke: tone.line,
   strokeWidth: .85, fill: tone.top, fillOpacity: 1,
@@ -56,17 +56,19 @@ const scenes: Record<string, { name: string; objects: any[]; order?: string[] }>
       plate(`server-cap-${tower}`, x - 5, -65, T + 3 * 38, 110, 130, 'none', 10),
     ]),
   ], order: ['pedestal', 'server-0-0', 'server-0-1', 'server-0-2', 'server-cap-0', 'server-1-0', 'server-1-1', 'server-1-2', 'server-cap-1'] },
-  production: { name: 'Управляемая технологическая линия', objects: [
-    // A cascade: each pipe leaves a taller unit and lands on the next roof,
-    // so the flow stays visible in the isometric view.
+  production: { name: 'Роботизированная производственная ячейка', objects: [
+    // A cantilever press over a conveyor: one column behind the belt, so
+    // nothing stands in front of the parts.
     pedestal(),
-    box('stack', -126, -30, T, 26, 26, 170),
-    box('unit-0', -140, -45, T, 70, 90, 110),
-    box('unit-1', -30, -45, T, 70, 90, 80),
-    box('pipe-0', -70, -8, T + 80, 60, 16, T),
-    box('unit-2', 80, -45, T, 60, 90, 50),
-    box('pipe-1', 40, -8, T + 50, 60, 16, T),
-  ], order: ['pedestal', 'stack', 'unit-0', 'unit-1', 'pipe-0', 'unit-2', 'pipe-1'] },
+    plate('conveyor', -130, -30, T, 260, 60, 'none', 16),
+    box('column', -50, -90, T, 20, 20, 120),
+    ...[-120, -60, 0, 60].map((x, i) => box(`part-${i}`, x, -20, T + 16, 40, 40, 28)),
+    // Press: fixed body under the arm, a rod hidden until the head strokes.
+    box('press-rod', -44, -4, 100, 8, 8, 24),
+    box('press-head', -55, -15, 84, 30, 30, 26),
+    box('press-body', -50, -10, 110, 20, 20, 24),
+    box('press-arm', -50, -90, T + 120, 20, 100, 16),
+  ], order: ['pedestal', 'conveyor', 'column', 'part-0', 'part-1', 'press-rod', 'press-head', 'press-body', 'press-arm', 'part-2', 'part-3'] },
   personal: { name: 'Изолированные ячейки персональных данных', objects: [
     pedestal(),
     corner('cells-boundary', -150, -150, T, 300, 100, 'back', T),

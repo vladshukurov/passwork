@@ -1,7 +1,2 @@
 /* Measured design values. A subset, not a replacement for the full build. */
 :root{--attio-bg:#fff;--attio-secondary:#fafafb;--attio-surface:#f3f4f6;--attio-text:#1c1d1f;--attio-body:#6f7988;--attio-stroke:#e4e7ec;--attio-blue:#266df0;--attio-ease:cubic-bezier(.33,1,.68,1);--attio-window-shadow:0 0 0 1px rgba(11,13,24,.06),0 1px 2px rgba(11,13,24,.025),0 3px 6px rgba(11,13,24,.03),0 8px 14px rgba(11,13,24,.035),0 16px 28px rgba(11,13,24,.04)}
-.attio-title{font-size:clamp(64px,calc(16px + 5.333svh),80px);line-height:.95;letter-spacing:clamp(-2.4px,calc(2.08px - .3733svh),-1.28px);font-weight:600}
-.attio-button{height:36px;padding:0 12px;gap:6px;border:1px solid #505967;border-radius:10px;background:#202124;color:#f3f4f6;font:500 14px/20px Inter,system-ui;transition:background-color .3s ease-in-out}
-.attio-button:hover{transition-duration:.05s;background:#383e47}
-.attio-window{border-radius:16px;padding:0 6px 6px;background:#f3f4f6cc;box-shadow:var(--attio-window-shadow);backdrop-filter:blur(12px)}
-@media(max-width:767.98px){.attio-title{font-size:40px;line-height:38px;letter-spacing:-.4px}}

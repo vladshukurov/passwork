@@ -403,7 +403,7 @@ const peopleLabel = count => {
   return 'сотрудников';
 };
 
-export function Pricing({ motion = { enabled: true, duration: 650 } }) {
+export function Pricing() {
   const [teamProgress, setTeamProgress] = useState(progressAtPeople(25));
   const largeTeam = teamProgress === 1000;
   const teamSize = peopleAtProgress(teamProgress);
@@ -448,7 +448,7 @@ export function Pricing({ motion = { enabled: true, duration: 650 } }) {
           <div className="pricing-plan-intro"><h3>{plan.name}</h3><p>{tidyCopy(plan.description)}</p></div>
           <div className="pricing-plan-offer">
             <p className="pricing-plan-kicker">{tidyCopy('Стоимость команды за год')}</p>
-            <p className="pricing-plan-total">{largeTeam ? <span className="pricing-plan-on-request">По запросу</span> : <AnimatedPrice amount={Number.parseInt(plan.price, 10) * teamSize * 365} duration={motion.duration} enabled={motion.enabled} />}</p>
+            <p className="pricing-plan-total">{largeTeam ? <span className="pricing-plan-on-request">По запросу</span> : <AnimatedPrice amount={Number.parseInt(plan.price, 10) * teamSize * 365} />}</p>
             <p className="pricing-plan-term">{tidyCopy(largeTeam ? 'Для команды от 101 человека' : `${plan.price} за пользователя в день`)}</p>
             <Button dialog="pricing" className="pricing-plan-action">{plan.action}</Button>
           </div>
@@ -610,15 +610,6 @@ function ContactDialog() {
 }
 
 function App() {
-  const motion = {
-    hero: { enabled: true, duration: 550 },
-    tabs: { enabled: true, duration: 320 },
-    features: { enabled: true, duration: 360 },
-    security: { enabled: true, duration: 360 },
-    pricing: { enabled: true, duration: 650 },
-    ui: { enabled: true, duration: 180 },
-    certification: { enabled: true, duration: 320 },
-  };
   useEffect(() => {
     const stopSectionNavigation = mountSectionNavigation();
     let active = true;
@@ -647,11 +638,11 @@ function App() {
   return <>
     <a className="skip-link" href="#main">Перейти к содержимому</a>
     <Header />
-    <main id="main" className={['dot-motion-sweep', ...Object.entries(motion).map(([key, value]) => `motion-${key}-${value.enabled ? 'on' : 'off'}`)].filter(Boolean).join(' ')} style={{ '--dot-duration': '7s', '--dot-glow': .85, ...Object.fromEntries(Object.entries(motion).map(([key, value]) => [`--motion-${key}-duration`, `${value.duration}ms`])) }}><Hero /><div className="page-grid">
+    <main id="main"><Hero /><div className="page-grid">
       <ClientLogos /><About /><Certification />
       <section className="teams-heading" id="teams"><h2>Пассворк решает<br />задачи разных команд</h2></section>
       <TeamTabs /><TeamScene /><SectionDivider inGrid /><MainFeatures /><Secrets /><SectionDivider inGrid />
-    </div><Trust /><div className="page-grid security-page-grid"><Security /></div><SectionDivider openBottom /><Pricing motion={motion.pricing} /><Awards /><Platforms /><SectionDivider openBottom /></main>
+    </div><Trust /><div className="page-grid security-page-grid"><Security /></div><SectionDivider openBottom /><Pricing /><Awards /><Platforms /><SectionDivider openBottom /></main>
     <Footer />
     <ContactDialog />
   </>;

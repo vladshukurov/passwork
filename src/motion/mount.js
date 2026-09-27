@@ -1,8 +1,8 @@
 import {gsap, mountPageMotion} from './page-motion.js';
+import {siteMotion} from './site-motion-tokens.js';
 import {mountHeroDashboard} from '../dashboards/hero/entry.ts';
 import {mountClientLogos} from './client-logos.js';
 import {mountHeroScroll} from './hero-scroll.js';
-import {mountOrbitAnimation} from './orbit-animation.js';
 import {mountSecuritySwitcher} from './security-switcher.js';
 import {mountTeamDashboard,teamScenarios} from '../dashboards/teams/entry.ts';
 import {snapshotScreen,dissolveScreen,fadeThroughScreen} from './screen-transitions.js';
@@ -17,16 +17,10 @@ const listen=(element,type,handler,options)=>{
   listeners.push(()=>element.removeEventListener(type,handler,options));
 };
 const stopLogos=mountClientLogos(document.querySelector('.client-logos'));
-const stopOrbit=mountOrbitAnimation(document.querySelector('.orbit-scene'));
 const stopSecurity=mountSecuritySwitcher(document.querySelector('.security-switcher'));
 
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const main=document.querySelector('main');
-const motionEnabled=key=>!main?.classList.contains(`motion-${key}-off`) && !reduced.matches;
-const motionDuration=(key,fallback)=>{
-  const milliseconds=Number.parseFloat(getComputedStyle(main).getPropertyValue(`--motion-${key}-duration`));
-  return Number.isFinite(milliseconds) && milliseconds>0?milliseconds/1000:fallback;
-};
 const stopPageMotion=mountPageMotion();
 const productPanel=document.querySelector('#product-panel');
 const detail=document.querySelector('.product-detail');
@@ -53,7 +47,7 @@ function selectProduct(index){
   productSwitch?.progress(1);
   outgoingProductScreen?.remove();
   gsap.set([liveDashboard,detail],{clearProps:'opacity,filter'});
-  const outgoing=motionEnabled('tabs')?snapshotScreen(activeProduct===0?liveDashboard:detail):null;
+  const outgoing=!reduced.matches?snapshotScreen(activeProduct===0?liveDashboard:detail):null;
   outgoingProductScreen=outgoing;
   activeProduct=index;
   setSelection(productTabs,index,productPanel);
@@ -68,7 +62,7 @@ function selectProduct(index){
     const incoming=index===0?liveDashboard:detail;
     productSwitch=dissolveScreen(outgoing,incoming,()=>{
       if(outgoingProductScreen===outgoing)outgoingProductScreen=null;
-    },motionDuration('tabs',.32));
+    },siteMotion.ui);
   }
 }
 productTabs.forEach((button,i)=>listen(button,'click',()=>selectProduct(i)));
@@ -89,7 +83,7 @@ function selectTeam(index){
   outgoingTeamCaption?.remove();
   gsap.set(teamDashboard,{clearProps:'opacity,filter'});
   gsap.set(caption,{clearProps:'opacity,filter'});
-  const animate=motionEnabled('tabs');
+  const animate=!reduced.matches;
   if(animate){
     outgoingTeamScreen=snapshotScreen(teamDashboard);
     outgoingTeamCaption=caption.cloneNode(true);
@@ -110,7 +104,7 @@ function selectTeam(index){
   teamSwitch=fadeThroughScreen(outgoing,teamDashboard,oldCaption,caption,()=>{
     if(outgoingTeamScreen===outgoing)outgoingTeamScreen=null;
     if(outgoingTeamCaption===oldCaption)outgoingTeamCaption=null;
-  },motionDuration('tabs',.32));
+  },siteMotion.ui);
 }
 teamTabs.forEach((button,i)=>listen(button,'click',()=>selectTeam(i)));
 function tabKeyboard(buttons,select){buttons.forEach((button,i)=>listen(button,'keydown',event=>{let next;if(event.key==='ArrowRight')next=(i+1)%buttons.length;else if(event.key==='ArrowLeft')next=(i-1+buttons.length)%buttons.length;else if(event.key==='Home')next=0;else if(event.key==='End')next=buttons.length-1;else return;event.preventDefault();select(next);buttons[next].focus();}));}
@@ -185,13 +179,8 @@ activeTeardown=()=>{
   stopHeroScroll();
   stopPageMotion();
   stopSecurity();
-  stopOrbit();
   stopLogos();
   if(dialog.open)dialog.close();
 };
 return activeTeardown;
 }
-
-// The archived static page mounts itself; React calls the same interface after
-// committing its markup and owns teardown on unmount/HMR.
-if (!document.querySelector('.react-site-header')) mountPasswork();

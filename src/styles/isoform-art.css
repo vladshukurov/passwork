@@ -5,9 +5,10 @@
 
 .iso-art {
   --iso-line: #a3a9b2;
-  --iso-top: #fff;
-  --iso-left: #f3f4f6;
-  --iso-right: #e8eaee;
+  /* Tops share the page colour; sides step down for volume. */
+  --iso-top: var(--pw-light-page, #fafafb);
+  --iso-left: #f0f1f4;
+  --iso-right: #e6e8ec;
   transition: --iso-line var(--pw-motion-ui) var(--pw-ease-out);
 }
 svg.iso-art path { stroke: var(--iso-line); stroke-width: .85; vector-effect: non-scaling-stroke; }

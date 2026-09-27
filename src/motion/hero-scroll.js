@@ -1,4 +1,5 @@
 import {gsap, ScrollTrigger} from './page-motion.js';
+import {siteMotion} from './site-motion-tokens.js';
 
 export function mountHeroScroll(hero, header) {
   if (!hero || !header) return () => {};
@@ -50,7 +51,7 @@ export function mountHeroScroll(hero, header) {
     }
     header.classList.toggle('is-over-product',productReachedHeader && !heroAboveHeader);
     header.classList.toggle('is-past-hero',heroAboveHeader);
-    if (header.classList.contains('react-site-header')) {
+    {
       const overDarkSection = [...document.querySelectorAll('.pricing,.trust')].some(section => {
         const bounds = section.getBoundingClientRect();
         return bounds.top < headerHeight && bounds.bottom > headerHeight / 2;
@@ -68,9 +69,7 @@ export function mountHeroScroll(hero, header) {
     const nextDirection = Math.sign(delta);
     distance = nextDirection===direction ? distance+Math.abs(delta) : Math.abs(delta);
     direction = nextDirection;
-    const visibilityThreshold = header.classList.contains('react-site-header')
-      ? (direction > 0 ? 36 : 48)
-      : 12;
+    const visibilityThreshold = direction > 0 ? 36 : 48;
     if(distance>=visibilityThreshold) {
       header.classList.toggle('is-header-hidden',direction>0);
       header.inert = direction>0 || originalInert;
@@ -82,15 +81,9 @@ export function mountHeroScroll(hero, header) {
   }});
   media.add('(min-width: 1101px) and (prefers-reduced-motion: no-preference)', () => {
     const baseScale = () => .86+.14*gsap.utils.clamp(0,1,(innerHeight-500)/300);
-    const motionEnabled = () => !main?.classList.contains('motion-hero-off');
-    const motionDuration = () => {
-      const milliseconds = Number.parseFloat(getComputedStyle(main || hero).getPropertyValue('--motion-hero-duration'));
-      return Number.isFinite(milliseconds) && milliseconds > 0 ? milliseconds / 1000 : .55;
-    };
     const gapAtRest = {title:180,description:130};
     const progressState = {value:0};
     let progressTween;
-    let settingsFrame = 0;
     const measure = () => {
       hero.style.setProperty('--hero-window-height',shell.offsetHeight+'px');
       hero.style.setProperty('--hero-window-overflow',Math.ceil(shell.offsetHeight*Math.max(0,baseScale()*1.05-1))+'px');
@@ -128,10 +121,6 @@ export function mountHeroScroll(hero, header) {
       copy.inert=false;
     };
     const render = (self,{immediate=false}={}) => {
-      if(!motionEnabled()) {
-        resetScene();
-        return;
-      }
       hero.classList.add('has-scroll-motion');
       // Copy keeps a geometry-based fade so no line can ghost through the UI.
       // Read all bounds before changing transforms, avoiding a forced layout
@@ -151,7 +140,7 @@ export function mountHeroScroll(hero, header) {
       } else {
         progressTween=gsap.to(progressState,{
           value:self.progress,
-          duration:motionDuration(),
+          duration:siteMotion.move,
           ease:'power2.out',
           overwrite:'auto',
           onUpdate:()=>renderMotion(progressState.value)
@@ -168,21 +157,7 @@ export function mountHeroScroll(hero, header) {
       end:()=>'+='+gsap.utils.clamp(320,520,innerHeight*.45),
       onUpdate:render,onRefresh:self=>render(self,{immediate:true})});
     render(trigger,{immediate:true});
-    const settingsObserver = new MutationObserver(() => {
-      cancelAnimationFrame(settingsFrame);
-      settingsFrame=requestAnimationFrame(() => {
-        if(motionEnabled()) {
-          const wasEnabled=hero.classList.contains('has-scroll-motion');
-          hero.classList.add('has-scroll-motion');
-          if(!wasEnabled) ScrollTrigger.refresh();
-          else render(trigger);
-        } else resetScene();
-      });
-    });
-    if(main) settingsObserver.observe(main,{attributes:true,attributeFilter:['class','style']});
     return () => {
-      cancelAnimationFrame(settingsFrame);
-      settingsObserver.disconnect();
       ScrollTrigger.removeEventListener('refreshInit',measure);
       trigger.kill();
       resetScene();

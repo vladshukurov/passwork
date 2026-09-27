@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "name": "Управляемая технологическая линия",
+  "name": "Роботизированная производственная ячейка",
   "artboard": {
     "width": 600,
     "height": 600,
@@ -11,7 +11,7 @@
     "stroke": "#a3a9b2",
     "secondaryStroke": "#a3a9b2",
     "strokeWidth": 0.85,
-    "fill": "#ffffff",
+    "fill": "#fafafb",
     "fillOpacity": 1,
     "hiddenStroke": "#a3a9b2",
     "hiddenStrokeOpacity": 0,
@@ -53,19 +53,19 @@
       }
     },
     {
-      "id": "stack",
-      "name": "stack",
-      "type": "box",
+      "id": "conveyor",
+      "name": "conveyor",
+      "type": "slab",
       "transform": {
-        "x": -126,
+        "x": -130,
         "y": -30,
         "z": 14
       },
       "geometry": {
-        "width": 26,
-        "depth": 26,
-        "height": 170,
-        "thickness": 12,
+        "width": 260,
+        "depth": 60,
+        "height": 60,
+        "thickness": 16,
         "count": 4,
         "gap": 18,
         "widthEnd": 36,
@@ -83,18 +83,18 @@
       }
     },
     {
-      "id": "unit-0",
-      "name": "unit-0",
+      "id": "column",
+      "name": "column",
       "type": "box",
       "transform": {
-        "x": -140,
-        "y": -45,
+        "x": -50,
+        "y": -90,
         "z": 14
       },
       "geometry": {
-        "width": 70,
-        "depth": 90,
-        "height": 110,
+        "width": 20,
+        "depth": 20,
+        "height": 120,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -113,18 +113,18 @@
       }
     },
     {
-      "id": "unit-1",
-      "name": "unit-1",
+      "id": "part-0",
+      "name": "part-0",
       "type": "box",
       "transform": {
-        "x": -30,
-        "y": -45,
-        "z": 14
+        "x": -120,
+        "y": -20,
+        "z": 30
       },
       "geometry": {
-        "width": 70,
-        "depth": 90,
-        "height": 80,
+        "width": 40,
+        "depth": 40,
+        "height": 28,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -143,18 +143,18 @@
       }
     },
     {
-      "id": "pipe-0",
-      "name": "pipe-0",
+      "id": "part-1",
+      "name": "part-1",
       "type": "box",
       "transform": {
-        "x": -70,
-        "y": -8,
-        "z": 94
+        "x": -60,
+        "y": -20,
+        "z": 30
       },
       "geometry": {
-        "width": 60,
-        "depth": 16,
-        "height": 14,
+        "width": 40,
+        "depth": 40,
+        "height": 28,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -173,18 +173,18 @@
       }
     },
     {
-      "id": "unit-2",
-      "name": "unit-2",
+      "id": "part-2",
+      "name": "part-2",
       "type": "box",
       "transform": {
-        "x": 80,
-        "y": -45,
-        "z": 14
+        "x": 0,
+        "y": -20,
+        "z": 30
       },
       "geometry": {
-        "width": 60,
-        "depth": 90,
-        "height": 50,
+        "width": 40,
+        "depth": 40,
+        "height": 28,
         "thickness": 12,
         "count": 4,
         "gap": 18,
@@ -203,18 +203,138 @@
       }
     },
     {
-      "id": "pipe-1",
-      "name": "pipe-1",
+      "id": "part-3",
+      "name": "part-3",
       "type": "box",
       "transform": {
-        "x": 40,
-        "y": -8,
-        "z": 64
+        "x": 60,
+        "y": -20,
+        "z": 30
       },
       "geometry": {
-        "width": 60,
-        "depth": 16,
-        "height": 14,
+        "width": 40,
+        "depth": 40,
+        "height": 28,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "press-rod",
+      "name": "press-rod",
+      "type": "box",
+      "transform": {
+        "x": -44,
+        "y": -4,
+        "z": 100
+      },
+      "geometry": {
+        "width": 8,
+        "depth": 8,
+        "height": 24,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "press-head",
+      "name": "press-head",
+      "type": "box",
+      "transform": {
+        "x": -55,
+        "y": -15,
+        "z": 84
+      },
+      "geometry": {
+        "width": 30,
+        "depth": 30,
+        "height": 26,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "press-body",
+      "name": "press-body",
+      "type": "box",
+      "transform": {
+        "x": -50,
+        "y": -10,
+        "z": 110
+      },
+      "geometry": {
+        "width": 20,
+        "depth": 20,
+        "height": 24,
+        "thickness": 12,
+        "count": 4,
+        "gap": 18,
+        "widthEnd": 36,
+        "heightEnd": 160,
+        "axis": "x",
+        "orientation": "x",
+        "motif": "none",
+        "seed": 1,
+        "opening": "none",
+        "openingWidth": 40,
+        "openingHeight": 52,
+        "openingBottom": 18,
+        "openingOffset": 0,
+        "cornerSide": "back"
+      }
+    },
+    {
+      "id": "press-arm",
+      "name": "press-arm",
+      "type": "box",
+      "transform": {
+        "x": -50,
+        "y": -90,
+        "z": 134
+      },
+      "geometry": {
+        "width": 20,
+        "depth": 100,
+        "height": 16,
         "thickness": 12,
         "count": 4,
         "gap": 18,

@@ -20,11 +20,9 @@ export const poses = {
     [`server-cap-${tower}`, [tower ? 14 : -14, 0, 52]],
   ]),
   production: [
-    ['stack', [-12, 0, 30]],
-    ['unit-0', [-12, 0, 0]],
-    ['pipe-0', [-6, 0, 12]],
-    ['unit-2', [14, 0, 0]],
-    ['pipe-1', [7, 0, 12]],
+    ['press-rod', [0, 0, -9]],
+    ['press-head', [0, 0, -18]],
+    ...[0, 1, 2, 3].map(i => [`part-${i}`, [16, 0, 0]]),
   ],
   personal: [
     ['cell-0-0', [-16, -16, 0]], ['cell-0-1', [-16, 16, 0]],

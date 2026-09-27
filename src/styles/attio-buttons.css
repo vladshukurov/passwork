@@ -96,7 +96,6 @@
 .button-outline:active { background-color: #ffffff24; box-shadow:0 1px 3px #0b193026,0 0 0 1px #ffffff18 inset; }
 .button-outline:disabled { background-color: transparent; border-color: #ffffff40; color: #ffffff66; }
 .button-outline img { filter: brightness(0) invert(1); }
-.button-small { height: 32px; padding: 0 10px; gap: 6px; border-radius: var(--pw-radius-control); font-size: 12px; line-height: 18px; }
 @media (prefers-reduced-motion: reduce) {
   .button { transition: none; }
 }

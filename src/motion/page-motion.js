@@ -5,41 +5,6 @@ import {ScrollTrigger} from 'gsap/ScrollTrigger';
 export {gsap, ScrollTrigger};
 gsap.registerPlugin(ScrollTrigger);
 
-function mountDotGlints() {
-  // React owns its dot treatments through the preview controls. Avoid a
-  // second GSAP mask tween fighting the selected CSS animation.
-  if (document.querySelector('.react-site-header')) return () => {};
-  const preference=matchMedia('(prefers-reduced-motion: no-preference)');
-  let cleanups=[];
-  const mount=()=>{
-    cleanups.forEach(cleanup=>cleanup());
-    cleanups=[];
-    if(!preference.matches)return;
-    document.querySelectorAll('.dot-glint').forEach((glint,index) => {
-      // The archived static site keeps its original one-shot sweep.
-      const sweep=gsap.fromTo(glint,
-        {webkitMaskPosition:'100% 0%',maskPosition:'100% 0%'},
-        {webkitMaskPosition:'0% 0%',maskPosition:'0% 0%',duration:siteMotion.glintSweep,
-          ease:'sine.inOut',paused:true,delay:.35+index*.15,
-          repeat:0});
-      let visible=false;
-      let started=false;
-      const update=()=>{
-        if(!visible || document.hidden){sweep.pause();return;}
-        if(!started){started=true;sweep.play(0);}
-        else if(sweep.progress()<1)sweep.resume();
-      };
-      const observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;update();});
-      observer.observe(glint.parentElement);
-      document.addEventListener('visibilitychange',update);
-      cleanups.push(()=>{observer.disconnect();document.removeEventListener('visibilitychange',update);sweep.kill();});
-    });
-  };
-  mount();
-  preference.addEventListener('change',mount);
-  return ()=>{preference.removeEventListener('change',mount);cleanups.forEach(cleanup=>cleanup());};
-}
-
 // Every section enters the same way: a short rise with one curve and one
 // stagger. Surfaces stay put; only their contents move.
 function reveal(trigger, targets, extra = {}) {
@@ -54,23 +19,16 @@ function reveal(trigger, targets, extra = {}) {
 }
 
 export function mountPageMotion() {
-  const stopGlints=mountDotGlints();
   const media = gsap.matchMedia();
   media.add('(prefers-reduced-motion: no-preference)', () => {
     // Separate inner entrance targets from the hero's scroll-controlled wrapper.
     if (window.scrollY < 8) {
       gsap.from('.header-inner', {opacity:0,y:-8,duration:siteMotion.reveal,ease:siteMotion.ease,clearProps:'opacity,transform'});
-      if (document.querySelector('.react-site-header')) {
-        // React's ScrollTrigger owns copy opacity and CTA scale. Keep its
-        // entrance on the independent Y axis, including the Figma origin mark.
-        gsap.from('.hero-origin,.hero h1,.hero-copy > p,.product-tabs', {
-          y:siteMotion.revealY,duration:siteMotion.entrance,stagger:siteMotion.stagger,ease:siteMotion.ease,clearProps:'transform'
-        });
-      } else {
-        gsap.from('.hero h1,.hero-copy > p,.hero-actions,.product-tabs', {
-          opacity:0,y:siteMotion.revealY,duration:siteMotion.entrance,stagger:siteMotion.stagger,ease:siteMotion.ease,clearProps:'opacity,transform'
-        });
-      }
+      // The hero's ScrollTrigger owns copy opacity and CTA scale, so the
+      // entrance only moves along Y.
+      gsap.from('.hero-origin,.hero h1,.hero-copy > p,.product-tabs', {
+        y:siteMotion.revealY,duration:siteMotion.entrance,stagger:siteMotion.stagger,ease:siteMotion.ease,clearProps:'transform'
+      });
     }
     // Illustrated cards: the artwork assembles, then the copy follows.
     document.querySelectorAll('.certification-cards, .secrets-cards').forEach(row => {
@@ -111,9 +69,8 @@ export function mountPageMotion() {
       const svg = card.querySelector('.iso-art');
       if (!svg) return;
       const art = mountArtHover(gsap, svg);
-      const main = card.closest('main');
       const enter = event => {
-        if (event.pointerType === 'touch' || main?.classList.contains('motion-certification-off')) return;
+        if (event.pointerType === 'touch') return;
         art.open();
       };
       const leave = () => art.close();
@@ -131,5 +88,5 @@ export function mountPageMotion() {
     });
     return () => cleanups.forEach(cleanup => cleanup());
   });
-  return () => {media.revert();stopGlints();};
+  return () => media.revert();
 }

@@ -33,9 +33,6 @@
 .react-site-header.is-scroll-header.is-over-dark-section::after {
   background: #151619;
 }
-.react-site-header.hero-surface-experiment.is-scroll-header.is-over-dark-section::after {
-  background: #345d99;
-}
 .react-site-header.is-scroll-header.is-over-dark-section {
   color: #ffffffb8;
 }

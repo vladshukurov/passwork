@@ -1,28 +1,4 @@
 /* Original Attio pipeline-radar motion, adapted to the Passwork scene. */
-.orbit-scene .orbit {
-  width: min(92%, calc(752 * var(--unit)));
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-@media (max-width: 1100px) { .orbit-scene .orbit { width: min(92%, 510px); } }
-@media (max-width: 800px) { .orbit-scene .orbit { width: min(92%, 410px); } }
-@media (max-width: 480px) { .orbit-scene .orbit { width: min(92%, 310px); } }
-.passwork-radar {
-  display: block;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  font-family: Inter, Museo, sans-serif;
-}
-.radar-center { filter: drop-shadow(0 8px 20px rgba(28,40,64,.12)); }
-.radar-tag-enter { transform-box: fill-box; transform-origin: center; }
-.has-orbit-motion .radar-tag-enter {
-  animation: passwork-radar-enter .5s ease var(--enter-delay, 0ms) both;
-}
-.orbit-scene:not(.is-orbit-active) :is(.pipeline-radar-ring-inner, .pipeline-radar-ring-outer, .pipeline-radar-bob, .radar-tag-enter) {
-  animation-play-state: paused;
-}
 @keyframes passwork-radar-enter {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
@@ -44,26 +20,4 @@
 @keyframes pipeline-radar-bob {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-5px); }
-}
-.pipeline-radar-ring-inner {
-  opacity: 0.11;
-  animation: pipeline-radar-ring-inner 3.6s ease-in-out infinite;
-}
-.pipeline-radar-ring-outer {
-  opacity: 0.067;
-  animation: pipeline-radar-ring-outer 3.6s ease-in-out infinite;
-}
-.pipeline-radar-bob {
-  transform-box: fill-box;
-  transform-origin: center;
-  will-change: transform;
-  animation: pipeline-radar-bob 4s ease-in-out infinite;
-}
-@media (prefers-reduced-motion: reduce) {
-  .pipeline-radar-ring-inner,
-  .pipeline-radar-ring-outer,
-  .pipeline-radar-bob,
-  .has-orbit-motion .radar-tag-enter {
-    animation: none;
-  }
 }
