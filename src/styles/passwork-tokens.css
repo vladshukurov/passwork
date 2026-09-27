@@ -67,6 +67,7 @@
   --pw-motion-micro: 160ms;
   --pw-motion-ui: 280ms;
   --pw-motion-move: 560ms;
+  --pw-motion-press: 90ms;  /* button press feedback, deliberately quicker */
   --pw-ease-out: cubic-bezier(.22, 1, .36, 1);
   --pw-ease-in-out: cubic-bezier(.65, 0, .35, 1);
   --pw-duration-fast: var(--pw-motion-micro);

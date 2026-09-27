@@ -62,8 +62,8 @@ export function mountSecuritySwitcher(section) {
       gsap.set(outgoing, { autoAlpha: 1, filter: 'none' });
       gsap.set(incoming, { autoAlpha: 0, filter: 'none' });
       artTransition = gsap.timeline({ onComplete: () => { artTransition = null; } })
-        .to(outgoing, { autoAlpha: 0, duration: transitionDuration(), ease: 'sine.inOut' }, 0)
-        .to(incoming, { autoAlpha: 1, duration: transitionDuration(), ease: 'sine.inOut' }, 0);
+        .to(outgoing, { autoAlpha: 0, duration: transitionDuration(), ease: siteMotion.fade }, 0)
+        .to(incoming, { autoAlpha: 1, duration: transitionDuration(), ease: siteMotion.fade }, 0);
     } else {
       if (outgoing) gsap.set(outgoing, { autoAlpha: 0, filter: 'none' });
       gsap.set(incoming, { autoAlpha: 1, filter: 'none' });

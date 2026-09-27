@@ -86,11 +86,11 @@
 .security-story-list { width: 100%; max-width: 570px; }
 .security-story { padding: 0; }
 .security-story + .security-story { margin-top: clamp(24px, 2.2vw, 36px); }
-.security-story-heading { display: block; width: 100%; padding: 0; border: 0; background: transparent; color: var(--pw-text); text-align: left; cursor: pointer; font: 500 clamp(18px, 1.2vw, 21px)/1.4 Museo, Arial, sans-serif; letter-spacing: -.025em; transition: color .3s ease; }
+.security-story-heading { display: block; width: 100%; padding: 0; border: 0; background: transparent; color: var(--pw-text); text-align: left; cursor: pointer; font: 500 clamp(18px, 1.2vw, 21px)/1.4 Museo, Arial, sans-serif; letter-spacing: -.025em; transition: color var(--pw-motion-ui) var(--pw-ease-out); }
 .security-story:not(.is-active) .security-story-heading:hover { color: #525e70; }
 .security-story-heading:focus-visible { outline: 2px solid #266df0; outline-offset: 5px; border-radius: 2px; }
 .security-story:not(.is-active) .security-story-heading { color: #7b8595; }
-.security-story-detail { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows .54s cubic-bezier(.22,1,.36,1), opacity .28s ease; }
+.security-story-detail { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows var(--pw-motion-move) var(--pw-ease-out), opacity var(--pw-motion-ui) var(--pw-ease-out); }
 .security-story.is-active .security-story-detail { grid-template-rows: 1fr; opacity: 1; }
 .security-story-detail-inner { min-height: 0; overflow: hidden; }
 .security-story-detail p { max-width: min(510px, calc(100% - 8px)); margin: 9px 0 20px; color: var(--pw-text-secondary); font: 500 clamp(14px, .95vw, 16px)/1.55 Museo, Arial, sans-serif; letter-spacing: -.01em; }
@@ -136,7 +136,7 @@
     flex: 0 0 auto;
     margin: 0;
   }
-  .security-story-detail { transition: grid-template-rows .42s cubic-bezier(.22,1,.36,1), opacity .3s ease; }
+  .security-story-detail { transition: grid-template-rows var(--pw-motion-move) var(--pw-ease-out), opacity var(--pw-motion-ui) var(--pw-ease-out); }
   .security-story-detail p { margin: 10px 0 20px; }
 }
 .security-scroll-track { scroll-margin-top: 85px; }

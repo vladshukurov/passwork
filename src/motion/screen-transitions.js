@@ -1,3 +1,4 @@
+import { siteMotion } from './site-motion-tokens.js';
 import { gsap } from './page-motion.js';
 
 export function snapshotScreen(source) {
@@ -20,8 +21,8 @@ export function dissolveScreen(outgoing, incoming, onComplete, duration = .32) {
     onComplete?.();
   } });
   timeline.set(incoming, { opacity: 0 }, 0);
-  timeline.fromTo(outgoing, { opacity: 1 }, { opacity: 0, duration, ease: 'sine.inOut' }, 0);
-  timeline.to(incoming, { opacity: 1, duration, ease: 'sine.inOut' }, 0);
+  timeline.fromTo(outgoing, { opacity: 1 }, { opacity: 0, duration, ease: siteMotion.fade }, 0);
+  timeline.to(incoming, { opacity: 1, duration, ease: siteMotion.fade }, 0);
   return timeline;
 }
 
@@ -36,7 +37,7 @@ export function fadeThroughScreen(outgoing, incoming, outgoingCaption, incomingC
   } });
   timeline.set(incoming, { opacity: 0 }, 0);
   timeline.set(incomingCaption, { opacity: 0 }, 0);
-  timeline.to([outgoing, outgoingCaption], { opacity: 0, duration, ease: 'sine.inOut' }, 0);
-  timeline.to([incoming, incomingCaption], { opacity: 1, duration, ease: 'sine.inOut' }, 0);
+  timeline.to([outgoing, outgoingCaption], { opacity: 0, duration, ease: siteMotion.fade }, 0);
+  timeline.to([incoming, incomingCaption], { opacity: 1, duration, ease: siteMotion.fade }, 0);
   return timeline;
 }

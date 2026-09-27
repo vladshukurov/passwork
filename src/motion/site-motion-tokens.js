@@ -7,6 +7,7 @@ export const siteMotion = Object.freeze({
   reveal: .72,         // first appearance on scroll
   ease: 'power4.out',  // = cubic-bezier(.22, 1, .36, 1)
   easeInOut: 'power2.inOut',
+  fade: 'sine.inOut',   // crossfades between two screens
   stagger: .06,
   revealY: 16,
   revealStart: 'top 85%',

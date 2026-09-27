@@ -48,7 +48,7 @@
   --pw-button-from: #eee;
   --pw-button-to: #eee;
   box-shadow: 0 1px 3px #0b19301c, 0 0 0 1px #0000000a inset;
-  transition-duration: 90ms;
+  transition-duration: var(--pw-motion-press);
 }
 .button:focus-visible {
   outline: 3px solid var(--pw-focus);

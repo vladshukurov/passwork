@@ -242,7 +242,7 @@ main :is(p, li) { text-wrap: pretty; }
   border-radius: 50%;
   background: #fff;
   box-shadow: 0 0 0 3px #ffffff14, 0 2px 6px #0006;
-  transition: box-shadow .18s ease;
+  transition: box-shadow var(--pw-motion-micro) var(--pw-ease-out);
 }
 .pricing-range-wrap input::-moz-range-thumb {
   box-sizing: border-box;
@@ -251,7 +251,7 @@ main :is(p, li) { text-wrap: pretty; }
   border-radius: 50%;
   background: #fff;
   box-shadow: 0 0 0 3px #ffffff14, 0 2px 6px #0006;
-  transition: box-shadow .18s ease;
+  transition: box-shadow var(--pw-motion-micro) var(--pw-ease-out);
 }
 .pricing-range-wrap input:hover::-webkit-slider-thumb { box-shadow: 0 0 0 4px #ffffff20, 0 2px 8px #0007; }
 .pricing-range-wrap input:hover::-moz-range-thumb { box-shadow: 0 0 0 4px #ffffff20, 0 2px 8px #0007; }
@@ -299,7 +299,7 @@ main :is(p, li) { text-wrap: pretty; }
 .pricing-plan-offer { padding: 4px 30px 10px; }
 .pricing-plan-kicker { margin-bottom: 6px; color: #ffffffa6; font: 500 13px/18px var(--pw-font); }
 .pricing-plan-total { color: #fff; font: 500 clamp(34px, 2.35vw, 44px)/1.08 var(--pw-font); letter-spacing: -.17px; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.pricing-plan-amount, .pricing-plan-on-request { display: inline-block; animation: pricing-value-enter .24s ease-out both; }
+.pricing-plan-amount, .pricing-plan-on-request { display: inline-block; animation: pricing-value-enter var(--pw-motion-ui) var(--pw-ease-out) both; }
 @keyframes pricing-value-enter { from { opacity: .55; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 .pricing-plan-term { margin: 5px 0 20px; color: #ffffffa6; font: 500 15px/21px var(--pw-font); letter-spacing: -.348px; }
 .pricing-plan-action { width: 100%; padding-inline: 24px; }
@@ -670,7 +670,7 @@ main :is(p, li) { text-wrap: pretty; }
   .react-site-header.is-menu-open .brand-light { opacity: 1; }
   .react-site-header .brand img { width: 114px; height: 25px; max-width: none; object-fit: contain; }
   .react-site-header .menu-toggle { display: grid; align-content: center; flex: 0 0 44px; width: 44px; height: 44px; padding: 0; }
-  .react-site-header .menu-toggle span { width: 24px; height: 2px; margin: 4px auto; border-radius: 2px; transition: transform .32s cubic-bezier(.22,1,.36,1), background-color .2s; }
+  .react-site-header .menu-toggle span { width: 24px; height: 2px; margin: 4px auto; border-radius: 2px; transition: transform var(--pw-motion-ui) var(--pw-ease-out), background-color var(--pw-motion-micro) var(--pw-ease-out); }
   .react-site-header.is-menu-open .menu-toggle span { background: #1c1d1f; }
   .react-site-header .menu-toggle[aria-expanded="true"] span:first-child { transform: translateY(5px) rotate(45deg); }
   .react-site-header .menu-toggle[aria-expanded="true"] span:last-child { transform: translateY(-5px) rotate(-45deg); }
@@ -684,7 +684,7 @@ main :is(p, li) { text-wrap: pretty; }
     background: #fafafb; color: #1c1d1f; box-shadow: none;
     opacity: 0; visibility: hidden; pointer-events: none;
     transform: translateY(-14px);
-    transition: opacity .32s ease, transform .5s cubic-bezier(.22,1,.36,1), visibility 0s .5s;
+    transition: opacity var(--pw-motion-ui) var(--pw-ease-out), transform var(--pw-motion-move) var(--pw-ease-out), visibility 0s var(--pw-motion-move);
   }
   .react-site-header .header-inner nav.open {
     opacity: 1; visibility: visible; pointer-events: auto;
@@ -700,7 +700,7 @@ main :is(p, li) { text-wrap: pretty; }
     background: transparent; color: #242629;
     font: 500 clamp(22px, 4.5vw, 28px)/1.2 var(--pw-font);
     text-align: left; opacity: 0; transform: translateY(14px);
-    transition: opacity .35s ease, transform .48s cubic-bezier(.22,1,.36,1);
+    transition: opacity var(--pw-motion-ui) var(--pw-ease-out), transform var(--pw-motion-move) var(--pw-ease-out);
   }
   .react-site-header .header-inner nav :is(a, button)::after { content: '↗'; flex: none; margin-left: 16px; color: #9aa7b8; font: 400 23px/1 var(--pw-font); }
   .react-site-header .header-inner nav :is(a, button):hover { color: #242629; background: transparent; }

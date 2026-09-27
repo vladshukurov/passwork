@@ -141,7 +141,7 @@ export function mountHeroScroll(hero, header) {
         progressTween=gsap.to(progressState,{
           value:self.progress,
           duration:siteMotion.move,
-          ease:'power2.out',
+          ease:siteMotion.ease,
           overwrite:'auto',
           onUpdate:()=>renderMotion(progressState.value)
         });
