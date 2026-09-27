@@ -1,0 +1,30 @@
+/* Rhythm: the single place for section and card spacing (--s-* tokens).
+   Loaded after typography.css. */
+
+/* Section openings: one top/bottom rhythm and one side inset. */
+.about, .section-intro, .teams-heading, .trust-heading, .pricing-heading, .awards-heading, .platforms-intro {
+  padding: var(--s-section-top) var(--s-inset) var(--s-section-bottom);
+  min-height: 0;
+}
+/* Title and lead: the text column keeps a readable measure instead of being
+   squeezed by a fixed gap. */
+.section-intro, .platforms-intro {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 520px);
+  column-gap: calc(var(--s-inset) * 2);
+  align-items: start;
+}
+.section-intro > div, .platforms-intro > div { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+.section-intro > div > p, .platforms-intro > div > p { margin: 0; max-width: 520px; }
+.teams-heading, .trust-heading, .awards-heading { gap: 20px; }
+.trust-heading { min-height: 0; }
+
+/* Cards: one inner padding; the title sits a fixed step below the art. */
+.certification-copy, .secrets-card-copy { padding: 8px var(--s-card) var(--s-card); gap: 8px; }
+.main-features-detail, .trust-card, .platform-card-copy { padding: var(--s-card); }
+.main-features-chapter-heading, .platform-feature-copy { padding: var(--s-card-lg); }
+.main-features-sidebar.security-switcher-copy, .security-switcher-copy { padding: var(--s-card-lg) var(--s-inset); }
+.team-tabs { padding: 16px var(--s-inset); }
+
+@media (max-width: 900px) {
+  .section-intro, .platforms-intro { grid-template-columns: minmax(0, 1fr); row-gap: 20px; }
+}

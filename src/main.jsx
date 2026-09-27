@@ -19,6 +19,8 @@ import './styles/tokens.css';
 import './styles/header-surface.css';
 import './styles/figma-2026.css';
 import './styles/isoform-art.css';
+import './styles/typography.css';
+import './styles/rhythm.css';
 import App from './App.jsx';
 
 createRoot(document.getElementById('root')).render(<App />);
