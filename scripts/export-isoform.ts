@@ -78,7 +78,9 @@ const scenes: Record<string, { name: string; objects: any[]; order?: string[] }>
     ...[-110, 0, 110].map((cx, i) => plate(`tank-cap-${i}`, cx - 40, -40, T + 122 + G, 80, 80, 'none', 8)),
     ...[-110, 0, 110].map((cx, i) => box(`riser-${i}`, cx - 8, -8, T + 140, 16, 16, 18)),
     box('pipe', -118, -8, T + 158, 236, 16, 14),
-  ], order: ['frame-base', 'frame', 'tank-0', 'tank-cap-0', 'tank-1', 'tank-cap-1', 'tank-2', 'tank-cap-2', 'riser-0', 'riser-1', 'riser-2', 'pipe'] },
+    // A coupling that travels along the pipe on hover: the process flow.
+    box('flow', -124, -12, T + 155, 28, 24, 20),
+  ], order: ['frame-base', 'frame', 'tank-0', 'tank-cap-0', 'tank-1', 'tank-cap-1', 'tank-2', 'tank-cap-2', 'riser-0', 'riser-1', 'riser-2', 'pipe', 'flow'] },
   personal: { name: 'Изолированные персональные данные', objects: [
     // A record with a floating cap inside two isolation rings.
     ...ring('outer', 120, 34), ...ring('inner', 78, 60),
@@ -105,10 +107,9 @@ const scenes: Record<string, { name: string; objects: any[]; order?: string[] }>
     plate('panel-body', -165, -85, T, 330, 170, 'none', 16),
     ...[0, 1, 2].flatMap(i => [
       box(`switch-base-${i}`, -150 + i * 105, -65, T + 16 + G, 84, 130, 20),
-      plate(`switch-rail-${i}`, -118 + i * 105, -55, T + 46, 20, 110, 'none', 4),
-      box(`switch-${i}`, -136 + i * 105, [-53, 17, -53][i], T + 50, 56, 40, 22),
+      box(`switch-${i}`, -136 + i * 105, [-53, 17, -53][i], T + 46, 56, 40, 22),
     ]),
-  ], order: ['panel-body', ...[0, 1, 2].flatMap(i => [`switch-base-${i}`, `switch-rail-${i}`, `switch-${i}`])] },
+  ], order: ['panel-body', ...[0, 1, 2].flatMap(i => [`switch-base-${i}`, `switch-${i}`])] },
   access: { name: 'Гранулярные права доступа', objects: [
     // Each permission: a tile with a floating block whose height is its level.
     ...[0, 1, 2].flatMap(col => [0, 1, 2].flatMap(row => [

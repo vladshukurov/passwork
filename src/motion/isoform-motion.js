@@ -6,56 +6,62 @@ import {siteMotion} from './site-motion-tokens.js';
 const COS = Math.cos(Math.PI / 6), SIN = Math.sin(Math.PI / 6);
 const iso = ([x = 0, y = 0, z = 0]) => ({x: (x - y) * COS, y: (x + y) * SIN - z});
 
-// Exploded view per scene: [object id, [x, y, z]]. Anything not listed rests.
-export const poses = {
-  // Every scene opens by pulling its floating layers further apart.
-  government: [
-    ...[0, 1].flatMap(col => [0, 1].map(row =>
-      [`registry-${col}-${row}`, [col ? 14 : -14, row ? 14 : -14, 14]])),
-    ['civic-platform', [0, 0, 28]],
-    ['civic-core', [0, 0, 44]],
-    ['civic-cap', [0, 0, 62]],
-  ],
-  infrastructure: [0, 1].flatMap(tower => [
-    ...[0, 1, 2].map(level => [`server-${tower}-${level}`, [tower ? 12 : -12, 0, level * 10]]),
-    [`server-cap-${tower}`, [tower ? 12 : -12, 0, 42]],
-  ]),
-  production: [
-    ...[0, 1, 2].map(i => [`tank-${i}`, [0, 0, 8]]),
-    ...[0, 1, 2].map(i => [`tank-cap-${i}`, [0, 0, 20]]),
-    ...[0, 1, 2].map(i => [`riser-${i}`, [0, 0, 30]]),
-    ['pipe', [0, 0, 40]],
-  ],
-  // Isolation walls step back from the record; its cap lifts.
-  personal: [
+// Per scene: how its pieces move on hover. Each piece is
+// [object id, [x, y, z] offset, optional {delay}]; anything not listed rests.
+// Mechanisms (drawers, switches, flow) use an in-out curve like a real part;
+// layered diagrams open with the site's ease-out.
+const mechanical = {ease: 'power2.inOut', enter: .55, leave: .45};
+const layered = {ease: siteMotion.ease, enter: siteMotion.artEnter, leave: siteMotion.artLeave, assemble: true};
+
+export const scenes = {
+  // Tiers of a layered system separate vertically.
+  government: {...layered, pieces: [
+    ['civic-platform', [0, 0, 14], {delay: 0}],
+    ['civic-core', [0, 0, 26], {delay: .04}],
+    ['civic-cap', [0, 0, 40], {delay: .08}],
+  ]},
+  // One server slides out of its rack for service.
+  infrastructure: {...mechanical, pieces: [['server-1-1', [0, 32, 0]]]},
+  // The coupling travels the length of the pipe: flow through the unit.
+  production: {ease: 'power1.inOut', enter: 1.1, leave: .7, pieces: [['flow', [220, 0, 0]]]},
+  // Isolation walls slide back from the record; its cap lifts.
+  personal: {...mechanical, pieces: [
     ...[['back-x', [0, -1]], ['back-y', [-1, 0]], ['front-x', [0, 1]], ['front-y', [1, 0]]].flatMap(([wall, [x, y]]) => [
       [`inner-${wall}`, [x * 12, y * 12, 0]],
-      [`outer-${wall}`, [x * 24, y * 24, 0]],
+      [`outer-${wall}`, [x * 24, y * 24, 0], {delay: .06}],
     ]),
-    ['record-cap', [0, 0, 24]],
-  ],
-  // The top drawer slides out through its morph; the lid lifts a little.
-  storage: [['safe-lid', [0, 0, 18]]],
-  cicd: [
-    ['source-lid', [0, 0, 28]],
-    ['left-lid', [0, 0, 24]],
-    ['right-lid', [0, 0, 24]],
-  ],
-  // Switches flip to their opposite position; the deck lifts off the body.
-  config: [
-    ...[0, 1, 2].flatMap(i => [[`switch-base-${i}`, [0, 0, 8]], [`switch-rail-${i}`, [0, 0, 8]]]),
-    ['switch-0', [0, 70, 8]], ['switch-1', [0, -70, 8]], ['switch-2', [0, 70, 8]],
-  ],
-  // Blocks rise to new levels; the centre permission rises furthest.
-  access: [0, 1, 2].flatMap(col => [0, 1, 2].map(row =>
-    [`cell-${col}-${row}`, [0, 0, [[8, 20, 8], [20, 34, 20], [8, 20, 8]][col][row]]])),
+    ['record-cap', [0, 0, 18], {delay: .12}],
+  ]},
+  // Only the top drawer moves, through its morph (data-open).
+  storage: {...mechanical, pieces: []},
+  // The source opens first, then the receivers: the secret is handed over.
+  cicd: {...mechanical, pieces: [
+    ['source-lid', [0, 0, 22], {delay: 0}],
+    ['left-lid', [0, 0, 18], {delay: .18}],
+    ['right-lid', [0, 0, 18], {delay: .18}],
+  ]},
+  // Switches flip one after another.
+  config: {...mechanical, enter: .42, leave: .36, pieces: [
+    ['switch-0', [0, 70, 0], {delay: 0}],
+    ['switch-1', [0, -70, 0], {delay: .08}],
+    ['switch-2', [0, 70, 0], {delay: .16}],
+  ]},
+  // Blocks rise to new levels in a wave from the centre.
+  access: {...layered, pieces: [0, 1, 2].flatMap(col => [0, 1, 2].map(row => {
+    const ring = Math.max(Math.abs(col - 1), Math.abs(row - 1));
+    return [`cell-${col}-${row}`, [0, 0, [34, 20, 8][ring] - (col + row) % 2 * 4], {delay: ring * .06}];
+  }))},
 };
+export const poses = Object.fromEntries(Object.entries(scenes).map(([kind, scene]) => [kind, scene.pieces]));
+
+function sceneOf(svg) {
+  return scenes[svg.dataset.art] ?? {...layered, pieces: []};
+}
 
 function pieces(svg) {
-  const kind = svg.dataset.art;
-  return (poses[kind] || []).map(([id, offset]) => {
+  return sceneOf(svg).pieces.map(([id, offset, options = {}]) => {
     const node = svg.querySelector(`[data-object="${id}"]`);
-    return node && {node, ...iso(offset)};
+    return node && {node, delay: options.delay ?? 0, ...iso(offset)};
   }).filter(Boolean);
 }
 
@@ -66,22 +72,18 @@ function morphs(svg) {
     ({path, rest: path.getAttribute('d'), open: path.dataset.open}));
 }
 
-// Hover: open quickly from the bottom up, close without replaying the choreography.
+// Hover: each scene moves with its own mechanism; closing never replays delays.
 export function mountArtHover(gsap, svg) {
+  const {ease, enter, leave} = sceneOf(svg);
   const parts = pieces(svg);
   const shapes = morphs(svg);
   const open = () => {
-    parts.forEach(({node, x, y}, i) => gsap.to(node, {
-      x, y, duration: siteMotion.artEnter, ease: siteMotion.ease,
-      delay: i * siteMotion.artStagger, overwrite: true,
-    }));
-    shapes.forEach(({path, open: d}) => gsap.to(path, {attr: {d}, duration: siteMotion.artEnter, ease: siteMotion.ease, overwrite: true}));
+    parts.forEach(({node, x, y, delay}) => gsap.to(node, {x, y, duration: enter, ease, delay, overwrite: true}));
+    shapes.forEach(({path, open: d}) => gsap.to(path, {attr: {d}, duration: enter, ease, overwrite: true}));
   };
   const close = () => {
-    parts.forEach(({node}) => gsap.to(node, {
-      x: 0, y: 0, duration: siteMotion.artLeave, ease: siteMotion.ease, overwrite: true,
-    }));
-    shapes.forEach(({path, rest: d}) => gsap.to(path, {attr: {d}, duration: siteMotion.artLeave, ease: siteMotion.ease, overwrite: true}));
+    parts.forEach(({node}) => gsap.to(node, {x: 0, y: 0, duration: leave, ease, overwrite: true}));
+    shapes.forEach(({path, rest: d}) => gsap.to(path, {attr: {d}, duration: leave, ease, overwrite: true}));
   };
   const reset = () => {
     parts.forEach(({node}) => gsap.set(node, {x: 0, y: 0, overwrite: true}));
@@ -90,11 +92,12 @@ export function mountArtHover(gsap, svg) {
   return {open, close, reset, nodes: [...parts.map(part => part.node), ...shapes.map(shape => shape.path)]};
 }
 
-// First appearance: pieces start in the exploded pose and settle, so the
-// entrance and the hover speak the same language.
+// First appearance: layered diagrams settle from their open pose; mechanisms
+// simply fade up, since a drawer or a switch shouldn't move on its own.
 export function assembleArt(gsap, svg, timeline, at = 0) {
   const parts = pieces(svg);
-  timeline.from(svg, {opacity: 0, duration: siteMotion.reveal * .6, ease: 'power1.out', clearProps: 'opacity'}, at);
+  timeline.from(svg, {opacity: 0, y: sceneOf(svg).assemble ? 0 : 8, duration: siteMotion.reveal * .8, ease: siteMotion.ease, clearProps: 'opacity,transform'}, at);
+  if (!sceneOf(svg).assemble) return;
   parts.forEach(({node, x, y}, i) => timeline.from(node, {
     x: x * .7, y: y * .7, duration: siteMotion.artAssemble, ease: siteMotion.ease,
     clearProps: 'transform',
