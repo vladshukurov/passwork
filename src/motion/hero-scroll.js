@@ -52,7 +52,7 @@ export function mountHeroScroll(hero, header) {
     header.classList.toggle('is-over-product',productReachedHeader && !heroAboveHeader);
     header.classList.toggle('is-past-hero',heroAboveHeader);
     {
-      const overDarkSection = [...document.querySelectorAll('.pricing,.trust')].some(section => {
+      const overDarkSection = [...document.querySelectorAll('.pricing,.trust,.site-footer')].some(section => {
         const bounds = section.getBoundingClientRect();
         return bounds.top < headerHeight && bounds.bottom > headerHeight / 2;
       });

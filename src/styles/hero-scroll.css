@@ -14,71 +14,6 @@
 .hero-window-scale { position: relative; z-index: 3; transform-origin: 50% 0; }
 .hero-window-scale > .product-window { margin-top: 0; }
 
-.site-header.is-scroll-header {
-  position: fixed;
-  inset: 0 0 auto;
-  height: 85px;
-  padding-top: 12px;
-  border: 0;
-  isolation: isolate;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  background: transparent;
-  transition: opacity .3s ease, color .2s;
-}
-.site-header.is-scroll-header.is-header-hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-.site-header.is-scroll-header::before,
-.site-header.is-scroll-header::after {
-  /* A single edge profile for the hero artwork and the white page surface. */
-  --header-veil-mask: linear-gradient(180deg,
-    #000 0%,
-    #000 63%,
-    #000f 70%,
-    #000d 78%,
-    #0009 85%,
-    #0004 92%,
-    transparent 100%);
-  content: '';
-  position: absolute;
-  z-index: -1;
-  inset: 0 0 -52px;
-  pointer-events: none;
-  opacity: 0;
-  -webkit-mask-image: var(--header-veil-mask);
-  mask-image: var(--header-veil-mask);
-  transition: opacity .36s ease;
-}
-.site-header.is-scroll-header::before {
-  background-color: #345d99;
-  background-image: url('/passwork-assets/blue-gradient-figma.png');
-  background-position: center var(--header-art-y, -64px);
-  background-size: auto var(--header-art-height, 1900px);
-  background-repeat: no-repeat;
-}
-.site-header.is-scroll-header::after {
-  background: #fff;
-}
-.site-header.is-scroll-header.is-over-product::before { opacity: 1; }
-.site-header.is-scroll-header.is-over-product-window::after {
-  opacity: 1;
-  clip-path: inset(0 var(--header-window-right) 0 var(--header-window-left));
-}
-.site-header.is-scroll-header.is-past-hero::after { opacity: 1; }
-.site-header.is-scroll-header:is(.is-past-hero,.is-over-product-window) {
-  color: #6f7988;
-}
-.brand { display:grid; }
-.brand img { grid-area:1/1; filter:none; }
-.brand-light { opacity:0; }
-.site-header:is(.is-past-hero,.is-over-product-window) .brand-light { opacity:1; }
-.site-header:is(.is-past-hero,.is-over-product-window) .brand-dark { opacity:0; }
-.preview-sidebar>img { filter:none; }
-.site-header:is(.is-past-hero,.is-over-product-window) .header-inner nav :is(a,button):hover { color: #1c1d1f; }
-.site-header:is(.is-past-hero,.is-over-product-window) .menu-toggle span { background: #1c1d1f; }
-
 @media (min-width: 1101px) and (prefers-reduced-motion: no-preference) {
   .hero.has-scroll-motion {
     overflow: clip;
@@ -105,10 +40,6 @@
 
 }
 @media (max-width: 800px) {
-  .site-header.is-scroll-header { height: 73px; padding-top: 0; }
   .hero-window-shell { margin-top: 18px; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .site-header.is-scroll-header,
-  .site-header.is-scroll-header::before { transition: none; }
-}
+.preview-sidebar > img { filter: none; }
