@@ -16,11 +16,11 @@ import './dashboards/teams/teams.css';
 import './dashboards/teams/teams-light.css';
 import './styles/site-footer.css';
 import './styles/tokens.css';
+import './styles/header-surface.css';
 import './styles/figma-2026.css';
 import './styles/isoform-art.css';
 import './styles/typography.css';
 import './styles/rhythm.css';
-import './styles/header.css';
 import './styles/states.css';
 import App from './App.jsx';
 

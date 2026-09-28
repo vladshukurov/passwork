@@ -58,7 +58,7 @@ section .section-intro > div > p, .platforms-intro > div > p, .awards-heading > 
 
 /* Body copy in cards and stories. */
 .certification-copy p, .secrets-card p, .main-features-detail p,
-.security-story-detail p, .platform-card-copy p {
+.security-story-detail p, .platform-card-copy p, .team-caption {
   font: 500 var(--t-body)/1.5 var(--pw-font);
   letter-spacing: -.005em;
   color: var(--pw-text-muted);
@@ -68,6 +68,7 @@ section .section-intro > div > p, .platforms-intro > div > p, .awards-heading > 
   letter-spacing: -.005em;
   color: var(--pw-inverse-soft);
 }
+.team-caption { color: #fff; }
 
 /* Secondary text. */
 .site-header .header-inner nav :is(a, button),

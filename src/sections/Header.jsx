@@ -40,21 +40,6 @@ export default function Header() {
     };
   }, [menuOpen]);
 
-  // Scrollspy: the nav marks the section currently under the reading line.
-  const [current, setCurrent] = useState(null);
-  useEffect(() => {
-    const ids = ['features', 'teams', 'security', 'pricing'];
-    const targets = ids.map(id => document.getElementById(id)).filter(Boolean);
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => { if (entry.isIntersecting) setCurrent(entry.target.id); });
-    }, { rootMargin: '-40% 0px -55% 0px' });
-    targets.forEach(target => observer.observe(target));
-    const clearAtTop = () => { if (scrollY < innerHeight * .6) setCurrent(null); };
-    window.addEventListener('scroll', clearAtTop, { passive: true });
-    return () => { observer.disconnect(); window.removeEventListener('scroll', clearAtTop); };
-  }, []);
-  const link = (id, label) => <a href={`#${id}`} aria-current={current === id ? 'true' : undefined}>{label}</a>;
-
   const close = () => setMenuOpen(false);
   return <header className="site-header react-site-header" ref={header}><div className="header-inner">
     <a className="brand" href="#top" aria-label="Пассворк — на главную" onClick={close}>
@@ -64,9 +49,9 @@ export default function Header() {
     <nav id="main-nav" aria-label="Основная навигация" className={menuOpen ? 'open' : undefined}
       onClick={event => { if (event.target.closest('a, button')) close(); }}>
       <span className="mobile-nav-overline" aria-hidden="true">Разделы сайта</span>
-      {link('features', 'Возможности')}{link('teams', 'Сценарии')}{link('security', 'Безопасность')}
+      <a href="#features">Возможности</a><a href="#teams">Сценарии</a><a href="#security">Безопасность</a>
       <button type="button" data-dialog="support">Поддержка</button>
-      {link('pricing', 'Цены')}
+      <a href="#pricing">Цены</a>
       <span className="mobile-nav-footer" aria-hidden="true">Пароли и доступы под контролем вашей команды</span>
     </nav>
     <Button className="header-demo" onClick={close} />
