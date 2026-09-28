@@ -13,7 +13,9 @@
   column-gap: calc(var(--s-inset) * 2);
   align-items: start;
 }
-.section-intro:not(.awards-heading) > div, .platforms-intro > div { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+.section-intro:not(.awards-heading) > div, .platforms-intro > div { display: flex; flex-direction: column; align-items: flex-start; gap: 28px; }
+/* The column gap is the only space above the button. */
+.section-intro:not(.awards-heading) > div > .button, .platforms-intro > div > .button { margin-top: 0; }
 .section-intro:not(.awards-heading) > div > p, .platforms-intro > div > p { margin: 0; max-width: 520px; }
 .teams-heading, .trust-heading, .awards-heading { gap: 20px; }
 .trust-heading { min-height: 0; }
