@@ -1,0 +1,73 @@
+/* Hero tabs 2–4 (product-views.ts): bodies inside the live dashboard shell,
+   built from its palette and parts. */
+.pw-pv{flex:1 1 auto; min-height:0; overflow:hidden; padding:0 32px}
+.pw-pv__tabs{margin-top:20px}
+.pw-pv__bar{display:flex; align-items:center; gap:10px; margin:20px 0 14px}
+.pw-pv .pw-pv__search{position:static; width:320px; height:36px; display:flex; align-items:center; gap:8px; padding:0 12px; border-radius:8px; background:var(--pw-search); color:var(--pw-text-4); font-size:13px}
+.pw-pv__search .pw-ico{width:14px; height:14px}
+.pw-pv__select{display:inline-flex; align-items:center; gap:6px; height:32px; padding:0 12px; border:1px solid var(--pw-line); border-radius:var(--passwork-card-radius); color:var(--pw-text-2); font-size:13px}
+.pw-pv__select .pw-ico, .pw-pv__level .pw-ico{width:10px; height:10px; color:var(--pw-text-4)}
+.pw-pv__ghost{margin-left:auto; display:inline-flex; align-items:center; height:32px; padding:0 14px; border:1px solid var(--pw-blue-soft); border-radius:var(--passwork-card-radius); color:var(--pw-blue); font-size:13px}
+
+.pw-pv__head, .pw-pv__row{display:grid; align-items:center; column-gap:16px; padding:0 12px}
+.pw-pv__table--access :is(.pw-pv__head, .pw-pv__row){grid-template-columns:1.7fr 1fr 1fr}
+.pw-pv__table--codes .pw-pv__row{grid-template-columns:1.6fr 1fr auto}
+.pw-pv__table--log :is(.pw-pv__head, .pw-pv__row){grid-template-columns:64px 1.3fr 1.4fr 1.1fr}
+.pw-pv__head{height:34px; border-radius:var(--passwork-card-radius); background:#f7f8fa; color:#8a8b8d; font-size:11px; letter-spacing:.06em; text-transform:uppercase}
+.pw-pv__row{height:58px; border-bottom:1px solid var(--pw-line); color:var(--pw-text); font-size:14px}
+.pw-pv__who{display:flex; align-items:center; gap:12px; min-width:0}
+.pw-pv__who b{font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.pw-pv__who > span{min-width:0}
+.pw-pv__who small{display:block; margin-top:2px; color:var(--pw-text-3); font-size:12px}
+.pw-pv .pw-pv__avatar{position:static; flex:none; width:30px; height:30px; margin:0; border:0; font-size:12px}
+.pw-pv__table--log .pw-pv__avatar{width:24px; height:24px; font-size:10px}
+.pw-pv__group{flex:none; display:grid; place-items:center; width:30px; height:30px; border-radius:50%; background:var(--pw-chip); color:var(--pw-blue)}
+.pw-pv__group .pw-ico{width:16px; height:16px}
+.pw-pv__muted{color:var(--pw-text-3)}
+.pw-pv__time{font-variant-numeric:tabular-nums}
+
+.pw-pv__level{justify-self:start; display:inline-flex; align-items:center; gap:6px; height:30px; padding:0 10px; border-radius:var(--passwork-card-radius); background:var(--pw-chip); color:var(--pw-text-2); font-size:13px}
+.pw-pv__level.is-locked{background:transparent; color:var(--pw-text-3)}
+.pw-pv__level.is-changed{animation:pw-pv-flash 1.4s ease-out}
+@keyframes pw-pv-flash{0%, 30%{background:var(--pw-blue-soft); color:#2f55b8}}
+
+.pw-pv__glyph{width:30px; height:30px; border-radius:8px; font-size:13px}
+.pw-pv__glyph--sprinthost{border-radius:50%; background:#c21f00}
+.pw-pv__glyph--emergency{background:#00bd95}
+.pw-pv__glyph--mail{background:#3b7de8}
+.pw-pv__glyph--gitlab{background:#e8612c}
+.pw-pv__glyph--vpn{background:#5b6472}
+.pw-pv__code{font:500 20px/1 ui-monospace,"SF Mono",Menlo,Consolas,monospace; letter-spacing:.08em; color:var(--pw-text); font-variant-numeric:tabular-nums}
+.pw-pv__code.is-new{animation:pw-flip .35s ease}
+.pw-pv__timer{display:flex; align-items:center; gap:12px; color:var(--pw-text-3)}
+.pw-pv__ring{width:18px; height:18px}
+.pw-pv__ring .pw-ring__fg{stroke-dasharray:37.7; animation:pw-pv-ring 30s linear infinite; animation-delay:calc(var(--phase) * -1)}
+@keyframes pw-pv-ring{from{stroke-dashoffset:0} to{stroke-dashoffset:37.7}}
+
+.pw-pv__row.is-fresh{animation:pw-pv-in .6s cubic-bezier(.22,1,.36,1)}
+@keyframes pw-pv-in{from{opacity:0; transform:translateY(-8px); background:var(--pw-hover)}}
+.pw-pv__note{margin-top:16px; color:var(--pw-text-3); font-size:12px}
+
+@media (max-width:809.98px){
+  .pw-pv{padding:0 14px}
+  .pw-pv__tabs{margin-top:12px}
+  .pw-pv__bar{margin:12px 0 8px}
+  .pw-pv__bar > :not(:first-child), .pw-pv .pw-pv__search{display:none}
+  .pw-pv__head{display:none}
+  .pw-pv__row{height:48px; column-gap:10px; padding:0 4px; font-size:12px}
+  .pw-pv__table--access .pw-pv__row{grid-template-columns:1fr auto}
+  .pw-pv__table--access .pw-pv__row > :nth-child(2){display:none}
+  .pw-pv__table--codes .pw-pv__row{grid-template-columns:1fr auto auto}
+  /* The log keeps what happened: time, who (avatar) and the action. */
+  .pw-pv__table--log .pw-pv__row{grid-template-columns:36px auto 1fr}
+  .pw-pv__table--log .pw-pv__who b, .pw-pv__table--log .pw-pv__row > :nth-child(4){display:none}
+  /* The shared mobile rule hides the third tab; here it can be the active one. */
+  .pw-live-dashboard .pw-pv__tabs .pw-tab:nth-child(3){display:block}
+  .pw-live-dashboard .pw-pv__tabs .pw-tab:nth-child(4){display:none}
+  .pw-pv__code{font-size:15px}
+  .pw-pv__who small, .pw-pv__timer .pw-ib, .pw-pv__note{display:none}
+  .pw-pv .pw-pv__avatar, .pw-pv__group, .pw-pv__glyph{width:24px; height:24px; font-size:10px}
+}
+@media (prefers-reduced-motion:reduce){
+  .pw-pv__ring .pw-ring__fg, .pw-pv__row.is-fresh, .pw-pv__level.is-changed{animation:none}
+}

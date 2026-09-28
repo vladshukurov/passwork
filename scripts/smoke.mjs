@@ -36,7 +36,7 @@ const { page, errors } = await open(1440);
 await check('product tabs switch the hero screen', async () => {
   const tab = page.locator('#product-tab-2');
   await tab.click();
-  await assert.doesNotReject(page.locator('.product-detail h3', { hasText: 'Коды двухфакторной' }).waitFor());
+  await assert.doesNotReject(page.locator('.product-detail [data-view="codes"] .pw-pv__code').first().waitFor());
   assert.equal(await tab.getAttribute('aria-selected'), 'true');
   assert.equal(await page.locator('.pw-live-dashboard:not(.screen-switch-outgoing)').isHidden(), true);
   await page.keyboard.press('Home');

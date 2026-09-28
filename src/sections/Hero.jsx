@@ -1,6 +1,8 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Button from '../components/Button.jsx';
 import { mountHeroDashboard } from '../dashboards/hero/entry.ts';
+import { mountProductView } from '../dashboards/hero/product-views.ts';
+import '../dashboards/hero/product-views.css';
 import { dissolveScreen, snapshotScreen } from '../motion/screen-transitions.js';
 import { siteMotion } from '../motion/site-motion-tokens.js';
 import { tabKeyHandler } from '../hooks/useTabList.js';
@@ -13,41 +15,21 @@ const productTabs = [
   ['Журнал действий', 'imgBook01'],
 ];
 
-const Table = ({ head, rows }) => <table className="preview-table">
-  <thead><tr>{head.map(cell => <th key={cell}>{cell}</th>)}</tr></thead>
-  <tbody>{rows.map(row => <tr key={row.join()}>{row.map((cell, i) => <td key={i}>{cell}</td>)}</tr>)}</tbody>
-</table>;
-const active = <span className="status-pill">Активен</span>;
-const Code = ({ title, value }) => <div className="preview-item"><div><h4>{title}</h4><p>Пример одноразового кода</p></div><span className="code-number">{value}</span></div>;
-
-// Tab 0 is the live dashboard; the rest are static previews.
-const productViews = [null,
-  { title: 'Управление доступом', description: 'Доступ к нужным паролям — для нужных людей.',
-    body: <Table head={['Команда', 'Уровень доступа', 'Статус']} rows={[['Администраторы', 'Полный доступ', active], ['IT-команда', 'Редактирование', active], ['Сотрудники', 'Просмотр', active]]} /> },
-  { title: 'Коды двухфакторной аутентификации', description: 'Пароли и одноразовые коды в одном защищённом пространстве.',
-    body: <><Code title="Корпоративная почта" value="482 916" /><Code title="Рабочие сервисы" value="735 204" /></> },
-  { title: 'Журнал действий', description: 'История работы с паролями и доступами внутри компании.',
-    body: <Table head={['Время', 'Действие', 'Пользователь']} rows={[['12:41', 'Обновлён пароль', 'Администратор'], ['12:35', 'Предоставлен доступ', 'IT-команда'], ['12:28', 'Создан новый сейф', 'Администратор']]} /> },
-];
-
-function ProductPreview({ view }) {
-  return <>
-    <aside className="preview-sidebar"><img src="/passwork-assets/logo-light.svg" alt="Пассворк" />
-      <p>Рабочее пространство</p><p>Избранное</p><p>Все пароли</p><p className="active">{view.title}</p></aside>
-    <div className="preview-content"><span className="preview-kicker">Пассворк / Рабочее пространство</span>
-      <h3>{view.title}</h3><p>{view.description}</p>{view.body}</div>
-  </>;
-}
+// Tabs 2–4 are drawn in the same product window as the live dashboard.
+const productViews = [null, 'access', 'codes', 'log'];
 
 export default function Hero() {
   const [selected, setSelected] = useState(0);
   const dashboard = useRef(null);
   const detail = useRef(null);
+  const view = useRef(null);
   const outgoing = useRef(null);
   const transition = useRef(null);
 
-  // The live dashboard runs only while its tab is visible.
+  // The live dashboard runs only while its tab is visible; the other tabs
+  // mount their own view in the same window.
   useEffect(() => (selected === 0 ? mountHeroDashboard(dashboard.current) : undefined), [selected]);
+  useEffect(() => (selected > 0 ? mountProductView(view.current, productViews[selected]) : undefined), [selected]);
 
   // Crossfade from a snapshot of the previous screen to the new one.
   useLayoutEffect(() => {
@@ -90,7 +72,7 @@ export default function Hero() {
             aria-label="Анимированная демонстрация Пассворка: поиск пароля, просмотр записи, журнал действий и права доступа" />
           <noscript><img src="/passwork-assets/imgImage27.png" alt="Интерфейс Пассворка" className="product-screenshot" width="1341" height="787" /></noscript>
           <div className="product-detail" ref={detail} hidden={selected === 0}>
-            {productViews[selected] && <ProductPreview view={productViews[selected]} />}
+            <div className="pw-live-dashboard pw-embed" ref={view} />
           </div>
         </div>
       </div></div>
