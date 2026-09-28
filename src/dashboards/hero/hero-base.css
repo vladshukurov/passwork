@@ -157,7 +157,7 @@
 /* живая фильтрация: непопавшие строки схлопываются, новые мягко поднимаются */
 .pw-item.is-entering{animation:pw-item-in .22s cubic-bezier(.22,1,.36,1) both}
 .pw-item.is-leaving{overflow:hidden; opacity:0; transform:translateY(-2px); transition:height .18s ease, opacity .16s ease, transform .16s ease}
-.pw-item__dot{position:absolute; left:-14px; top:50%; width:7px; height:7px; margin-top:-3.5px; border-radius:50%; background:#3bc78f}
+.pw-item__dot{flex:none; width:6px; height:6px; margin-left:-2px; border-radius:50%; background:#3bc78f}
 .pw-glyph{width:22px; height:22px; display:flex; align-items:center; justify-content:center; flex:none}
 .pw-glyph--sq{width:18px;height:18px;border-radius:4px;font-size:11px;font-weight:500;color:#fff}
 .pw-glyph--emergency{background:#00bd95}
@@ -165,7 +165,7 @@
 .pw-glyph--sprinthost{width:18px;height:18px;border-radius:50%;background:#c21f00}
 .pw-glyph--sprinthost svg{width:11px;height:11px}
 .pw-glyph--cloud svg{width:20px;height:20px}
-.pw-glyph--astra svg{width:18px;height:18px}
+.pw-glyph--astra{background:#1f63c6}
 .pw-glyph--lg{width:30px;height:30px}
 .pw-glyph--lg.pw-glyph--sq{border-radius: var(--passwork-card-radius);font-size:16px}
 .pw-glyph--lg.pw-glyph--py{font-size:12px}
@@ -190,7 +190,7 @@
 .pw-close .pw-ico{width:16px;height:16px}
 .pw-detail__meta{margin-top:21px; height:33px; display:flex; align-items:flex-start; justify-content:space-between}
 .pw-meta__title{font-size:13px; line-height:16px; color:var(--pw-text-2)}
-.pw-meta__sub{margin-top:2px; font-size:11px; line-height:14px; color:#595a5d}
+.pw-meta__sub{margin-top:2px; font-size:12px; line-height:15px; color:#595a5d}
 .pw-circles{display:flex; gap:17px}
 .pw-tabs{margin-top:24px; height:38px; display:flex; gap:24px; border-bottom:1px solid var(--pw-line-soft)}
 .pw-tab{
@@ -227,7 +227,7 @@
 .pw-ring__bg{stroke:#262a31}
 .pw-ring__fg{stroke:var(--pw-blue); stroke-linecap:round; transition:stroke-dashoffset .25s linear}
 .pw-chips{display:flex; gap:10px}
-.pw-chip{height:20px; padding:0 8px; border-radius:var(--passwork-card-radius); background:var(--pw-chip); color:#8f9194; font-size:11px; font-weight:500; display:flex; align-items:center}
+.pw-chip{height:20px; padding:0 8px; border-radius:var(--passwork-card-radius); background:var(--pw-chip); color:#8f9194; font-size:12px; font-weight:500; display:flex; align-items:center}
 
 .pw-hist,.pw-ver{
   height:50px; border-bottom:1px solid var(--pw-line-soft); border-radius: var(--passwork-card-radius); display:flex; align-items:center; gap:12px; font-size:14px; padding:0 6px;

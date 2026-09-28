@@ -61,7 +61,9 @@ const glyph = (kind: Entry['icon'], large = false) => {
   if (kind === 'py') return `<span class="${cls} pw-glyph--sq">py</span>`;
   if (kind === 'sprinthost') return `<span class="${cls}">${ICONS.sprint}</span>`;
   if (kind === 'cloud') return `<span class="${cls}">${ICONS.cloud}</span>`;
-  return `<span class="${cls}">${ICONS.astra}</span>`;
+  // A letter tile, like the other services: a star here read as a second
+  // "favourite" star next to the title.
+  return `<span class="${cls} pw-glyph--sq">A</span>`;
 };
 
 const random = (a: number, b: number) => a + Math.random() * (b - a);
@@ -146,7 +148,7 @@ export function initLiveDashboard(embed: HTMLElement, { animate = true }: { anim
       : chip
         ? `<span class="pw-item__hint pw-item__hint--chip">${chip}</span>`
         : '';
-    return `${e.dot ? '<i class="pw-item__dot"></i>' : ''}${glyph(e.icon)}<span>${name}</span>${extra}`;
+    return `${glyph(e.icon)}<span>${name}</span>${e.dot ? '<i class="pw-item__dot"></i>' : ''}${extra}`;
   };
 
   /*
@@ -420,9 +422,13 @@ export function initLiveDashboard(embed: HTMLElement, { animate = true }: { anim
     const eye = $('[data-act="eye"]');
     if (eye) eye.innerHTML = ICONS.eyeOff;
     state.reveal = true;
+    // One element for the whole reveal: re-creating it per character replayed
+    // its fade-in and left dots and letters ghosting over each other.
+    secret.innerHTML = '<span class="pw-secret"></span>';
+    const text = secret.firstElementChild as HTMLElement;
     for (let i = 1; i <= pass.length; i++) {
       if (!alive) return;
-      secret.innerHTML = `<span class="pw-secret">${pass.slice(0, i)}${'•'.repeat(pass.length - i)}</span>`;
+      text.textContent = `${pass.slice(0, i)}${'•'.repeat(pass.length - i)}`;
       await sleep(28);
     }
   };

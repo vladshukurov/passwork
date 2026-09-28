@@ -67,9 +67,11 @@
   .pw-live-dashboard .pw-detail__title h3{font-size:18px}
   .pw-live-dashboard .pw-tabs{margin-top:24px;height:32px;gap:16px}
   .pw-live-dashboard .pw-tab{font-size:12px}.pw-live-dashboard .pw-tab:nth-child(3){display:none}
-  .pw-live-dashboard .pw-row{grid-template-columns:66px minmax(0,1fr) 16px;gap:6px;padding:10px 0;font-size:12px;line-height:24px}
+  .pw-live-dashboard .pw-row{grid-template-columns:76px minmax(0,1fr) 16px;gap:6px;padding:10px 0;font-size:12px;line-height:24px}
   .pw-live-dashboard .pw-row--first{padding-top:16px}
   .pw-live-dashboard .pw-row__acts{height:24px;gap:0}.pw-live-dashboard .pw-row__acts .pw-ib+.pw-ib{display:none}
+  /* TOTP keeps its countdown ring; the copy icon had nowhere to go. */
+  .pw-live-dashboard .pw-row__acts .pw-ring~.pw-ib{display:none}
   .pw-live-dashboard .pw-row__val a{overflow:hidden;text-overflow:ellipsis}
   .pw-live-dashboard :is(.pw-dots,.pw-secret){font-size:12px}
 }
