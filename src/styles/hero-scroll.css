@@ -68,7 +68,7 @@
 }
 .site-header.is-scroll-header.is-past-hero::after { opacity: 1; }
 .site-header.is-scroll-header:is(.is-past-hero,.is-over-product-window) {
-  color: #6f7988;
+  color: var(--pw-text-muted);
 }
 .brand { display:grid; }
 .brand img { grid-area:1/1; filter:none; }
