@@ -29,7 +29,7 @@
    the selector gets room below. Plan cards keep their original layout
    (only the plan names are larger, see typography.css). */
 .pricing-heading { padding-bottom: 28px; }
-.pricing-team-selector { padding: 0 var(--s-inset) 48px; }
+.pricing-team-selector { padding: 0 var(--s-inset) 72px; }
 .pricing-team-readout { gap: 8px; }
 
 /* Platforms: the browser screens share the phones' top line and read as
@@ -40,8 +40,9 @@
   filter: none; box-shadow: 0 1px 2px rgb(16 24 40 / 6%), 0 10px 28px rgb(16 24 40 / 10%);
 }
 
-/* The footer opens with its own dark band instead of touching the last block. */
-.site-footer { padding-top: clamp(40px, 5vw, 80px); }
+/* The footer opens with extra dark room inside its grid, so the vertical
+   lines run unbroken from the page into the footer. */
+.site-footer .footer-main { padding-top: clamp(88px, 9vw, 144px); }
 
 @media (max-width: 900px) {
   .section-intro, .platforms-intro { grid-template-columns: minmax(0, 1fr); row-gap: 20px; }

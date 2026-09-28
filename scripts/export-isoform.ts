@@ -58,15 +58,16 @@ const lidded = (id: string, x: number, y: number, size: number, height: number) 
 ];
 
 const scenes: Record<string, { name: string; objects: any[]; order?: string[] }> = {
-  government: { name: 'Государственная информационная система', objects: [
-    // Four floating tiers: base, registries, platform, core with its cap.
-    plate('civic-base', -125, -125, T + 20, 250, 250, 'none', 10),
-    ...[-100, 10].flatMap((x, col) => [-100, 10].map((y, row) =>
-      box(`registry-${col}-${row}`, x, y, T + 30, 90, 90, 34))),
-    plate('civic-platform', -110, -110, T + 64 + G, 220, 220, 'none', 12),
-    box('civic-core', -50, -50, T + 86, 100, 100, 48),
-    plate('civic-cap', -58, -58, T + 134 + G, 116, 116, 'none', 8),
-  ], order: ['civic-base', 'registry-0-0', 'registry-0-1', 'registry-1-0', 'registry-1-1', 'civic-platform', 'civic-core', 'civic-cap'] },
+  // A civic building: stylobate, colonnade, entablature, stepped roof.
+  government: { name: 'Государственное учреждение', objects: [
+    plate('steps-1', -150, -115, T, 300, 230, 'none', 10),
+    plate('steps-2', -138, -103, T + 10, 276, 206, 'none', 10),
+    box('hall', -118, -92, T + 20, 236, 118, 84),
+    ...[0, 1, 2, 3, 4].map(i => box(`column-${i}`, -118 + i * 54.5, 62, T + 20, 18, 18, 84)),
+    plate('entablature', -134, -99, T + 104 + G, 268, 196, 'none', 12),
+    plate('roof-1', -116, -81, T + 116 + 2 * G, 232, 160, 'none', 10),
+    plate('roof-2', -90, -55, T + 126 + 3 * G, 180, 108, 'none', 10),
+  ], order: ['steps-1', 'steps-2', 'hall', 'column-0', 'column-1', 'column-2', 'column-3', 'column-4', 'entablature', 'roof-1', 'roof-2'] },
   infrastructure: { name: 'Резервируемая инфраструктура', objects: [
     // Two racks of floating server slabs, each under a cap.
     ...[-120, 20].flatMap((x, tower) => [
@@ -82,12 +83,12 @@ const scenes: Record<string, { name: string; objects: any[]; order?: string[] }>
     ...[-110, 0, 110].map((cx, i) => box(`tank-${i}`, cx - 40, -40, T + 12, 80, 80, 110)),
     ...[-110, 0, 110].map((cx, i) => plate(`tank-cap-${i}`, cx - 40, -40, T + 122 + G, 80, 80, 'none', 8)),
   ], order: ['frame-base', 'frame', 'tank-0', 'tank-cap-0', 'tank-1', 'tank-cap-1', 'tank-2', 'tank-cap-2'] },
-  personal: { name: 'Изолированные персональные данные', objects: [
-    // A record with a floating cap inside two isolation rings.
-    ...ring('outer', 120, 34), ...ring('inner', 78, 60),
-    box('record', -34, -34, T, 68, 68, 78),
-    plate('record-cap', -40, -40, T + 78 + G, 80, 80, 'none', 8),
-  ], order: ['outer-back-x', 'outer-back-y', 'inner-back-x', 'inner-back-y', 'record', 'record-cap', 'inner-front-y', 'inner-front-x', 'outer-front-y', 'outer-front-x'] },
+  // A person inside the isolation rings.
+  personal: { name: 'Человек внутри колец изоляции', objects: [
+    ...ring('outer', 120, 24), ...ring('inner', 78, 36),
+    box('body', -28, -20, T, 56, 40, 78),
+    box('head', -16, -16, T + 78 + G, 32, 32, 32),
+  ], order: ['outer-back-x', 'outer-back-y', 'inner-back-x', 'inner-back-y', 'body', 'head', 'inner-front-y', 'inner-front-x', 'outer-front-y', 'outer-front-x'] },
   storage: { name: 'Защищённое хранилище', objects: [
     // A filing safe on a floating plinth under a floating lid. Drawer fronts
     // have even 12-unit margins; the top one slides out (see morphs).

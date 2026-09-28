@@ -3,11 +3,8 @@
    the sizes that older layers set piecemeal. Product mock-ups inside the
    dashboards keep their own miniature scale and are not listed here. */
 
-/* Display — hero title. */
-.hero h1, .hero h1 .hero-title-line {
-  font: 500 var(--t-display)/1.02 var(--pw-font);
-  letter-spacing: -.035em;
-}
+/* The hero keeps the production type (passwork.css / figma-2026.css). */
+.hero-copy > p { color: #ffffffa6; }
 
 /* Section titles — one size everywhere, light or dark. */
 .section-intro h2, .about h2, .teams-heading h2, .trust-heading h2,
@@ -49,12 +46,11 @@ section .section-intro > div > p, .platforms-intro > div > p, .awards-heading > 
   letter-spacing: -.008em;
   color: var(--pw-text-muted);
 }
-.hero-copy > p, .trust-heading p {
+.trust-heading p {
   font: 500 var(--t-lead)/1.45 var(--pw-font);
   letter-spacing: -.008em;
   color: var(--pw-inverse-soft);
 }
-.hero-copy > p { max-width: 640px; margin-inline: auto; }
 
 /* Body copy in cards and stories. */
 .certification-copy p, .secrets-card p, .main-features-detail p,

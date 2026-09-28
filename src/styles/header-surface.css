@@ -12,19 +12,17 @@
   transform: none;
 }
 
-/* The veil fades out over 28px on an eased curve, and its light variant is
-   exactly the page colour: no lighter band and no visible edge under the bar. */
+/* The veil is opaque behind the bar and fades over a short 16px eased tail;
+   its light variant is exactly the page colour, so no band or edge shows. */
 .react-site-header.is-scroll-header::before,
 .react-site-header.is-scroll-header::after {
-  inset: 0 0 -28px;
+  inset: 0 0 -16px;
   --header-veil-mask: linear-gradient(180deg,
     #000 0%,
-    #000 72%,
-    rgb(0 0 0 / 86%) 78%,
-    rgb(0 0 0 / 64%) 84%,
-    rgb(0 0 0 / 40%) 89%,
-    rgb(0 0 0 / 20%) 94%,
-    rgb(0 0 0 / 6%) 98%,
+    #000 82%,
+    rgb(0 0 0 / 70%) 87%,
+    rgb(0 0 0 / 38%) 92%,
+    rgb(0 0 0 / 12%) 97%,
     transparent 100%);
   transition: opacity .42s ease, background-color .5s ease;
 }
@@ -52,6 +50,15 @@
 .react-site-header.is-scroll-header.is-over-dark-section .header-demo:hover { background: #f3f5f8; border-color: #f3f5f8; }
 .react-site-header.is-scroll-header.is-over-dark-section .header-inner nav :is(a,button):hover { color: #fff; }
 .react-site-header.is-scroll-header.is-over-dark-section .menu-toggle span { background: #fff; }
+
+/* Over the product window the blue does not bleed onto the white UI: a clean
+   band of the hero background, ending on a hairline. */
+.react-site-header.is-scroll-header:is(.is-over-product, .is-over-product-window):not(.is-past-hero)::before {
+  inset: 0;
+  -webkit-mask-image: none;
+  mask-image: none;
+  box-shadow: inset 0 -1px 0 rgb(255 255 255 / 14%);
+}
 
 /* Never turn the middle of the product into a different-coloured rectangle. */
 .react-site-header.is-scroll-header.is-over-product-window:not(.is-past-hero)::after {

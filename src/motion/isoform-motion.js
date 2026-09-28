@@ -17,9 +17,9 @@ const layered = {ease: siteMotion.ease, enter: siteMotion.artEnter, leave: siteM
 export const scenes = {
   // Tiers of a layered system separate vertically.
   government: {...layered, pieces: [
-    ['civic-platform', [0, 0, 14], {delay: 0}],
-    ['civic-core', [0, 0, 26], {delay: .04}],
-    ['civic-cap', [0, 0, 40], {delay: .08}],
+    ['entablature', [0, 0, 16], {delay: 0}],
+    ['roof-1', [0, 0, 30], {delay: .04}],
+    ['roof-2', [0, 0, 46], {delay: .08}],
   ]},
   // Servers slide out of both racks in a cascade, like drawers on rails.
   infrastructure: {...mechanical, pieces: [0, 1].flatMap(tower => [0, 1, 2].map(level =>
@@ -34,7 +34,7 @@ export const scenes = {
       [`inner-${wall}`, [x * 12, y * 12, 0]],
       [`outer-${wall}`, [x * 24, y * 24, 0], {delay: .06}],
     ]),
-    ['record-cap', [0, 0, 18], {delay: .12}],
+    ['head', [0, 0, 14], {delay: .12}],
   ]},
   // Only the top drawer moves, through its morph (data-open).
   storage: {...mechanical, pieces: []},
