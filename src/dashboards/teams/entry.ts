@@ -1,38 +1,16 @@
 // Original scenarios from reserve-passwork-copy; this adapter replaces only React mounting.
 import { DASHBOARD_HEADER_MARKUP, DASHBOARD_SIDEBAR_MARKUP } from './live-dashboard-markup';
+import { teamScenarios } from './scenarios';
 import { initItDashboardDemo } from './it-dashboard-demo';
 import { initDevopsDashboardDemo } from './devops-dashboard-demo';
 import { initSecurityDashboardDemo } from './security-dashboard-demo';
 import { initGovernmentDashboardDemo } from './government-dashboard-demo';
 import { initManufacturingDashboardDemo } from './manufacturing-dashboard-demo';
 
-export const teamScenarios = [
-  {
-    id: 'it', name: 'IT-команды', init: initItDashboardDemo, shell: '',
-    caption: 'Разграничение доступа по ролям и группам',
-    label: 'Пассворк для IT-команд: доступ по ролям и его отзыв, общие папки, журнал действий, ротация, 2FA, SSO, файлы и заметки, обмен ссылкой, браузер и телефон.',
-  },
-  {
-    id: 'devops', name: 'DevOps', init: initDevopsDashboardDemo, shell: 'pw-devops-embed',
-    caption: 'Безопасная работа с учётными данными инфраструктуры',
-    label: 'Пассворк для DevOps: отдельные сейфы Production, Staging и Development, временный токен сборки, получение секрета по API и CLI, ротация ключей и журнал обращений.',
-  },
-  {
-    id: 'security', name: 'Безопасность', init: initSecurityDashboardDemo, shell: 'pw-security-embed',
-    caption: 'Контроль доступа и аудит действий сотрудников',
-    label: 'Пассворк для безопасности: уведомление о массовом открытии паролей, журнал действий пользователя, сравнение версий записи, права доступа и настройка уведомлений.',
-  },
-  {
-    id: 'government', name: 'Госорганизации', init: initGovernmentDashboardDemo, shell: 'pw-industry-embed',
-    caption: 'Российское решение для защищённой инфраструктуры',
-    label: 'Пассворк для госорганизаций: роли сотрудников, пароли ведомственных систем, журнал действий и отзыв доступа с сохранением истории.',
-  },
-  {
-    id: 'manufacturing', name: 'Производство', init: initManufacturingDashboardDemo, shell: 'pw-industry-embed',
-    caption: 'Управление доступом для подразделений и рабочих команд',
-    label: 'Пассворк для производства: доступ к техническим системам, история пароля SCADA, политика ротации, уведомления о подозрительной активности и журнал действий.',
-  },
-] as const;
+const inits = {
+  it: initItDashboardDemo, devops: initDevopsDashboardDemo, security: initSecurityDashboardDemo,
+  government: initGovernmentDashboardDemo, manufacturing: initManufacturingDashboardDemo,
+};
 
 function shellFor(index: number) {
   let sidebar = DASHBOARD_SIDEBAR_MARKUP;
@@ -69,7 +47,7 @@ export function mountTeamDashboard(embed: HTMLElement, index: number) {
     // Reset the entire shell too: cues change avatars, counts and the active vault.
     embed.innerHTML = shellFor(index);
     fit();
-    controller = scenario.init(embed, embed.querySelector<HTMLElement>('.pw-it__workspace')!, {
+    controller = inits[scenario.id](embed, embed.querySelector<HTMLElement>('.pw-it__workspace')!, {
       onComplete: () => queueMicrotask(play),
     });
   };

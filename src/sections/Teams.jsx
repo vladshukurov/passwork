@@ -1,5 +1,5 @@
-import React, { useLayoutEffect, useRef, useState } from 'react';
-import { mountTeamDashboard, teamScenarios } from '../dashboards/teams/entry.ts';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { teamScenarios } from '../dashboards/teams/scenarios.ts';
 import { fadeThroughScreen, snapshotScreen } from '../motion/screen-transitions.js';
 import { siteMotion } from '../motion/site-motion-tokens.js';
 import { revealTab, tabKeyHandler } from '../hooks/useTabList.js';
@@ -18,15 +18,28 @@ export default function Teams() {
   const caption = useRef(null);
   const outgoing = useRef(null);
   const transition = useRef(null);
+  const [demos, setDemos] = useState(null);
+
+  // The scenario demos load as the section approaches, not with the page.
+  useEffect(() => {
+    const load = () => import('../dashboards/teams/entry.ts').then(setDemos);
+    if (!('IntersectionObserver' in window)) { load(); return undefined; }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { observer.disconnect(); load(); }
+    }, { rootMargin: '150% 0px' });
+    observer.observe(dashboard.current);
+    return () => observer.disconnect();
+  }, []);
 
   useLayoutEffect(() => {
-    const stop = mountTeamDashboard(dashboard.current, selected);
+    if (!demos) return undefined;
+    const stop = demos.mountTeamDashboard(dashboard.current, selected);
     const previous = outgoing.current;
     outgoing.current = null;
     if (previous) transition.current = fadeThroughScreen(previous.screen, dashboard.current,
       previous.caption, caption.current, null, siteMotion.ui);
     return () => { transition.current?.progress(1); stop(); };
-  }, [selected]);
+  }, [demos, selected]);
 
   const select = index => {
     if (index === selected) return;
