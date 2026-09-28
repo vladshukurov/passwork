@@ -38,7 +38,7 @@ await check('product tabs switch the hero screen', async () => {
   await tab.click();
   await assert.doesNotReject(page.locator('.product-detail [data-view="codes"] .pw-pv__code').first().waitFor());
   assert.equal(await tab.getAttribute('aria-selected'), 'true');
-  assert.equal(await page.locator('.pw-live-dashboard:not(.screen-switch-outgoing)').isHidden(), true);
+  assert.equal(await page.locator('#product-panel > .pw-live-dashboard:not(.screen-switch-outgoing)').isHidden(), true);
   await page.keyboard.press('Home');
   assert.equal(await page.locator('#product-tab-0').getAttribute('aria-selected'), 'true');
   await page.waitForTimeout(400);
