@@ -5,7 +5,7 @@ import { mountProductView } from '../dashboards/hero/product-views.ts';
 import '../dashboards/hero/product-views.css';
 import { dissolveScreen, snapshotScreen } from '../motion/screen-transitions.js';
 import { siteMotion } from '../motion/site-motion-tokens.js';
-import { tabKeyHandler } from '../hooks/useTabList.js';
+import { revealTab, tabKeyHandler } from '../hooks/useTabList.js';
 import { tidyCopy } from '../lib/typography.js';
 
 const productTabs = [
@@ -46,6 +46,7 @@ export default function Hero() {
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches)
       outgoing.current = snapshotScreen(selected === 0 ? dashboard.current : detail.current);
     setSelected(index);
+    revealTab(document.getElementById(`product-tab-${index}`));
   };
   const onKeyDown = tabKeyHandler(productTabs.length, select);
 

@@ -63,3 +63,32 @@
 @media (max-width: 900px) {
   .section-intro:not(.awards-heading), .platforms-intro { grid-template-columns: minmax(0, 1fr); row-gap: 20px; }
 }
+
+/* Phones: denser card grids and scrollable tab rows that say so. */
+@media (max-width: 720px) {
+  .certification-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .certification-card { min-height: 0; border-right: 1px solid var(--stroke); }
+  .certification-card:nth-child(2n) { border-right: 0; }
+  .certification-art { height: 150px; }
+  :is(.certification-art) .iso-art { height: 118px; margin-top: 0; }
+  .certification-copy { padding: 4px 16px 20px; }
+  .certification-copy h3 { font-size: 17px; line-height: 22px; }
+  .certification-copy p { font-size: 14px; line-height: 20px; }
+
+  .trust-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .trust-card { height: 230px; padding: 20px 14px; border-top: 1px solid #ffffff1f; }
+  .trust-card:nth-child(odd) { border-right: 1px solid #ffffff1f; }
+  .trust-card:nth-child(-n + 2) { border-top: 0; }
+  .trust-card-art, .trust-card :is(.trust-card-art) { top: 22px !important; width: 96px !important; max-width: none; }
+  :is(.trust-card-registry, .trust-card-bugbounty) .trust-card-art { width: 80% !important; top: -8px !important; }
+  .trust-card-copy h3 { font-size: 16px; line-height: 20px; letter-spacing: -.17px; }
+  .trust-card-copy p { font-size: 13px; line-height: 18px; }
+
+  .product-tabs, .team-tabs {
+    scroll-snap-type: x proximity; scroll-padding-inline: 16px;
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent);
+    mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent);
+  }
+  .product-tabs::after, .team-tabs::after { content: ''; flex: 0 0 28px; }
+  :is(.product-tabs, .team-tabs) button { scroll-snap-align: start; }
+}

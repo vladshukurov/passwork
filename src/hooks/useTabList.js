@@ -13,3 +13,14 @@ export function tabKeyHandler(count, select) {
     event.currentTarget.parentElement.children[next]?.focus();
   };
 }
+
+// Scroll a tab row horizontally so the chosen tab is fully visible
+// (tab rows scroll sideways on phones). Never scrolls the page.
+export function revealTab(button) {
+  const row = button?.parentElement;
+  if (!row || row.scrollWidth <= row.clientWidth) return;
+  const left = button.offsetLeft - 16;
+  const right = button.offsetLeft + button.offsetWidth + 44 - row.clientWidth;
+  const target = row.scrollLeft > left ? left : row.scrollLeft < right ? right : row.scrollLeft;
+  row.scrollTo({ left: target, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+}

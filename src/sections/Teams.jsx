@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 import { mountTeamDashboard, teamScenarios } from '../dashboards/teams/entry.ts';
 import { fadeThroughScreen, snapshotScreen } from '../motion/screen-transitions.js';
 import { siteMotion } from '../motion/site-motion-tokens.js';
-import { tabKeyHandler } from '../hooks/useTabList.js';
+import { revealTab, tabKeyHandler } from '../hooks/useTabList.js';
 import { tidyCopy } from '../lib/typography.js';
 
 const teamLabels = ['IT-команды', 'DevOps', 'Безопасность', 'Госорганизации', 'Производство'];
@@ -39,6 +39,7 @@ export default function Teams() {
       outgoing.current = { screen: snapshotScreen(dashboard.current), caption: oldCaption };
     }
     setSelected(index);
+    revealTab(document.getElementById(`team-tab-${index}`));
   };
   const onKeyDown = tabKeyHandler(teamLabels.length, select);
 
