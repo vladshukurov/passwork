@@ -120,7 +120,7 @@ function Pricing() {
       <div className="pricing-plans">
         {plans.map(plan => <article className={`pricing-plan${plan.featured ? ' pricing-plan-featured' : ''}`} key={plan.name}>
           {plan.featured && <div className="pricing-plan-art" aria-hidden="true">
-            <img className="pricing-plan-gradient" src="/passwork-assets/figma-pricing-gradient-2026.png" alt="" />
+            <img className="pricing-plan-gradient" src="/passwork-assets/figma-pricing-gradient-2026.webp" alt="" />
             <img className="pricing-plan-pattern" src="/passwork-assets/figma-pricing-dots-2026.svg" alt="" />
             <img className="pricing-plan-glint dot-glint" src="/passwork-assets/figma-pricing-dots-2026.svg" alt="" />
           </div>}

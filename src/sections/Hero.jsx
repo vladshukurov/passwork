@@ -70,7 +70,7 @@ export default function Hero() {
         <div id="product-panel" role="tabpanel" aria-labelledby={`product-tab-${selected}`} className="product-window" tabIndex="0">
           <div className="pw-live-dashboard pw-embed" ref={dashboard} hidden={selected !== 0} role="img"
             aria-label="Анимированная демонстрация Пассворка: поиск пароля, просмотр записи, журнал действий и права доступа" />
-          <noscript><img src="/passwork-assets/imgImage27.png" alt="Интерфейс Пассворка" className="product-screenshot" width="1341" height="787" /></noscript>
+          <noscript><img src="/passwork-assets/imgImage27.webp" alt="Интерфейс Пассворка" className="product-screenshot" width="1341" height="787" /></noscript>
           <div className="product-detail" ref={detail} hidden={selected === 0}>
             <div className="pw-live-dashboard pw-embed" ref={view} />
           </div>

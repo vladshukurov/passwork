@@ -10,7 +10,7 @@ const mainFeatures = [
     label: 'Аудит безопасности',
     title: 'Отслеживайте старые, слабые и скомпрометированные пароли в панели безопасности',
     summary: 'Видите риски и вовремя обновляйте доступы',
-    image: '/passwork-assets/feature-figma-audit.png',
+    image: '/passwork-assets/feature-figma-audit.webp',
     imageAlt: 'Панель безопасности Пассворка со списком паролей и показателями риска',
     details: [
       ['Доступ только к нужному', 'Настраивайте права для каждого сейфа и папки', 'permissions'],

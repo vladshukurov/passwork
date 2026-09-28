@@ -6,8 +6,8 @@ export function SectionDivider({ openBottom = false, inGrid = false }) {
 
 export function DarkHeadingDots() {
   return <>
-    <img className="dark-heading-dots" src="/passwork-assets/figma-dark-heading-dots-2026.png" width="1212" height="866" alt="" aria-hidden="true" />
-    <img className="dark-heading-dots dark-heading-glint dot-glint" src="/passwork-assets/figma-dark-heading-dots-2026.png" width="1212" height="866" alt="" aria-hidden="true" />
+    <img className="dark-heading-dots" src="/passwork-assets/figma-dark-heading-dots-2026.webp" width="1212" height="866" alt="" aria-hidden="true" />
+    <img className="dark-heading-dots dark-heading-glint dot-glint" src="/passwork-assets/figma-dark-heading-dots-2026.webp" width="1212" height="866" alt="" aria-hidden="true" />
   </>;
 }
 

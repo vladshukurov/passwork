@@ -3,10 +3,10 @@ import { DarkHeadingDots, SectionHeroSurface } from '../components/Decor.jsx';
 import { tidyCopy } from '../lib/typography.js';
 
 const trustSignals = [
-  { title: 'Реестр отечественного ПО', source: 'Минцифры России', image: 'figma-trust-registry-2026.png', kind: 'registry' },
-  { title: 'Лицензия ФСБ на криптографию', source: 'ФСБ России', image: 'figma-trust-fsb-2026.png', kind: 'fsb' },
-  { title: 'Программа Bug Bounty', source: 'Standoff Bug Bounty', image: 'figma-trust-bugbounty-2026.png', kind: 'bugbounty' },
-  { title: 'Лицензии ФСТЭК России', source: 'Регулятор ИБ', image: 'figma-trust-fstek-2026.png', kind: 'fstek' },
+  { title: 'Реестр отечественного ПО', source: 'Минцифры России', image: 'figma-trust-registry-2026.webp', kind: 'registry' },
+  { title: 'Лицензия ФСБ на криптографию', source: 'ФСБ России', image: 'figma-trust-fsb-2026.webp', kind: 'fsb' },
+  { title: 'Программа Bug Bounty', source: 'Standoff Bug Bounty', image: 'figma-trust-bugbounty-2026.webp', kind: 'bugbounty' },
+  { title: 'Лицензии ФСТЭК России', source: 'Регулятор ИБ', image: 'figma-trust-fstek-2026.webp', kind: 'fstek' },
 ];
 
 function Trust() {

@@ -442,7 +442,7 @@ main :is(p, li) { text-wrap: pretty; }
 .section-hero-gradient {
   position: absolute;
   inset: -64px;
-  background: url('/passwork-assets/blue-gradient-figma.png') center / cover no-repeat;
+  background: url('/passwork-assets/blue-gradient-figma.webp') center / cover no-repeat;
   filter: blur(56px);
 }
 .section-hero-dots {

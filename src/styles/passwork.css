@@ -20,7 +20,7 @@
   --pw-gradient-grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.68' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='128' height='128' filter='url(%23n)' opacity='.14'/%3E%3C/svg%3E");
 }
 .hero-gradient,.team-scene{
-  background-image:var(--pw-gradient-grain),url('/passwork-assets/blue-gradient-figma.png');
+  background-image:var(--pw-gradient-grain),url('/passwork-assets/blue-gradient-figma.webp');
   background-position:0 0,center;
   background-size:128px 128px,cover;
   background-repeat:repeat,no-repeat;
@@ -29,7 +29,7 @@
 .hero-gradient{
   /* Smooth the locally supplied artwork without changing its palette. */
   inset:-64px;
-  background-image:url('/passwork-assets/blue-gradient-figma.png');
+  background-image:url('/passwork-assets/blue-gradient-figma.webp');
   background-position:center;
   background-size:cover;
   filter:blur(56px);

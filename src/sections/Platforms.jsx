@@ -25,30 +25,30 @@ function Platforms() {
       </div>
     </div>
     <article className="platform-feature">
-      <img className="platform-feature-gradient" src="/passwork-assets/figma-platform-wide-gradient-2026.png" alt="" aria-hidden="true" />
+      <img className="platform-feature-gradient" src="/passwork-assets/figma-platform-wide-gradient-2026.webp" alt="" aria-hidden="true" />
       <img className="platform-feature-dots" src="/passwork-assets/figma-platform-wide-dots-2026.svg" alt="" aria-hidden="true" />
       <img className="platform-feature-dots dot-glint" src="/passwork-assets/figma-platform-wide-dots-2026.svg" alt="" aria-hidden="true" />
       <div className="platform-feature-copy"><h3>Десктопное приложение</h3><p>{tidyCopy('Управляйте паролями и доступами в приложении для macOS, Windows и Linux')}</p>
         <PlatformAvailability platforms={platformIcons.desktop} light /></div>
-      <img className="platform-feature-art" src="/passwork-assets/figma-platform-browser-hero-2026.png" alt="Десктопное приложение Пассворк: работа с паролем и доступами" loading="lazy" />
+      <img className="platform-feature-art" src="/passwork-assets/figma-platform-browser-hero-2026.webp" alt="Десктопное приложение Пассворк: работа с паролем и доступами" loading="lazy" />
     </article>
     <div className="platforms-cards">
       <article className="platform-card platform-card-mobile">
         <div className="platform-card-copy"><h3>Мобильное приложение</h3><p>{tidyCopy('Открывайте рабочие пароли с телефона, когда вы не за компьютером')}</p>
           <PlatformAvailability platforms={platformIcons.mobile} /></div>
-        <img className="platform-phone-art" src="/passwork-assets/figma-platform-phone-auth-2026.png" alt="Экран мобильного приложения Пассворк" loading="lazy" />
+        <img className="platform-phone-art" src="/passwork-assets/figma-platform-phone-auth-2026.webp" alt="Экран мобильного приложения Пассворк" loading="lazy" />
       </article>
       <article className="platform-card platform-card-2fa">
         <div className="platform-card-copy"><h3>2FA</h3><p>{tidyCopy('Подтверждайте вход с помощью приложения аутентификатора Пассворк')}</p>
           <PlatformAvailability platforms={platformIcons.mobile} /></div>
-        <img className="platform-phone-art" src="/passwork-assets/figma-platform-phone-app-2026.png" alt="Экран приложения Пассворк" loading="lazy" />
+        <img className="platform-phone-art" src="/passwork-assets/figma-platform-phone-app-2026.webp" alt="Экран приложения Пассворк" loading="lazy" />
       </article>
       <article className="platform-card platform-card-browser">
         <div className="platform-card-copy"><h3>{tidyCopy('Расширение для браузера')}</h3><p>{tidyCopy('Ищите и создавайте учётные данные, не покидая браузер')}</p>
           <PlatformAvailability platforms={platformIcons.browser} /></div>
         <div className="platform-access-screens" role="img" aria-label="Интерфейс расширения Пассворка в браузере">
-          <img src="/passwork-assets/figma-platform-access-folder-2026.png" alt="" loading="lazy" />
-          <img src="/passwork-assets/figma-platform-access-create-2026.png" alt="" loading="lazy" />
+          <img src="/passwork-assets/figma-platform-access-folder-2026.webp" alt="" loading="lazy" />
+          <img src="/passwork-assets/figma-platform-access-create-2026.webp" alt="" loading="lazy" />
         </div>
       </article>
     </div>
