@@ -28,7 +28,7 @@ svg.iso-art path[data-face="right"] { fill: var(--iso-right); }
 
 @media (hover: hover) and (pointer: fine) {
   /* Muted brand blue in soft tonal steps: light top, slightly deeper sides. */
-  :is(.certification-card, .secrets-card):hover .iso-art {
+  svg.iso-art.is-active {
     --iso-line: #5a87e0;
     --iso-edge: #a9c1ef;
     --iso-top: #f6f9ff;
@@ -42,6 +42,9 @@ svg.iso-art path[data-face="right"] { fill: var(--iso-right); }
   display: block; flex: none; width: auto; max-width: 78%;
   height: 204px; margin-top: 44px; overflow: visible; pointer-events: none;
 }
+/* Only the figure's rest silhouette takes the pointer. */
+.iso-art path { pointer-events: none; }
+.iso-art path[data-hit] { fill: transparent; stroke: none; pointer-events: fill; }
 @media (max-width: 720px) {
   :is(.certification-art, .secrets-card-art) .iso-art { height: 160px; margin-top: 16px; }
 }

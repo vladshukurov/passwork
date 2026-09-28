@@ -164,7 +164,12 @@ function render(scene: any, order?: string[], open: Record<string, any> = {}) {
   const { width: w, height: h } = scene.artboard;
   const { scale, cx, cy, area } = fit(boxes);
   if (process.env.DEBUG_FIT) console.log(scene.name, Math.round(area), scale.toFixed(3));
-  const body = runs.map(r => `<g data-object="${r.owner}">${r.parts.join('')}</g>`).join('\n');
+  // Hover target: the silhouette of the figure at rest. It never moves, so
+  // the hover follows the figure itself, not the card or the moving parts.
+  const hit = 'M ' + hull(boxes.flatMap((b: any) => makeBox(b).getVertices().map(project)))
+    .map((p: any) => `${p.x.toFixed(2)} ${p.y.toFixed(2)}`).join(' L ') + ' Z';
+  const body = `<path data-hit d="${hit}" fill="none" stroke="none"/>\n`
+    + runs.map(r => `<g data-object="${r.owner}">${r.parts.join('')}</g>`).join('\n');
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><title>${scene.name}</title>`
     + `<g data-iso stroke-width="0.85" stroke-linejoin="round" transform="translate(${w / 2} ${h / 2}) scale(${scale.toFixed(4)}) translate(${(-cx).toFixed(2)} ${(-cy).toFixed(2)})">\n${body}\n</g></svg>`;
   return svg.replace(/<path /g, '<path vector-effect="non-scaling-stroke" ');

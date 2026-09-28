@@ -65,23 +65,27 @@ export function mountPageMotion() {
   });
   media.add('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)', () => {
     const cleanups = [];
-    document.querySelectorAll('.certification-card, .secrets-card').forEach(card => {
-      const svg = card.querySelector('.iso-art');
-      if (!svg) return;
+    // Hover follows the figure itself: its rest silhouette ([data-hit]) is the
+    // only hit area, so leaving the figure closes it even inside the card.
+    document.querySelectorAll('.certification-card .iso-art, .secrets-card .iso-art').forEach(svg => {
+      const hit = svg.querySelector('[data-hit]');
+      if (!hit) return;
       const art = mountArtHover(gsap, svg);
       const enter = event => {
         if (event.pointerType === 'touch') return;
+        svg.classList.add('is-active');
         art.open();
       };
-      const leave = () => art.close();
-      const observer = new IntersectionObserver(([entry]) => {if (!entry.isIntersecting) art.reset();});
-      card.addEventListener('pointerenter', enter);
-      card.addEventListener('pointerleave', leave);
-      observer.observe(card);
+      const leave = () => { svg.classList.remove('is-active'); art.close(); };
+      const observer = new IntersectionObserver(([entry]) => {if (!entry.isIntersecting) { svg.classList.remove('is-active'); art.reset(); }});
+      hit.addEventListener('pointerenter', enter);
+      hit.addEventListener('pointerleave', leave);
+      observer.observe(svg);
       cleanups.push(() => {
-        card.removeEventListener('pointerenter', enter);
-        card.removeEventListener('pointerleave', leave);
+        hit.removeEventListener('pointerenter', enter);
+        hit.removeEventListener('pointerleave', leave);
         observer.disconnect();
+        svg.classList.remove('is-active');
         gsap.killTweensOf(art.nodes);
         gsap.set(art.nodes, {clearProps: 'transform'});
       });
