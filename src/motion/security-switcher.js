@@ -4,6 +4,7 @@ import {siteMotion} from './site-motion-tokens.js';
 import { mountSecurityDashboardMotion } from './security-dashboard-motion.js';
 import { gsap } from './page-motion.js';
 import { chapterAt, centeredChapterScrollTop, centeredSceneProgress } from './security-scroll-progress.js';
+import { mountIdleAdvance } from './idle-advance.js';
 
 export function mountSecuritySwitcher(section) {
   if (!section) return () => {};
@@ -28,11 +29,13 @@ export function mountSecuritySwitcher(section) {
   let scrollFrame = 0;
   let inView = false;
   let artTransition = null;
+  let chapterProgress = 0;
 
   function setProgress(progress) {
-    const { index, progress: chapterProgress } = chapterAt(progress, choices.length);
+    const { index, progress: within } = chapterAt(progress, choices.length);
+    chapterProgress = within;
     if (index !== active) select(index, true);
-    bars.forEach((bar, i) => gsap.set(bar, { scaleX: i === index ? chapterProgress : i < index ? 1 : 0 }));
+    bars.forEach((bar, i) => gsap.set(bar, { scaleX: i === index ? within : i < index ? 1 : 0 }));
   }
 
   function select(index, animate = false) {
@@ -147,7 +150,18 @@ export function mountSecuritySwitcher(section) {
   select(0);
   configureScroll();
 
+  // Idle autoplay: the active bar fills by itself, then the story moves on.
+  const stopAutoplay = mountIdleAdvance({
+    root: gallery,
+    count: choices.length,
+    chapter: () => active,
+    progress: () => (desktop.matches ? chapterProgress : 0),
+    fill: value => (value === null ? updateScroll() : gsap.set(bars[active], { scaleX: value })),
+    advance: index => jumpTo(index),
+  });
+
   return () => {
+    stopAutoplay();
     cancelAnimationFrame(scrollFrame);
     artTransition?.kill();
     observer.disconnect();

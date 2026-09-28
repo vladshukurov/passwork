@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import FeatureDetailPreview from '../components/FeatureDetailPreview.jsx';
 import '../styles/feature-detail-preview.css';
 import { featureProgress } from '../lib/feature-scroll-state.js';
+import { mountIdleAdvance } from '../motion/idle-advance.js';
 import { tidyCopy } from '../lib/typography.js';
 
 const mainFeatures = [
@@ -43,7 +44,11 @@ const mainFeatures = [
 function MainFeatures() {
   const [active, setActive] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [autoFill, setAutoFill] = useState(null);
   const chapters = useRef([]);
+  const grid = useRef(null);
+  const live = useRef({ active: 0, progress: 0 });
+  live.current = { active, progress };
 
   useEffect(() => {
     let frame = 0;
@@ -68,6 +73,16 @@ function MainFeatures() {
     };
   }, []);
 
+  // Idle autoplay: the active bar fills by itself, then the page glides on.
+  useEffect(() => mountIdleAdvance({
+    root: grid.current,
+    count: mainFeatures.length,
+    chapter: () => live.current.active,
+    progress: () => live.current.progress,
+    fill: value => setAutoFill(value),
+    advance: index => goTo(index),
+  }), []); // eslint-disable-line react-hooks/exhaustive-deps
+
   const goTo = index => {
     setActive(index);
     setProgress(0);
@@ -75,7 +90,7 @@ function MainFeatures() {
   };
 
   return <section className="main-features" id="features" aria-labelledby="features-heading">
-    <div className="main-features-grid">
+    <div className="main-features-grid" ref={grid}>
       <div className="main-features-sidebar security-switcher-copy">
         <div className="security-copy-heading"><h2 id="features-heading">Пароли и доступы под контролем</h2></div>
         <nav className="main-features-nav security-story-list" aria-label="Разделы основных возможностей">
@@ -83,7 +98,7 @@ function MainFeatures() {
             <button className="security-story-heading" type="button" aria-current={active === index ? 'step' : undefined}
               aria-controls={`feature-${index}`} onClick={() => goTo(index)}>{tidyCopy(item.label)}</button>
             <div className="security-story-detail"><div className="security-story-detail-inner">
-              <p>{tidyCopy(item.summary)}</p><div className="security-story-progress" aria-hidden="true"><span style={{ transform: `scaleX(${active === index ? progress : 0})` }} /></div>
+              <p>{tidyCopy(item.summary)}</p><div className="security-story-progress" aria-hidden="true"><span style={{ transform: `scaleX(${active === index ? (autoFill ?? progress) : 0})` }} /></div>
             </div></div>
           </div>)}
         </nav>
