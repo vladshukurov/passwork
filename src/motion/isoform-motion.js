@@ -11,7 +11,7 @@ const iso = ([x = 0, y = 0, z = 0]) => ({x: (x - y) * COS, y: (x + y) * SIN - z}
 // not listed rests. morphDelay staggers outlines that change shape.
 // Mechanisms (drawers, switches, flow) use an in-out curve like a real part;
 // layered diagrams open with the site's ease-out.
-const mechanical = {ease: 'power2.inOut', enter: .55, leave: .45};
+const mechanical = {ease: 'power2.inOut', enter: siteMotion.artEnter, leave: siteMotion.artLeave};
 const layered = {ease: siteMotion.ease, enter: siteMotion.artEnter, leave: siteMotion.artLeave, assemble: true};
 
 export const scenes = {
@@ -23,9 +23,9 @@ export const scenes = {
   ]},
   // Servers slide out of both racks in a cascade, like drawers on rails.
   infrastructure: {...mechanical, pieces: [0, 1].flatMap(tower => [0, 1, 2].map(level =>
-    [`server-${tower}-${level}`, [0, [20, 42, 30][level] + tower * 10, 0], {delay: tower * .1 + (2 - level) * .06}]))},
+    [`server-${tower}-${level}`, [0, [20, 42, 30][level] + tower * 10, 0], {delay: tower * .06 + (2 - level) * .04}]))},
   // Tanks grow in a wave (their outlines morph, see data-open); caps ride on top.
-  production: {...mechanical, enter: .6, pieces: [0, 1, 2].map(i =>
+  production: {...mechanical, pieces: [0, 1, 2].map(i =>
     [`tank-cap-${i}`, [0, 0, [60, 36, 12][i]], {delay: i * .08}]),
     morphDelay: {'tank-0': 0, 'tank-1': .08, 'tank-2': .16}},
   // Isolation walls slide back from the record; its cap lifts.
@@ -45,7 +45,7 @@ export const scenes = {
     ['right-lid', [0, 0, 18], {delay: .18}],
   ]},
   // Switches flip one after another.
-  config: {...mechanical, enter: .42, leave: .36, pieces: [
+  config: {...mechanical, pieces: [
     ['switch-0', [0, 70, 0], {delay: 0}],
     ['switch-1', [0, -70, 0], {delay: .08}],
     ['switch-2', [0, 70, 0], {delay: .16}],

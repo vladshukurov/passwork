@@ -4,9 +4,8 @@
   --pw-page: #fafafb;
   --pw-surface-muted: #f3f4f6;
   --pw-text: #1c1d1f;
-  --pw-text-muted: #5f6977;      /* the one secondary grey: 5.3:1 on the page */
-  --pw-text-secondary: var(--pw-text-muted);
-  --pw-inverse-soft: rgb(255 255 255 / 70%);
+  --pw-text-muted: #6f7988;
+  --pw-text-secondary: #475569;
   --pw-border: #e4e7ec;
   --pw-accent: #266df0;
   --pw-art-line: #a7b1bf;
@@ -15,21 +14,11 @@
   --pw-art-hover-face: #e7f0ff;
   --pw-focus: #619dff;
   --pw-inverse: #fff;
-  --pw-inverse-muted: var(--pw-inverse-soft);
+  --pw-inverse-muted: #ffffffa6;
   --pw-control: #202124;
   --pw-control-border: #505967;
   --pw-control-pressed: #383e47;
   --pw-font: Museo, Arial, sans-serif;
-  /* Type scale (Museo 500 only). Size / line height / tracking. */
-  --t-display: clamp(38px, 4.4vw, 68px);
-  --t-h2: clamp(30px, 2.6vw, 44px);
-  --t-h3: clamp(24px, 1.9vw, 30px);
-  --t-h4: 20px;
-  --t-item: 18px;
-  --t-lead: clamp(17px, 1.3vw, 20px);
-  --t-body: 16px;
-  --t-small: 14px;
-  --t-micro: 12px;
   /* Rhythm on an 8px grid. */
   --s-section-top: clamp(72px, 7.5vw, 120px);
   --s-section-bottom: clamp(40px, 4vw, 64px);

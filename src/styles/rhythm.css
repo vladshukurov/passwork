@@ -8,13 +8,13 @@
 }
 /* Title and lead: the text column keeps a readable measure instead of being
    squeezed by a fixed gap. */
-.section-intro, .platforms-intro {
+.section-intro:not(.awards-heading), .platforms-intro {
   grid-template-columns: minmax(0, 1fr) minmax(0, 520px);
   column-gap: calc(var(--s-inset) * 2);
   align-items: start;
 }
-.section-intro > div, .platforms-intro > div { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
-.section-intro > div > p, .platforms-intro > div > p { margin: 0; max-width: 520px; }
+.section-intro:not(.awards-heading) > div, .platforms-intro > div { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+.section-intro:not(.awards-heading) > div > p, .platforms-intro > div > p { margin: 0; max-width: 520px; }
 .teams-heading, .trust-heading, .awards-heading { gap: 20px; }
 .trust-heading { min-height: 0; }
 
@@ -40,10 +40,11 @@
   filter: none; box-shadow: 0 1px 2px rgb(16 24 40 / 6%), 0 10px 28px rgb(16 24 40 / 10%);
 }
 
-/* The footer opens with extra dark room inside its grid, so the vertical
-   lines run unbroken from the page into the footer. */
-.site-footer .footer-main { padding-top: clamp(88px, 9vw, 144px); }
+/* The footer opens with a dark band inside its grid: the vertical lines run
+   through it, and a horizontal rule then starts the footer proper. */
+.site-footer .footer-inner { padding-top: clamp(40px, 5vw, 80px); }
+.site-footer .footer-main { border-top: 1px solid #ffffff1f; }
 
 @media (max-width: 900px) {
-  .section-intro, .platforms-intro { grid-template-columns: minmax(0, 1fr); row-gap: 20px; }
+  .section-intro:not(.awards-heading), .platforms-intro { grid-template-columns: minmax(0, 1fr); row-gap: 20px; }
 }

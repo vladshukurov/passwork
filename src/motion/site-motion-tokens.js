@@ -12,8 +12,8 @@ export const siteMotion = Object.freeze({
   revealY: 16,
   revealStart: 'top 85%',
   // Isoform artwork: pieces settle into place, hover opens an exploded view.
-  artEnter: .62,
-  artLeave: .48,
+  artEnter: .6,   // every illustration opens and closes at the same pace
+  artLeave: .45,
   artStagger: .03,
   artAssemble: 1.05,
   artAssembleStagger: .045,

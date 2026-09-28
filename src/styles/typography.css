@@ -1,94 +1,28 @@
-/* Typography: the single place that assigns the type scale (--t-* in
-   passwork-tokens.css) to the site's text roles. Loaded last, so it settles
-   the sizes that older layers set piecemeal. Product mock-ups inside the
-   dashboards keep their own miniature scale and are not listed here. */
+/* Typography keeps the production values (passwork.css, figma-2026.css,
+   security-switcher.css). This layer only aligns text that plays the same
+   role but drifted apart. */
 
-/* The hero keeps the production type (passwork.css / figma-2026.css). */
-.hero-copy > p { color: #ffffffa6; }
-
-/* Section titles — one size everywhere, light or dark. */
-.section-intro h2, .about h2, .teams-heading h2, .trust-heading h2,
-.pricing-heading h2, .awards-heading h2, .platforms-intro h2 {
-  font: 500 var(--t-h2)/1.08 var(--pw-font);
-  letter-spacing: -.025em;
+/* Card titles: certification, secrets, feature details and trust cards. */
+.certification-copy h3, .secrets-card h3, .main-features-detail h4, .trust-card-copy h3 {
+  font: 500 20px/26px var(--pw-font);
+  letter-spacing: -.17px;
 }
-.about h2 span { color: var(--pw-text-muted); }
 
-/* Chapter titles inside a section. */
+/* Card descriptions on the light page. */
+.certification-copy p, .secrets-card p, .main-features-detail p {
+  font: 500 16px/22px var(--pw-font);
+  letter-spacing: -.348px;
+  color: var(--pw-text-muted);
+}
+
+/* Chapter headings: the pinned sidebars of the features and security
+   stories, and the feature chapter titles, share one size. */
 .main-features-sidebar .security-copy-heading h2,
 .security-switcher-copy .security-copy-heading h3,
-.main-features-chapter-heading h3,
-.platform-feature-copy h3,
-.pricing-plan-intro h3,
-.pricing-team-readout strong {
-  font: 500 var(--t-h3)/1.15 var(--pw-font);
-  letter-spacing: -.02em;
+.main-features-chapter-heading h3 {
+  font: 500 clamp(24px, 2vw, 34px)/1.14 var(--pw-font);
+  letter-spacing: -.035em;
 }
 
-/* Card titles. */
-.certification-copy h3, .secrets-card h3, .main-features-detail h4,
-.trust-card-copy h3, .platform-card-copy h3 {
-  font: 500 var(--t-h4)/1.3 var(--pw-font);
-  letter-spacing: -.012em;
-}
-
-/* Story navigation items (features and security). */
-:is(.security-story-list, .main-features-nav) .security-story .security-story-heading {
-  font: 500 var(--t-item)/1.35 var(--pw-font);
-  letter-spacing: -.01em;
-  color: var(--pw-text-muted);
-}
-:is(.security-story-list, .main-features-nav) .security-story.is-active .security-story-heading { color: var(--pw-text); }
-
-/* Lead paragraphs under section and hero titles. */
-section .section-intro > div > p, .platforms-intro > div > p, .awards-heading > div > p {
-  font: 500 var(--t-lead)/1.45 var(--pw-font);
-  letter-spacing: -.008em;
-  color: var(--pw-text-muted);
-}
-.trust-heading p {
-  font: 500 var(--t-lead)/1.45 var(--pw-font);
-  letter-spacing: -.008em;
-  color: var(--pw-inverse-soft);
-}
-
-/* Body copy in cards and stories. */
-.certification-copy p, .secrets-card p, .main-features-detail p,
-.security-story-detail p, .platform-card-copy p, .team-caption {
-  font: 500 var(--t-body)/1.5 var(--pw-font);
-  letter-spacing: -.005em;
-  color: var(--pw-text-muted);
-}
-.trust-card-copy p, .pricing-plan-intro p, .platform-feature-copy p {
-  font: 500 var(--t-body)/1.5 var(--pw-font);
-  letter-spacing: -.005em;
-  color: var(--pw-inverse-soft);
-}
-.team-caption { color: #fff; }
-
-/* Secondary text. */
-.site-header .header-inner nav :is(a, button),
-.pricing-features li, .pricing-plan-term, .pricing-team-readout span,
-.footer-column :is(a, button), .footer-brand p {
-  font-size: var(--t-small);
-  line-height: 1.45;
-  letter-spacing: 0;
-}
-
-/* On dark surfaces secondary text uses the one soft white. */
-.pricing :is(.pricing-plan-kicker, .pricing-plan-term, .pricing-features li, .pricing-team-readout span),
-.site-footer :is(.footer-bottom span, .footer-bottom a, .footer-column h2, .footer-brand p) { color: var(--pw-inverse-soft); }
-
-/* Controls: tabs and buttons share one text size. */
-.product-tabs button, .team-tabs button, .button { font-size: 15px; letter-spacing: -.005em; }
-.site-header .header-demo, .site-footer .button { font-size: var(--t-small); }
-
-/* Labels and fine print. */
-.pricing-plan-kicker, .platform-availability span, .footer-bottom :is(span, a), .footer-column h2 {
-  font-size: var(--t-micro);
-  line-height: 1.35;
-  letter-spacing: .01em;
-}
-
-/* Figures keep their width while counting. */
-.pricing-plan-amount { font: 500 clamp(30px, 2.4vw, 36px)/1.1 var(--pw-font); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+/* Plan names are larger than the other card titles (client request). */
+.pricing-plan-intro h3 { font: 500 clamp(24px, 1.9vw, 30px)/1.15 var(--pw-font); letter-spacing: -.02em; }
