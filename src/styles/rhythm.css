@@ -32,12 +32,19 @@
 .pricing-team-selector { padding: 0 var(--s-inset) 72px; }
 .pricing-team-readout { gap: 8px; }
 
-/* Illustrated cards: the series is smaller now, so both rows are lower. */
+/* Illustrated cards: the series is smaller now, so both rows are lower, and
+   each figure sits centred in the space above its title (equal room above
+   and below, whatever the length of the description). */
 @media (min-width: 1281px) {
   .certification-cards { height: 372px; }
-  .certification-art { height: 235px; }
   .secrets-card { height: 392px; }  /* three-line descriptions */
-  :is(.certification-art, .secrets-card-art) .iso-art { margin-top: 28px; }
+  .certification-art { flex: 1; height: auto; min-height: 0; }
+  /* Secrets copy varies in length, so the art gets one fixed zone per row
+     and every figure shares the same line. */
+  .secrets-card { justify-content: flex-start; }
+  .secrets-card-art { flex: none; height: 236px; }
+  :is(.certification-art, .secrets-card-art) { align-items: center; }
+  :is(.certification-art, .secrets-card-art) .iso-art { margin-top: 0; }
 }
 
 /* Platforms: the browser screens share the phones' top line and read as
