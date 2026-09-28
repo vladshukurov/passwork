@@ -25,6 +25,17 @@
 .main-features-sidebar.security-switcher-copy, .security-switcher-copy { padding: var(--s-card-lg) var(--s-inset); }
 .team-tabs { padding: 16px var(--s-inset); }
 
+/* Pricing: room around the selector and inside each plan. */
+.pricing-team-selector { padding: 24px var(--s-inset) 48px; }
+.pricing-team-readout { gap: 8px; }
+.pricing-plan { padding-bottom: var(--s-card-lg); }
+.pricing-plan-intro { min-height: 0; padding: var(--s-card-lg) var(--s-card-lg) 28px; display: grid; gap: 12px; align-content: start; }
+.pricing-plan-offer { padding: 8px var(--s-card-lg) 16px; }
+.pricing-plan-kicker { margin-bottom: 8px; }
+.pricing-plan-term { margin: 8px 0 28px; }
+.pricing-features { padding: 20px var(--s-card-lg) 0; }
+.pricing-features li { padding-block: 9px; }
+
 @media (max-width: 900px) {
   .section-intro, .platforms-intro { grid-template-columns: minmax(0, 1fr); row-gap: 20px; }
 }
