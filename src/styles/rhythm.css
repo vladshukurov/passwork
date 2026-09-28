@@ -36,6 +36,14 @@
 .pricing-features { padding: 20px var(--s-card-lg) 0; }
 .pricing-features li { padding-block: 9px; }
 
+/* Platforms: the browser screens share the phones' top line and read as
+   product windows (hairline plus soft shadow) rather than white on white. */
+.platform-access-screens { top: clamp(180px, 9.896vw, 190px); }
+.platform-access-screens img {
+  border: 1px solid var(--pw-border); border-radius: 12px; background: #fff;
+  filter: none; box-shadow: 0 1px 2px rgb(16 24 40 / 6%), 0 10px 28px rgb(16 24 40 / 10%);
+}
+
 @media (max-width: 900px) {
   .section-intro, .platforms-intro { grid-template-columns: minmax(0, 1fr); row-gap: 20px; }
 }

@@ -52,7 +52,6 @@ export default function App() {
       <div className="page-grid security-page-grid"><Security /></div>
       <SectionDivider openBottom />
       <Pricing /><Awards /><Platforms />
-      <SectionDivider openBottom />
     </main>
     <Footer />
     <ContactDialog />
