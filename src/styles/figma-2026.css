@@ -15,7 +15,6 @@
 html { scroll-behavior: auto !important; }
 
 body, .page-grid, .secrets, .section-divider, .platforms, .site-footer { background-color: var(--pw-light-page); }
-.feature-copy { background: var(--pw-light-page); }
 
 .button {
   background-image: none;
