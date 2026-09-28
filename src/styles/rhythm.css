@@ -32,6 +32,14 @@
 .pricing-team-selector { padding: 0 var(--s-inset) 72px; }
 .pricing-team-readout { gap: 8px; }
 
+/* Illustrated cards: the series is smaller now, so both rows are lower. */
+@media (min-width: 1281px) {
+  .certification-cards { height: 372px; }
+  .certification-art { height: 235px; }
+  .secrets-card { height: 392px; }  /* three-line descriptions */
+  :is(.certification-art, .secrets-card-art) .iso-art { margin-top: 28px; }
+}
+
 /* Platforms: the browser screens share the phones' top line and read as
    product windows (hairline plus soft shadow) rather than white on white. */
 .platform-access-screens { top: clamp(180px, 9.896vw, 190px); }
