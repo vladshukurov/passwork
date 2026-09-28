@@ -28,14 +28,15 @@
 }
 /* Light page. */
 .site-header.is-scroll-header.is-past-hero {
-  background: rgb(250 250 251 / 88%);
+  /* Dense enough that colour from the section below never muddies it. */
+  background: rgb(250 250 251 / 95%);
   border-bottom-color: var(--pw-border);
   color: var(--pw-text-muted);
-  -webkit-backdrop-filter: blur(16px) saturate(1.4); backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
 }
 /* Dark sections. */
 .site-header.is-scroll-header.is-past-hero.is-over-dark-section {
-  background: rgb(21 22 25 / 88%);
+  background: rgb(21 22 25 / 94%);
   border-bottom-color: rgb(255 255 255 / 8%);
   color: rgb(255 255 255 / 72%);
 }
