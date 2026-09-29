@@ -129,7 +129,7 @@ function Pricing() {
             <p className="pricing-plan-kicker">{tidyCopy('Стоимость команды за год')}</p>
             <p className="pricing-plan-total">{largeTeam ? <span className="pricing-plan-on-request">По запросу</span> : <AnimatedPrice amount={Number.parseInt(plan.price, 10) * teamSize * 365} />}</p>
             <p className="pricing-plan-term">{tidyCopy(largeTeam ? 'Для команды от 101 человека' : `${plan.price} за пользователя в день`)}</p>
-            <Button dialog="pricing" className="pricing-plan-action">{plan.action}</Button>
+            <Button dialog="pricing" variant={plan.featured ? 'default' : 'ghost'} className="pricing-plan-action">{plan.action}</Button>
           </div>
           <ul className="pricing-features">{plan.features.map(feature => <li key={feature}>
             <img src="/passwork-assets/figma-pricing-check-2026.svg" alt="" width="16" height="16" />{tidyCopy(feature)}

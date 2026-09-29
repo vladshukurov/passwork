@@ -1,0 +1,180 @@
+/* Design-system tokens named after the Figma variables
+   (file cJNZoxguk02Zbmg4X320R8: collections Color, Layout, Typography).
+   Purely additive: every token resolves to the value the site renders today,
+   mostly by pointing at the existing --pw-* / --s-* variables, so nothing
+   changes on screen. Where Figma holds a different value, the comment says so
+   (see docs/design-system.md, "Figma tokens"). Figma's 1920 and 1440 modes
+   map to the fluid clamp() values between those widths. */
+:root {
+  /* Color · Light */
+  --color-text-primary: var(--pw-text);                /* #1c1d1f */
+  --color-text-secondary: var(--pw-text-secondary);    /* #475569 */
+  --color-text-tertiary: var(--pw-text-muted);         /* #667080 */
+  --color-text-subtle: #7b8595;
+  --color-text-disabled: #9298a1;
+  --color-text-label: #596473;
+  --color-text-inverse: var(--pw-inverse);             /* #fff */
+  --color-text-inverse-secondary: var(--pw-inverse-muted); /* #ffffffa6 */
+  --color-text-accent: var(--pw-accent);               /* #266df0 */
+  --color-text-on-brand: #fff;
+  --color-text-on-brand-secondary: #ffffffa6;
+  --color-text-on-brand-tertiary: #ffffffc9;
+
+  --color-surface-default: var(--pw-surface);          /* #fff */
+  --color-surface-page: var(--pw-page);                /* #fafafb */
+  --color-surface-page-translucent: #fafafbe8;
+  --color-surface-subtle: var(--pw-surface-muted);     /* #f3f4f6 */
+  --color-surface-muted: #e5e7ee;
+  --color-surface-hover: #eef0f4;
+  --color-surface-inverse: #151619;
+  --color-surface-brand: #397dca;
+  --color-surface-brand-strong: #356eb7;
+  --color-surface-brand-emphasis: #295585;
+  --color-surface-on-brand: #ffffff19;
+  --color-surface-on-brand-hover: #ffffff16;
+  --color-surface-on-brand-strong: #ffffff24;
+
+  --color-border-default: var(--pw-border);            /* #e4e7ec */
+  --color-border-subtle: #eeeff1;
+  --color-border-muted: #e5e7ee;
+  --color-border-strong: #d2d5db;
+  --color-border-inverse: #ffffff1f;
+  --color-border-on-brand: #ffffff55;
+  --color-border-focus: var(--pw-focus);               /* #619dff */
+
+  --color-accent-default: var(--pw-accent);            /* #266df0 */
+  --color-accent-progress: #5984da;
+
+  --color-icon-default: #596473;
+  --color-icon-secondary: #0000008c;
+  --color-icon-disabled: #00000066;
+  --color-icon-on-brand: #fff;
+  --color-icon-on-brand-secondary: #ffffffa6;
+
+  --color-illustration-iso-line: var(--pw-art-line);   /* #a7b1bf */
+  --color-illustration-iso-front: var(--pw-art-front); /* #78899f */
+  --color-illustration-iso-face: var(--pw-art-face);   /* #f7f8fb */
+  --color-illustration-iso-face-hover: var(--pw-art-hover-face); /* #e7f0ff */
+  --color-illustration-stroke: #b9bec6;
+  --color-illustration-stroke-strong: #8e959f;
+  --color-illustration-fill: #fafafb;
+  --color-illustration-fill-shade: #eceef1;
+
+  --color-static-white: #fff;
+  --color-static-black: #000;
+
+  /* Button (same in Light and Dark) */
+  --color-button-default-bg: #fff;
+  --color-button-default-bg-hover: #f3f5f8;
+  --color-button-default-bg-pressed: #e9edf2;
+  --color-button-default-fg: var(--pw-text);           /* #1c1d1f */
+  --color-button-dark-bg: var(--pw-control);           /* #202124 */
+  --color-button-dark-bg-hover: #34363a;
+  --color-button-dark-bg-pressed: #151618;
+  --color-button-dark-border: var(--pw-control-border); /* #505967 */
+  --color-button-dark-fg: #fff;
+  --color-button-ghost-bg: #ffffff0f;
+  --color-button-ghost-bg-hover: #ffffff20;
+  --color-button-ghost-bg-pressed: #ffffff2e;
+  --color-button-ghost-fg: #fff;
+  --color-button-disabled-bg: #b5bdc9;
+  --color-button-disabled-fg: #fff;
+
+  /* Layout · section and card rhythm (1920 → 1440) */
+  --space-section-top: var(--s-section-top);       /* site: up to 120; Figma: 152 at 1920, 114 at 1440 */
+  --space-section-bottom: var(--s-section-bottom); /* site: up to 64; Figma: 56 at 1920, 42 at 1440 */
+  --space-section-inset: var(--s-inset);           /* 56 → 52 */
+  --space-section-intro-gap: 28px;
+  --space-section-heading-gap: 20px;
+  --space-card: var(--s-card);                     /* 32 → 30 */
+  --space-card-lg: var(--s-card-lg);               /* 44 → 42 */
+  --space-card-gap: 8px;
+  --page-grid-width: 1524px;                       /* = --content */
+  --page-content-width: min(1520px, 79.375%);      /* dark bands, pricing, platforms, footer */
+
+  /* Layout · radius */
+  --radius-control: var(--pw-radius-control);      /* 10 */
+  --radius-control-sm: 8px;
+  --radius-window: var(--pw-radius-window);        /* 8 */
+  --radius-card: var(--pw-radius-card);            /* 12 */
+  --radius-dialog: var(--pw-radius-dialog);        /* 16 */
+  --radius-pill: 99px;
+
+  /* Layout · button sizes */
+  --button-height-s: 36px;
+  --button-padding-x-s: 14px;
+  --button-height-m: 42px;
+  --button-padding-x-m: 22px;
+  --button-height-l: var(--pw-button-height);      /* 48 */
+  --button-padding-x-l: var(--pw-button-padding);  /* 22 */
+  --button-gap: 8px;
+
+  /* Typography (size / line-height, 1920 → 1440) */
+  --type-display-size: clamp(40px, 3.33333vw, 64px);  /* 64/64 → 48/48 */
+  --type-display-leading: 1;
+  --type-h1-size: var(--pw-heading-size);             /* 48/52 → 36/40 */
+  --type-h1-leading: var(--pw-heading-leading);
+  --type-h3-size: clamp(24px, 2vw, 34px);             /* 34/39 → 28/32 */
+  --type-h3-leading: 1.14;
+  --type-title-size: 20px;                            /* 20/26 */
+  --type-title-leading: 26px;
+  --type-body-l-size: var(--pw-lead-size);            /* 20/26 → 16/24 */
+  --type-body-l-leading: 26px;
+  --type-body-size: 16px;                             /* 16/22 */
+  --type-body-leading: 22px;
+  --type-body-s-size: 15px;                           /* 15/22 */
+  --type-body-s-leading: 22px;
+  --type-label-l-size: 16px;                          /* 16/20 */
+  --type-label-l-leading: 20px;
+  --type-label-size: 15px;                            /* 15/20 */
+  --type-label-leading: 20px;
+  --type-caption-l-size: 14px;                        /* 14/20 */
+  --type-caption-l-leading: 20px;
+  --type-caption-size: 13px;                          /* 13/18 */
+  --type-caption-leading: 18px;
+  --type-small-size: 12px;                            /* 12/18 */
+  --type-small-leading: 18px;
+}
+
+/* Color · Dark. Opt-in scope for new blocks on the dark surface; the existing
+   dark bands (Trust, Pricing, Footer) keep their own rules for now. */
+:is([data-theme="dark"], .theme-dark) {
+  --color-text-primary: #fff;
+  --color-text-secondary: #ffffffa6;
+  --color-text-tertiary: #ffffffa6;
+  --color-text-subtle: #ffffff80;
+  --color-text-disabled: #ffffff66;
+  --color-text-label: #ffffffa6;
+  --color-text-inverse: #1c1d1f;
+  --color-text-inverse-secondary: #475569;
+  --color-text-accent: #619dff;
+
+  --color-surface-default: #1c1d1f;
+  --color-surface-page: #151619;
+  --color-surface-page-translucent: #151619e8;
+  --color-surface-subtle: #ffffff0f;
+  --color-surface-muted: #ffffff1f;
+  --color-surface-hover: #ffffff14;
+  --color-surface-inverse: #fafafb;
+
+  --color-border-default: #ffffff1f;
+  --color-border-subtle: #ffffff14;
+  --color-border-muted: #ffffff14;
+  --color-border-strong: #ffffff55;
+  --color-border-inverse: #e4e7ec;
+
+  --color-accent-default: #619dff;
+  --color-accent-progress: #619dff;
+
+  --color-icon-secondary: #ffffffa6;
+  --color-icon-disabled: #ffffff66;
+
+  --color-illustration-iso-line: #3d4148;
+  --color-illustration-iso-front: #585e67;
+  --color-illustration-iso-face: #26282c;
+  --color-illustration-iso-face-hover: #2b3a52;
+  --color-illustration-stroke: #3d4148;
+  --color-illustration-stroke-strong: #585e67;
+  --color-illustration-fill: #26282c;
+  --color-illustration-fill-shade: #1e2023;
+}

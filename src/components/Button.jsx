@@ -3,6 +3,7 @@ import React from 'react';
 const variantClass = {
   default: '',
   dark: 'button-dark',
+  ghost: 'button-ghost',
   outline: 'button-outline',
 };
 

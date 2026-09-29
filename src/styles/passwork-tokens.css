@@ -1,4 +1,7 @@
 /* Passwork's active site tokens. The archived Attio page has its own tokens. */
+/* Figma-named design-system tokens (--color-*, --space-*, --radius-*, --type-*),
+   additive aliases of the values below. */
+@import './ds-tokens.css';
 :root {
   --pw-surface: #fff;
   --pw-page: #fafafb;
