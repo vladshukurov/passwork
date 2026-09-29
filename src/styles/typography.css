@@ -15,14 +15,21 @@
   color: var(--pw-text-muted);
 }
 
-/* Chapter headings: the pinned sidebars of the features and security
-   stories, and the feature chapter titles, share one size. */
+/* Large card titles, one size everywhere: the story chapters (features and
+   security), plan names, the desktop-app feature and the case statements. */
 .main-features-sidebar .security-copy-heading h2,
 .security-switcher-copy .security-copy-heading h3,
-.main-features-chapter-heading h3 {
-  font: 500 clamp(24px, 2vw, 34px)/1.14 var(--pw-font);
+.main-features-chapter-heading h3,
+.pricing-plan-intro h3,
+.platform-feature-copy h3,
+.case-cell-statement {
+  font: 500 clamp(24px, 2vw, 28px)/1.14 var(--pw-font);
   letter-spacing: -.035em;
 }
 
-/* Plan names are larger than the other card titles (client request). */
-.pricing-plan-intro h3 { font: 500 clamp(24px, 1.9vw, 30px)/1.15 var(--pw-font); letter-spacing: -.02em; }
+/* Intro leads: one size, whether the intro is split or centred. */
+.section-intro:not(.awards-heading) > div > p, .platforms-intro > div > p,
+.trust-heading p, .reviews-heading > p {
+  font: 500 16px/26px var(--pw-font);
+  letter-spacing: -.17px;
+}

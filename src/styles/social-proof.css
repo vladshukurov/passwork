@@ -6,10 +6,7 @@
 .case-muted { color: var(--pw-text-muted); }
 
 /* A statement: one sentence, the result in full ink, the context muted. */
-.case-cell-statement {
-  font: 500 clamp(24px, 2vw, 34px)/1.14 var(--pw-font); letter-spacing: -.035em;
-  text-wrap: balance;
-}
+.case-cell-statement { text-wrap: balance; }
 
 /* ---------- Case studies ---------- */
 .case-studies { scroll-margin-top: 85px; }
@@ -18,7 +15,7 @@
   background: var(--pw-border); border-bottom: 1px solid var(--pw-border);
 }
 .case-cell {
-  position: relative; display: flex; flex-direction: column; min-width: 0; min-height: 340px;
+  position: relative; display: flex; flex-direction: column; min-width: 0; min-height: var(--s-card-h, 340px);
   padding: var(--s-card-lg) var(--s-inset);
   background: var(--pw-page);
   transition: background-color var(--pw-motion-ui) var(--pw-ease-out);
@@ -47,7 +44,7 @@
 .reviews-heading { padding-bottom: var(--s-inset); }
 .reviews .awards-inner { border-bottom: 1px solid var(--pw-border); }
 .reviews-heading h2 { max-width: none; }
-.reviews-heading > p { max-width: 1000px; margin: 0; color: var(--pw-text); font: 500 20px/26px var(--pw-font); letter-spacing: -.17px; }
+.reviews-heading > p { max-width: 760px; margin: 0; color: var(--pw-text); }
 .reviews .awards-list { display: flex; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
 .reviews .award { min-height: 0; border: 0; }
 .reviews .award { width: 92px; height: 92px; }
@@ -85,10 +82,8 @@
 @media (max-width: 720px) {
   .case-cell { min-height: 0; padding: 28px 20px; }
   .case-cell-statement { padding-top: 40px; }
-  .case-cell-statement { font-size: 22px; line-height: 28px; letter-spacing: -.4px; }
   .case-logo { transform: scale(.85); transform-origin: left center; }
   .review-column { min-height: 0; padding: 28px 20px; }
-  .reviews-heading > p { font-size: 17px; line-height: 24px; }
   .reviews .award { width: 58px; height: 58px; }
   .reviews .award a { width: calc(var(--award-size) * .63); }
 }

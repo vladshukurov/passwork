@@ -28,3 +28,22 @@
 @media (prefers-reduced-motion: reduce) {
   .product-tabs button:active, .team-tabs button:active { transform: none; }
 }
+
+/* Durations: surfaces (tabs, buttons, card and logo states) take the UI
+   duration; text links and small icons take the micro one. */
+.hero .product-tabs button, .product-tabs button {
+  transition-duration: var(--pw-motion-ui);
+  transition-timing-function: var(--pw-ease-out);
+}
+/* Team tabs: colours on the UI duration, the press stays quick. */
+.team-tabs button { transition-duration: var(--pw-motion-ui), var(--pw-motion-ui), var(--pw-motion-micro); }
+.trust-card-art, .award img { transition: opacity var(--pw-motion-ui) var(--pw-ease-out); }
+:is(.platform-card, .trust-card) { transition: none; }
+.header-inner nav :is(a, button), .react-site-header nav :is(a, button),
+.footer-column > a, .footer-column > button, .footer-column > a span, .footer-bottom a {
+  transition-duration: var(--pw-motion-micro);
+  transition-timing-function: var(--pw-ease-out);
+}
+@media (prefers-reduced-motion: reduce) {
+  .trust-card-art, .award img { transition: none; }
+}

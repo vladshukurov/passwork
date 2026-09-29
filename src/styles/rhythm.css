@@ -38,8 +38,12 @@
    each figure sits centred in the space above its title (equal room above
    and below, whatever the length of the description). */
 @media (min-width: 1281px) {
-  .certification-cards { height: 372px; }
-  .secrets-card { height: 392px; }  /* three-line descriptions */
+  :root { --s-card-h: 392px; }
+  /* One card height across the page (certification, secrets, trust,
+     platforms, cases); the secrets' three-line descriptions set it. */
+  .certification-cards { height: var(--s-card-h); }
+  .secrets-card, .trust-card, .platform-card { height: var(--s-card-h); }
+  .case-cell { min-height: var(--s-card-h); }
   .certification-art { flex: 1; height: auto; min-height: 0; }
   /* Secrets copy varies in length, so the art gets one fixed zone per row
      and every figure shares the same line. */
