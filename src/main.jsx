@@ -22,6 +22,7 @@ import './styles/isoform-art.css';
 import './styles/typography.css';
 import './styles/rhythm.css';
 import './styles/states.css';
+import './styles/social-proof.css';
 import App from './App.jsx';
 
 createRoot(document.getElementById('root')).render(<App />);

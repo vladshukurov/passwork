@@ -65,8 +65,10 @@ export default function Teams() {
     <section className="team-scene" id="team-panel" role="tabpanel" aria-labelledby={`team-tab-${selected}`} tabIndex="0">
       <img src="/passwork-assets/img1PxDots8PxPitch800600Source.svg" alt="" className="scene-dots" />
       <img src="/passwork-assets/img1PxDots8PxPitch800600Source.svg" alt="" className="scene-dots dot-glint" aria-hidden="true" />
-      <div className="team-dashboard-window team-screenshot"><div className="pw-team-dashboard pw-embed" ref={dashboard} role="img" /></div>
-      <p className="team-caption" ref={caption} aria-live="polite">{tidyCopy(teamScenarios[selected].caption)}</p>
+      <div className="team-demo">
+        <div className="team-dashboard-window"><div className="pw-team-dashboard pw-embed" ref={dashboard} role="img" /></div>
+        <p className="team-caption" ref={caption} aria-live="polite">{tidyCopy(teamScenarios[selected].caption)}</p>
+      </div>
     </section>
   </>;
 }

@@ -12,7 +12,8 @@ import Secrets from './sections/Secrets.jsx';
 import Trust from './sections/Trust.jsx';
 import Security from './sections/Security.jsx';
 import Pricing from './sections/Pricing.jsx';
-import Awards from './sections/Awards.jsx';
+import CaseStudies from './sections/CaseStudies.jsx';
+import Reviews from './sections/Reviews.jsx';
 import Platforms from './sections/Platforms.jsx';
 import Footer from './sections/Footer.jsx';
 import { mountPageMotion } from './motion/page-motion.js';
@@ -49,9 +50,9 @@ export default function App() {
         <MainFeatures /><Secrets /><SectionDivider inGrid />
       </div>
       <Trust />
-      <div className="page-grid security-page-grid"><Security /></div>
+      <div className="page-grid security-page-grid"><Security /><CaseStudies /></div>
       <SectionDivider openBottom />
-      <Pricing /><Awards /><Platforms />
+      <Pricing /><Reviews /><Platforms />
     </main>
     <Footer />
     <ContactDialog />
