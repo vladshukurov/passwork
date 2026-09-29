@@ -3,7 +3,8 @@
 /* Figma-named design-system tokens (--color-*, --space-*, --radius-*, --type-*):
    colours are the source of truth; layout tokens alias the values below. */
 @import './ds-tokens.css';
-:root {
+/* Also declared on .theme-dark so a dark band re-resolves the aliases. */
+:root, .theme-dark {
   --pw-surface: var(--color-surface-default);
   --pw-page: var(--color-surface-page);
   --pw-surface-muted: var(--color-surface-subtle);

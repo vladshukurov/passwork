@@ -50,9 +50,10 @@ export default function App() {
         <MainFeatures /><Secrets /><SectionDivider inGrid />
       </div>
       <Trust />
-      <div className="page-grid security-page-grid"><Security /><CaseStudies /></div>
+      <div className="page-grid security-page-grid"><Security /><SectionDivider inGrid /></div>
+      <CaseStudies /><Reviews />
       <SectionDivider openBottom />
-      <Pricing /><Reviews /><Platforms />
+      <Pricing /><Platforms />
     </main>
     <Footer />
     <ContactDialog />

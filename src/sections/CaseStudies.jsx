@@ -28,7 +28,7 @@ const cases = [
 ];
 
 export default function CaseStudies() {
-  return <section className="case-studies" id="cases" aria-labelledby="cases-heading">
+  return <section className="case-studies theme-dark" id="cases" aria-labelledby="cases-heading"><div className="case-studies-inner">
     <div className="section-intro case-studies-intro">
       <h2 id="cases-heading">Пассворк<br />{' '}в крупных компаниях</h2>
       <div>
@@ -50,5 +50,5 @@ export default function CaseStudies() {
           </a>
         </h3>
       </li>)}</ul>
-  </section>;
+  </div></section>;
 }

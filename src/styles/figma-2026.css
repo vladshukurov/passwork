@@ -1,6 +1,6 @@
 /* React implementation of the current Passwork Figma typography and layout.
    The archived static version deliberately keeps its own styling. */
-:root {
+:root, .theme-dark {
   --pw-light-page: var(--color-surface-page);
   --pw-radius-control: 10px;
   --pw-button-height: 48px;

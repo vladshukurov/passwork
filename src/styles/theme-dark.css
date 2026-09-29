@@ -26,7 +26,7 @@
 
 /* Dark bands (trust, pricing) no longer contrast with the page, so the
    boundary a light band implied becomes a hairline. */
-:root[data-theme="dark"] :is(.trust-inner, .pricing-inner, .reviews .awards-inner) { border-top: 1px solid var(--color-border-default); }
+:root[data-theme="dark"] :is(.trust-inner, .pricing-inner, .case-studies-inner, .reviews .awards-inner) { border-top: 1px solid var(--color-border-default); }
 
 /* Award badges: the monochrome rest state is quieter on a dark page. */
 :root[data-theme="dark"] .award-logo-mono { opacity: .6; }
