@@ -624,7 +624,9 @@ main :is(p, li) { text-wrap: pretty; }
 }
 
 /* Figma frame variant: the 1.5px background is the separator, never an outline. */
-.button, .site-footer .footer-column > button, .react-site-header nav button { transition: none; animation: none; }
+/* Buttons ease their colours like the tabs do. */
+.button { transition: background-color var(--pw-motion-ui) var(--pw-ease-out), border-color var(--pw-motion-ui) var(--pw-ease-out), color var(--pw-motion-ui) var(--pw-ease-out), transform var(--pw-motion-press) var(--pw-ease-out); animation: none; }
+.site-footer .footer-column > button, .react-site-header nav button { transition: none; animation: none; }
 
 /* Only the light on the stationary dot pattern changes; no drifting layer. */
 .platform-feature-dots.dot-glint { opacity: 0; filter: brightness(0) invert(1); -webkit-mask-image: linear-gradient(112deg, transparent 35%, #0009 42%, #000 50%, #0009 58%, transparent 65%); mask-image: linear-gradient(112deg, transparent 35%, #0009 42%, #000 50%, #0009 58%, transparent 65%); -webkit-mask-size: 250% 100%; mask-size: 250% 100%; -webkit-mask-position: 100% 0; mask-position: 100% 0; }

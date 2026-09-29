@@ -7,7 +7,7 @@
 
 /* A statement: one sentence, the result in full ink, the context muted. */
 .case-cell-statement {
-  font: 500 clamp(24px, 1.77vw, 34px)/1.15 var(--pw-font); letter-spacing: -.8px;
+  font: 500 clamp(24px, 2vw, 34px)/1.14 var(--pw-font); letter-spacing: -.035em;
   text-wrap: balance;
 }
 
@@ -18,13 +18,17 @@
   background: var(--pw-border); border-bottom: 1px solid var(--pw-border);
 }
 .case-cell {
-  position: relative; display: flex; flex-direction: column; min-width: 0; min-height: 380px;
+  position: relative; display: flex; flex-direction: column; min-width: 0; min-height: 340px;
   padding: var(--s-card-lg) var(--s-inset);
   background: var(--pw-page);
   transition: background-color var(--pw-motion-ui) var(--pw-ease-out);
 }
 .case-cell-top { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-.case-cell-top img { display: block; width: auto; max-width: 190px; height: auto; max-height: 36px; }
+/* Logos: monochrome ink at rest (as the client logos), the brand colours on hover. */
+.case-logo { position: relative; display: block; flex: none; }
+.case-logo::before, .case-logo img { position: absolute; inset: 0; transition: opacity var(--pw-motion-ui) var(--pw-ease-out); }
+.case-logo::before { content: ''; background: var(--pw-text-muted); -webkit-mask: var(--logo) left center / contain no-repeat; mask: var(--logo) left center / contain no-repeat; }
+.case-logo img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: left center; opacity: 0; }
 .case-cell-industry { color: var(--pw-text-muted); font: 500 14px/20px var(--pw-font); letter-spacing: -.2px; white-space: nowrap; }
 .case-cell-statement { max-width: 560px; margin-top: auto; padding-top: 48px; }
 .case-cell-statement a { color: var(--pw-text); }
@@ -32,21 +36,18 @@
 .case-cell-statement a::after { content: ''; position: absolute; inset: 0; }
 .case-cell-statement a:focus-visible { outline: 0; }
 .case-cell:has(a:focus-visible) { outline: 3px solid var(--pw-focus); outline-offset: -3px; }
-.case-cell-foot {
-  width: max-content; margin: 32px 0 0;
-  color: var(--pw-text); font: 500 16px/20px var(--pw-font); letter-spacing: -.2px;
-}
-.case-cell-arrow { display: inline-block; transition: transform var(--pw-motion-micro) var(--pw-ease-out); }
 @media (hover: hover) and (pointer: fine) {
   .case-cell:hover { background: var(--pw-surface); }
-  .case-cell:hover .case-cell-arrow { transform: translateX(4px); }
+  .case-cell:hover .case-logo::before { opacity: 0; }
+  .case-cell:hover .case-logo img { opacity: 1; }
 }
 
 /* ---------- Reviews ---------- */
 /* Heading, lead and the award badges, centred; badges sit 32px under the lead. */
 .reviews-heading { padding-bottom: var(--s-inset); }
+.reviews .awards-inner { border-bottom: 1px solid var(--pw-border); }
 .reviews-heading h2 { max-width: none; }
-.reviews-heading > p { max-width: 1000px; margin: 0; color: var(--pw-text); font: 500 20px/26px var(--pw-font); letter-spacing: -.2px; }
+.reviews-heading > p { max-width: 1000px; margin: 0; color: var(--pw-text); font: 500 20px/26px var(--pw-font); letter-spacing: -.17px; }
 .reviews .awards-list { display: flex; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
 .reviews .award { min-height: 0; border: 0; }
 .reviews .award { width: 92px; height: 92px; }
@@ -57,21 +58,21 @@
 .reviews .award:nth-child(n + 5) { --award-size: 70px; }
 
 .review-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.review-column { display: flex; min-width: 0; min-height: 376px; padding: var(--s-card); }
+.review-column { display: flex; min-width: 0; min-height: 320px; padding: var(--s-card); }
 .review-column + .review-column { border-left: 1px solid var(--pw-border); }
-.review-column figure { display: flex; flex: 1; flex-direction: column; gap: 20px; margin: 0; }
-.review-stars { display: flex; gap: 6px; }
-.review-stars img { display: block; width: 20px; height: 20px; }
+.review-column figure { display: flex; flex: 1; flex-direction: column; gap: 16px; margin: 0; }
+.review-stars { display: flex; gap: 4px; }
+.review-stars img { display: block; width: 16px; height: 16px; }
 .review-column blockquote { margin: 0; }
-.review-column blockquote p { color: var(--pw-text); font: 500 20px/26px var(--pw-font); letter-spacing: -.2px; }
-.review-column figcaption { display: flex; flex-direction: column; gap: 8px; margin-top: auto; padding-top: 28px; }
-.review-author { width: max-content; color: var(--pw-text); font: 500 20px/26px var(--pw-font); letter-spacing: -.2px; transition: color var(--pw-motion-micro) var(--pw-ease-out); }
+.review-column blockquote p { color: var(--pw-text); font: 500 16px/22px var(--pw-font); letter-spacing: -.3px; }
+.review-column figcaption { display: flex; flex-direction: column; gap: 4px; margin-top: auto; padding-top: 24px; }
+.review-author { width: max-content; color: var(--pw-text); font: 500 16px/20px var(--pw-font); letter-spacing: -.2px; transition: color var(--pw-motion-micro) var(--pw-ease-out); }
 .review-author:hover { color: var(--pw-accent); }
 .review-author:focus-visible { outline: 2px solid var(--pw-focus); outline-offset: 3px; border-radius: 2px; }
-.review-role { color: var(--pw-text-muted); font: 500 16px/22px var(--pw-font); letter-spacing: -.3px; }
+.review-role { color: var(--pw-text-muted); font: 500 14px/20px var(--pw-font); letter-spacing: -.2px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .case-cell, .case-cell-arrow, .review-author { transition: none; }
+  .case-cell, .case-logo::before, .case-logo img, .review-author { transition: none; }
 }
 
 @media (max-width: 900px) {
@@ -85,11 +86,8 @@
   .case-cell { min-height: 0; padding: 28px 20px; }
   .case-cell-statement { padding-top: 40px; }
   .case-cell-statement { font-size: 22px; line-height: 28px; letter-spacing: -.4px; }
-  .case-cell-foot { margin-top: 24px; }
-  .case-cell-top img { max-height: 30px; max-width: 150px; }
+  .case-logo { transform: scale(.85); transform-origin: left center; }
   .review-column { min-height: 0; padding: 28px 20px; }
-  .review-column blockquote p { font-size: 17px; line-height: 24px; }
-  .review-author { font-size: 17px; line-height: 24px; }
   .reviews-heading > p { font-size: 17px; line-height: 24px; }
   .reviews .award { width: 58px; height: 58px; }
   .reviews .award a { width: calc(var(--award-size) * .63); }
