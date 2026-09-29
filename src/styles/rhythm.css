@@ -54,11 +54,11 @@
 }
 
 /* Platforms: the browser screens share the phones' top line and read as
-   product windows (hairline plus soft shadow) rather than white on white. */
+   product windows (a hairline, no shadow) rather than white on white. */
 .platform-access-screens { top: clamp(180px, 9.896vw, 190px); }
 .platform-access-screens img {
   border: 1px solid var(--pw-border); border-radius: 12px; background: #fff;
-  filter: none; box-shadow: 0 1px 2px rgb(16 24 40 / 6%), 0 10px 28px rgb(16 24 40 / 10%);
+  filter: none; box-shadow: none;
 }
 
 /* The footer opens with a dark band inside its grid: the vertical lines run
