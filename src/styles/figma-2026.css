@@ -690,19 +690,19 @@ main :is(p, li) { text-wrap: pretty; }
   }
   .react-site-header .header-inner nav .mobile-nav-overline,
   .react-site-header .header-inner nav .mobile-nav-footer { display: block; }
-  .react-site-header .header-inner nav .mobile-nav-overline { padding: 0 0 18px; color: #8993a1; font: 500 12px/18px var(--pw-font); letter-spacing: .08em; text-transform: uppercase; }
+  .react-site-header .header-inner nav .mobile-nav-overline { padding: 0 0 18px; color: var(--color-text-subtle); font: 500 12px/18px var(--pw-font); letter-spacing: .08em; text-transform: uppercase; }
   .react-site-header .header-inner nav :is(a, button) {
     display: flex; align-items: center; justify-content: space-between;
     min-height: 70px; padding: 14px 0;
     border: 0; border-bottom: 1px solid var(--color-border-default); border-radius: 0;
-    background: transparent; color: #242629;
+    background: transparent; color: var(--color-text-primary);
     font: 500 clamp(22px, 4.5vw, 28px)/1.2 var(--pw-font);
     text-align: left; opacity: 0; transform: translateY(14px);
     transition: opacity var(--pw-motion-ui) var(--pw-ease-out), transform var(--pw-motion-move) var(--pw-ease-out);
   }
-  .react-site-header .header-inner nav :is(a, button)::after { content: '↗'; flex: none; margin-left: 16px; color: #9aa7b8; font: 400 23px/1 var(--pw-font); }
-  .react-site-header .header-inner nav :is(a, button):hover { color: #242629; background: transparent; }
-  .react-site-header .header-inner nav :is(a, button):focus-visible { outline: 2px solid #4388e7; outline-offset: -4px; }
+  .react-site-header .header-inner nav :is(a, button)::after { content: '↗'; flex: none; margin-left: 16px; color: var(--color-text-disabled); font: 400 23px/1 var(--pw-font); }
+  .react-site-header .header-inner nav :is(a, button):hover { color: var(--color-text-primary); background: transparent; }
+  .react-site-header .header-inner nav :is(a, button):focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: -4px; }
   .react-site-header .header-inner nav.open :is(a, button) { opacity: 1; transform: translateY(0); }
   .react-site-header .header-inner nav.open > :nth-child(2) { transition-delay: .06s; }
   .react-site-header .header-inner nav.open > :nth-child(3) { transition-delay: .1s; }
@@ -711,9 +711,9 @@ main :is(p, li) { text-wrap: pretty; }
   .react-site-header .header-inner nav.open > :nth-child(6) { transition-delay: .22s; }
   .react-site-header .header-inner nav .mobile-nav-footer {
     max-width: 260px; margin-top: auto; padding-top: 40px;
-    color: #8b95a3; font: 500 13px/19px var(--pw-font);
+    color: var(--color-text-subtle); font: 500 13px/19px var(--pw-font);
   }
-  .react-site-header.is-menu-open .header-demo { background: #f2f5f9; border-color: #e3e7ee; color: var(--color-button-default-fg); }
+  .react-site-header.is-menu-open .header-demo { background: var(--color-button-default-bg-hover); border-color: var(--color-border-default); color: var(--color-button-default-fg); }
 }
 @media (max-width: 480px) {
   .react-site-header .brand img { width: 130px; height: auto; aspect-ratio: 114 / 25; }

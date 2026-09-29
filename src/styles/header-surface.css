@@ -106,3 +106,9 @@
     transition: none;
   }
 }
+
+/* Dark theme: past the hero (and in the open mobile menu) the page is dark,
+   so the logo keeps its light wordmark. Over the white product window in the
+   hero it still follows the window. */
+:root[data-theme="dark"] .react-site-header:is(.is-past-hero, .is-menu-open) .brand-dark { opacity: 1; }
+:root[data-theme="dark"] .react-site-header:is(.is-past-hero, .is-menu-open) .brand-light { opacity: 0; }
