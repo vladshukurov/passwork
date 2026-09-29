@@ -23,6 +23,7 @@ import './styles/typography.css';
 import './styles/rhythm.css';
 import './styles/states.css';
 import './styles/social-proof.css';
+import './styles/theme-dark.css';
 import App from './App.jsx';
 
 const root = createRoot(document.getElementById('root'));

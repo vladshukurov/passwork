@@ -94,8 +94,8 @@
 .security-story.is-active .security-story-detail { grid-template-rows: 1fr; opacity: 1; }
 .security-story-detail-inner { min-height: 0; overflow: hidden; }
 .security-story-detail p { max-width: min(510px, calc(100% - 8px)); margin: 9px 0 20px; color: var(--pw-text-secondary); font: 500 clamp(14px, .95vw, 16px)/1.55 Museo, Arial, sans-serif; letter-spacing: -.01em; }
-.security-story-progress { width: 100%; height: 2px; background: #e4e9f1; }
-.security-story-progress span { display: block; width: 100%; height: 100%; transform: scaleX(0); transform-origin: left; background: #5984da; }
+.security-story-progress { width: 100%; height: 2px; background: var(--color-border-default); }
+.security-story-progress span { display: block; width: 100%; height: 100%; transform: scaleX(0); transform-origin: left; background: var(--color-accent-progress); }
 @media (max-width: 1100px) and (min-width: 801px) {
   .security-switcher-copy { display: flex; padding: 36px 32px; }
   .security-copy-heading h3 { font-size: 30px; }

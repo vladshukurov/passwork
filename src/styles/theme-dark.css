@@ -1,0 +1,38 @@
+/* Dark theme: what a token swap alone cannot express. Colours come from the
+   Figma "Color" collection (ds-tokens.css); this layer only dims the brand
+   scenes, re-draws the lines that a light band used to imply, and gives the
+   iso art its dark hover. Loaded last; inert unless [data-theme="dark"]. */
+:root[data-theme="dark"] {
+  /* One scrim for every blue scene, so they sit in the dark UI instead of
+     glowing on it. Painted over the background, under the content. */
+  --theme-scene-scrim: inset 0 0 0 100vmax rgb(8 16 38 / 56%);
+}
+
+/* Blue scenes drawn as backgrounds: dim with the scrim. */
+:root[data-theme="dark"] :is(.hero-gradient, .team-scene, .main-features-art, .security-switcher-stage) { box-shadow: var(--theme-scene-scrim); }
+:root[data-theme="dark"] .hero-gradient { box-shadow: inset 0 0 0 100vmax rgb(9 13 24 / 38%); }
+/* Blue scenes drawn as images: dim the image itself, not the screens on top. */
+:root[data-theme="dark"] :is(.security-stage-background, .security-stage-pattern, .platform-feature-gradient, .pricing-plan-gradient) { filter: brightness(.52) saturate(.9); }
+:root[data-theme="dark"] :is(.platform-feature, .team-scene, .pricing-plan-featured) { background-color: #1d3558; }
+
+/* The white dot patterns on those scenes step back with them. */
+:root[data-theme="dark"] :is(.scene-dots, .hero-dots, .security-stage-dots, .platform-feature-dots):not(.dot-glint) { opacity: .45; }
+
+/* Dark bands (trust, pricing) no longer contrast with the page, so the
+   boundary a light band implied becomes a hairline. */
+:root[data-theme="dark"] :is(.trust-inner, .pricing-inner, .reviews .awards-inner) { border-top: 1px solid var(--color-border-default); }
+
+/* Award badges: the monochrome rest state is quieter on a dark page. */
+:root[data-theme="dark"] .award-logo-mono { opacity: .6; }
+
+/* Iso art hover: the light theme's pale blue would glow on dark; this is the
+   same blue set, rebuilt for a dark surface. */
+@media (hover: hover) and (pointer: fine) {
+  :root[data-theme="dark"] svg.iso-art.is-active {
+    --iso-line: #7ea3ee;
+    --iso-edge: #3f5a8c;
+    --iso-top: #243453;
+    --iso-left: #1f2d49;
+    --iso-right: #1a263e;
+  }
+}
