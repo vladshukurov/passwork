@@ -2,7 +2,7 @@
 .team-dashboard-window {
   aspect-ratio: 1344 / 756;
   overflow: hidden;
-  background: #fff;
+  background: var(--pw-bg);
 }
 .pw-team-dashboard.pw-embed {
   --pw-bg:#fff;--pw-side:#fafafb;--pw-line:#eeeff1;--pw-line-soft:#eeeff1;
@@ -10,35 +10,35 @@
   --pw-text:#1c1d1f;--pw-text-2:#363a40;--pw-text-3:#747b85;--pw-text-4:#969ca4;
   --pw-blue:#6687d9;--pw-blue-soft:#eaf0fd;--pw-hl:#8aa6e9;--pw-pulse-color:#4168bf;
   --passwork-card-radius:6px;--font-sans:Inter,Museo,Arial,sans-serif;
-  background:#fff;color-scheme:light;
+  background:var(--pw-bg);color-scheme:light;
 }
 .pw-team-dashboard .pw-app { box-shadow: none; }
 .pw-team-dashboard .pw-side{background:var(--pw-side);border-right:1px solid var(--pw-line)}
-.pw-team-dashboard .pw-main{background:white}
+.pw-team-dashboard .pw-main{background:var(--pw-bg)}
 .pw-team-dashboard :is(.pw-search__value,.pw-sec__title,.pw-row__val,.pw-dots,.pw-secret,.pw-hist__text b,.pw-ver__num){color:var(--pw-text)}
 .pw-team-dashboard :is(.pw-folder,.pw-row__label,.pw-totp,.pw-hist__text,.pw-access){color:var(--pw-text-2)}
 .pw-team-dashboard :is(.pw-label,.pw-close,.pw-ib,.pw-menu__title,.pw-item__hint--chip,.pw-tree-row__chev,.pw-tree-row--dim,.pw-ver__by,.pw-meta__sub,.pw-chip,.pw-item){color:var(--pw-text-3)}
 .pw-team-dashboard :is(.pw-item.is-selected,.pw-tree-row--active,.pw-detail__title h3,.pw-crumbs b){color:var(--pw-text)}
 .pw-team-dashboard .pw-search__caret{background:var(--pw-text-2)}
-.pw-team-dashboard :is(.pw-search__clear,.pw-avatar--letter,.pw-mini--more){background:#e6e8ec;color:#969ca4}
-.pw-team-dashboard .pw-sec__add{border-color:#dce0e6;color:#9298a1}
-.pw-team-dashboard .pw-star:not(.is-on){color:#d3d6dc}
+.pw-team-dashboard :is(.pw-search__clear,.pw-avatar--letter,.pw-mini--more){background:var(--pw-muted-bg);color:var(--pw-text-4)}
+.pw-team-dashboard .pw-sec__add{border-color:var(--pw-line-3);color:var(--pw-text-5)}
+.pw-team-dashboard .pw-star:not(.is-on){color:var(--pw-text-6)}
 .pw-team-dashboard .pw-star.is-on{color:#dfb63c}
 .pw-team-dashboard .pw-ring__bg{stroke:#e6e9ee}
 .pw-team-dashboard :is(.pw-round,.pw-circle){color:var(--pw-blue);border-color:var(--pw-blue-soft)}
-.pw-team-dashboard .pw-item mark{background:#dce7ff;color:#345caa}
-.pw-team-dashboard .pw-ver__cur{color:#4d70bd;border-color:#dce4f5;background:#eef2fc}
+.pw-team-dashboard .pw-item mark{background:var(--pw-mark-bg);color:#345caa}
+.pw-team-dashboard .pw-ver__cur{color:#4d70bd;border-color:var(--pw-control-line);background:var(--pw-sel-2)}
 .pw-team-dashboard :is(.pw-round,.pw-circle,.pw-ib,.pw-star,.pw-close,.pw-sec__add,.pw-tab).pw-hl{color:#4168bf}
 .pw-team-dashboard .pw-ib.is-done{color:#25815e}
 .pw-team-dashboard .pw-btn-add.pw-hl{background:#5277cc}
-.pw-team-dashboard .pw-search.is-focused,.pw-team-dashboard .pw-search.is-focused.pw-hl{background:#f7f9ff;box-shadow:inset 0 0 0 1px #8aa6e9,0 0 0 3px #6687d91a}
-.pw-team-dashboard .pw-menu{background:#fff;border-color:#e2e6ed;box-shadow:0 14px 34px #21355b1a;min-width:340px}
-.pw-team-dashboard .pw-toast{background:#fff;color:#313e54;border:1px solid #e2e6ed;box-shadow:0 6px 18px #21355b1c}
+.pw-team-dashboard .pw-search.is-focused,.pw-team-dashboard .pw-search.is-focused.pw-hl{background:var(--pw-focus-bg);box-shadow:inset 0 0 0 1px #8aa6e9,0 0 0 3px #6687d91a}
+.pw-team-dashboard .pw-menu{background:var(--pw-bg);border-color:var(--pw-line-2);box-shadow:0 14px 34px #21355b1a;min-width:340px}
+.pw-team-dashboard .pw-toast{background:var(--pw-bg);color:var(--pw-text);border:1px solid var(--pw-line-2);box-shadow:0 6px 18px #21355b1c}
 .pw-team-dashboard .pw-cursor__arrow{fill:#252c3a;stroke:#fff;filter:drop-shadow(0 1px 1px #0003) drop-shadow(0 3px 5px #0002)}
 .pw-team-dashboard .pw-ripple{border-color:#6687d9aa}
 .pw-team-dashboard .pw-glyph--cloud svg path{fill:#a5c6d9}
 .pw-team-dashboard .pw-glyph--sprinthost{background:#e5492f}
 
-.pw-team-dashboard .pw-it__dialog { background: #fff; }
-.pw-team-dashboard .pw-it__toggle i { background: #fff; }
+.pw-team-dashboard .pw-it__dialog { background: var(--pw-bg); }
+.pw-team-dashboard .pw-it__toggle i { background: var(--pw-bg); }
 .pw-team-dashboard .pw-it__button--primary.pw-hl { background: #5277cc; }

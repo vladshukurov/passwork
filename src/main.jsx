@@ -10,6 +10,7 @@ import './styles/client-logos.css';
 import './styles/hero-entrance.css';
 import './styles/hero-scroll.css';
 import './styles/security-switcher.css';
+import './styles/product-palette.css';
 import './dashboards/hero/hero-base.css';
 import './dashboards/hero/hero-light.css';
 import './dashboards/teams/teams.css';

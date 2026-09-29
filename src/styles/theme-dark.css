@@ -2,21 +2,27 @@
    Figma "Color" collection (ds-tokens.css); this layer only dims the brand
    scenes, re-draws the lines that a light band used to imply, and gives the
    iso art its dark hover. Loaded last; inert unless [data-theme="dark"]. */
+/* Brand scenes get their own dark gradients: the same blue family as the
+   light ones, from deep navy to a saturated blue, instead of a dimmed copy. */
 :root[data-theme="dark"] {
-  /* One scrim for every blue scene, so they sit in the dark UI instead of
-     glowing on it. Painted over the background, under the content. */
-  --theme-scene-scrim: inset 0 0 0 100vmax rgb(8 16 38 / 56%);
+  --scene-dark-grain: var(--pw-gradient-grain);
+  --scene-dark-hero: linear-gradient(180deg, #0d1528 0%, #122650 42%, #1a3d80 78%, #1f4a99 100%);
+  --scene-dark-blue: linear-gradient(155deg, #0e1a33 0%, #15305e 48%, #1c4288 100%);
+  --scene-dark-soft: linear-gradient(145deg, #121c33 0%, #172c55 55%, #22407e 100%);
 }
-
-/* Blue scenes drawn as backgrounds: dim with the scrim. */
-:root[data-theme="dark"] :is(.hero-gradient, .team-scene, .main-features-art, .security-switcher-stage) { box-shadow: var(--theme-scene-scrim); }
-:root[data-theme="dark"] .hero-gradient { box-shadow: inset 0 0 0 100vmax rgb(9 13 24 / 38%); }
-/* Blue scenes drawn as images: dim the image itself, not the screens on top. */
-:root[data-theme="dark"] :is(.security-stage-background, .security-stage-pattern, .platform-feature-gradient, .pricing-plan-gradient) { filter: brightness(.52) saturate(.9); }
-:root[data-theme="dark"] :is(.platform-feature, .team-scene, .pricing-plan-featured) { background-color: #1d3558; }
-
-/* The white dot patterns on those scenes step back with them. */
-:root[data-theme="dark"] :is(.scene-dots, .hero-dots, .security-stage-dots, .platform-feature-dots):not(.dot-glint) { opacity: .45; }
+:root[data-theme="dark"] .hero { background: #0d1528; }
+:root[data-theme="dark"] .hero-gradient { background-image: var(--scene-dark-grain), var(--scene-dark-hero); background-size: 128px 128px, cover; }
+:root[data-theme="dark"] .team-scene { background-image: var(--scene-dark-grain), var(--scene-dark-blue); background-size: 128px 128px, cover; }
+:root[data-theme="dark"] .main-features-art { background: var(--scene-dark-soft); }
+:root[data-theme="dark"] .main-features-art::after { opacity: .25; }
+:root[data-theme="dark"] .security-switcher-stage { background: var(--scene-dark-soft); }
+:root[data-theme="dark"] :is(.platform-feature, .pricing-plan-featured) { background: var(--scene-dark-blue); }
+/* The light scenes' gradient images give way to the gradients above. */
+:root[data-theme="dark"] :is(.security-stage-background, .security-stage-pattern, .platform-feature-gradient, .pricing-plan-gradient) { opacity: 0; }
+/* The white dot patterns stay, but quiet: on a dark gradient full-strength
+   dots read as noise. Matched by file so every scene is covered. */
+:root[data-theme="dark"] img:is([src*="Dots"], [src*="dots"]):not(.dot-glint, [src*="dark-heading"], [src*="pricing-dots"]) { opacity: .2; }
+:root[data-theme="dark"] img:is([src*="Dots"], [src*="dots"]).dot-glint:not([src*="dark-heading"], [src*="pricing-dots"]) { opacity: .18; }
 
 /* Dark bands (trust, pricing) no longer contrast with the page, so the
    boundary a light band implied becomes a hairline. */
@@ -36,3 +42,62 @@
     --iso-right: #1a263e;
   }
 }
+
+/* Product scenes: the dashboards, tab views and feature snippets swap their
+   whole palette (product-palette.css) for a dark app UI. Accents, statuses
+   and avatars keep their colours. */
+:root[data-theme="dark"] :is(.product-window, .team-dashboard-window, .pw-live-dashboard.pw-embed, .pw-team-dashboard.pw-embed, .feature-snippet, .security-visual) {
+  color-scheme: dark;
+  --pw-bg: #1c1d1f;
+  --pw-side: #18191b;
+  --pw-subtle: #222326;
+  --pw-subtle-2: #202226;
+  --pw-subtle-3: #1f2023;
+  --pw-bar-1: #232427;
+  --pw-bar-2: #1f2022;
+  --pw-search: #26272a;
+  --pw-chip: #2a2c30;
+  --pw-hover: #22262e;
+  --pw-sel: #232d40;
+  --pw-sel-2: #232d40;
+  --pw-muted-bg: #2e3035;
+  --pw-focus-bg: #1f2635;
+  --pw-mark-bg: #2b3a58;
+  --pw-avatar-bg: #2a3242;
+  --pw-line: #ffffff14;
+  --pw-line-soft: #ffffff0f;
+  --pw-line-2: #ffffff1a;
+  --pw-line-3: #ffffff1f;
+  --pw-line-4: #ffffff1a;
+  --pw-check: #ffffff40;
+  --pw-control-line: #ffffff24;
+  --pw-selected-line: #2b3a58;
+  --pw-blue-soft: #2b3a58;
+  --pw-text: #f3f4f5;
+  --pw-text-2: #d6d8db;
+  --pw-text-3: #9ea3aa;
+  --pw-text-4: #7d828a;
+  --pw-text-5: #7d828a;
+  --pw-text-6: #4a4d52;
+  --pw-info: #9fb0cc;
+  --pw-blue: #7a9ae6;
+  --pw-hl: #8aa6e9;
+  --pw-pulse-color: #8aa6e9;
+  --pw-accent-text: #9fb7ea;
+}
+:root[data-theme="dark"] :is(.pw-live-dashboard.pw-embed, .pw-team-dashboard.pw-embed, .feature-snippet) { background-color: var(--pw-bg); }
+:root[data-theme="dark"] :is(.product-window, .team-dashboard-window, .main-features-detail-art) { background: #1c1d1f; }
+
+/* Security stage cards: one-off illustration, recoloured in place. */
+:root[data-theme="dark"] .security-visual :is(.protection-card, .security-attestation, .infrastructure-node) { background: #1c1d1f; border-color: #ffffff1a; color: #e6e8eb; }
+:root[data-theme="dark"] .security-visual .protection-code { background: #222326; border-color: #ffffff14; }
+:root[data-theme="dark"] .security-visual :is(.protection-code pre, .protection-code dl, .infrastructure-node-title) { color: #e6e8eb; }
+:root[data-theme="dark"] .security-visual .check-row { border-color: #ffffff1a; }
+:root[data-theme="dark"] .security-visual .check-row b { color: #fff; }
+:root[data-theme="dark"] .security-visual .infrastructure-map { background: radial-gradient(circle, #ffffff1f .6px, transparent .8px) 0 0 / calc(8 * var(--security-unit)) calc(8 * var(--security-unit)), #18191b; }
+:root[data-theme="dark"] .security-visual :is(.security-attestation-top, .security-attestation-scope, .infrastructure-node-detail) { border-color: #ffffff14; }
+:root[data-theme="dark"] .security-visual .infrastructure-local { background: #232d40; border-color: #ffffff1a; color: #9fb0cc; }
+:root[data-theme="dark"] .security-visual .security-attestation-scope > div span { background: #232d40; color: #9fb7ea; }
+:root[data-theme="dark"] .security-visual :is(.security-attestation-level span, .security-attestation-status, .infrastructure-map-heading, .security-attestation-scope > span) { color: #9ea3aa; }
+:root[data-theme="dark"] .security-visual .infrastructure-link::after { background: #1c1d1f; }
+:root[data-theme="dark"] .security-visual :is(.check-row img, .check-heading img, .protection-code img) { filter: invert(1) brightness(1.15); }

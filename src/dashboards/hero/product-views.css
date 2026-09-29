@@ -13,7 +13,7 @@
 .pw-pv__table--access :is(.pw-pv__head, .pw-pv__row){grid-template-columns:1.7fr 1fr 1fr}
 .pw-pv__table--codes .pw-pv__row{grid-template-columns:1.6fr 1fr auto}
 .pw-pv__table--log :is(.pw-pv__head, .pw-pv__row){grid-template-columns:64px 1.3fr 1.4fr 1.1fr}
-.pw-pv__head{height:34px; border-radius:var(--passwork-card-radius); background:#f7f8fa; color:#8a8b8d; font-size:11px; letter-spacing:.06em; text-transform:uppercase}
+.pw-pv__head{height:34px; border-radius:var(--passwork-card-radius); background:var(--pw-subtle); color:#8a8b8d; font-size:11px; letter-spacing:.06em; text-transform:uppercase}
 .pw-pv__row{height:58px; border-bottom:1px solid var(--pw-line); color:var(--pw-text); font-size:14px}
 .pw-pv__who{display:flex; align-items:center; gap:12px; min-width:0}
 .pw-pv__who b{font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}

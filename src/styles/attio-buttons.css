@@ -68,21 +68,21 @@
   --pw-button-to: var(--pw-control);
   background-color: var(--pw-control);
   border-color: var(--pw-control-border);
-  color: #f3f4f6;
+  color: var(--color-button-dark-fg);
   box-shadow: 0 1px 2px #11182724, 0 0 0 1px #ffffff0a inset;
 }
 .button-dark:hover,
 .button-dark:focus-visible {
-  --pw-button-from: #303030;
-  --pw-button-to: #303030;
-  border-color: #303030;
-  color: #fff;
+  --pw-button-from: var(--color-button-dark-bg-hover);
+  --pw-button-to: var(--color-button-dark-bg-hover);
+  border-color: var(--color-button-dark-bg-hover);
+  color: var(--color-button-dark-fg);
   box-shadow: 0 2px 6px #0000001f, 0 0 0 1px #ffffff10 inset;
 }
 .button-dark:active {
-  --pw-button-from: var(--pw-control-pressed);
-  --pw-button-to: var(--pw-control-pressed);
-  color: #fff;
+  --pw-button-from: var(--color-button-dark-bg-pressed);
+  --pw-button-to: var(--color-button-dark-bg-pressed);
+  color: var(--color-button-dark-fg);
 }
 .button-outline {
   background-image: none;
