@@ -6,6 +6,8 @@
   padding: var(--s-section-top) var(--s-inset) var(--s-section-bottom);
   min-height: 0;
 }
+/* The statement block is framed evenly above and below. */
+.about { padding-bottom: var(--s-section-top); }
 /* Title and lead: the text column keeps a readable measure instead of being
    squeezed by a fixed gap. */
 .section-intro:not(.awards-heading), .platforms-intro {
