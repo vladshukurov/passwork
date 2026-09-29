@@ -59,7 +59,7 @@
   background-repeat: no-repeat;
 }
 .site-header.is-scroll-header::after {
-  background: #fff;
+  background: var(--color-surface-page);
 }
 .site-header.is-scroll-header.is-over-product::before { opacity: 1; }
 .site-header.is-scroll-header.is-over-product-window::after {
@@ -75,8 +75,8 @@
 .brand-light { opacity:0; }
 .site-header:is(.is-past-hero,.is-over-product-window) .brand-light { opacity:1; }
 .site-header:is(.is-past-hero,.is-over-product-window) .brand-dark { opacity:0; }
-.site-header:is(.is-past-hero,.is-over-product-window) .header-inner nav :is(a,button):hover { color: #1c1d1f; }
-.site-header:is(.is-past-hero,.is-over-product-window) .menu-toggle span { background: #1c1d1f; }
+.site-header:is(.is-past-hero,.is-over-product-window) .header-inner nav :is(a,button):hover { color: var(--color-text-primary); }
+.site-header:is(.is-past-hero,.is-over-product-window) .menu-toggle span { background: var(--color-text-primary); }
 
 @media (min-width: 1101px) and (prefers-reduced-motion: no-preference) {
   .hero.has-scroll-motion {

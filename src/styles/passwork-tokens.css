@@ -1,25 +1,26 @@
-/* Passwork's active site tokens. The archived Attio page has its own tokens. */
-/* Figma-named design-system tokens (--color-*, --space-*, --radius-*, --type-*),
-   additive aliases of the values below. */
+/* Passwork's active site tokens. Colours are aliases of the Figma tokens in
+   ds-tokens.css, so they follow the theme. */
+/* Figma-named design-system tokens (--color-*, --space-*, --radius-*, --type-*):
+   colours are the source of truth; layout tokens alias the values below. */
 @import './ds-tokens.css';
 :root {
-  --pw-surface: #fff;
-  --pw-page: #fafafb;
-  --pw-surface-muted: #f3f4f6;
-  --pw-text: #1c1d1f;
-  --pw-text-muted: #667080;  /* AA on white and the page tone */
-  --pw-text-secondary: #475569;
-  --pw-border: #e4e7ec;
-  --pw-accent: #266df0;
-  --pw-art-line: #a7b1bf;
-  --pw-art-front: #78899f;
-  --pw-art-face: #f7f8fb;
-  --pw-art-hover-face: #e7f0ff;
-  --pw-focus: #619dff;
-  --pw-inverse: #fff;
-  --pw-inverse-muted: #ffffffa6;
-  --pw-control: #202124;
-  --pw-control-border: #505967;
+  --pw-surface: var(--color-surface-default);
+  --pw-page: var(--color-surface-page);
+  --pw-surface-muted: var(--color-surface-subtle);
+  --pw-text: var(--color-text-primary);
+  --pw-text-muted: var(--color-text-tertiary);  /* AA on white and the page tone */
+  --pw-text-secondary: var(--color-text-secondary);
+  --pw-border: var(--color-border-default);
+  --pw-accent: var(--color-accent-default);
+  --pw-art-line: var(--color-illustration-iso-line);
+  --pw-art-front: var(--color-illustration-iso-front);
+  --pw-art-face: var(--color-illustration-iso-face);
+  --pw-art-hover-face: var(--color-illustration-iso-face-hover);
+  --pw-focus: var(--color-border-focus);
+  --pw-inverse: var(--color-text-on-brand);
+  --pw-inverse-muted: var(--color-text-on-brand-secondary);
+  --pw-control: var(--color-button-dark-bg);
+  --pw-control-border: var(--color-button-dark-border);
   --pw-control-pressed: #383e47;
   --pw-font: Museo, Arial, sans-serif;
   /* Rhythm on an 8px grid. */

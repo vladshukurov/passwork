@@ -6,79 +6,81 @@
    (see docs/design-system.md, "Figma tokens"). Figma's 1920 and 1440 modes
    map to the fluid clamp() values between those widths. */
 :root {
-  /* Color · Light */
-  --color-text-primary: var(--pw-text);                /* #1c1d1f */
-  --color-text-secondary: var(--pw-text-secondary);    /* #475569 */
-  --color-text-tertiary: var(--pw-text-muted);         /* #667080 */
-  --color-text-subtle: #7b8595;
+  /* Color · Light — values straight from the Figma "Color" collection.
+     The legacy --pw-* colours point here (passwork-tokens.css). */
+  /* text */
+  --color-text-accent: #266df0;
   --color-text-disabled: #9298a1;
+  --color-text-inverse: #ffffff;
+  --color-text-inverse-secondary: #ffffffa6;
   --color-text-label: #596473;
-  --color-text-inverse: var(--pw-inverse);             /* #fff */
-  --color-text-inverse-secondary: var(--pw-inverse-muted); /* #ffffffa6 */
-  --color-text-accent: var(--pw-accent);               /* #266df0 */
-  --color-text-on-brand: #fff;
+  --color-text-on-brand: #ffffff;
   --color-text-on-brand-secondary: #ffffffa6;
   --color-text-on-brand-tertiary: #ffffffc9;
-
-  --color-surface-default: var(--pw-surface);          /* #fff */
-  --color-surface-page: var(--pw-page);                /* #fafafb */
-  --color-surface-page-translucent: #fafafbe8;
-  --color-surface-subtle: var(--pw-surface-muted);     /* #f3f4f6 */
-  --color-surface-muted: #e5e7ee;
+  --color-text-primary: #1c1d1f;
+  --color-text-secondary: #475569;
+  --color-text-subtle: #7b8595;
+  --color-text-tertiary: #667080;
+  /* surface */
+  --color-surface-brand: #397dca;
+  --color-surface-brand-emphasis: #295585;
+  --color-surface-brand-strong: #356eb7;
+  --color-surface-default: #ffffff;
   --color-surface-hover: #eef0f4;
   --color-surface-inverse: #151619;
-  --color-surface-brand: #397dca;
-  --color-surface-brand-strong: #356eb7;
-  --color-surface-brand-emphasis: #295585;
+  --color-surface-muted: #e5e7ee;
   --color-surface-on-brand: #ffffff19;
   --color-surface-on-brand-hover: #ffffff16;
   --color-surface-on-brand-strong: #ffffff24;
-
-  --color-border-default: var(--pw-border);            /* #e4e7ec */
-  --color-border-subtle: #eeeff1;
-  --color-border-muted: #e5e7ee;
-  --color-border-strong: #d2d5db;
+  --color-surface-page: #fafafb;
+  --color-surface-page-translucent: #fafafbe8;
+  --color-surface-subtle: #f3f4f6;
+  /* border */
+  --color-border-default: #e4e7ec;
+  --color-border-focus: #619dff;
   --color-border-inverse: #ffffff1f;
+  --color-border-muted: #e5e7ee;
   --color-border-on-brand: #ffffff55;
-  --color-border-focus: var(--pw-focus);               /* #619dff */
-
-  --color-accent-default: var(--pw-accent);            /* #266df0 */
+  --color-border-strong: #d2d5db;
+  --color-border-subtle: #eeeff1;
+  /* accent */
+  --color-accent-default: #266df0;
   --color-accent-progress: #5984da;
-
+  /* icon */
   --color-icon-default: #596473;
-  --color-icon-secondary: #0000008c;
   --color-icon-disabled: #00000066;
-  --color-icon-on-brand: #fff;
+  --color-icon-on-brand: #ffffff;
   --color-icon-on-brand-secondary: #ffffffa6;
-
-  --color-illustration-iso-line: var(--pw-art-line);   /* #a7b1bf */
-  --color-illustration-iso-front: var(--pw-art-front); /* #78899f */
-  --color-illustration-iso-face: var(--pw-art-face);   /* #f7f8fb */
-  --color-illustration-iso-face-hover: var(--pw-art-hover-face); /* #e7f0ff */
-  --color-illustration-stroke: #b9bec6;
-  --color-illustration-stroke-strong: #8e959f;
+  --color-icon-rating: #fdb900;
+  --color-icon-secondary: #0000008c;
+  /* illustration */
   --color-illustration-fill: #fafafb;
   --color-illustration-fill-shade: #eceef1;
-
-  --color-static-white: #fff;
-  --color-static-black: #000;
-
-  /* Button (same in Light and Dark) */
-  --color-button-default-bg: #fff;
-  --color-button-default-bg-hover: #f3f5f8;
-  --color-button-default-bg-pressed: #e9edf2;
-  --color-button-default-fg: var(--pw-text);           /* #1c1d1f */
-  --color-button-dark-bg: var(--pw-control);           /* #202124 */
+  --color-illustration-iso-face: #f7f8fb;
+  --color-illustration-iso-face-hover: #e7f0ff;
+  --color-illustration-iso-front: #78899f;
+  --color-illustration-iso-line: #a7b1bf;
+  --color-illustration-stroke: #b9bec6;
+  --color-illustration-stroke-strong: #8e959f;
+  /* button */
+  --color-button-dark-bg: #202124;
   --color-button-dark-bg-hover: #34363a;
   --color-button-dark-bg-pressed: #151618;
-  --color-button-dark-border: var(--pw-control-border); /* #505967 */
-  --color-button-dark-fg: #fff;
+  --color-button-dark-border: #505967;
+  --color-button-dark-fg: #ffffff;
+  --color-button-default-bg: #ffffff;
+  --color-button-default-bg-hover: #f3f5f8;
+  --color-button-default-bg-pressed: #e9edf2;
+  --color-button-default-fg: #1c1d1f;
+  --color-button-disabled-bg: #b5bdc9;
+  --color-button-disabled-fg: #ffffff;
   --color-button-ghost-bg: #ffffff0f;
   --color-button-ghost-bg-hover: #ffffff20;
   --color-button-ghost-bg-pressed: #ffffff2e;
-  --color-button-ghost-fg: #fff;
-  --color-button-disabled-bg: #b5bdc9;
-  --color-button-disabled-fg: #fff;
+  --color-button-ghost-fg: #ffffff;
+  /* static */
+  --color-static-black: #000000;
+  --color-static-white: #ffffff;
 
   /* Layout · section and card rhythm (1920 → 1440) */
   --space-section-top: var(--s-section-top);       /* site: up to 120; Figma: 152 at 1920, 114 at 1440 */
@@ -139,42 +141,51 @@
 /* Color · Dark. Opt-in scope for new blocks on the dark surface; the existing
    dark bands (Trust, Pricing, Footer) keep their own rules for now. */
 :is([data-theme="dark"], .theme-dark) {
-  --color-text-primary: #fff;
-  --color-text-secondary: #ffffffa6;
-  --color-text-tertiary: #ffffffa6;
-  --color-text-subtle: #ffffff80;
+  /* Color · Dark — only the variables whose Dark value differs. */
+  color-scheme: dark;
+  /* button: the dark CTA inverts to white */
+  --color-button-dark-bg: #ffffff;
+  --color-button-dark-bg-hover: #f3f5f8;
+  --color-button-dark-bg-pressed: #e9edf2;
+  --color-button-dark-border: #ffffff;
+  --color-button-dark-fg: #1c1d1f;
+  /* text */
+  --color-text-accent: #619dff;
   --color-text-disabled: #ffffff66;
-  --color-text-label: #ffffffa6;
   --color-text-inverse: #1c1d1f;
   --color-text-inverse-secondary: #475569;
-  --color-text-accent: #619dff;
-
+  --color-text-label: #ffffffa6;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #ffffffa6;
+  --color-text-subtle: #ffffff80;
+  --color-text-tertiary: #ffffffa6;
+  /* surface */
   --color-surface-default: #1c1d1f;
+  --color-surface-hover: #ffffff14;
+  --color-surface-inverse: #fafafb;
+  --color-surface-muted: #ffffff1f;
   --color-surface-page: #151619;
   --color-surface-page-translucent: #151619e8;
   --color-surface-subtle: #ffffff0f;
-  --color-surface-muted: #ffffff1f;
-  --color-surface-hover: #ffffff14;
-  --color-surface-inverse: #fafafb;
-
+  /* border */
   --color-border-default: #ffffff1f;
-  --color-border-subtle: #ffffff14;
+  --color-border-inverse: #e4e7ec;
   --color-border-muted: #ffffff14;
   --color-border-strong: #ffffff55;
-  --color-border-inverse: #e4e7ec;
-
+  --color-border-subtle: #ffffff14;
+  /* accent */
   --color-accent-default: #619dff;
   --color-accent-progress: #619dff;
-
-  --color-icon-secondary: #ffffffa6;
+  /* icon */
   --color-icon-disabled: #ffffff66;
-
-  --color-illustration-iso-line: #3d4148;
-  --color-illustration-iso-front: #585e67;
-  --color-illustration-iso-face: #26282c;
-  --color-illustration-iso-face-hover: #2b3a52;
-  --color-illustration-stroke: #3d4148;
-  --color-illustration-stroke-strong: #585e67;
+  --color-icon-secondary: #ffffffa6;
+  /* illustration */
   --color-illustration-fill: #26282c;
   --color-illustration-fill-shade: #1e2023;
+  --color-illustration-iso-face: #26282c;
+  --color-illustration-iso-face-hover: #2b3a52;
+  --color-illustration-iso-front: #585e67;
+  --color-illustration-iso-line: #3d4148;
+  --color-illustration-stroke: #3d4148;
+  --color-illustration-stroke-strong: #585e67;
 }

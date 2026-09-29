@@ -8,13 +8,13 @@
 
 .iso-art {
   /* Two inks: the silhouette (line) and quieter inner edges (edge). */
-  --iso-line: #8e959f;
-  --iso-edge: #b9bec6;
+  --iso-line: var(--color-illustration-stroke-strong);
+  --iso-edge: var(--color-illustration-stroke);
   /* Line drawing with one quiet tone: only the shaded (right) faces step
      down from the page colour, so volume reads at rest. */
-  --iso-top: #fafafb;
-  --iso-left: #fafafb;
-  --iso-right: #eceef1;
+  --iso-top: var(--color-illustration-fill);
+  --iso-left: var(--color-illustration-fill);
+  --iso-right: var(--color-illustration-fill-shade);
   transition-property: --iso-line, --iso-edge, --iso-top, --iso-left, --iso-right;
   transition-duration: var(--pw-motion-ui);
   transition-timing-function: var(--pw-ease-out);

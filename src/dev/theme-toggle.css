@@ -1,0 +1,11 @@
+.dev-theme-toggle {
+  position: fixed; z-index: 1000; right: 16px; bottom: 16px;
+  display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px;
+  border: 1px solid var(--color-border-default); border-radius: var(--radius-pill);
+  background: var(--color-surface-default); color: var(--color-text-primary);
+  font: 500 14px/20px var(--pw-font); letter-spacing: -.2px; cursor: pointer;
+  box-shadow: 0 6px 20px #0b19301c;
+  transition: background-color var(--pw-motion-ui) var(--pw-ease-out), color var(--pw-motion-ui) var(--pw-ease-out);
+}
+.dev-theme-toggle:hover { background: var(--color-surface-hover); }
+.dev-theme-toggle:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }

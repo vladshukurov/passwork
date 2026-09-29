@@ -17,7 +17,7 @@
 .client-logo-art {
   display: block;
   max-width: 65%;
-  background: #6f7988;
+  background: var(--color-text-tertiary);
   -webkit-mask: var(--logo-art) center / contain no-repeat;
   mask: var(--logo-art) center / contain no-repeat;
 }

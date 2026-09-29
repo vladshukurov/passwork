@@ -1,7 +1,7 @@
 /* React implementation of the current Passwork Figma typography and layout.
    The archived static version deliberately keeps its own styling. */
 :root {
-  --pw-light-page: #fafafb;
+  --pw-light-page: var(--color-surface-page);
   --pw-radius-control: 10px;
   --pw-button-height: 48px;
   --pw-button-padding: 22px;
@@ -71,21 +71,21 @@ body, .page-grid, .secrets, .section-divider, .platforms, .site-footer { backgro
   background-image: none;
   background-color: #fff;
   border-color: #fff;
-  color: var(--pw-text);
+  color: var(--color-button-default-fg);
   box-shadow: none;
 }
 .react-site-header:not(.is-past-hero) .header-demo:hover,
 .react-site-header.is-over-product-window .header-demo:hover {
   background-color: #f3f5f8;
   border-color: #f3f5f8;
-  color: var(--pw-text);
+  color: var(--color-button-default-fg);
   box-shadow: none;
 }
 .react-site-header.is-past-hero .header-demo {
   background-image: none;
   background-color: #f5f6f8;
-  border-color: #e4e7ec;
-  color: var(--pw-text);
+  border-color: var(--color-border-default);
+  color: var(--color-button-default-fg);
   box-shadow: none;
 }
 
@@ -423,9 +423,9 @@ main :is(p, li) { text-wrap: pretty; }
 .platforms-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; margin-inline: -1px; padding: 2px; background: var(--pw-border); }
 .platform-card { position: relative; min-width: 0; height: clamp(350px, 22.7083vw, 436px); overflow: hidden; background: var(--pw-light-page); border-radius: 0; }
 .platform-card-copy { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; gap: 9px; padding: clamp(20px, 1.667vw, 32px); }
-.platform-card h3 { color: #1c1d1f; font: 500 clamp(16px, 1.0417vw, 20px)/1.3 var(--pw-font); letter-spacing: -.17px; }
+.platform-card h3 { color: var(--color-text-primary); font: 500 clamp(16px, 1.0417vw, 20px)/1.3 var(--pw-font); letter-spacing: -.17px; }
 .platform-card p { color: var(--pw-text-muted); font: 500 clamp(13px, .8333vw, 16px)/1.375 var(--pw-font); letter-spacing: -.348px; }
-.platform-availability { display: inline-flex; align-items: center; gap: 10px; max-width: 100%; min-height: 28px; margin-top: 14px; padding: 4px 10px; border: 1px solid #e4e7ec; border-radius: 99px; background: #fafafbe8; color: #596473; white-space: nowrap; }
+.platform-availability { display: inline-flex; align-items: center; gap: 10px; max-width: 100%; min-height: 28px; margin-top: 14px; padding: 4px 10px; border: 1px solid var(--color-border-default); border-radius: 99px; background: var(--color-surface-page-translucent); color: var(--color-text-label); white-space: nowrap; }
 .platform-availability > span { font: 500 12px/18px var(--pw-font); }
 .platform-availability-icons { display: inline-flex; align-items: center; gap: 6px; }
 .platform-availability-icon { display: block; flex: none; width: 16px; height: 16px; background: currentColor; -webkit-mask: var(--platform-icon) center / contain no-repeat; mask: var(--platform-icon) center / contain no-repeat; }
@@ -661,7 +661,7 @@ main :is(p, li) { text-wrap: pretty; }
    stacked over the page's card grid. */
 @media (max-width: 800px) {
   body.mobile-menu-open { overflow: hidden; }
-  .react-site-header.is-menu-open { z-index: 1500; opacity: 1; pointer-events: auto; background: #fafafb; color: #1c1d1f; }
+  .react-site-header.is-menu-open { z-index: 1500; opacity: 1; pointer-events: auto; background: var(--color-surface-page); color: var(--color-text-primary); }
   .react-site-header.is-scroll-header.is-menu-open::before,
   .react-site-header.is-scroll-header.is-menu-open::after { opacity: 0; }
   .react-site-header.is-menu-open .brand-dark { opacity: 0; }
@@ -669,7 +669,7 @@ main :is(p, li) { text-wrap: pretty; }
   .react-site-header .brand img { width: 114px; height: 25px; max-width: none; object-fit: contain; }
   .react-site-header .menu-toggle { display: grid; align-content: center; flex: 0 0 44px; width: 44px; height: 44px; padding: 0; }
   .react-site-header .menu-toggle span { width: 24px; height: 2px; margin: 4px auto; border-radius: 2px; transition: transform var(--pw-motion-ui) var(--pw-ease-out), background-color var(--pw-motion-micro) var(--pw-ease-out); }
-  .react-site-header.is-menu-open .menu-toggle span { background: #1c1d1f; }
+  .react-site-header.is-menu-open .menu-toggle span { background: var(--color-text-primary); }
   .react-site-header .menu-toggle[aria-expanded="true"] span:first-child { transform: translateY(5px) rotate(45deg); }
   .react-site-header .menu-toggle[aria-expanded="true"] span:last-child { transform: translateY(-5px) rotate(-45deg); }
   .react-site-header .header-inner nav {
@@ -678,8 +678,8 @@ main :is(p, li) { text-wrap: pretty; }
     width: 100%; height: calc(100dvh - 72px); margin: 0;
     overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain;
     padding: 28px max(24px, calc((100vw - 660px)/2)) max(28px, env(safe-area-inset-bottom));
-    border: 0; border-top: 1px solid #e4e7ec; border-radius: 0;
-    background: #fafafb; color: #1c1d1f; box-shadow: none;
+    border: 0; border-top: 1px solid var(--color-border-default); border-radius: 0;
+    background: var(--color-surface-page); color: var(--color-text-primary); box-shadow: none;
     opacity: 0; visibility: hidden; pointer-events: none;
     transform: translateY(-14px);
     transition: opacity var(--pw-motion-ui) var(--pw-ease-out), transform var(--pw-motion-move) var(--pw-ease-out), visibility 0s var(--pw-motion-move);
@@ -694,7 +694,7 @@ main :is(p, li) { text-wrap: pretty; }
   .react-site-header .header-inner nav :is(a, button) {
     display: flex; align-items: center; justify-content: space-between;
     min-height: 70px; padding: 14px 0;
-    border: 0; border-bottom: 1px solid #e4e7ec; border-radius: 0;
+    border: 0; border-bottom: 1px solid var(--color-border-default); border-radius: 0;
     background: transparent; color: #242629;
     font: 500 clamp(22px, 4.5vw, 28px)/1.2 var(--pw-font);
     text-align: left; opacity: 0; transform: translateY(14px);
@@ -713,7 +713,7 @@ main :is(p, li) { text-wrap: pretty; }
     max-width: 260px; margin-top: auto; padding-top: 40px;
     color: #8b95a3; font: 500 13px/19px var(--pw-font);
   }
-  .react-site-header.is-menu-open .header-demo { background: #f2f5f9; border-color: #e3e7ee; color: #1c1d1f; }
+  .react-site-header.is-menu-open .header-demo { background: #f2f5f9; border-color: #e3e7ee; color: var(--color-button-default-fg); }
 }
 @media (max-width: 480px) {
   .react-site-header .brand img { width: 130px; height: auto; aspect-ratio: 114 / 25; }
