@@ -38,6 +38,11 @@
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
 }
+/* Inside the hero the bar follows the scroll itself rather than a timed fade. */
+.react-site-header.is-scroll-header:not(.is-past-hero)::before {
+  opacity: var(--header-veil, 0);
+  transition: background-color .5s ease;
+}
 
 .react-site-header.is-scroll-header.is-over-dark-section::after {
   background: rgb(21 22 25 / 76%);

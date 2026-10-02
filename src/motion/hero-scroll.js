@@ -42,13 +42,16 @@ export function mountHeroScroll(hero, header) {
       header.style.setProperty('--header-window-right', `${Math.max(0, Math.round(innerWidth - windowBounds.right))}px`);
     }
     header.classList.toggle('is-over-product-window', Boolean(windowBehindHeader));
-    if (productReachedHeader && heroArt) {
+    // Over the hero the bar is the hero artwork, so it can fade in with the
+    // very first pixels of scroll and stay seamless with the background.
+    if (!heroAboveHeader && heroArt) {
       const artY = Math.round(heroArtTopY - y);
       if (artY !== previousArtY) {
         header.style.setProperty('--header-art-y', `${artY}px`);
         previousArtY = artY;
       }
     }
+    header.style.setProperty('--header-veil', heroAboveHeader ? '1' : String(Math.min(1, y / 96)));
     header.classList.toggle('is-over-product',productReachedHeader && !heroAboveHeader);
     header.classList.toggle('is-past-hero',heroAboveHeader);
     {
@@ -176,6 +179,7 @@ export function mountHeroScroll(hero, header) {
     header.classList.remove('is-scroll-header','is-over-product','is-over-product-window','is-past-hero','is-over-dark-section','is-header-hidden');
     header.style.removeProperty('--header-art-height');
     header.style.removeProperty('--header-art-y');
+    header.style.removeProperty('--header-veil');
     header.inert=originalInert;
   };
 }
