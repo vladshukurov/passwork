@@ -4,7 +4,7 @@
 .react-site-header.is-scroll-header {
   height: 72px;
   padding-top: 0;
-  transition: opacity .32s ease, color .42s ease;
+  transition: opacity .32s ease, color .2s ease;
 }
 
 .react-site-header.is-scroll-header.is-header-hidden {
@@ -23,12 +23,21 @@
   backdrop-filter: blur(20px) saturate(180%);
   transition: opacity .42s ease, background-color .5s ease;
 }
-.react-site-header.is-scroll-header::after {
-  background: rgb(250 250 251 / 78%);
-  box-shadow: 0 1px 0 rgb(16 24 40 / 6%);
+/* One glass surface for the whole page below the hero: it starts at the
+   hero's bottom edge and paints dark bands in with hard stops, so every
+   boundary moves with the content instead of switching on a timer. */
+.react-site-header.site-header.is-scroll-header::after {
+  opacity: 1;
+  clip-path: inset(var(--header-hero-edge, 100%) 0 0 0);
+  background: linear-gradient(180deg,
+    rgb(250 250 251 / 78%) 0 var(--header-dark-top, 0px),
+    rgb(21 22 25 / 76%) var(--header-dark-top, 0px) var(--header-dark-bottom, 0px),
+    rgb(250 250 251 / 78%) var(--header-dark-bottom, 0px));
+  box-shadow: none;
+  transition: none;
 }
 
-.react-site-header .brand img { transition: opacity .42s ease; }
+.react-site-header .brand img { transition: opacity .2s ease; }
 
 /* Over the hero the bar is the hero artwork itself, aligned to the page
    (hero-scroll.css), solid and crisp-edged: translucent blue over the gradient
@@ -38,16 +47,14 @@
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
 }
-/* Inside the hero the bar follows the scroll itself rather than a timed fade. */
-.react-site-header.is-scroll-header:not(.is-past-hero)::before {
+/* The hero bar follows the scroll itself and ends exactly at the hero's
+   bottom edge, where the glass below takes over. */
+.react-site-header.site-header.is-scroll-header::before {
   opacity: var(--header-veil, 0);
-  transition: background-color .5s ease;
+  clip-path: inset(0 0 calc(100% - var(--header-hero-edge, 100%)) 0);
+  transition: none;
 }
 
-.react-site-header.is-scroll-header.is-over-dark-section::after {
-  background: rgb(21 22 25 / 76%);
-  box-shadow: 0 1px 0 rgb(255 255 255 / 6%);
-}
 .react-site-header.is-scroll-header.is-over-dark-section {
   color: #ffffffb8;
 }
@@ -62,11 +69,6 @@
 .react-site-header.is-scroll-header.is-over-dark-section .header-inner nav :is(a,button):hover { color: #fff; }
 .react-site-header.is-scroll-header.is-over-dark-section .menu-toggle span { background: #fff; }
 
-/* Never turn the middle of the product into a different-coloured rectangle. */
-.react-site-header.is-scroll-header.is-over-product-window:not(.is-past-hero)::after {
-  opacity: 0;
-  clip-path: none;
-}
 
 .react-site-header.is-scroll-header.is-over-product-window:not(.is-past-hero) {
   color: #ffffffa6;

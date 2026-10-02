@@ -33,7 +33,9 @@ export function mountHeroScroll(hero, header) {
   function updateHeader() {
     const y = Math.max(0,window.scrollY), delta = y-previousY;
     previousY = y;
-    const heroAboveHeader = y + headerHeight >= heroEndY;
+    // Text and logo colours switch when an edge crosses the middle of the bar,
+    // where they sit; the surfaces themselves follow the edges exactly.
+    const heroAboveHeader = y + headerHeight / 2 >= heroEndY;
     const productReachedHeader = !heroAboveHeader && shell.getBoundingClientRect().top <= headerHeight + 24;
     const windowBounds = productReachedHeader && productWindow.getBoundingClientRect();
     const windowBehindHeader = windowBounds && windowBounds.top < headerHeight + 52 && windowBounds.bottom > 0;
@@ -42,9 +44,14 @@ export function mountHeroScroll(hero, header) {
       header.style.setProperty('--header-window-right', `${Math.max(0, Math.round(innerWidth - windowBounds.right))}px`);
     }
     header.classList.toggle('is-over-product-window', Boolean(windowBehindHeader));
+    // The bar behaves like glass over the page: the hero artwork above the
+    // hero's bottom edge, light glass below it and dark glass over dark bands,
+    // with the boundaries following the content pixel for pixel.
+    const heroEdge = Math.min(headerHeight, Math.max(0, Math.round(heroEndY - y)));
+    header.style.setProperty('--header-hero-edge', `${heroEdge}px`);
     // Over the hero the bar is the hero artwork, so it can fade in with the
     // very first pixels of scroll and stay seamless with the background.
-    if (!heroAboveHeader && heroArt) {
+    if (heroEdge > 0 && heroArt) {
       const artY = Math.round(heroArtTopY - y);
       if (artY !== previousArtY) {
         header.style.setProperty('--header-art-y', `${artY}px`);
@@ -55,11 +62,18 @@ export function mountHeroScroll(hero, header) {
     header.classList.toggle('is-over-product',productReachedHeader && !heroAboveHeader);
     header.classList.toggle('is-past-hero',heroAboveHeader);
     {
+      let darkTop = 0, darkBottom = 0;
       const overDarkSection = [...document.querySelectorAll('.pricing,.trust,.case-studies,.site-footer')].some(section => {
         const bounds = section.getBoundingClientRect();
-        return bounds.top < headerHeight && bounds.bottom > headerHeight / 2;
+        if (bounds.top < headerHeight && bounds.bottom > 0) {
+          darkTop = Math.max(0, Math.round(bounds.top));
+          darkBottom = Math.min(headerHeight, Math.round(bounds.bottom));
+        }
+        return bounds.top < headerHeight / 2 && bounds.bottom > headerHeight / 2;
       });
       header.classList.toggle('is-over-dark-section', overDarkSection);
+      header.style.setProperty('--header-dark-top', `${darkTop}px`);
+      header.style.setProperty('--header-dark-bottom', `${darkBottom}px`);
     }
     const menuOpen = header.querySelector('.menu-toggle[aria-expanded="true"]');
     if (y <= 8 || menuOpen || header.contains(document.activeElement)) {
@@ -180,6 +194,7 @@ export function mountHeroScroll(hero, header) {
     header.style.removeProperty('--header-art-height');
     header.style.removeProperty('--header-art-y');
     header.style.removeProperty('--header-veil');
+    ['--header-hero-edge', '--header-dark-top', '--header-dark-bottom'].forEach(name => header.style.removeProperty(name));
     header.inert=originalInert;
   };
 }
