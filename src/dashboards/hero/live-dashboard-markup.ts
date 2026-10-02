@@ -1,5 +1,5 @@
-/* Статичная разметка дашборда (сайдбар, шапка, список) и слой курсора.
-   Список записей, панель пароля и курсор дорисовывает live-dashboard-engine.ts. */
+/* Сайдбар и шапка папки для остальных вкладок hero (product-views.ts).
+   Живое окно первой вкладки свёрстано заново по Figma — vault-markup.ts. */
 
 export const DASHBOARD_SIDEBAR_MARKUP = `  <aside class="pw-side">
     <div class="pw-side__top">
@@ -73,28 +73,3 @@ export const DASHBOARD_HEADER_MARKUP = `    <header class="pw-head">
         <span class="pw-btn-add" data-act="add-password">Добавить пароль</span>
       </div>
     </header>`;
-
-export const LIVE_DASHBOARD_MARKUP = `
-<div class="pw-stage">
-<div class="pw-app">
-${DASHBOARD_SIDEBAR_MARKUP}
-  <div class="pw-main">
-${DASHBOARD_HEADER_MARKUP}
-    <div class="pw-body">
-      <section class="pw-list">
-        <div class="pw-label pw-label--folders">Папки</div>
-        <div class="pw-folders">
-          <div class="pw-folder" data-id="servers"><svg viewBox="0 0 22 18"><path fill="#23aad9" d="M1 3.4A1.9 1.9 0 0 1 2.9 1.5h5l2 2h9.2A1.9 1.9 0 0 1 21 5.4v9.2a1.9 1.9 0 0 1-1.9 1.9H2.9A1.9 1.9 0 0 1 1 14.6z"/></svg><span>Серверы</span></div>
-          <div class="pw-folder" data-id="mail"><svg viewBox="0 0 22 18"><path fill="#3bc78f" d="M1 3.4A1.9 1.9 0 0 1 2.9 1.5h5l2 2h9.2A1.9 1.9 0 0 1 21 5.4v9.2a1.9 1.9 0 0 1-1.9 1.9H2.9A1.9 1.9 0 0 1 1 14.6z"/></svg><span>Почта</span></div>
-        </div>
-        <div class="pw-list__divider"></div>
-        <div class="pw-label pw-label--second">Название</div>
-        <div class="pw-items"></div>
-      </section>
-      <section class="pw-detail"></section>
-    </div>
-  </div>
-</div>
-<div class="pw-cursors"></div>
-</div>
-`;

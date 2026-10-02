@@ -1,0 +1,259 @@
+/* ============================================================
+   Живое окно в hero по макетам Figma «Сценарии» (24:7180).
+   Канвас 1400×820, масштаб --pw-s; префикс pwv-. Курсор и рипл
+   общие с прежним дашбордом (.pw-cursor, .pw-ripple в hero-base.css).
+   ============================================================ */
+@font-face{font-family:"PW App Sans";src:url('/passwork-assets/MuseoSansCyrl-300.otf') format('opentype');font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:"PW App Sans";src:url('/passwork-assets/MuseoSansCyrl-500.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"PW App Sans";src:url('/passwork-assets/MuseoSansCyrl-700.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+
+.pwv-stage{
+  /* Переменные Figma: background/*, typography/*, divider/*, ui/basic/*.
+     Тёмной темы у сцены пока нет — светлое окно в обеих темах сайта. */
+  --pwv-page:#f7f8fa; --pwv-surface:#fff; --pwv-field:#f7f8fa;
+  --pwv-text:#080808; --pwv-text-2:#4a4a4a; --pwv-text-3:#858585; --pwv-text-4:#c2c2c2; --pwv-tag-text:#333;
+  --pwv-line:#e0e0e0; --pwv-line-soft:#f2f2f2;
+  --pwv-blue:#4f84e2; --pwv-blue-40:rgba(79,132,226,.4); --pwv-success:#64d9a9;
+  --pwv-tag:rgba(71,134,221,.1); --pwv-selected:rgba(79,132,226,.1); --pwv-hover:rgba(79,132,226,.06);
+  --pwv-shadow:0 4px 20px rgba(0,0,0,.04);
+  --pwv-ease:cubic-bezier(.22,1,.36,1);
+
+  position:absolute; left:0; top:0; width:1400px; height:820px;
+  transform-origin:0 0; transform:scale(var(--pw-s,1));
+  display:flex; flex-direction:column; padding:0 10px 10px;
+  background:var(--pwv-page); color:var(--pwv-text);
+  font:300 16px/19px "PW App Sans", Museo, Arial, sans-serif;
+  font-feature-settings:"lnum" 1,"tnum" 1;
+  -webkit-font-smoothing:antialiased; white-space:nowrap;
+}
+.pwv-stage *,.pwv-stage *::before,.pwv-stage *::after{box-sizing:border-box}
+.pwv-stage img{display:block; flex:none; max-width:none}
+.pwv-stage b{font-weight:700}
+.pwv-i16{width:16px;height:16px}.pwv-i18{width:18px;height:18px}.pwv-i19{width:19px;height:19px}.pwv-i20{width:20px;height:20px}.pwv-i24{width:24px;height:24px}
+.pwv-muted{color:var(--pwv-text-3); font-size:15px}
+.pwv-blue,.pwv-link{color:var(--pwv-blue)}
+.pwv-link{font-size:15px}
+.pwv-divider{height:1px; background:var(--pwv-line); flex:none}
+.pwv-label{font-size:12px; line-height:19px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--pwv-text)}
+.pwv-tag{display:inline-flex; align-items:center; height:20px; padding:0 8px; border-radius:5px; background:var(--pwv-tag); color:var(--pwv-text); font-size:13px; line-height:16px}
+.pwv-tag--sm{border-radius:4px; color:var(--pwv-tag-text)}
+.pwv-round{position:relative; display:grid; place-items:center; width:36px; height:36px; border:1.5px solid var(--pwv-blue-40); border-radius:50%; flex:none; transition:background .15s ease}
+.pwv-round img{width:24px; height:24px}
+
+/* Панели состояний: новая ложится поверх старой и проявляется, старая
+   прячется после — без провала прозрачности на середине. */
+.pwv-pane{position:absolute; inset:0; background:var(--pwv-surface); visibility:hidden; opacity:0}
+.pwv-pane.is-active{visibility:visible; opacity:1; z-index:2}
+.pwv-pane.is-leaving{visibility:visible; opacity:1; z-index:1; animation:pwv-pane-out .14s ease-in both}
+/* Смена состояния последовательная: старое быстро гаснет, новое проявляется
+   следом — без двойной экспозиции двух разных экранов. Прозрачность ведёт панель
+   целиком, строки только доезжают на место каскадом. */
+.pwv-pane.is-entering{animation:pwv-pane-in .28s ease-out .1s both}
+.pwv-pane.is-entering .pwv-rise{animation:pwv-rise .46s var(--pwv-ease) both; animation-delay:calc(var(--i,0) * 16ms + 100ms)}
+@keyframes pwv-pane-in{from{opacity:0}to{opacity:1}}
+@keyframes pwv-pane-out{from{opacity:1}to{opacity:0}}
+@keyframes pwv-rise{from{transform:translateY(6px)}to{transform:none}}
+
+/* ---------- Топбар ---------- */
+.pwv-topbar{height:60px; margin:0 -10px; padding:0 20px; display:flex; align-items:center; justify-content:space-between; flex:none}
+.pwv-topbar__left{display:flex; align-items:center; gap:20px}
+.pwv-brand{font-size:18px; line-height:normal; color:var(--pwv-text)}
+.pwv-topbar__rule{width:1px; height:30px; background:var(--pwv-line)}
+.pwv-topbar__right{display:flex; align-items:center; gap:15px}
+.pwv-topbar__icon{display:flex; align-items:center; gap:5px; padding:9px}
+.pwv-topbar__bell{padding:8px; margin-left:-15px}
+.pwv-topbar__bell em{font:500 12px/14px "PW App Sans", Museo, sans-serif; font-style:normal; color:#fff; background:#f7443c; border-radius:3px; padding:3px 6.5px}
+.pwv-user{display:flex; align-items:center; gap:10px}
+.pwv-user__photo{width:35px; height:35px; border-radius:50%; object-fit:cover}
+
+/* ---------- Рабочая область ---------- */
+.pwv-work{flex:1; display:flex; min-height:0; background:var(--pwv-surface); border-radius:10px; overflow:hidden; box-shadow:var(--pwv-shadow)}
+.pwv-side{position:relative; width:315px; flex:none; border-right:1px solid var(--pwv-line)}
+.pwv-side__panes{position:absolute; inset:85px 0 0}
+.pwv-side__panes > .pwv-pane{display:flex; flex-direction:column; gap:20px; padding-bottom:30px; overflow:hidden}
+.pwv-content{position:relative; flex:1; min-width:0}
+/* У каждой панели свой отступ сверху, контейнеры не двигаются:
+   уходящая панель остаётся на месте, пока поверх проявляется новая. */
+.pwv-heads,.pwv-bodies{position:absolute; inset:0}
+.pwv-head--folder{bottom:auto; height:135px}
+.pwv-head--results{bottom:auto; height:120px}
+.pwv-body--folder{top:135px}
+.pwv-body--results,.pwv-body--found{top:120px}
+
+/* ---------- Сайдбар: навигация ---------- */
+.pwv-search{display:flex; align-items:center; gap:8px; width:255px; height:35px; padding:0 10px; border-radius:4px; background:var(--pwv-field); color:var(--pwv-text-3); font-size:15px}
+.pwv-search.pwv-hover{background:color-mix(in srgb, var(--pwv-field) 100%, #000 3%)}
+.pwv-navs{display:flex; flex-direction:column; gap:11px}
+.pwv-nav{display:flex; align-items:center; gap:8px; height:19px; padding-left:30px; color:var(--pwv-text-2)}
+.pwv-divider--side{margin:0 30px}
+.pwv-group{display:flex; flex-direction:column; gap:15px; width:285px}
+.pwv-sec{display:flex; align-items:center; gap:8px; height:20px; padding-left:30px}
+.pwv-sec__title{font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--pwv-text)}
+.pwv-sec__add{margin-left:auto}
+.pwv-trees{display:flex; flex-direction:column; gap:5px}
+.pwv-tree{position:relative; display:flex; align-items:center; gap:7px; height:24px; padding-left:30px; color:var(--pwv-text-2)}
+.pwv-tree > .pwv-i24 + span{margin-left:-1px}
+.pwv-tree--l2{padding-left:52px}
+.pwv-tree--l3{padding-left:74px}
+.pwv-tree > img.pwv-i24{margin-right:-1px}
+.pwv-chev-right{transform:rotate(90deg)}
+.pwv-group > .pwv-tree{height:19px}
+.pwv-tree.is-active{font-weight:700; line-height:21px}
+.pwv-tree.is-active::before{content:""; position:absolute; left:0; top:-3px; width:3px; height:30px; background:var(--pwv-blue)}
+
+/* ---------- Сайдбар: поиск ---------- */
+/* Фокус поиска: поле сужается до 198, появляется рамка, каретка и «Отмена». */
+.pwv-search-row{position:absolute; top:30px; left:30px; right:0; height:35px; z-index:3}
+.pwv-search{transition:width .38s var(--pwv-ease), background .32s ease, box-shadow .24s ease}
+.pwv-side.is-searching .pwv-search{width:198px; box-shadow:inset 0 0 0 1px var(--pwv-blue-40)}
+.pwv-search__placeholder{position:relative}
+.pwv-caret{position:absolute; left:-1px; top:1px; width:1px; height:17px; background:var(--pwv-text); opacity:0}
+.pwv-side.is-searching .pwv-caret{animation:pwv-caret 1.06s steps(1) .2s infinite}
+@keyframes pwv-caret{0%{opacity:1}50%{opacity:0}}
+.pwv-cancel{position:absolute; left:213px; top:8px; line-height:19px; opacity:0; transform:translateX(10px); transition:opacity .2s ease, transform .38s var(--pwv-ease)}
+.pwv-side.is-searching .pwv-cancel{opacity:1; transform:none; transition-delay:.08s}
+.pwv-cancel.pwv-hover{opacity:.75}
+.pwv-side__search{padding-top:1px}
+.pwv-group--filters{width:315px; gap:15px}
+.pwv-group--filters .pwv-label{padding-left:30px}
+.pwv-colors{display:flex; gap:13px; padding:0 30px}
+.pwv-color{position:relative; width:14px; height:14px; border-radius:50%; background:var(--c)}
+.pwv-color::after{content:""; position:absolute; inset:-5px; border-radius:50%; border:2px solid var(--c); opacity:0; transform:scale(.7); transition:opacity .18s ease, transform .22s var(--pwv-ease)}
+.pwv-color.pwv-hover::after,.pwv-color.is-selected::after{opacity:.2; transform:none}
+.pwv-color.is-selected::after{opacity:.35}
+.pwv-tags{display:flex; flex-wrap:wrap; gap:7px 5px; padding:0 30px}
+
+/* ---------- Шапки контента ---------- */
+.pwv-head{padding:30px 30px 0; border-bottom:1px solid var(--pwv-line)}
+.pwv-head__row{display:flex; align-items:center; justify-content:space-between}
+.pwv-crumbs{display:flex; gap:9px; font-size:21px; line-height:29px; color:var(--pwv-text-3)}
+.pwv-crumbs i{font-style:normal; color:var(--pwv-text-4); margin-right:1px}
+.pwv-crumbs b{color:var(--pwv-text)}
+.pwv-head__actions{display:flex; gap:15px}
+.pwv-button{display:flex; align-items:center; height:36px; padding:0 24px; border-radius:4px; background:var(--pwv-blue); color:#fff; font-size:15px}
+.pwv-head__info{display:flex; align-items:center; gap:10px; margin-top:14px}
+.pwv-avatars{display:flex}
+.pwv-avatar{width:36px; height:36px; margin-right:-5px; border-radius:50%; box-shadow:0 0 0 2px var(--pwv-surface); overflow:hidden}
+.pwv-avatar:nth-child(1){z-index:5}.pwv-avatar:nth-child(2){z-index:4}.pwv-avatar:nth-child(3){z-index:3}.pwv-avatar:nth-child(4){z-index:2}.pwv-avatar:last-child{margin-right:0}
+.pwv-avatars{isolation:isolate}
+.pwv-avatar img{width:100%; height:100%; object-fit:cover}
+.pwv-head__access{display:flex; flex-direction:column; gap:2px; margin-left:5px; font-size:13px; line-height:16px}
+.pwv-head__access b{font-weight:500}
+.pwv-head__access span{color:var(--pwv-text-3)}
+.pwv-head--results{display:flex; flex-direction:column; gap:15px; padding-top:33px}
+.pwv-head__title{font-size:21px; line-height:29px}
+.pwv-head__count{color:var(--pwv-text-3)}
+
+/* ---------- Тела ---------- */
+.pwv-body--folder,.pwv-body--found{display:flex}
+.pwv-list{width:335px; flex:none; display:flex; flex-direction:column; gap:16px; padding-top:25px; overflow:hidden}
+.pwv-list__section{display:flex; flex-direction:column}
+/* Отступ только между заголовком и списком: строки списка идут вплотную, шаг 32. */
+.pwv-list__section > .pwv-label{margin-bottom:10px}
+.pwv-list__section--folders > .pwv-label{margin-bottom:5px}
+.pwv-list--folder .pwv-list__section{padding:0 20px 0 30px}
+.pwv-list--folder .pwv-list__section--folders{padding-left:25px}
+.pwv-list--folder .pwv-label{padding:0 4px}
+.pwv-list--folder .pwv-folder{display:flex; align-items:center; gap:10px; height:30px; padding:0 3px; font-size:15px}
+.pwv-list--folder .pwv-entry{position:relative; display:flex; align-items:center; gap:10px; height:32px; padding:0 5px; border-radius:5px}
+.pwv-divider--list{margin:0 20px 0 30px}
+.pwv-entry.is-selected{background:var(--pwv-selected)}
+.pwv-letter{position:relative; display:grid; place-items:center; width:20px; height:20px; border-radius:4px; background:#3dcfac; color:#fff; font-size:13px; font-weight:700; line-height:1}
+.pwv-letter__badge{position:absolute; left:-4px; bottom:-4px; width:12px; height:12px}
+.pwv-entry__status{position:absolute; left:-15px; top:11px; width:10px; height:10px}
+.pwv-logo-regru{width:20px; height:17.35px}
+.pwv-logo-sprint{position:relative; width:20px; height:20px}
+.pwv-logo-sprint img{position:absolute; left:-4px; top:0; width:24px; height:24px}
+
+.pwv-list--found .pwv-list__section{padding:0 20px}
+.pwv-list--found .pwv-label{padding:0 10px}
+.pwv-list--found :is(.pwv-folder,.pwv-entry){position:relative; display:flex; align-items:center; gap:10px; height:32px; padding:0 10px; border-radius:4px; font-size:15px}
+.pwv-list--found .pwv-entry.is-selected{background:var(--pwv-tag)}
+.pwv-logo{width:20px; height:20px; border-radius:3px; object-fit:contain}
+.pwv-indicator{position:absolute; left:-13px; top:50%; width:8px; height:8px; margin-top:-4px; border-radius:50%; background:#48bfea}
+
+/* ---------- Карточка записи ---------- */
+.pwv-card{position:relative; flex:1; min-width:0; padding:25px 30px; border-left:1px solid var(--pwv-line)}
+.pwv-card__head{display:flex; align-items:center; justify-content:space-between; height:35px}
+.pwv-card__title{display:flex; align-items:center; gap:10px; font-size:21px; line-height:29px}
+.pwv-card__logo{width:35px; height:35px}
+.pwv-card__logo--tile{border-radius:5px; image-rendering:auto}
+.pwv-card__close{display:grid; place-items:center; width:35px; height:35px}
+.pwv-card__close img{width:11.667px; height:11.667px}
+.pwv-card__meta{display:flex; flex-direction:column; justify-content:center; height:36px; margin-top:13px; font-size:13px; line-height:16px}
+.pwv-card__meta b{font-weight:500}
+.pwv-card__meta span{color:var(--pwv-text-3)}
+.pwv-card__actions{position:absolute; top:73px; right:30px; display:flex; gap:10px}
+.pwv-tabs{display:flex; gap:20px; height:30px; margin-top:25px; border-bottom:1px solid var(--pwv-line); font-weight:500; line-height:21px; color:var(--pwv-text-3)}
+.pwv-tabs .is-active{position:relative; color:var(--pwv-text)}
+.pwv-tabs .is-active::after{content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px; background:var(--pwv-blue)}
+.pwv-rows{margin-top:10px}
+.pwv-row{display:flex; align-items:center; gap:10px; height:50px; border-bottom:1px solid var(--pwv-line-soft)}
+.pwv-row--last{border-bottom:0}
+.pwv-row__label{width:110px; flex:none}
+.pwv-row__value{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis}
+.pwv-row__acts{display:flex; align-items:center; justify-content:flex-end; gap:10px; width:95px; padding:0 10px; flex:none}
+.pwv-row__tags{display:flex; gap:5px}
+.pwv-row--urls{height:auto; align-items:flex-start; padding:7.5px 0}
+.pwv-row--urls .pwv-row__label{padding:8px 0}
+.pwv-urls{flex:1; display:flex; flex-direction:column; gap:6px; padding:8px 0; min-width:0}
+.pwv-url{display:flex; align-items:center; gap:10px}
+.pwv-url a{flex:1; min-width:0; color:var(--pwv-blue); overflow:hidden; text-overflow:ellipsis}
+.pwv-num{font-size:15px}
+.pwv-ib{position:relative; display:grid; place-items:center; width:18px; height:18px; transition:opacity .15s ease}
+.pwv-ib img{width:18px; height:18px}
+.pwv-ib.pwv-hover{opacity:.7}
+.pwv-eye,.pwv-eye-off{transition:opacity .2s ease}
+.pwv-eye-off{position:absolute; inset:0; opacity:0}
+.pwv-ib.is-on .pwv-eye{opacity:0}
+.pwv-ib.is-on .pwv-eye-off{opacity:1}
+.pwv-dots{letter-spacing:3px}
+.pwv-secret{font:300 15px/18px "Fira Code", ui-monospace, SFMono-Regular, Menlo, monospace; color:var(--pwv-text)}
+.pwv-copied{color:var(--pwv-success); animation:pw-fade-in .22s ease-out both}
+[data-role="secret"] > *{animation:pwv-pane-in .24s ease-out both}
+
+/* ---------- Таблицы результатов ---------- */
+.pwv-body--results{display:flex; flex-direction:column; gap:20px; padding:25px 30px 15px 20px}
+.pwv-tr{display:grid; grid-template-columns:240fr 180fr 190fr 195fr 160fr 50px; align-items:center; height:32px; border-radius:4px; font-size:15px; transition:background .15s ease}
+.pwv-tr--head{height:29px}
+.pwv-tr--tall{height:42px}
+.pwv-th{display:flex; align-items:center; gap:4px; padding:0 10px; font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--pwv-text)}
+.pwv-th--first{padding-left:20px}
+.pwv-td{position:relative; display:flex; align-items:center; gap:10px; min-width:0; padding:0 10px; overflow:hidden; text-overflow:ellipsis}
+.pwv-td--name{overflow:visible}
+.pwv-td--dir{grid-column:5}
+.pwv-td--tags{gap:5px}
+.pwv-td--marks{justify-content:center; gap:4px; padding:0}
+.pwv-marks{display:flex; gap:4px}
+.pwv-mark{width:20px; height:20px}
+.pwv-mark img{width:20px; height:20px}
+.pwv-mark__hover{opacity:0; transition:opacity .15s ease}
+.pwv-tr.pwv-hover{background:var(--pwv-hover)}
+.pwv-tr.pwv-hover .pwv-mark__hover{opacity:1}
+.pwv-more{display:inline-flex; align-items:center; height:22px; padding:0 10px; border:1px solid var(--pwv-line); border-radius:20px; color:var(--pwv-text-3); font-size:12px; line-height:14px}
+.pwv-divider--table{margin:0 10px}
+
+/* Нажатие и курсор поверх сцены. */
+/* Нажатие: короткое мягкое вдавливание и неспешный отпуск. Крупные блоки
+   не сжимаются — у них только чуть темнеет фон. */
+.pwv-ib,.pwv-color,.pwv-round{transition:transform .32s var(--pwv-ease), opacity .15s ease, background .15s ease}
+.pwv-ib.pwv-pressed{transform:scale(.94); transition-duration:.12s}
+.pwv-color.pwv-pressed{transform:scale(.9); transition-duration:.12s}
+.pwv-tr{transition:background .32s ease}
+.pwv-tr.pwv-pressed{background:rgba(79,132,226,.1); transition-duration:.1s}
+.pwv-search.pwv-pressed{background:color-mix(in srgb, var(--pwv-field) 100%, #000 5%); transition-duration:.1s}
+.pwv-stage .pwv-cursors .pw-cursor__arrow{transition:transform .26s var(--pwv-ease)}
+.pwv-stage .pwv-cursors .pw-cursor.is-pressed .pw-cursor__arrow{transform:scale(.92); transition-duration:.1s}
+.pwv-stage .pwv-cursors .pw-ripple{width:8px; height:8px; margin:-4px 0 0 -4px; border-width:1.5px; border-color:rgba(79,132,226,.45); animation:pwv-ripple .6s cubic-bezier(.22,1,.36,1) forwards}
+@keyframes pwv-ripple{from{transform:scale(.5); opacity:.8}to{transform:scale(3.2); opacity:0}}
+.pwv-cursors{position:absolute; inset:0; z-index:50; overflow:visible; pointer-events:none}
+
+/* Окно hero держит пропорции канваса 1400×820. */
+@media (min-width:810px){
+  .hero .product-window{aspect-ratio:1400/820}
+}
+.pw-live-dashboard.pw-embed:has(> .pwv-stage){background:var(--pwv-page, #f7f8fa)}
+@media (max-width:809.98px){
+  /* На телефоне сцена статична и вписывается в ширину окна. */
+  .hero .product-window:has(.pwv-stage):not(:has(.product-detail:not([hidden]))){height:auto; min-height:0; aspect-ratio:1400/820}
+}
