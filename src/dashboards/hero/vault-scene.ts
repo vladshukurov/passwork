@@ -350,7 +350,11 @@ export function initVaultScene(embed: HTMLElement, { animate = true }: { animate
       // «Отмена» закрывает поиск и возвращает к папке, курсор отходит в сторону
       if (await c.go('[data-act="cancel"]')) {
         await c.idle(260, 340);
-        await c.click(() => reset());
+        // «Отмена» исчезает вместе с режимом поиска — ховер с неё снимаем сразу.
+        await c.click(() => {
+          c.unhover();
+          reset();
+        });
         await c.idle(500, 650);
       } else {
         reset();

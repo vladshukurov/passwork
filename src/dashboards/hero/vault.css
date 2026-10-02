@@ -110,9 +110,11 @@
 .pwv-caret{position:absolute; left:-1px; top:1px; width:1px; height:17px; background:var(--pwv-text); opacity:0}
 .pwv-side.is-searching .pwv-caret{animation:pwv-caret 1.06s steps(1) .2s infinite}
 @keyframes pwv-caret{0%{opacity:1}50%{opacity:0}}
-.pwv-cancel{position:absolute; left:213px; top:8px; line-height:19px; opacity:0; transform:translateX(10px); transition:opacity .2s ease, transform .38s var(--pwv-ease)}
-.pwv-side.is-searching .pwv-cancel{opacity:1; transform:none; transition-delay:.08s}
-.pwv-cancel.pwv-hover{opacity:.75}
+/* Закрытие: «Отмена» гаснет сразу, поле расширяется чуть позже и не наезжает на неё. */
+.pwv-cancel{position:absolute; left:213px; top:8px; line-height:19px; opacity:0; visibility:hidden; transform:translateX(10px); transition:opacity .12s ease, transform .38s var(--pwv-ease), visibility 0s linear .12s}
+.pwv-side.is-searching .pwv-cancel{opacity:1; visibility:visible; transform:none; transition:opacity .2s ease .08s, transform .38s var(--pwv-ease) .08s, visibility 0s}
+.pwv-side.is-searching .pwv-cancel.pwv-hover{opacity:.75; transition-delay:0s}
+.pwv-side:not(.is-searching) .pwv-search{transition-delay:.08s, 0s, 0s}
 .pwv-side__search{padding-top:1px}
 .pwv-group--filters{width:315px; gap:15px}
 .pwv-group--filters .pwv-label{padding-left:30px}
