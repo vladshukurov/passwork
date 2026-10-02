@@ -12,30 +12,32 @@
   transform: none;
 }
 
-/* The veil is opaque behind the bar and fades over a short 16px eased tail;
-   its light variant is exactly the page colour, so no band or edge shows. */
+/* Frosted glass instead of a fading veil: a translucent bar that blurs what
+   scrolls underneath and ends on a crisp edge, with no gradient tail. */
 .react-site-header.is-scroll-header::before,
 .react-site-header.is-scroll-header::after {
-  inset: 0 0 -16px;
-  --header-veil-mask: linear-gradient(180deg,
-    #000 0%,
-    #000 82%,
-    rgb(0 0 0 / 70%) 87%,
-    rgb(0 0 0 / 38%) 92%,
-    rgb(0 0 0 / 12%) 97%,
-    transparent 100%);
+  inset: 0;
+  -webkit-mask-image: none;
+  mask-image: none;
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
   transition: opacity .42s ease, background-color .5s ease;
 }
-.react-site-header.is-scroll-header::after { background: var(--pw-light-page, #fafafb); }
+.react-site-header.is-scroll-header::after {
+  background: rgb(250 250 251 / 78%);
+  box-shadow: 0 1px 0 rgb(16 24 40 / 6%);
+}
 
 .react-site-header .brand img { transition: opacity .42s ease; }
 
 .react-site-header.is-scroll-header::before {
-  background-color: #345d99;
+  background-color: rgb(52 93 153 / 88%);
+  background-image: none;
 }
 
 .react-site-header.is-scroll-header.is-over-dark-section::after {
-  background: #151619;
+  background: rgb(21 22 25 / 76%);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 6%);
 }
 .react-site-header.is-scroll-header.is-over-dark-section {
   color: #ffffffb8;
@@ -50,25 +52,6 @@
 .react-site-header.is-scroll-header.is-over-dark-section .header-demo:hover { background: #f3f5f8; border-color: #f3f5f8; }
 .react-site-header.is-scroll-header.is-over-dark-section .header-inner nav :is(a,button):hover { color: #fff; }
 .react-site-header.is-scroll-header.is-over-dark-section .menu-toggle span { background: #fff; }
-
-/* Over the product window the hero blue fades onto the white UI along a long
-   eased "scrim" curve: density drops gradually, so there is no grey-blue
-   mid-tone band. */
-.react-site-header.is-scroll-header:is(.is-over-product, .is-over-product-window):not(.is-past-hero)::before {
-  inset: 0 0 -40px;
-  --header-veil-mask: linear-gradient(180deg,
-    #000 0%,
-    #000 64%,
-    rgb(0 0 0 / 92%) 68%,
-    rgb(0 0 0 / 80%) 72%,
-    rgb(0 0 0 / 64%) 76%,
-    rgb(0 0 0 / 47%) 80%,
-    rgb(0 0 0 / 32%) 84%,
-    rgb(0 0 0 / 19%) 88%,
-    rgb(0 0 0 / 9%) 92%,
-    rgb(0 0 0 / 3%) 96%,
-    transparent 100%);
-}
 
 /* Never turn the middle of the product into a different-coloured rectangle. */
 .react-site-header.is-scroll-header.is-over-product-window:not(.is-past-hero)::after {
