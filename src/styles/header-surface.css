@@ -30,9 +30,13 @@
 
 .react-site-header .brand img { transition: opacity .42s ease; }
 
+/* Over the hero the bar is the hero artwork itself, aligned to the page
+   (hero-scroll.css), solid and crisp-edged: translucent blue over the gradient
+   and the white product window read as a dirty tint. */
 .react-site-header.is-scroll-header::before {
-  background-color: rgb(52 93 153 / 88%);
-  background-image: none;
+  background-color: #345d99;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 .react-site-header.is-scroll-header.is-over-dark-section::after {
