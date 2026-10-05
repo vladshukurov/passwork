@@ -1,5 +1,5 @@
 import React from 'react';
-import IsoformArt from '../components/IsoformArt.jsx';
+import IllustrationArt from '../components/IllustrationArt.jsx';
 import SectionIntro from '../components/SectionIntro.jsx';
 import { tidyCopy } from '../lib/typography.js';
 
@@ -12,7 +12,7 @@ const certifications = [
 
 function CertificationCard({ title, scope, art }) {
   return <article className="certification-card" role="listitem">
-    <div className="certification-art"><IsoformArt name={art} /></div>
+    <div className="certification-art"><IllustrationArt name={art} /></div>
     <div className="certification-copy"><h3>{tidyCopy(title)}</h3><p>{tidyCopy(scope)}</p></div>
   </article>;
 }

@@ -1,5 +1,5 @@
 import {siteMotion} from './site-motion-tokens.js';
-import {assembleArt, mountArtHover} from './isoform-motion.js';
+import {assembleArt, mountArtHover} from './illustration-motion.js';
 import {gsap} from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 export {gsap, ScrollTrigger};

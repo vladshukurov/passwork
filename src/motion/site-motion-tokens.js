@@ -11,7 +11,7 @@ export const siteMotion = Object.freeze({
   stagger: .06,
   revealY: 16,
   revealStart: 'top 85%',
-  // Isoform artwork: pieces settle into place, hover opens an exploded view.
+  // Isometric illustrations: pieces settle into place, hover opens an exploded view.
   artEnter: .6,   // every illustration opens and closes at the same pace
   artLeave: .45,
   artStagger: .03,

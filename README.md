@@ -1,61 +1,175 @@
 # Пассворк — сайт
 
-[Открыть сайт](https://passwork-omega.vercel.app/) · [Репозиторий](https://github.com/vladshukurov/passwork)
+Одностраничный маркетинговый сайт Пассворка: React 19 + Vite 7, анимации на GSAP,
+живые демо интерфейса на TypeScript. Сборка — статические файлы, сервер не нужен.
 
-Одностраничный сайт на React + Vite. Анимации — GSAP (из npm), живые демо интерфейса — TypeScript-движки в `src/dashboards`.
+Сайт не обращается к внешним сервисам: нет API, ключей, аналитики и CDN. Шрифты,
+картинки и иконки лежат в репозитории. Форма заявки — прототип, данные никуда не уходят.
 
-## Команды
+## Быстрый старт
+
+Нужен Node.js 22 (подойдёт и 20.19+) и npm.
 
 ```bash
-npm install
-npm run dev      # http://127.0.0.1:8773
-npm run build    # сборка в dist/, её публикует Vercel
-npm test         # юнит-тесты и проверка иллюстраций
-npm run smoke    # поведенческий тест в браузере (нужен запущенный dev-сервер)
+git clone <адрес-репозитория> passwork
+cd passwork
+npm ci
+npm run dev
 ```
 
-`npm run smoke` использует Chromium из Playwright (`npx playwright install chromium`)
-или бинарник из `CHROMIUM_PATH`; адрес меняется через `SITE_URL`.
+Сайт откроется на http://127.0.0.1:8773. Изменения в коде видны сразу, без перезагрузки.
 
-## Структура
+| Команда | Что делает |
+| --- | --- |
+| `npm run dev` | локальный сервер разработки |
+| `npm run build` | сборка в `dist/` — эту папку можно выложить на любой статический хостинг |
+| `npm run preview` | открыть собранный `dist/` локально |
+| `npm test` | быстрые проверки: логика скролла и целостность иллюстраций |
+| `npm run smoke` | проверка в браузере: скролл, вкладки, меню на 1440 / 900 / 390 px (нужен запущенный `npm run dev`) |
+
+Для `npm run smoke` один раз установите браузер: `npx playwright install chromium`.
+
+## Документация
+
+| Документ | О чём |
+| --- | --- |
+| [docs/motion.md](docs/motion.md) | все анимации и интерактив: что запускает, тайминги, где менять |
+| [docs/design-system.md](docs/design-system.md) | токены, типографика, компоненты, связь с Figma |
+| [docs/figma.md](docs/figma.md) | как устроен Figma-файл и UI kit |
+| [docs/git.md](docs/git.md) | как перенести репозиторий к себе, ветки, деплой |
+| [docs/ai.md](docs/ai.md) | как править проект через нейросети (Claude Code, Cursor, Codex) |
+| [docs/prompts/](docs/prompts/README.md) | промты и контекст, которые использовались при работе |
+| [docs/handoff-checklist.md](docs/handoff-checklist.md) | чек-лист передачи: что проверено и что проверить у себя |
+| [AGENTS.md](AGENTS.md) | правила проекта для нейросетей-агентов (читаются автоматически) |
+
+## Как устроен проект
 
 ```
-index.html            точка входа
+index.html                 точка входа, meta и Open Graph
 src/
-  App.jsx             порядок секций и контроллеры уровня страницы
-  sections/           секции страницы: Header, Hero, Certification, Teams, …
-  components/         общие части: Button, SectionIntro, ContactDialog, IsoformArt, …
-  hooks/              useController (подключение GSAP/движков), клавиатура вкладок
-  lib/                чистые функции: типографика, шкала цен, навигация по якорям
-  motion/             GSAP: токены движения, появление секций, hero, безопасность, иллюстрации
-  dashboards/         живые демо: hero/ и teams/ (TypeScript + CSS)
-  art/isoform/        SVG и редактируемые сцены изометрических иллюстраций
-  styles/             токены и стили; порядок подключения — в src/main.jsx
-public/passwork-assets/  картинки, шрифт, иконки — только то, что использует страница
-scripts/              экспорт иллюстраций и тесты
-docs/                 дизайн-система и правила движения
+  main.jsx                 подключение стилей (порядок важен) и запуск React
+  App.jsx                  порядок секций на странице и контроллеры уровня страницы
+  sections/                секции страницы — по файлу на блок
+  components/              общие части: Button, SectionIntro, ContactDialog, IllustrationArt…
+  dashboards/hero/         живое окно продукта в первом экране (TypeScript + CSS)
+  dashboards/teams/        демо-сценарии блока «Пассворк решает задачи разных команд»
+  motion/                  GSAP: токены движения, скролл, hover, автоплей, переходы
+  art/illustrations/       8 изометрических SVG-иллюстраций
+  lib/                     чистые функции: типографика, шкала цен, навигация по якорям
+  hooks/                   подключение GSAP-контроллеров к React, клавиатура вкладок
+  styles/                  токены и стили
+  dev/                     переключатель тёмной темы — только в dev, в сборку не попадает
+public/passwork-assets/    картинки, шрифты, иконки, логотипы
+scripts/                   тесты и smoke-проверка
+docs/                      документация
 ```
 
-## Движение
+Порядок блоков на странице задаёт `src/App.jsx`:
 
-Все длительности и кривые — общие токены: `src/motion/site-motion-tokens.js` для GSAP и
-`--pw-motion-*` в `src/styles/passwork-tokens.css` для CSS. Правила — в [`docs/motion.md`](docs/motion.md).
+| Блок на сайте | Файл |
+| --- | --- |
+| Шапка и мобильное меню | `sections/Header.jsx` |
+| Первый экран, вкладки и живое окно продукта | `sections/Hero.jsx`, `dashboards/hero/*` |
+| Логотипы клиентов | `sections/ClientLogos.jsx`, `motion/client-logos.js` |
+| «Пассворк — корпоративный менеджер паролей…» | `sections/About.jsx` |
+| Сертификация ФСТЭК (4 карточки с иллюстрациями) | `sections/Certification.jsx` |
+| Задачи разных команд (вкладки + демо) | `sections/Teams.jsx`, `dashboards/teams/*` |
+| Основные возможности (3 главы со скроллом) | `sections/MainFeatures.jsx`, `components/FeatureDetailPreview.jsx` |
+| Менеджер секретов | `sections/Secrets.jsx` |
+| Доверие регуляторов (тёмная полоса) | `sections/Trust.jsx` |
+| Безопасность (закреплённая сцена) | `sections/Security.jsx`, `components/SecurityStage.jsx`, `motion/security-*.js` |
+| Кейсы (тёмная полоса) | `sections/CaseStudies.jsx` |
+| Отзывы и награды | `sections/Reviews.jsx`, `sections/Awards.jsx` |
+| Цены | `sections/Pricing.jsx`, `lib/pricing-scale.js` |
+| Платформы | `sections/Platforms.jsx` |
+| Футер | `sections/Footer.jsx` |
+| Окно заявки | `components/ContactDialog.jsx` |
 
-## Иллюстрации (Isoform Studio)
+## Как менять
 
-Восемь изометрических сцен для блоков «Сертификация» и «Менеджер секретов» собираются
-из геометрии [Isoform Studio](../Documents/ChatGPT/пока%20нет%20названия) — локального редактора
-(`~/Documents/ChatGPT/пока нет названия`, пакет `isometric-atelier`).
+### Тексты
 
-- Сцены описаны кодом в `scripts/export-isoform.ts`: чистая линия без постамента, сетка 10,
-  толщина плит 14. Масштаб каждой сцены подбирается так, чтобы площадь силуэта была
-  одинаковой — лёгкие сцены не выглядят мельче плотных.
-- Экспорт: `"<studio>/node_modules/.bin/tsx" scripts/export-isoform.ts "<studio>"`.
-  Пишет `src/art/isoform/*.svg` (каждая грань помечена `data-face`) и `*.scene.json`,
-  которые можно открыть в редакторе Studio.
-- Цвета задаёт CSS (`src/styles/isoform-art.css`): в покое грани цвета фона и серая линия, при hover — синие тона. Позы hover — `src/motion/isoform-motion.js`; ящик сейфа меняет форму через `data-open`.
-  `npm test` проверяет, что все анимируемые объекты есть в SVG.
+Весь текст лежит прямо в JSX секции, обычно в массиве в начале файла: тарифы — `plans`
+в `Pricing.jsx`, сертификация — `certifications` в `Certification.jsx`, подписи
+сценариев — `dashboards/teams/scenarios.ts`. Меняйте строку и сохраняйте файл.
+
+`tidyCopy()` из `lib/typography.js` сам ставит неразрывный пробел после коротких
+предлогов и союзов («в», «на», «и»…), поэтому их не нужно расставлять руками. Тексты внутри демо
+интерфейса находятся в разметке `dashboards/hero/vault-markup.ts` и
+`dashboards/teams/*-demo.ts`.
+
+### Картинки, логотипы, иконки
+
+Файлы лежат в `public/passwork-assets/`, в коде на них ссылаются как на
+`/passwork-assets/<имя>`. Чтобы заменить картинку, положите новый файл с тем же именем.
+Если имя другое, поправьте ссылку в секции.
+
+Растровые изображения храните в WebP, в размере, близком к показу. Иконки интерфейса —
+SVG или `lucide-react`.
+
+### Цвета, шрифты, отступы
+
+Значения задаются токенами в `src/styles/ds-tokens.css`. Имена совпадают с переменными
+Figma: `text/primary` → `--color-text-primary`. Поменяйте значение один раз — оно
+применится везде. Подробности — в [docs/design-system.md](docs/design-system.md).
+
+### Анимации
+
+Общие длительности и кривые задаются в `src/motion/site-motion-tokens.js` (GSAP) и
+переменными `--pw-motion-*` в `src/styles/passwork-tokens.css` (CSS). Карта всех
+механик с таймингами — в [docs/motion.md](docs/motion.md).
+
+### Иллюстрации
+
+Восемь изометрических иллюстраций — это обычные SVG в `src/art/illustrations/`. Их
+можно открыть и поправить в Figma или Illustrator и сохранить обратно под тем же именем.
+
+При этом нужно сохранить разметку, на которую опирается анимация:
+- группы `<g data-object="…">` — детали, которые двигаются при наведении;
+- атрибуты `data-face="top|left|right"` на гранях — их красит CSS;
+- атрибут `data-open` у контуров, которые меняют форму.
+
+`npm test` проверит, что все детали на месте. Позы при наведении задаются в
+`src/motion/illustration-motion.js`, цвета — в `src/styles/illustration-art.css`.
+
+### Добавить блок
+
+1. Создайте `src/sections/NewBlock.jsx` и соберите его из `SectionIntro`, `Button` и
+   существующих классов.
+2. Добавьте блок в нужное место в `src/App.jsx`.
+3. Если нужно появление при скролле, добавьте пару `[селектор блока, селектор
+   содержимого]` в список в `src/motion/page-motion.js`.
+
+## Нестандартные моменты и ограничения
+
+- **Шрифт Museo Sans Cyrl** (300 / 500 / 700) — коммерческий, файлы `.otf` лежат в
+  `public/passwork-assets/`. Использовать его можно в рамках лицензии Пассворка. В Figma
+  шрифт должен быть установлен локально.
+- **Форма заявки** (`ContactDialog.jsx`) ничего не отправляет. Чтобы подключить CRM или
+  почту, обработайте `submit` и разрешите адрес в `connect-src` / `form-action` в
+  `vercel.json`.
+- **Content-Security-Policy** задана в `vercel.json`: внешние скрипты, шрифты и картинки
+  запрещены. Добавляя аналитику или виджет, расширьте политику, иначе браузер их
+  заблокирует.
+- **Open Graph**: в `index.html` прописан абсолютный адрес `https://passwork-omega.vercel.app/`.
+  После переезда на свой домен замените его в `og:url`, `og:image` и `twitter:image`.
+- **Порядок CSS** в `src/main.jsx` важен: слои переопределяют друг друга. Новые стили
+  добавляйте в конец или в файл своей секции.
+- **Названия `attio-*`** у части CSS-файлов остались от ранних референсов. Это обычные
+  слои стилей сайта, ни с каким внешним сервисом они не связаны.
+- **Тёмная тема** готова как превью: в `npm run dev` справа внизу есть переключатель,
+  можно также открыть `?theme=dark`. В продакшен-сборку она не попадает. Цвета задаёт
+  `src/styles/theme-dark.css`.
+- **Живые демо** в первом экране и в блоке команд — это HTML-разметка, нарисованная по
+  макетам продукта, а не скриншоты. Подробнее о том, как их менять, — в
+  [docs/motion.md](docs/motion.md#живое-окно-продукта-hero).
+- **`prefers-reduced-motion`**: при включённой в системе настройке «Уменьшить движение»
+  все сцены статичны, контент остаётся видимым.
 
 ## Деплой
 
-Vercel выполняет `npm run build` и публикует `dist/` (см. `vercel.json`).
+`npm run build` создаёт `dist/` — набор статических файлов. Его можно выложить на
+Vercel, Netlify, GitHub Pages, S3 или nginx.
+
+Для Vercel всё уже настроено в `vercel.json`: импортируйте репозиторий в свой аккаунт,
+настройки сборки подхватятся сами. Пошагово — в [docs/git.md](docs/git.md#деплой).

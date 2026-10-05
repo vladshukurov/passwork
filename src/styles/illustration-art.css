@@ -1,4 +1,4 @@
-/* Isoform illustrations: neutral ink, page-coloured faces, toned right faces.
+/* Isometric illustrations: neutral ink, page-coloured faces, toned right faces.
    On hover ink and faces turn a clean brand blue in three tonal steps. */
 @property --iso-line { syntax: '<color>'; inherits: true; initial-value: #8e959f; }
 @property --iso-edge { syntax: '<color>'; inherits: true; initial-value: #b9bec6; }

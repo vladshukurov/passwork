@@ -1,5 +1,5 @@
 import React from 'react';
-import IsoformArt from '../components/IsoformArt.jsx';
+import IllustrationArt from '../components/IllustrationArt.jsx';
 import SectionIntro from '../components/SectionIntro.jsx';
 import { tidyCopy } from '../lib/typography.js';
 
@@ -16,7 +16,7 @@ function Secrets() {
       description="Храните ключи, токены и конфигурации в одном месте. Выдавайте доступ команде и передавайте секреты в приложения через API" />
     <div className="secrets-cards" role="list">{secretFeatures.map(([title, description, art]) =>
       <article className="secrets-card" role="listitem" key={title}>
-        <div className="secrets-card-art" aria-hidden="true"><IsoformArt name={art} /></div>
+        <div className="secrets-card-art" aria-hidden="true"><IllustrationArt name={art} /></div>
         <div className="secrets-card-copy"><h3>{tidyCopy(title)}</h3><p>{tidyCopy(description)}</p></div>
       </article>)}</div>
   </div></section>;

@@ -648,7 +648,7 @@ main :is(p, li) { text-wrap: pretty; }
   60%, 100% { opacity: 0; -webkit-mask-position: 0% 0%; mask-position: 0% 0%; }
 }
 
-/* Motion-lab values are scoped to the live React preview. Surfaces never
+/* Motion values are scoped to the live React page. Surfaces never
    translate: only their state, copy and artwork respond to interaction. */
 :is(.product-tabs button, .team-tabs button) { transition-duration: var(--pw-motion-ui); }
 .security-story-detail { transition-duration: var(--pw-motion-ui); }

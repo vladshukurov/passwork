@@ -1,4 +1,4 @@
-// Original scenarios from reserve-passwork-copy; this adapter replaces only React mounting.
+// Mounts the team scenario demos; React only owns mounting and teardown.
 import { DASHBOARD_HEADER_MARKUP, DASHBOARD_SIDEBAR_MARKUP } from './live-dashboard-markup';
 import { teamScenarios } from './scenarios';
 import { initItDashboardDemo } from './it-dashboard-demo';
